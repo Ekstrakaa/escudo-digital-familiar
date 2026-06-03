@@ -2,17 +2,6 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { getSmartReply } from '../data/smartReply'
 
-const CHIPS = [
-  { label:'📞 Llamada banco',  color:'#ff3d5a', border:'rgba(255,61,90,.3)',   msg:'Me llamaron del banco y pedían mi clave' },
-  { label:'💬 SMS falso',      color:'#ffc844', border:'rgba(255,200,68,.3)', msg:'Me llegó un SMS con un link sospechoso' },
-  { label:'🔐 Código WA',      color:'#00e5a0', border:'rgba(0,229,160,.3)',  msg:'Me piden el código de 6 dígitos de WhatsApp' },
-  { label:'🚨 Me estafaron',   color:'#ff6b35', border:'rgba(255,107,53,.3)', msg:'Caí en una estafa, ¿qué hago ahora?' },
-  { label:'👪 Proteger mayor', color:'#8b7cf8', border:'rgba(139,124,248,.3)',msg:'¿Cómo protejo a mi familiar mayor de estafas?' },
-  { label:'🖥 Soporte falso',  color:'#00c8ff', border:'rgba(0,200,255,.3)',  msg:'Me llamaron del soporte técnico y pedían acceso al celular' },
-  { label:'⚠️ WA clonado',    color:'#ffc844', border:'rgba(255,200,68,.3)', msg:'Me clonaron la cuenta de WhatsApp' },
-  { label:'📋 Números',        color:'#00e5a0', border:'rgba(0,229,160,.3)',  msg:'¿Cuáles son los números de emergencia digital en Uruguay?' },
-]
-
 function now() {
   const d = new Date()
   return d.getHours() + ':' + String(d.getMinutes()).padStart(2,'0')
@@ -92,7 +81,6 @@ export default function ChatScreen({ go, seed }) {
     setBtnOff(true)
     setTyping(true)
 
-    // Intentar IA real (Gemini vía función serverless)
     let reply = null
     try {
       const resp = await fetch('/.netlify/functions/chat', {
@@ -104,14 +92,12 @@ export default function ChatScreen({ go, seed }) {
         const data = await resp.json()
         if(data && data.reply) reply = data.reply
       }
-    } catch { /* sin conexión o sin función → usa respaldo */ }
+    } catch { /* sin conexión → usa respaldo */ }
 
-    // Respaldo local si la IA no respondió
     if(!reply) reply = getSmartReply(text)
 
     historyRef.current = [...historyRef.current, { role:'assistant', content:reply }]
 
-    // Pequeño delay para que se vea natural el "escribiendo..."
     setTimeout(() => {
       setTyping(false)
       addBot(reply)
@@ -119,7 +105,6 @@ export default function ChatScreen({ go, seed }) {
     }, 400)
   }
 
-  // Welcome + optional seed
   useEffect(() => {
     setTimeout(() => {
       addBot('¡Hola! Soy el asistente digital del Programa de Inclusión Digital de la Intendencia de Montevideo.\n\nEstoy acá para orientarte ante cualquier situación de riesgo digital. Contame qué pasó o preguntá lo que necesitás.\n\n¿En qué te puedo ayudar?')
@@ -168,20 +153,6 @@ export default function ChatScreen({ go, seed }) {
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
-
-      {/* Chips */}
-      <div className="px-4 pt-3 pb-2 border-t border-white/[.05]" style={{ background:'rgba(5,10,24,.9)' }}>
-        <div className="font-mono text-[.6rem] text-t3 tracking-widest uppercase mb-2">Consultá rápido</div>
-        <div className="flex flex-wrap gap-2">
-          {CHIPS.map(c => (
-            <button key={c.msg} onClick={() => sendMsg(c.msg)}
-              className="inline-flex items-center gap-[5px] px-[14px] py-[9px] rounded-full text-[.78rem] font-semibold transition-all active:scale-95"
-              style={{ border:`1px solid ${c.border}`, color:c.color, background:'transparent' }}>
-              {c.label}
-            </button>
-          ))}
-        </div>
       </div>
 
       {/* Input */}
