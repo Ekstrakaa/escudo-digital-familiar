@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html { font-size: 17px; scroll-behavior: smooth; }
+  body {
+    background: #050a18;
+    color: #f0f6ff;
+    font-family: 'Outfit', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+  :focus-visible { outline: 2px solid #00c8ff; outline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, #00c8ff, #00e5a0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .glass {
+    background: rgba(15, 29, 53, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  .glow-cyan { box-shadow: 0 0 24px rgba(0,200,255,.2); }
+  .glow-red  { box-shadow: 0 8px 32px rgba(255,61,90,.35); }
+  .safe-top  { padding-top: env(safe-area-inset-top, 0px); }
+  .safe-bot  { padding-bottom: env(safe-area-inset-bottom, 0px); }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(0,200,255,.2); border-radius: 2px; }
+
+/* Message animation */
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.msg-in { animation: msgIn .28s ease both; }
+
+/* Dot animation */
+@keyframes dotBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: .4; }
+  30%           { transform: translateY(-6px); opacity: 1; }
+}
+.dot-1 { animation: dotBounce .9s ease-in-out infinite; }
+.dot-2 { animation: dotBounce .9s .2s ease-in-out infinite; }
+.dot-3 { animation: dotBounce .9s .4s ease-in-out infinite; }
