@@ -137,35 +137,38 @@ export default function HomeScreen({ go }) {
 
         {/* ── LOGO arriba del título ── */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.85 }}
+          initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: .5, ease: 'easeOut' }}
           className="relative flex items-center justify-center mb-5"
+          style={{ width: 130, height: 130 }}
         >
-          {/* Glow pulsante detrás del logo */}
+          {/* Glow pulsante detrás — cambia de color */}
           <motion.div
-            className="absolute rounded-full pointer-events-none"
-            style={{ inset: -16 }}
+            className="absolute pointer-events-none"
+            style={{ inset: -10, borderRadius: '50%', zIndex: 0 }}
             animate={{
               boxShadow: [
-                '0 0 28px 6px rgba(26,199,167,.18)',
-                '0 0 52px 18px rgba(26,199,167,.32)',
-                '0 0 28px 6px rgba(26,199,167,.18)',
+                '0 0 35px 12px rgba(26,199,167,.30)',
+                '0 0 55px 22px rgba(0,200,255,.35)',
+                '0 0 40px 15px rgba(139,124,248,.28)',
+                '0 0 35px 12px rgba(26,199,167,.30)',
               ]
             }}
-            transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
+            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
           />
+          {/* Logo con breathing + screen blend para eliminar fondo negro */}
           <motion.img
             src="/imgs/LOGO.png"
             alt="Escudo Digital Familiar"
-            animate={{ scale: [1, 1.04, 1] }}
+            animate={{ scale: [1, 1.07, 1] }}
             transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
             style={{
-              width: 110,
-              height: 110,
+              width: 120,
+              height: 120,
               objectFit: 'contain',
-              mixBlendMode: 'lighten',
-              filter: 'drop-shadow(0 0 14px rgba(26,199,167,.55))',
+              mixBlendMode: 'screen',
+              filter: 'drop-shadow(0 0 18px rgba(26,199,167,.7)) brightness(1.1) contrast(1.05)',
               position: 'relative',
               zIndex: 1,
             }}
