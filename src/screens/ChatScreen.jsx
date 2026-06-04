@@ -6,17 +6,12 @@ function now() {
   return d.getHours() + ':' + String(d.getMinutes()).padStart(2,'0')
 }
 
-const QUICK_CHIPS = [
-  { label: '🚪 Persona en mi puerta', msg: 'Hay una persona en la puerta de mi casa pidiendo mis datos bancarios' },
-  { label: '📱 Me pidieron la clave', msg: 'Me llamaron del banco y me pidieron mi clave, ¿qué hago?' },
-  { label: '💸 Creo que me estafaron', msg: 'Creo que me estafaron, noto movimientos raros en mi cuenta' },
-  { label: '📲 WhatsApp sospechoso', msg: 'Recibí un WhatsApp raro pidiendo dinero urgente' },
-]
-
 const EMERGENCY_NUMBERS = [
   { label: '🚨 911', sub: 'Policía', color: '#ef4444' },
+  { label: '🕵️ 2030 4625', sub: 'Cibercrimen MI', color: '#00c8ff' },
   { label: '🏦 1722 0001', sub: 'BROU 24hs', color: '#f59e0b' },
   { label: '🛡️ 1719', sub: 'CERTuy', color: '#10b981' },
+  { label: '🟣 1950 5555', sub: 'IM Adultos', color: '#8b7cf8' },
 ]
 
 function RobotAvatar({ typing }) {
@@ -113,7 +108,6 @@ export default function ChatScreen({ go, seed }) {
   const [typing, setTyping]     = useState(false)
   const [input, setInput]       = useState('')
   const [btnOff, setBtnOff]     = useState(false)
-  const [showChips, setShowChips] = useState(true)
   const msgsRef = useRef(null)
   const taRef   = useRef(null)
   const historyRef = useRef([])
@@ -138,7 +132,6 @@ export default function ChatScreen({ go, seed }) {
 
   const sendMsg = async (text) => {
     if(!text?.trim()) return
-    setShowChips(false)
     addUser(text)
     const newHistory = [...historyRef.current, { role:'user', content:text }]
     historyRef.current = newHistory
@@ -253,30 +246,7 @@ export default function ChatScreen({ go, seed }) {
           )}
         </AnimatePresence>
 
-        {/* Quick chips */}
-        <AnimatePresence>
-          {showChips && messages.length <= 1 && !typing && (
-            <motion.div
-              initial={{ opacity:0, y:10 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0, y:-10 }}
-              className="flex flex-col gap-2 mt-2"
-            >
-              <div className="text-[.7rem] text-slate-500 text-center mb-1">Tocá una opción o escribí tu consulta</div>
-              {QUICK_CHIPS.map((c, i) => (
-                <motion.button
-                  key={i}
-                  initial={{ opacity:0, x:-10 }}
-                  animate={{ opacity:1, x:0 }}
-                  transition={{ delay: i * 0.08 }}
-                  onClick={() => sendMsg(c.msg)}
-                  className="w-full text-left px-4 py-3 rounded-xl text-[.9rem] text-white transition-all active:scale-[.98]"
-                  style={{ background:'rgba(0,200,255,.08)', border:'1px solid rgba(0,200,255,.2)' }}
-                >
-                  {c.label}
-                </motion.button>
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
+
       </div>
 
       {/* Input */}
