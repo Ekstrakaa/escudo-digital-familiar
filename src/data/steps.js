@@ -14,7 +14,7 @@ export const STEPS = [
     icon: '🚪',
     txt: '🚪 Son las 2 de la tarde. Tocan el timbre.\n\nAbre la puerta y hay un señor mayor, bien vestido, con corbata y una credencial del Banco República. Con cara preocupada dice:\n\n"Buenas tardes. Soy Carlos García, supervisor del BROU. Su cuenta tiene un problema grave y si no resolvemos esto hoy antes de las 5pm, sus ahorros quedan bloqueados. Necesito su tarjeta y su clave para reactivar el servicio."\n\n¿Qué hacés?',
     opts: [
-      'Le doy la tarjeta y la clave — tiene credencial y parece muy serio es buena persona',
+      'Le doy la tarjeta y la clave — tiene credencial y parece muy serio',
       'Cierro la puerta, llamo YO al BROU al 1722 0001 para verificar',
       'Le doy la tarjeta pero no la clave, así no puede hacer nada raro',
       'Lo hago pasar y llamamos juntos al banco desde mi casa'
@@ -28,7 +28,8 @@ export const STEPS = [
   {
     type: 'fact',
     img: '<img src="/imgs/canal4_hombre.png" alt="Noticia Canal 4 - Hombre 90 años estafado" style="width:100%;display:block;border-radius:12px 12px 0 0;object-fit:cover;max-height:220px;" />',
-    txt: '<strong style="color:#ef4444">📺 Caso real Uruguay — Canal 4</strong><br><br>Un hombre de <strong>90 años fue estafado por $46.000</strong> con el cuento del tío. Se hicieron pasar por su nieto y le pidieron que sacara un préstamo del banco.<br><br><strong style="color:#f59e0b">⚠️ Ante cualquier persona en la puerta pidiendo datos o dinero:</strong><br>Cerrá la puerta y llamá al <strong style="color:#10b981">911</strong> o al Ministerio del Interior: <strong style="color:#10b981">2030 4625</strong>',
+    txt: '<strong style="color:#ef4444">📺 Caso real Uruguay — Canal 4</strong><br><br>Un hombre de <strong>90 años fue estafado por $46.000</strong> con el cuento del tío. Se hicieron pasar por su nieto y le pidieron que sacara un préstamo del banco.<br><br><strong style="color:#f59e0b">⚠️ Ante cualquier persona en la puerta pidiendo datos o dinero:</strong><br>Cerrá la puerta y llamá al <strong style="color:#10b981">911</strong> o al Ministerio del Interior: <strong style="color:#10b981">0800 5050</strong>',
+    stat: 'Las víctimas del cuento del tío en Uruguay pierden en promedio $40.000 pesos por caso denunciado.',
     src: 'Canal 4 Uruguay · Telenoche 2025'
   },
 
@@ -137,7 +138,7 @@ export const STEPS = [
     id: 7,
     cat: 'Robo de datos bancarios',
     icon: '💳',
-    img: '<img src="/imgs/brou_ancap.png" alt="Publicidad falsa BROU ANCAP" style="width:100%;display:block;border-radius:12px 12px 0 0;object-fit:cover;max-height:180px;" />',
+    img: '<img src="/imgs/brou_ancap.png" alt="Publicidad falsa BROU ANCAP" style="width:100%;display:block;border-radius:12px 12px 0 0;object-fit:contain;max-height:240px;background:#0a1628;" />',
     txt: '📱 Te llega un mensaje de WhatsApp con esta imagen:\n\n"¡Beneficio exclusivo para clientes BROU! 35% de descuento en combustible en todas las estaciones ANCAP. Para activarlo hacé clic aquí, asociá tu tarjeta y validá con tu llave digital. ¡Solo hoy!"\n\n¿Qué hacés?',
     opts: [
       'Entro y doy mis datos — es del BROU y ANCAP, parecen logos reales',
