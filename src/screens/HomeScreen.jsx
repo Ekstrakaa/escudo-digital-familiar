@@ -167,8 +167,7 @@ export default function HomeScreen({ go }) {
               width: 120,
               height: 120,
               objectFit: 'contain',
-              mixBlendMode: 'screen',
-              filter: 'drop-shadow(0 0 18px rgba(26,199,167,.7)) brightness(1.1) contrast(1.05)',
+              filter: 'drop-shadow(0 0 18px rgba(26,199,167,.7)) drop-shadow(0 0 8px rgba(0,200,255,.4))',
               position: 'relative',
               zIndex: 1,
             }}
