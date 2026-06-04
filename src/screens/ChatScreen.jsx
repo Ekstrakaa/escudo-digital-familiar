@@ -145,7 +145,7 @@ export default function ChatScreen({ go, seed }) {
       const controller = new AbortController()
       const timeout = setTimeout(() => controller.abort(), 20000)
 
-      const resp = await fetch('/.netlify/functions/chat', {
+      const resp = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: text, history: newHistory.slice(0, -1) }),
