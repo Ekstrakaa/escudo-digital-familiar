@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { getSmartReply } from '../data/smartReply'
 
 function now() {
   const d = new Date()
@@ -82,25 +81,36 @@ export default function ChatScreen({ go, seed }) {
     setTyping(true)
 
     let reply = null
+
     try {
+      const controller = new AbortController()
+      const timeout = setTimeout(() => controller.abort(), 15000)
+
       const resp = await fetch('/.netlify/functions/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: text, history: newHistory.slice(0, -1) }),
+        signal: controller.signal
       })
+      clearTimeout(timeout)
+
       if(resp.ok) {
         const data = await resp.json()
         if(data && data.reply) reply = data.reply
       }
-    } catch { /* sin conexión → usa respaldo */ }
+    } catch(e) {
+      console.log('Error al conectar con el asistente:', e)
+    }
 
-    if(!reply) reply = getSmartReply(text)
-
-    historyRef.current = [...historyRef.current, { role:'assistant', content:reply }]
+    historyRef.current = [...historyRef.current, { role:'assistant', content: reply || '' }]
 
     setTimeout(() => {
       setTyping(false)
-      addBot(reply)
+      if(reply) {
+        addBot(reply)
+      } else {
+        addBot('Lo siento, en este momento no puedo conectarme. Por favor intentá de nuevo en unos segundos.\n\nSi es una emergencia llamá al 911 o al CERTuy: 1719.')
+      }
       setBtnOff(false)
     }, 400)
   }
