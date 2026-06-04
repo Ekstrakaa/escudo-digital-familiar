@@ -1,10 +1,49 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { STEPS } from '../data/steps'
 import { CATS }  from '../data/cats'
 
 const LETTERS = ['A','B','C','D']
 
+/* ──────────────────────────────────────────
+   Confetti burst (verde cuando acertás)
+────────────────────────────────────────── */
+function ConfettiBurst() {
+  const pieces = Array.from({ length: 22 }, (_, i) => ({
+    id: i,
+    x: (Math.random() - 0.5) * 280,
+    y: -(Math.random() * 200 + 80),
+    rot: Math.random() * 720 - 360,
+    scale: Math.random() * 0.6 + 0.4,
+    color: ['#00e5a0','#00c8ff','#f59e0b','#10b981','#34d399'][Math.floor(Math.random()*5)],
+    shape: Math.random() > 0.5 ? 'rect' : 'circle',
+    delay: Math.random() * 0.15,
+  }))
+
+  return (
+    <div className="pointer-events-none fixed inset-0 z-50 flex items-center justify-center overflow-hidden">
+      {pieces.map(p => (
+        <motion.div
+          key={p.id}
+          initial={{ opacity: 1, x: 0, y: 0, rotate: 0, scale: p.scale }}
+          animate={{ opacity: 0, x: p.x, y: p.y, rotate: p.rot, scale: p.scale * 0.5 }}
+          transition={{ duration: 0.85, delay: p.delay, ease: 'easeOut' }}
+          style={{
+            position: 'absolute',
+            width: p.shape === 'rect' ? 10 : 8,
+            height: p.shape === 'rect' ? 6 : 8,
+            borderRadius: p.shape === 'circle' ? '50%' : 2,
+            background: p.color,
+          }}
+        />
+      ))}
+    </div>
+  )
+}
+
+/* ──────────────────────────────────────────
+   Tarjeta ¿Sabías que?
+────────────────────────────────────────── */
 function FactCard({ step, onNext }) {
   return (
     <motion.div key={step.id} initial={{ opacity:0, y:16 }} animate={{ opacity:1, y:0 }} transition={{ duration:.35 }}>
@@ -25,7 +64,7 @@ function FactCard({ step, onNext }) {
           {step.src && <div className="font-mono text-[.65rem] text-t3 mb-5">Fuente: {step.src}</div>}
           <button onClick={onNext}
             className="w-full flex items-center justify-center gap-2 py-[17px] rounded-[14px] text-black font-bold text-[1rem] transition-all active:scale-98"
-            style={{ background:'linear-gradient(135deg,#00c8ff,#0099cc)' }}>
+            style={{ background:'linear-gradient(135deg,#00e5a0,#10b981)' }}>
             Continuar
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </button>
@@ -35,26 +74,56 @@ function FactCard({ step, onNext }) {
   )
 }
 
-function QuestionCard({ step, qNum, onAnswer }) {
+/* ──────────────────────────────────────────
+   Tarjeta de Pregunta
+────────────────────────────────────────── */
+function QuestionCard({ step, qNum, onAnswer, onShake }) {
   const [answered, setAnswered] = useState(false)
   const [chosen, setChosen]     = useState(null)
   const meta = CATS[step.cat] || { color:'#00c8ff', bg:'rgba(0,200,255,.1)', svg:'' }
 
   const select = (i) => {
     if(answered) return
-    setAnswered(true); setChosen(i)
-    setTimeout(() => onAnswer(i === step.ok), 1500)
+    setAnswered(true)
+    setChosen(i)
+    const correct = i === step.ok
+    if(!correct) onShake()   // vibración roja si errás
+    setTimeout(() => onAnswer(correct), 1400)
   }
 
-  const optClass = (i) => {
-    if(!answered) return ''
-    if(i === step.ok) return 'correct'
-    if(i === chosen && i !== step.ok) return 'wrong'
-    return 'dimmed'
+  const optStyle = (i) => {
+    if(!answered) return {
+      background: '#142040',
+      border: '1.5px solid rgba(0,200,255,.18)',
+      opacity: 1,
+    }
+    if(i === step.ok) return {
+      background: 'rgba(0,229,160,.10)',
+      border: '1.5px solid #00e5a0',
+      opacity: 1,
+    }
+    if(i === chosen) return {
+      background: 'rgba(255,61,90,.10)',
+      border: '1.5px solid #ff3d5a',
+      opacity: 1,
+    }
+    return {
+      background: 'rgba(20,32,64,.4)',
+      border: '1.5px solid rgba(0,200,255,.08)',
+      opacity: 0.38,
+    }
+  }
+
+  const letterStyle = (i) => {
+    if(!answered) return { background:'#0f1d35', color:'#4a6080', border:'1px solid rgba(0,200,255,.2)' }
+    if(i === step.ok)          return { background:'#00e5a0', color:'#000', border:'none' }
+    if(i === chosen && i !== step.ok) return { background:'#ff3d5a', color:'#fff', border:'none' }
+    return { background:'#0f1d35', color:'#4a6080', border:'1px solid rgba(0,200,255,.1)' }
   }
 
   return (
     <motion.div key={step.id} initial={{ opacity:0, y:16 }} animate={{ opacity:1, y:0 }} transition={{ duration:.35 }}>
+
       {/* Category banner */}
       <motion.div initial={{ opacity:0, x:-12 }} animate={{ opacity:1, x:0 }} transition={{ delay:.05 }}
         className="flex items-center gap-4 p-4 rounded-2xl mb-4"
@@ -80,68 +149,89 @@ function QuestionCard({ step, qNum, onAnswer }) {
               {step.tip}
             </div>
           )}
-          <div className="text-[1.05rem] font-semibold leading-[1.65] text-t1">{step.txt}</div>
+          <div className="text-[1.05rem] font-semibold leading-[1.65] text-t1 whitespace-pre-wrap">{step.txt}</div>
         </div>
       </motion.div>
 
       {/* Options */}
       <motion.div initial={{ opacity:0, y:12 }} animate={{ opacity:1, y:0 }} transition={{ delay:.1 }}
         className="flex flex-col gap-[10px]">
-        {step.opts.map((opt, i) => {
-          const cl = optClass(i)
-          return (
-            <button key={i} onClick={() => select(i)} disabled={answered}
-              className="flex items-center gap-4 w-full text-left px-5 py-4 rounded-[16px] min-h-[60px] transition-all duration-200"
-              style={{
-                background: cl==='correct' ? 'rgba(0,229,160,.08)' : cl==='wrong' ? 'rgba(255,61,90,.08)' : cl==='dimmed' ? 'rgba(20,32,64,.4)' : '#142040',
-                border: cl==='correct' ? '1.5px solid #00e5a0' : cl==='wrong' ? '1.5px solid #ff3d5a' : '1.5px solid rgba(0,200,255,.18)',
-                opacity: cl==='dimmed' ? .4 : 1,
-                cursor: answered ? 'default' : 'pointer',
-              }}>
-              <div className="w-[30px] h-[30px] rounded-[8px] flex items-center justify-center flex-shrink-0 font-mono text-[.72rem] font-semibold transition-all"
-                style={{
-                  background: cl==='correct' ? '#00e5a0' : cl==='wrong' ? '#ff3d5a' : '#0f1d35',
-                  color: cl==='correct' ? '#000' : cl==='wrong' ? '#fff' : '#4a6080',
-                  border: cl ? 'none' : '1px solid rgba(0,200,255,.2)',
-                }}>
-                {LETTERS[i]}
-              </div>
-              <span className="text-[.97rem] text-t1 leading-snug">{opt}</span>
-            </button>
-          )
-        })}
+        {step.opts.map((opt, i) => (
+          <button key={i} onClick={() => select(i)} disabled={answered}
+            className="flex items-center gap-4 w-full text-left px-5 py-4 rounded-[16px] min-h-[60px] transition-all duration-200"
+            style={{ ...optStyle(i), cursor: answered ? 'default' : 'pointer' }}>
+            <div className="w-[30px] h-[30px] rounded-[8px] flex items-center justify-center flex-shrink-0 font-mono text-[.72rem] font-semibold transition-all"
+              style={letterStyle(i)}>
+              {LETTERS[i]}
+            </div>
+            <span className="text-[.97rem] text-t1 leading-snug">{opt}</span>
+          </button>
+        ))}
       </motion.div>
+
+      {/* Feedback text — sin cartel, solo texto sutil */}
+      <AnimatePresence>
+        {answered && (
+          <motion.div
+            initial={{ opacity:0, y:8 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0 }}
+            transition={{ delay:.1 }}
+            className="mt-4 rounded-[14px] p-4 text-[.88rem] leading-relaxed"
+            style={{
+              background: chosen === step.ok ? 'rgba(0,229,160,.06)' : 'rgba(255,61,90,.06)',
+              border: `1px solid ${chosen === step.ok ? 'rgba(0,229,160,.2)' : 'rgba(255,61,90,.2)'}`,
+              color: chosen === step.ok ? '#00e5a0' : '#ff8fa0',
+            }}>
+            {chosen === step.ok ? step.fc : step.fw}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   )
 }
 
+/* ──────────────────────────────────────────
+   Pantalla principal del Quiz
+────────────────────────────────────────── */
 export default function QuizScreen({ go }) {
-  const [step, setStep]       = useState(0)
-  const [score, setScore]     = useState(0)
-  const [hits, setHits]       = useState(0)
-  const [qCount, setQCount]   = useState(0)
-  const [toast, setToast]     = useState(null)
+  const [step, setStep]         = useState(0)
+  const [score, setScore]       = useState(0)
+  const [hits, setHits]         = useState(0)
+  const [qCount, setQCount]     = useState(0)
+  const [shake, setShake]       = useState(false)
+  const [showConfetti, setShowConfetti] = useState(false)
+  const containerRef = useRef(null)
 
   const totalQs = STEPS.filter(s => s.type === 'q').length
   const pct     = Math.round((step / STEPS.length) * 100)
   const current = STEPS[step]
 
-  const showToast = (msg, color) => {
-    setToast({ msg, color })
-    setTimeout(() => setToast(null), 1600)
+  /* Efecto rojo de vibración al errar */
+  const triggerShake = () => {
+    setShake(true)
+    setTimeout(() => setShake(false), 600)
+  }
+
+  /* Efecto verde/confetti al acertar */
+  const triggerConfetti = () => {
+    setShowConfetti(true)
+    setTimeout(() => setShowConfetti(false), 950)
   }
 
   const handleAnswer = (correct) => {
     if(correct) {
-      showToast('✓ Correcto', '#00e5a0')
-      setHits(h => h+1); setScore(s => s+200)
-    } else {
-      showToast('✗ Incorrecto', '#ff3d5a')
+      triggerConfetti()
+      setHits(h => h + 1)
+      setScore(s => s + 200)
     }
     setTimeout(() => {
       const next = step + 1
       if(next >= STEPS.length) {
-        go.results({ pct: Math.round(((hits + (correct?1:0)) / totalQs)*100), hits: hits+(correct?1:0), total: totalQs, score: score+(correct?200:0) })
+        go.results({
+          pct: Math.round(((hits + (correct?1:0)) / totalQs) * 100),
+          hits: hits + (correct?1:0),
+          total: totalQs,
+          score: score + (correct?200:0)
+        })
       } else {
         setStep(next)
       }
@@ -155,11 +245,37 @@ export default function QuizScreen({ go }) {
   }
 
   useEffect(() => {
-    if(current?.type === 'q') setQCount(c => c+1)
+    if(current?.type === 'q') setQCount(c => c + 1)
   }, [step])
 
   return (
-    <div className="flex flex-col min-h-screen bg-bg">
+    <motion.div
+      ref={containerRef}
+      className="flex flex-col min-h-screen bg-bg"
+      animate={shake ? {
+        x: [0, -10, 12, -10, 8, -5, 3, 0],
+        backgroundColor: ['#050d1a', '#2d0a0a', '#1a0505', '#050d1a'],
+      } : { x: 0 }}
+      transition={shake ? { duration: 0.55, ease: 'easeOut' } : {}}
+      style={shake ? { boxShadow: 'inset 0 0 60px rgba(255,61,90,.35)' } : {}}
+    >
+      {/* Confetti */}
+      {showConfetti && <ConfettiBurst />}
+
+      {/* Flash verde al acertar */}
+      <AnimatePresence>
+        {showConfetti && (
+          <motion.div
+            key="greenflash"
+            className="pointer-events-none fixed inset-0 z-40"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 0.18, 0] }}
+            transition={{ duration: 0.5 }}
+            style={{ background: 'radial-gradient(ellipse at center, #00e5a0 0%, transparent 70%)' }}
+          />
+        )}
+      </AnimatePresence>
+
       {/* Topbar */}
       <div className="glass flex items-center gap-3 px-4 sticky top-0 z-50 border-b border-white/[.06]"
         style={{ paddingTop:`calc(env(safe-area-inset-top,0px) + 12px)`, paddingBottom:'12px' }}>
@@ -175,7 +291,7 @@ export default function QuizScreen({ go }) {
         <div className="font-mono text-[.82rem] text-yellow font-semibold flex-shrink-0 ml-auto">{score} pts</div>
       </div>
 
-      {/* Progress */}
+      {/* Progress bar */}
       <div className="px-4 pt-4 pb-2">
         <div className="h-[3px] rounded-full overflow-hidden" style={{ background:'#142040' }}>
           <motion.div className="h-full rounded-full" style={{ background:'linear-gradient(90deg,#00c8ff,#00e5a0)' }}
@@ -188,21 +304,10 @@ export default function QuizScreen({ go }) {
         <AnimatePresence mode="wait">
           {current?.type === 'fact'
             ? <FactCard key={step} step={current} onNext={handleNext} />
-            : <QuestionCard key={step} step={current} qNum={qCount} onAnswer={handleAnswer} />
+            : <QuestionCard key={step} step={current} qNum={qCount} onAnswer={handleAnswer} onShake={triggerShake} />
           }
         </AnimatePresence>
       </div>
-
-      {/* Toast */}
-      <AnimatePresence>
-        {toast && (
-          <motion.div initial={{ opacity:0, y:16, x:'-50%' }} animate={{ opacity:1, y:0, x:'-50%' }} exit={{ opacity:0, y:8, x:'-50%' }}
-            className="fixed bottom-20 left-1/2 font-bold text-[1.1rem] px-7 py-4 rounded-2xl z-50 whitespace-nowrap"
-            style={{ color:toast.color, borderColor:toast.color, background:'#142040', border:'2px solid', boxShadow:'0 8px 32px rgba(0,0,0,.5)' }}>
-            {toast.msg}
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+    </motion.div>
   )
 }
