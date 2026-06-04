@@ -41,6 +41,42 @@ export const CATS = {
     svg:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',
     tip:'Ante una estafa, cada minuto es crítico. CERTuy (1719) y tu banco pueden bloquear transacciones si actuás rápido.'
   },
+  'Cuento del tío':{
+    color:'#ef4444',
+    bg:'rgba(239,68,68,.1)',
+    svg:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+    tip:'El cuento del tío usa urgencia y disfraces para que no tengas tiempo de pensar. Ante cualquier presión, cerrá la puerta y llamá vos al banco.'
+  },
+  'WhatsApp código':{
+    color:'#10b981',
+    bg:'rgba(16,185,129,.1)',
+    svg:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
+    tip:'El código de 6 dígitos de WhatsApp es la llave de tu cuenta. Nadie tiene derecho a pedírtelo — ni WhatsApp mismo.'
+  },
+  'SMS falso (phishing)':{
+    color:'#f59e0b',
+    bg:'rgba(245,158,11,.1)',
+    svg:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>',
+    tip:'Los links oficiales del Estado uruguayo siempre terminan en .gub.uy. Cualquier otra dirección es falsa.'
+  },
+  'Robo de datos bancarios':{
+    color:'#06b6d4',
+    bg:'rgba(6,182,212,.1)',
+    svg:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>',
+    tip:'El BROU nunca contacta por WhatsApp para ofrecer beneficios ni pedir tu llave digital. Bloqueá ese contacto.'
+  },
+  'Premio falso':{
+    color:'#a855f7',
+    bg:'rgba(168,85,247,.1)',
+    svg:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>',
+    tip:'Si no participaste en ningún sorteo, no podés ganar nada. Todo premio inesperado que pide datos es una estafa.'
+  },
+  'Persona en la puerta':{
+    color:'#8b7cf8',
+    bg:'rgba(139,124,248,.1)',
+    svg:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
+    tip:'Cualquier inspector o funcionario real puede esperar afuera mientras verificás. Nadie puede obligarte a abrir tu puerta.'
+  },
   'Reconocimiento':{
     color:'#f59e0b',
     bg:'rgba(245,158,11,.1)',
