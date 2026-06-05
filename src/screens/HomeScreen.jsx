@@ -413,6 +413,47 @@ export default function HomeScreen({ go }) {
           ))}
         </div>
 
+        {/* Botón Primeros Auxilios Digitales */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: .85 }}
+          className="w-full mt-4 pb-10"
+          style={{ maxWidth: 480 }}
+        >
+          <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.6rem', fontWeight:500, color:'#4a6080', letterSpacing:'.1em', textTransform:'uppercase', textAlign:'center', marginBottom:10 }}>
+            ¿Ya fuiste víctima? Actuá ahora
+          </div>
+          <motion.button
+            whileTap={{ scale: .97 }}
+            onClick={() => go.chat('Creo que me estafaron, necesito los primeros auxilios digitales, qué hago ahora')}
+            className="w-full flex items-center justify-between px-5 py-4 rounded-[16px]"
+            style={{
+              background: 'rgba(239,68,68,.06)',
+              border: '1.5px solid rgba(239,68,68,.25)',
+              cursor: 'pointer',
+              backdropFilter: 'blur(6px)',
+              WebkitBackdropFilter: 'blur(6px)',
+            }}
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-[10px] flex items-center justify-center flex-shrink-0"
+                style={{ background: 'rgba(239,68,68,.1)', border: '1px solid rgba(239,68,68,.3)' }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16l.19.92z"/></svg>
+              </div>
+              <div className="text-left">
+                <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.95rem', fontWeight:700, color:'#fff' }}>
+                  Primeros Auxilios Digitales
+                </div>
+                <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.75rem', color:'#ef4444', marginTop:2 }}>
+                  Si te estafaron, hacé esto YA →
+                </div>
+              </div>
+            </div>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round"><path d="M9 18l6-6-6-6"/></svg>
+          </motion.button>
+        </motion.div>
+
       </div>
     </div>
   )
