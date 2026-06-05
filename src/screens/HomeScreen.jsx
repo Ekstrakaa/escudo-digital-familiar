@@ -20,7 +20,7 @@ function Particles() {
       y:   Math.random() * canvas.height,
       vx:  (Math.random() - 0.5) * 0.32,
       vy:  (Math.random() - 0.5) * 0.32,
-      r:   Math.random() * 1.8 + 0.5,
+      r:   Math.random() * 2.8 + 1.0,
       a:   Math.random() * 0.55 + 0.20,
       hue: Math.random() * 360,
       dh:  (Math.random() * 0.6 + 0.2) * (Math.random() > 0.5 ? 1 : -1),
@@ -167,7 +167,7 @@ export default function HomeScreen({ go }) {
               width: 120,
               height: 120,
               objectFit: 'contain',
-              filter: 'drop-shadow(0 0 18px rgba(26,199,167,.7)) drop-shadow(0 0 8px rgba(0,200,255,.4))',
+              filter: 'drop-shadow(0 0 20px rgba(26,199,167,.8)) drop-shadow(0 0 10px rgba(0,200,255,.5))',
               position: 'relative',
               zIndex: 1,
             }}
