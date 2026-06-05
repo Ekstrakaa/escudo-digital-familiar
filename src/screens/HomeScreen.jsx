@@ -263,20 +263,20 @@ export default function HomeScreen({ go }) {
               exit={{ opacity:0, scale:.92, y:16 }}
               transition={{ duration:.25, ease:'easeOut' }}
               className="w-full rounded-[20px] overflow-hidden"
-              style={{ maxWidth:320, background:'#0d1a30', border:'1px solid rgba(239,68,68,.28)', boxShadow:'0 24px 64px rgba(0,0,0,.7)' }}
+              style={{ maxWidth:280, background:'#0d1a30', border:'1px solid rgba(239,68,68,.28)', boxShadow:'0 24px 64px rgba(0,0,0,.7)' }}
               onClick={e => e.stopPropagation()}>
 
               {/* Header */}
-              <div className="flex items-center justify-between px-4 py-3"
+              <div className="flex items-center justify-between px-3 py-2"
                 style={{ borderBottom:'1px solid rgba(255,255,255,.06)' }}>
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-[10px] flex items-center justify-center flex-shrink-0"
+                  <div className="w-7 h-7 rounded-[8px] flex items-center justify-center flex-shrink-0"
                     style={{ background:'rgba(239,68,68,.1)', border:'1px solid rgba(239,68,68,.25)' }}>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16l.19.92z"/></svg>
                   </div>
                   <div>
-                    <div style={{ fontFamily:"'Outfit',sans-serif", fontWeight:700, fontSize:'.92rem', color:'#fff' }}>Primeros Auxilios Digitales</div>
-                    <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.68rem', color:'#ef4444' }}>Si te estafaron, hacé esto YA</div>
+                    <div style={{ fontFamily:"'Outfit',sans-serif", fontWeight:700, fontSize:'.82rem', color:'#fff' }}>Primeros Auxilios Digitales</div>
+                    <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.62rem', color:'#ef4444' }}>Si te estafaron, hacé esto YA</div>
                   </div>
                 </div>
                 <button onClick={() => setAuxOpen(false)}
@@ -286,15 +286,15 @@ export default function HomeScreen({ go }) {
               </div>
 
               {/* Números — compactos, sin scroll */}
-              <div className="px-3 pt-2 pb-3 flex flex-col gap-[5px]">
+              <div className="px-3 pt-2 pb-3 flex flex-col gap-[4px]">
                 {AUX_ROWS.map(r => (
                   <div key={r[0]} className="flex items-center gap-3 px-3 py-[9px] rounded-[10px]"
                     style={{ background:'rgba(255,255,255,.03)', border:'1px solid rgba(255,255,255,.05)' }}>
                     <div className="w-5 h-5 rounded-[5px] flex items-center justify-center font-mono text-[.6rem] font-semibold flex-shrink-0"
                       style={{ background:'#142040', color:'#4a6080' }}>{r[0]}</div>
                     <div className="flex-1 min-w-0">
-                      <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.65rem', color:'#8fa8cc' }}>{r[1]}</div>
-                      <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.83rem', fontWeight:700, color:'#f0f6ff' }}>{r[2]}</div>
+                      <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.6rem', color:'#8fa8cc' }}>{r[1]}</div>
+                      <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.78rem', fontWeight:700, color:'#f0f6ff' }}>{r[2]}</div>
                     </div>
                   </div>
                 ))}
@@ -302,8 +302,8 @@ export default function HomeScreen({ go }) {
                 {/* Botón chat */}
                 <button
                   onClick={() => { setAuxOpen(false); go.chat('Creo que me estafaron, necesito ayuda urgente') }}
-                  className="w-full py-[11px] rounded-[12px] font-bold text-white mt-1"
-                  style={{ background:'linear-gradient(135deg,#c0392b,#e74c3c)', fontFamily:"'Outfit',sans-serif", fontSize:'.9rem', border:'none', cursor:'pointer' }}>
+                  className="w-full py-[9px] rounded-[10px] font-bold text-white mt-1"
+                  style={{ background:'linear-gradient(135deg,#c0392b,#e74c3c)', fontFamily:"'Outfit',sans-serif", fontSize:'.82rem', border:'none', cursor:'pointer' }}>
                   Hablar con el asistente →
                 </button>
               </div>
