@@ -12,7 +12,7 @@ export const STEPS = [
     id: 1,
     cat: 'Cuento del tío',
     icon: '🚪',
-    txt: '🚪 Son las 2 de la tarde. Tocan el timbre.\n\nAbre la puerta y hay un señor mayor, bien vestido, con corbata y una credencial del Banco República. Con cara preocupada dice:\n\n"Buenas tardes. Soy Carlos García, supervisor del BROU. Su cuenta tiene un problema grave y si no resolvemos esto hoy antes de las 5pm, sus ahorros quedan bloqueados. Necesito su tarjeta y su clave para reactivar el servicio."\n\n¿Qué hacés?',
+    txt: 'Son las 2 de la tarde.🚪 Tocan el timbre.\n\nAbre la puerta y hay un señor mayor, bien vestido, con corbata y una credencial del Banco República. Con cara preocupada dice:\n\n"Buenas tardes. Soy Carlos García, supervisor del BROU. Su cuenta tiene un problema grave y si no resolvemos esto hoy antes de las 5pm, sus ahorros quedan bloqueados. Necesito su tarjeta y su clave para reactivar el servicio."\n\n¿Qué hacés?',
     opts: [
       'Le doy la tarjeta y la clave — tiene credencial y parece muy serio',
       'Cierro la puerta, llamo YO al BROU al 1722 0001 para verificar',
@@ -20,14 +20,14 @@ export const STEPS = [
       'Lo hago pasar y llamamos juntos al banco desde mi casa'
     ],
     ok: 1,
-    fc: '¡Muy bien! 🛡️ Los bancos NUNCA mandan personas a tu casa a buscar tarjetas ni claves. Ni con corbata, ni con credencial, ni con urgencia. La "urgencia" es el truco para que no pienses. Cerrar la puerta y llamar VOS al banco es la única respuesta correcta.',
-    fw: '😬 Cuidado. Los estafadores se visten bien, usan credenciales falsas y crean pánico. Ningún banco manda empleados a tu puerta. Si eso pasa, cerrá y llamá VOS al BROU: 1722 0001.'
+    fc: '✅ ¡Correcto! Los bancos NUNCA mandan gente a tu casa. La urgencia es el truco. Cerrá y llamá vos al BROU: 1722 0001.',
+    fw: '❌ Cuidado. Ningún banco manda empleados a tu puerta. Cerrá y llamá vos al BROU: 1722 0001.'
   },
 
   // ─── ¿SABÍAS QUE? 1: Canal 4 hombre ─────────────────────
   {
     type: 'fact',
-    img: '<img src="/imgs/canal4_hombre.png" alt="Noticia Canal 4 - Hombre 90 años estafado" style="width:100%;display:block;border-radius:12px 12px 0 0;object-fit:cover;max-height:220px;" />',
+    img: '<img src="/imgs/canal4_hombre.png" alt="Noticia Canal 4 - Hombre 90 años estafado" style="width:100%;display:block;border-radius:12px 12px 0 0;object-fit:contain;max-height:160px;background:#0a1628;" />',
     txt: '<strong style="color:#ef4444">📺 Caso real Uruguay — Canal 4</strong><br><br>Un hombre de <strong>90 años fue estafado por $46.000</strong> con el cuento del tío. Se hicieron pasar por su nieto y le pidieron que sacara un préstamo del banco.<br><br><strong style="color:#f59e0b">⚠️ Ante cualquier persona en la puerta pidiendo datos o dinero:</strong><br>Cerrá la puerta y llamá al <strong style="color:#10b981">911</strong> o al Ministerio del Interior: <strong style="color:#10b981">0800 5050</strong>',
     stat: 'Las víctimas del cuento del tío en Uruguay pierden en promedio $40.000 pesos por caso denunciado.',
     src: 'Canal 4 Uruguay · Telenoche 2025'
@@ -47,8 +47,8 @@ export const STEPS = [
       'Le pido que me mande una foto para confirmar su identidad'
     ],
     ok: 2,
-    fc: '¡Exacto! 🎉 Llamar al número conocido del familiar es LA ÚNICA forma segura de verificar. Los estafadores siempre dicen "no le digas a nadie" para que no tengas tiempo de pensar ni consultar.',
-    fw: '😬 La frase "no le digas a nadie" es la señal más clara de estafa. Nunca mandes plata por WhatsApp sin llamar primero al número viejo de tu familiar. Una foto se puede falsificar, un número guardado no.'
+    fc: '✅ ¡Correcto! Llamar al número conocido del familiar es la única forma segura. "No le digas a nadie" es siempre señal de estafa.',
+    fw: '❌ "No le digas a nadie" es siempre estafa. Nunca mandes plata sin llamar primero al número guardado de tu familiar.'
   },
 
   // ─── PREGUNTA 3: Clonación de voz IA ────────────────────
@@ -65,15 +65,15 @@ export const STEPS = [
       'Le digo que voy personalmente a verla al hospital'
     ],
     ok: 2,
-    fc: '¡Correcto! 🛡️ La inteligencia artificial puede copiar CUALQUIER voz con apenas 3 segundos de audio de redes sociales. La única defensa real: colgar y llamar VOS al número que tenés guardado del familiar.',
-    fw: '😬 Esta estafa se llama "clonación de voz con IA". Los estafadores sacan audio de Facebook o Instagram y replican la voz en segundos. Siempre colgá y llamá vos al número guardado del familiar, sin excepción.'
+    fc: '✅ ¡Correcto! La IA puede copiar cualquier voz. La única defensa: colgá y llamá vos al número guardado de tu familiar.',
+    fw: '❌ Se llama clonación de voz con IA. Colgá siempre y llamá vos al número guardado del familiar.'
   },
 
 
   // ─── ¿SABÍAS QUE? — Telenoche millón ────────────────────
   {
     type: 'fact',
-    img: '<img src="/imgs/telenoche_millon.png" alt="Cuento del tío - un millón de pesos" style="width:100%;display:block;border-radius:12px 12px 0 0;object-fit:cover;max-height:220px;" />',
+    img: '<img src="/imgs/telenoche_millon.png" alt="Cuento del tío - un millón de pesos" style="width:100%;display:block;border-radius:12px 12px 0 0;object-fit:contain;max-height:160px;background:#0a1628;" />',
     txt: '<strong style="color:#ef4444">📺 Caso real — Cuento del tío telefónico</strong><br><br>Se hicieron pasar por policías y lograron que una víctima transfiriera <strong>más de un millón de pesos</strong>. Todo empezó con una llamada al teléfono de línea de su casa.<br><br><strong style="color:#f59e0b">⚠️ Recordá siempre:</strong><br>• La Policía <strong>NUNCA</strong> te va a llamar para pedirte dinero<br>• Ningún funcionario oficial pide transferencias por teléfono<br>• Ante cualquier llamada sospechosa, <strong>colgá y llamá al 911 vos</strong><br><br><div style="margin-top:12px;padding:10px 14px;border-radius:10px;background:rgba(0,229,160,.07);border:1px solid rgba(0,229,160,.2);color:#00e5a0;font-size:.85rem">💬 Si te pasa algo así, consultá en nuestro <strong>chat de Escudo Digital</strong> — te ayudamos a actuar paso a paso ante cualquier situación.</div>',
     stat: 'En Uruguay los estafadores llaman al teléfono de línea haciéndose pasar por policías o familiares para crear pánico y conseguir transferencias.',
     src: 'Telenoche · Canal 4 Uruguay 2025'
@@ -93,8 +93,8 @@ export const STEPS = [
       'Llamo a un familiar para que me ayude a decidir qué hacer'
     ],
     ok: 2,
-    fc: '¡Perfecto! 🎉 WhatsApp NUNCA te contacta por WhatsApp para pedirte códigos. Ese código de 6 dígitos es la llave de tu cuenta — si lo compartís, el estafador toma el control de tu WhatsApp y le escribe a todos tus contactos haciéndose pasar por vos.',
-    fw: '😬 WhatsApp nunca te pide códigos por mensaje. Ese código de 6 dígitos activa tu cuenta en el celular del estafador. Bloqueá ese número inmediatamente y denuncialo.'
+    fc: '✅ ¡Perfecto! WhatsApp nunca pide códigos. Ese código es la llave de tu cuenta — si lo das, pierden el control de tu WhatsApp.',
+    fw: '❌ WhatsApp nunca pide códigos. Ese código activa tu cuenta en otro celular. Bloqueá ese número ya.'
   },
 
   // ─── PREGUNTA 5: SMS SUCIVE multa falsa ─────────────────
@@ -111,14 +111,14 @@ export const STEPS = [
       'Llamo al número que aparece en el SMS para consultar si es real'
     ],
     ok: 2,
-    fc: '¡Excelente! 🛡️ SUCIVE nunca manda links por SMS. El dominio oficial siempre termina en .gub.uy — cualquier otra dirección es falsa. Este tipo de estafa fue denunciado públicamente por el Ministerio del Interior en 2025.',
-    fw: '😬 Cualquier SMS con link que no sea .gub.uy es falso. Borralo sin tocar el link. Si tenés dudas sobre multas, entrá vos mismo escribiendo sucive.gub.uy en el navegador de tu celular.'
+    fc: '✅ ¡Correcto! SUCIVE nunca manda links. Los sitios oficiales terminan en .gub.uy — cualquier otro es falso.',
+    fw: '❌ Links que no terminan en .gub.uy son siempre falsos. Borrá el mensaje sin tocarlo.'
   },
 
   // ─── ¿SABÍAS QUE? 2: Canal 4 mujer ──────────────────────
   {
     type: 'fact',
-    img: '<img src="/imgs/canal4_mujer.png" alt="Noticia Canal 4 - Mujer estafada por $90.000" style="width:100%;display:block;border-radius:12px 12px 0 0;object-fit:cover;max-height:220px;" />',
+    img: '<img src="/imgs/canal4_mujer.png" alt="Noticia Canal 4 - Mujer estafada por $90.000" style="width:100%;display:block;border-radius:12px 12px 0 0;object-fit:contain;max-height:160px;background:#0a1628;" />',
     txt: '<strong style="color:#ef4444">📺 Caso real Uruguay — Canal 4</strong><br><br>Una mujer fue <strong>estafada por casi $90.000</strong> con el cuento del tío. La denuncia policial muestra el monto exacto de lo robado.<br><br><strong style="color:#f59e0b">⚠️ Recordá siempre:</strong> Ningún banco, familiar ni funcionario tiene derecho a pedirte dinero o datos por teléfono, WhatsApp o en la puerta de tu casa.<br><br>Si creés que fuiste víctima llamá al <strong style="color:#10b981">911</strong> o al <strong style="color:#10b981">0800 5050</strong>',
     stat: 'En Uruguay se denuncian más de 50 casos de cuento del tío por mes — y muchos más no se denuncian.',
     src: 'Canal 4 Uruguay · Telenoche 2025'
@@ -138,8 +138,8 @@ export const STEPS = [
       'Cuelgo y bloqueo el número — ninguna empresa pide el Gmail por teléfono'
     ],
     ok: 3,
-    fc: '¡Muy bien! 🎉 Antel, Claro, Movistar — ninguna empresa de telecomunicaciones llama espontáneamente para pedirte el Gmail ni acceso remoto. Si les das acceso pueden ver tus fotos, claves bancarias y toda tu información personal.',
-    fw: '😬 Ninguna empresa llama para pedirte el Gmail o acceso remoto. Si alguien lo hace, es una estafa. Colgá, bloqueá el número y si tenés dudas sobre tu router llamá VOS al 104 (Antel).'
+    fc: '✅ ¡Muy bien! Ninguna empresa llama para pedir el Gmail. Si das acceso, pueden ver tus claves bancarias y fotos.',
+    fw: '❌ Ninguna empresa pide el Gmail por teléfono. Es siempre estafa. Colgá y bloqueá el número.'
   },
 
   // ─── PREGUNTA 7: BROU + ANCAP descuento WhatsApp ────────
@@ -148,7 +148,7 @@ export const STEPS = [
     id: 7,
     cat: 'Robo de datos bancarios',
     icon: '💳',
-    img: '<img src="/imgs/brou_ancap.png" alt="Publicidad falsa BROU ANCAP" style="width:100%;display:block;border-radius:12px 12px 0 0;object-fit:contain;max-height:240px;background:#0a1628;" />',
+    img: '<img src="/imgs/brou_ancap.png" alt="Publicidad falsa BROU ANCAP" style="width:100%;display:block;border-radius:12px 12px 0 0;object-fit:contain;max-height:160px;background:#0a1628;" />',
     txt: '📱 Te llega un mensaje de WhatsApp con esta imagen:\n\n"¡Beneficio exclusivo para clientes BROU! 35% de descuento en combustible en todas las estaciones ANCAP. Para activarlo hacé clic aquí, asociá tu tarjeta y validá con tu llave digital. ¡Solo hoy!"\n\n¿Qué hacés?',
     opts: [
       'Entro y doy mis datos — es del BROU y ANCAP, parecen logos reales',
@@ -157,14 +157,14 @@ export const STEPS = [
       'Reenvío el mensaje a un familiar para ver si él también lo recibió'
     ],
     ok: 2,
-    fc: '¡Correcto! 🛡️ El BROU nunca contacta por WhatsApp para ofrecer beneficios ni pedir la "llave digital". Eso que llaman "llave digital" son tus credenciales de homebanking — si las das, el estafador entra a tu cuenta.',
-    fw: '😬 Este fraude real circula en Uruguay con los logos oficiales del BROU y ANCAP. Los estafadores copian las imágenes para parecer legítimos. El BROU no da beneficios por WhatsApp. Bloqueá ese número.'
+    fc: '✅ ¡Correcto! El BROU nunca da beneficios por WhatsApp. La "llave digital" son tus claves bancarias — nunca las des.',
+    fw: '❌ Fraude real en Uruguay. El BROU nunca da beneficios por WhatsApp. Bloqueá ese número.'
   },
 
   // ─── ¿SABÍAS QUE? 3: Correo Uruguayo falso ───────────────
   {
     type: 'fact',
-    img: '<img src="/imgs/correo_uy.png" alt="Email falso Correo Uruguayo" style="width:100%;display:block;border-radius:12px 12px 0 0;object-fit:cover;max-height:200px;" />',
+    img: '<img src="/imgs/correo_uy.png" alt="Email falso Correo Uruguayo" style="width:100%;display:block;border-radius:12px 12px 0 0;object-fit:contain;max-height:160px;background:#0a1628;" />',
     txt: '<strong style="color:#ef4444">⚠️ Phishing — Correo Uruguayo falso</strong><br><br>Los estafadores envían emails copiando el diseño oficial del <strong>Correo Uruguayo</strong> para cobrar un supuesto "gasto de envío" de un paquete pendiente.<br><br><strong style="color:#f59e0b">Cómo reconocer un email falso:</strong><br>• El dominio no termina en <strong>.gub.uy</strong><br>• Te piden datos de tarjeta para pagar<br>• Dice "paquete pendiente" sin que hayas pedido nada<br><br><strong style="color:#10b981">Ante cualquier duda, llamá al Correo: 2916 0010</strong>',
     stat: 'El phishing por email aumentó un 300% en Uruguay durante 2024-2025 según CERTuy.',
     src: 'CERTuy · Ministerio del Interior Uruguay 2025'
@@ -184,15 +184,15 @@ export const STEPS = [
       'Llamo al número que aparece en el email para verificar el premio'
     ],
     ok: 2,
-    fc: '¡Excelente! 🎉 Si no participaste en ningún sorteo, no podés ganar nada. Abitab y ninguna empresa seria pide datos de tarjeta por email para entregarte un premio. La "urgencia de 24 horas" es el truco para que no pienses.',
-    fw: '😬 Los premios falsos son una de las estafas más comunes. Si no participaste en un sorteo, no ganaste nada. Nunca ingreses tus datos en links de emails inesperados. Si querés verificar, llamá VOS a Abitab.'
+    fc: '✅ ¡Correcto! Si no participaste, no ganaste nada. Nadie pide datos de tarjeta para entregar premios.',
+    fw: '❌ Si no participaste en ningún sorteo, no podés ganar nada. Nunca des datos por email inesperado.'
   },
 
 
   // ─── ¿SABÍAS QUE? — Hombre estafado USD 18.000 ──────────
   {
     type: 'fact',
-    img: '<img src="/imgs/cuento_tio_hombre.png" alt="Hombre estafado USD 18.000" style="width:100%;display:block;border-radius:12px 12px 0 0;object-fit:cover;max-height:220px;" />',
+    img: '<img src="/imgs/cuento_tio_hombre.png" alt="Hombre estafado USD 18.000" style="width:100%;display:block;border-radius:12px 12px 0 0;object-fit:contain;max-height:160px;background:#0a1628;" />',
     txt: '<strong style="color:#ef4444">⚠️ Caso real — Cuento del tío: USD 18.000 y $350.000</strong><br><br>Un hombre de 67 años fue engañado por alguien que se hizo pasar por su hijo. Le dijeron que había tenido un accidente grave y necesitaba dinero urgente. Perdió <strong>USD 18.000 y $350.000 pesos</strong>.<br><br><strong style="color:#f59e0b">Antes de mandar cualquier dinero:</strong><br>• Llamá directamente al número guardado de tu familiar<br>• Consultá con otro familiar de confianza lo que está pasando<br>• Llamá al <strong style="color:#00c8ff">911</strong> si sentís presión o amenazas<br><br><div style="margin-top:12px;padding:10px 14px;border-radius:10px;background:rgba(0,229,160,.07);border:1px solid rgba(0,229,160,.2);color:#00e5a0;font-size:.85rem">💬 Ante cualquier situación de urgencia con dinero, usá nuestro <strong>chat de Escudo Digital</strong> — te orientamos antes de que tomes cualquier decisión.</div>',
     stat: 'La mayoría de las víctimas del cuento del tío dicen que "la voz sonaba exactamente igual". Hoy la IA puede clonar cualquier voz con solo 3 segundos de audio.',
     src: 'El País Uruguay · 31 de mayo de 2026'
@@ -212,8 +212,8 @@ export const STEPS = [
       'Les digo que esperen afuera mientras llamo a un familiar'
     ],
     ok: 1,
-    fc: '¡Muy bien! 🛡️ Cualquier inspector real de la Intendencia puede esperar afuera mientras verificás. Llamar al número oficial (no al que ellos te den) antes de abrir es siempre la respuesta correcta. Tener uniforme no garantiza que sean quienes dicen ser.',
-    fw: '😬 Los estafadores alquilan uniformes o los falsifican. Nadie puede obligarte a abrir la puerta sin un papel oficial. Pedí el número de expediente, cerrá la puerta con pasador y llamá VOS a la Intendencia al 1950 0911.'
+    fc: '✅ ¡Bien! Cualquier inspector real puede esperar. Cerrá la puerta y llamá vos a la Intendencia: 1950 0911.',
+    fw: '❌ Los uniformes se pueden falsificar. Nadie puede obligarte a abrir. Cerrá y llamá: 1950 0911.'
   },
 
   // ─── PREGUNTA 10: Señor con traje del Banco República ───
@@ -230,14 +230,14 @@ export const STEPS = [
       'Le pido que me muestre más documentación antes de dar nada'
     ],
     ok: 2,
-    fc: '¡Correcto! 🎉 El CVV y la llave digital son las claves más importantes de tu cuenta. El BROU NUNCA manda personas a tu casa a pedirlas. Esta es una de las estafas más comunes en Uruguay. Siempre cerrá la puerta y llamá vos al banco.',
-    fw: '😬 El CVV y la llave digital son las llaves de tu cuenta bancaria. Dárselos a alguien es como darle las llaves de tu casa. El BROU nunca manda empleados a pedir estos datos. Cerrá la puerta y llamá al 1722 0001.'
+    fc: '✅ ¡Correcto! El BROU nunca manda gente a pedir datos. Cerrá la puerta y llamá: 1722 0001.',
+    fw: '❌ El CVV y la llave digital son las llaves de tu cuenta. El BROU nunca los pide en persona. Cerrá y llamá: 1722 0001.'
   },
 
   // ─── ¿SABÍAS QUE? 4: Talleres IM ─────────────────────────
   {
     type: 'fact',
-    img: '<img src="/imgs/manosdigital.png" alt="Curso inclusión digital personas mayores" style="width:100%;display:block;border-radius:12px 12px 0 0;object-fit:cover;max-height:200px;" />',
+    img: '<img src="/imgs/manosdigital.png" alt="Curso inclusión digital personas mayores" style="width:100%;display:block;border-radius:12px 12px 0 0;object-fit:contain;max-height:160px;background:#0a1628;" />',
     txt: `<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><img src="/imgs/logo_im.png" alt="Intendencia Montevideo" style="height:32px;object-fit:contain" /><strong style="color:#10b981;font-size:1.05rem">Intendencia de Montevideo</strong></div><strong style="color:#10b981">🏛️ ¿Sabías que la IM tiene talleres GRATIS?</strong><br><br>La <strong>Intendencia de Montevideo</strong> tiene un Programa de Inclusión Digital especial para personas mayores donde podés aprender a usar el celular de forma segura, reconocer estafas y navegar internet con confianza.<br><br><strong style="color:#f59e0b">Son gratuitos, en tu barrio, y para todas las edades.</strong><br><br>Inscribite o consultá: <strong style="color:#10b981">montevideo.gub.uy/personas-mayores</strong><br>O llamá al <strong style="color:#8b7cf8">1950 5555</strong> (IM Adultos Mayores)<br><br><div style="margin-top:14px;padding:12px 14px;border-radius:12px;background:rgba(0,200,255,.07);border:1px solid rgba(0,200,255,.2)"><strong style="color:#00c8ff">🕵️ ¿Fuiste víctima de una estafa digital?</strong><br><br>Llamá al <strong style="color:#00c8ff;font-size:1.1rem">2030 4625</strong><br><span style="color:#8fa8cc;font-size:.85rem">Dirección General de Cibercrimen<br>Ministerio del Interior — Uruguay<br>Comisario Gral. Paulo Danilo Rocha Martínez</span></div>`,
     stat: 'Más de 2.000 personas mayores participaron en talleres de inclusión digital de la IM en 2024.',
     src: 'Intendencia de Montevideo · Programa de Inclusión Digital 2025'
