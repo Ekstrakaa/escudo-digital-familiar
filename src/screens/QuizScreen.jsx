@@ -129,52 +129,43 @@ function QuestionCard({ step, qNum, onAnswer, onShake }) {
   }
 
   return (
-    <motion.div key={step.id} initial={{ opacity:0, y:16 }} animate={{ opacity:1, y:0 }} transition={{ duration:.35 }}>
+    <motion.div key={step.id} initial={{ opacity:0, y:12 }} animate={{ opacity:1, y:0 }} transition={{ duration:.3 }}>
 
-      {/* Category banner */}
-      <motion.div initial={{ opacity:0, x:-12 }} animate={{ opacity:1, x:0 }} transition={{ delay:.05 }}
-        className="flex items-center gap-4 p-4 rounded-2xl mb-4"
-        style={{ background:'#0f1d35', border:'1px solid rgba(0,200,255,.1)' }}>
-        <div className="w-14 h-14 rounded-[14px] flex items-center justify-center flex-shrink-0"
+      {/* Header compacto: categoría + número */}
+      <div className="flex items-center gap-2 mb-2 px-1">
+        <div className="w-7 h-7 rounded-[8px] flex items-center justify-center flex-shrink-0"
           style={{ background:meta.bg, border:`1px solid ${meta.color}33` }}
-          dangerouslySetInnerHTML={{ __html: meta.svg }} />
-        <div>
-          <div className="font-mono text-[.72rem] tracking-widest uppercase font-semibold mb-[3px]" style={{ color:meta.color }}>{step.cat}</div>
-          <div className="text-[.83rem] text-t2">Pregunta {qNum}</div>
-        </div>
-      </motion.div>
+          dangerouslySetInnerHTML={{ __html: meta.svg.replace('width="22" height="22"','width="14" height="14"') }} />
+        <span className="font-mono text-[.65rem] tracking-widest uppercase font-semibold" style={{ color:meta.color }}>{step.cat}</span>
+        <span className="text-[.65rem] text-t3 ml-auto">Pregunta {qNum}</span>
+      </div>
 
-      {/* Question */}
-      <motion.div initial={{ opacity:0, y:12 }} animate={{ opacity:1, y:0 }} transition={{ delay:.07 }}
-        className="rounded-2xl overflow-hidden mb-4"
+      {/* Imagen si hay */}
+      {step.img && (
+        <div className="rounded-[12px] overflow-hidden mb-2"
+          dangerouslySetInnerHTML={{ __html: step.img }} />
+      )}
+
+      {/* Pregunta */}
+      <div className="rounded-[14px] p-3 mb-3"
         style={{ background:'#0f1d35', border:'1px solid rgba(0,200,255,.1)' }}>
-        {step.img && <div dangerouslySetInnerHTML={{ __html: step.img }} />}
-        <div className="p-5">
-          {step.tip && (
-            <div className="text-[.82rem] text-t2 leading-relaxed p-3 mb-4 rounded-[8px]"
-              style={{ background:'rgba(0,200,255,.05)', borderLeft:'2px solid rgba(0,200,255,.35)' }}>
-              {step.tip}
-            </div>
-          )}
-          <div className="text-[1.05rem] font-semibold leading-[1.65] text-t1 whitespace-pre-wrap">{step.txt}</div>
-        </div>
-      </motion.div>
+        <div className="text-[.92rem] font-semibold leading-[1.5] text-t1 whitespace-pre-wrap">{step.txt}</div>
+      </div>
 
-      {/* Options */}
-      <motion.div initial={{ opacity:0, y:12 }} animate={{ opacity:1, y:0 }} transition={{ delay:.1 }}
-        className="flex flex-col gap-[10px]">
+      {/* Opciones compactas */}
+      <div className="flex flex-col gap-[7px]">
         {step.opts.map((opt, i) => (
           <button key={i} onClick={() => select(i)} disabled={answered}
-            className="flex items-center gap-4 w-full text-left px-5 py-4 rounded-[16px] min-h-[60px] transition-all duration-200"
-            style={{ ...optStyle(i), cursor: answered ? 'default' : 'pointer' }}>
-            <div className="w-[30px] h-[30px] rounded-[8px] flex items-center justify-center flex-shrink-0 font-mono text-[.72rem] font-semibold transition-all"
+            className="flex items-center gap-3 w-full text-left px-3 py-[10px] rounded-[12px] transition-all duration-200"
+            style={{ ...optStyle(i), cursor: answered ? 'default' : 'pointer', minHeight: 44 }}>
+            <div className="w-[26px] h-[26px] rounded-[7px] flex items-center justify-center flex-shrink-0 font-mono text-[.68rem] font-semibold transition-all"
               style={letterStyle(i)}>
               {LETTERS[i]}
             </div>
-            <span className="text-[.97rem] text-t1 leading-snug">{opt}</span>
+            <span className="text-[.88rem] text-t1 leading-snug">{opt}</span>
           </button>
         ))}
-      </motion.div>
+      </div>
 
 {/* Feedback — modal central */}
       <AnimatePresence>
