@@ -140,24 +140,8 @@ export default function HomeScreen({ go }) {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: .5, ease: 'easeOut' }}
-          className="relative flex items-center justify-center mb-5"
-          style={{ width: 130, height: 130 }}
+          className="flex items-center justify-center mb-5"
         >
-          {/* Glow pulsante detrás — cambia de color */}
-          <motion.div
-            className="absolute pointer-events-none"
-            style={{ inset: -10, borderRadius: '50%', zIndex: 0 }}
-            animate={{
-              boxShadow: [
-                '0 0 35px 12px rgba(26,199,167,.30)',
-                '0 0 55px 22px rgba(0,200,255,.35)',
-                '0 0 40px 15px rgba(139,124,248,.28)',
-                '0 0 35px 12px rgba(26,199,167,.30)',
-              ]
-            }}
-            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-          />
-          {/* Logo con breathing + screen blend para eliminar fondo negro */}
           <motion.img
             src="/imgs/LOGO.png"
             alt="Escudo Digital Familiar"
@@ -167,9 +151,7 @@ export default function HomeScreen({ go }) {
               width: 120,
               height: 120,
               objectFit: 'contain',
-              filter: 'drop-shadow(0 0 20px rgba(26,199,167,.8)) drop-shadow(0 0 10px rgba(0,200,255,.5))',
-              position: 'relative',
-              zIndex: 1,
+              filter: 'drop-shadow(0 0 18px rgba(26,199,167,.8)) drop-shadow(0 0 8px rgba(0,200,255,.5))',
             }}
           />
         </motion.div>
