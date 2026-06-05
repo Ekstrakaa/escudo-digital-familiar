@@ -271,13 +271,13 @@ export default function HomeScreen({ go }) {
             initial={{ opacity:0 }} animate={{ opacity:1 }} exit={{ opacity:0 }}
             transition={{ duration:.2 }}
             className="fixed inset-0 flex items-end justify-center z-50 px-4 pb-6"
-            style={{ background:'rgba(5,13,26,.8)', backdropFilter:'blur(8px)' }}
+            style={{ background:'rgba(5,13,26,.8)', backdropFilter:'blur(8px)', overflowY:'auto' }}
             onClick={() => setAuxOpen(false)}>
             <motion.div
               initial={{ y:60, opacity:0 }} animate={{ y:0, opacity:1 }} exit={{ y:60, opacity:0 }}
               transition={{ duration:.35, ease:'easeOut' }}
               className="w-full max-w-[480px] rounded-[24px] overflow-hidden"
-              style={{ background:'#0f1d35', border:'1px solid rgba(239,68,68,.25)' }}
+              style={{ background:'#0f1d35', border:'1px solid rgba(239,68,68,.25)', maxHeight:'85vh', overflowY:'auto' }}
               onClick={e => e.stopPropagation()}>
               {/* Header */}
               <div className="flex items-center justify-between px-5 py-4"
