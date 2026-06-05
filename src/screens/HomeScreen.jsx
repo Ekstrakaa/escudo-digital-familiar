@@ -263,11 +263,11 @@ export default function HomeScreen({ go }) {
               exit={{ opacity:0, scale:.92, y:16 }}
               transition={{ duration:.25, ease:'easeOut' }}
               className="w-full rounded-[20px] overflow-hidden"
-              style={{ maxWidth:340, background:'#0d1a30', border:'1px solid rgba(239,68,68,.28)', boxShadow:'0 24px 64px rgba(0,0,0,.7)' }}
+              style={{ maxWidth:320, background:'#0d1a30', border:'1px solid rgba(239,68,68,.28)', boxShadow:'0 24px 64px rgba(0,0,0,.7)' }}
               onClick={e => e.stopPropagation()}>
 
               {/* Header */}
-              <div className="flex items-center justify-between px-5 py-4"
+              <div className="flex items-center justify-between px-4 py-3"
                 style={{ borderBottom:'1px solid rgba(255,255,255,.06)' }}>
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-9 rounded-[10px] flex items-center justify-center flex-shrink-0"
@@ -286,15 +286,15 @@ export default function HomeScreen({ go }) {
               </div>
 
               {/* Números — compactos, sin scroll */}
-              <div className="px-4 pt-3 pb-4 flex flex-col gap-[6px]">
+              <div className="px-3 pt-2 pb-3 flex flex-col gap-[5px]">
                 {AUX_ROWS.map(r => (
                   <div key={r[0]} className="flex items-center gap-3 px-3 py-[9px] rounded-[10px]"
                     style={{ background:'rgba(255,255,255,.03)', border:'1px solid rgba(255,255,255,.05)' }}>
                     <div className="w-5 h-5 rounded-[5px] flex items-center justify-center font-mono text-[.6rem] font-semibold flex-shrink-0"
                       style={{ background:'#142040', color:'#4a6080' }}>{r[0]}</div>
                     <div className="flex-1 min-w-0">
-                      <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.68rem', color:'#8fa8cc' }}>{r[1]}</div>
-                      <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.88rem', fontWeight:700, color:'#f0f6ff' }}>{r[2]}</div>
+                      <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.65rem', color:'#8fa8cc' }}>{r[1]}</div>
+                      <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.83rem', fontWeight:700, color:'#f0f6ff' }}>{r[2]}</div>
                     </div>
                   </div>
                 ))}
@@ -302,7 +302,7 @@ export default function HomeScreen({ go }) {
                 {/* Botón chat */}
                 <button
                   onClick={() => { setAuxOpen(false); go.chat('Creo que me estafaron, necesito ayuda urgente') }}
-                  className="w-full py-[13px] rounded-[12px] font-bold text-white mt-1"
+                  className="w-full py-[11px] rounded-[12px] font-bold text-white mt-1"
                   style={{ background:'linear-gradient(135deg,#c0392b,#e74c3c)', fontFamily:"'Outfit',sans-serif", fontSize:'.9rem', border:'none', cursor:'pointer' }}>
                   Hablar con el asistente →
                 </button>
