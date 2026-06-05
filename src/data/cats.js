@@ -47,12 +47,7 @@ export const CATS = {
     svg:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
     tip:'El cuento del tío usa urgencia y disfraces para que no tengas tiempo de pensar. Ante cualquier presión, cerrá la puerta y llamá vos al banco.'
   },
-  'WhatsApp código':{
-    color:'#10b981',
-    bg:'rgba(16,185,129,.1)',
-    svg:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
-    tip:'El código de 6 dígitos de WhatsApp es la llave de tu cuenta. Nadie tiene derecho a pedírtelo — ni WhatsApp mismo.'
-  },
+
   'SMS falso (phishing)':{
     color:'#f59e0b',
     bg:'rgba(245,158,11,.1)',
