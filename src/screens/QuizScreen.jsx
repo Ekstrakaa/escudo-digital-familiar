@@ -46,30 +46,41 @@ function ConfettiBurst() {
 ────────────────────────────────────────── */
 function FactCard({ step, onNext }) {
   return (
-    <motion.div key={step.id} initial={{ opacity:0, y:16 }} animate={{ opacity:1, y:0 }} transition={{ duration:.35 }}>
-      <div className="rounded-2xl overflow-hidden" style={{ background:'#0f1d35', border:'1px solid rgba(0,200,255,.12)' }}>
+    <motion.div
+      key={step.id}
+      initial={{ opacity:0, y:16 }} animate={{ opacity:1, y:0 }} transition={{ duration:.35 }}
+      className="flex flex-col"
+      style={{ height:'calc(100dvh - 130px)' }}
+    >
+      {/* Contenido scrolleable si es necesario */}
+      <div className="flex-1 overflow-y-auto rounded-2xl"
+        style={{ background:'#0f1d35', border:'1px solid rgba(0,200,255,.12)', WebkitOverflowScrolling:'touch' }}>
         {step.img && <div dangerouslySetInnerHTML={{ __html: step.img }} />}
-        <div className="p-5">
-          <div className="inline-flex items-center gap-2 px-3 py-[5px] rounded-full font-mono text-[.62rem] font-semibold tracking-wider uppercase text-cyan mb-4"
+        <div className="p-4">
+          <div className="inline-flex items-center gap-2 px-3 py-[4px] rounded-full font-mono text-[.6rem] font-semibold tracking-wider uppercase text-cyan mb-3"
             style={{ background:'rgba(0,200,255,.08)', border:'1px solid rgba(0,200,255,.2)' }}>
             ¿Sabías que?
           </div>
-          <div className="text-[.97rem] leading-[1.75] text-t1 mb-4" dangerouslySetInnerHTML={{ __html: step.txt }} />
+          <div className="text-[.88rem] leading-[1.65] text-t1 mb-3"
+            dangerouslySetInnerHTML={{ __html: step.txt }} />
           {step.stat && (
-            <div className="flex items-start gap-3 rounded-xl p-4 mb-4" style={{ background:'rgba(139,124,248,.07)', border:'1px solid rgba(139,124,248,.18)' }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8b7cf8" strokeWidth="2" className="flex-shrink-0 mt-[2px]"><path d="M12 22V12m0 0V2m0 10H2m10 0h10"/></svg>
-              <div className="text-[.83rem] text-t2 leading-relaxed">{step.stat}</div>
+            <div className="flex items-start gap-3 rounded-xl p-3 mb-3"
+              style={{ background:'rgba(139,124,248,.07)', border:'1px solid rgba(139,124,248,.18)' }}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8b7cf8" strokeWidth="2" className="flex-shrink-0 mt-[2px]"><path d="M12 22V12m0 0V2m0 10H2m10 0h10"/></svg>
+              <div className="text-[.78rem] text-t2 leading-relaxed">{step.stat}</div>
             </div>
           )}
-          {step.src && <div className="font-mono text-[.65rem] text-t3 mb-5">Fuente: {step.src}</div>}
-          <button onClick={onNext}
-            className="w-full flex items-center justify-center gap-2 py-[17px] rounded-[14px] text-black font-bold text-[1rem] transition-all active:scale-98"
-            style={{ background:'linear-gradient(135deg,#00e5a0,#10b981)' }}>
-            Continuar
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </button>
+          {step.src && <div className="font-mono text-[.62rem] text-t3 mb-2">Fuente: {step.src}</div>}
         </div>
       </div>
+
+      {/* Botón SIEMPRE visible abajo */}
+      <button onClick={onNext}
+        className="w-full flex items-center justify-center gap-2 rounded-[14px] text-black font-bold text-[1rem] transition-all active:scale-98 mt-3 flex-shrink-0"
+        style={{ background:'linear-gradient(135deg,#00e5a0,#10b981)', height:56 }}>
+        Continuar
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
     </motion.div>
   )
 }
