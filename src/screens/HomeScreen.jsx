@@ -108,25 +108,12 @@ const AUX_ROWS = [
 export default function HomeScreen({ go }) {
   const [auxOpen, setAuxOpen] = useState(false)
 
-  useEffect(() => {
-    if (auxOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
-    return () => { document.body.style.overflow = '' }
-  }, [auxOpen])
-
   return (
     <div className="relative flex flex-col min-h-screen overflow-x-hidden"
       style={{ background: 'linear-gradient(170deg, #060c1a 0%, #071626 50%, #060c1a 100%)' }}>
 
-      {/* Partículas */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <Particles />
-      </div>
+      <div className="absolute inset-0 pointer-events-none z-0"><Particles /></div>
 
-      {/* Gradiente animado */}
       <motion.div className="absolute inset-0 pointer-events-none z-0"
         animate={{ background: [
           'radial-gradient(ellipse 70% 35% at 20% 25%, rgba(0,200,255,.06) 0%, transparent 70%)',
@@ -136,11 +123,10 @@ export default function HomeScreen({ go }) {
         transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
       />
 
-      {/* Contenido */}
       <div className="relative z-10 flex flex-col items-center px-4"
         style={{ paddingTop: `calc(env(safe-area-inset-top, 0px) + 36px)`, paddingBottom: 40 }}>
 
-        {/* Badge IM */}
+        {/* Badge */}
         <motion.div initial={{ opacity:0, y:-10 }} animate={{ opacity:1, y:0 }} transition={{ delay:.1 }}
           className="flex items-center gap-2 px-4 py-[7px] rounded-full mb-6"
           style={{ background:'rgba(139,124,248,.1)', border:'1px solid rgba(139,124,248,.25)' }}>
@@ -153,11 +139,8 @@ export default function HomeScreen({ go }) {
 
         {/* Logo */}
         <motion.div initial={{ opacity:0, scale:.8 }} animate={{ opacity:1, scale:1 }}
-          transition={{ duration:.5, ease:'easeOut' }}
-          className="flex items-center justify-center mb-5">
-          <motion.img
-            src="/imgs/LOGO.png"
-            alt="Escudo Digital Familiar"
+          transition={{ duration:.5, ease:'easeOut' }} className="flex items-center justify-center mb-5">
+          <motion.img src="/imgs/LOGO.png" alt="Escudo Digital Familiar"
             animate={{
               scale: [1, 1.13, 1],
               filter: [
@@ -170,16 +153,13 @@ export default function HomeScreen({ go }) {
               ]
             }}
             transition={{ duration:8, repeat:Infinity, ease:'easeInOut' }}
-            style={{ width:120, height:120, objectFit:'contain' }}
-          />
+            style={{ width:120, height:120, objectFit:'contain' }} />
         </motion.div>
 
         {/* Título */}
         <motion.div initial={{ opacity:0, y:-14 }} animate={{ opacity:1, y:0 }}
           transition={{ duration:.45, ease:'easeOut' }} className="text-center mb-2">
-          <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'2.35rem', fontWeight:800, color:'#ffffff', lineHeight:1.15, letterSpacing:'-0.5px' }}>
-            Escudo Digital
-          </div>
+          <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'2.35rem', fontWeight:800, color:'#ffffff', lineHeight:1.15, letterSpacing:'-0.5px' }}>Escudo Digital</div>
           <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'2.35rem', fontWeight:800, lineHeight:1.15, letterSpacing:'-0.5px' }}>
             <span style={{ color:'#ffffff' }}>Digital </span>
             <span style={{ color:'#00E5A0' }}>Familiar</span>
@@ -188,36 +168,32 @@ export default function HomeScreen({ go }) {
 
         {/* Subtítulo */}
         <motion.p initial={{ opacity:0, y:-8 }} animate={{ opacity:1, y:0 }} transition={{ delay:.1, duration:.4 }}
-          style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.9rem', fontWeight:400, color:'#8fa8cc', textAlign:'center', maxWidth:260, lineHeight:1.55, marginBottom:20 }}>
+          style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.9rem', color:'#8fa8cc', textAlign:'center', maxWidth:260, lineHeight:1.55, marginBottom:20 }}>
           Tu herramienta de orientación ante estafas digitales, disponible 24/7.
         </motion.p>
 
-        {/* Botón ROJO — abre panel de números */}
+        {/* Botón ROJO */}
         <motion.button initial={{ opacity:0, y:10 }} animate={{ opacity:1, y:0 }}
-          transition={{ delay:.24, duration:.4 }} whileTap={{ scale:.97 }}
+          transition={{ delay:.24 }} whileTap={{ scale:.97 }}
           onClick={() => go.chat(null)}
           className="w-full flex items-center justify-between px-6 rounded-2xl mb-3"
-          style={{ maxWidth:480, height:62, background:'linear-gradient(135deg,#c0392b 0%,#e74c3c 100%)', boxShadow:'0 4px 24px rgba(220,60,50,.4)', border:'none', cursor:'pointer' }}>
+          style={{ maxWidth:480, height:62, background:'linear-gradient(135deg,#c0392b,#e74c3c)', boxShadow:'0 4px 24px rgba(220,60,50,.4)', border:'none', cursor:'pointer' }}>
           <div className="flex items-center gap-3">
             <div style={{ width:11, height:11, borderRadius:'50%', background:'#ff6b6b', flexShrink:0 }} />
-            <span style={{ fontFamily:"'Outfit',sans-serif", fontSize:'1.08rem', fontWeight:700, color:'#ffffff' }}>
-              Necesito ayuda ahora
-            </span>
+            <span style={{ fontFamily:"'Outfit',sans-serif", fontSize:'1.08rem', fontWeight:700, color:'#fff' }}>Necesito ayuda ahora</span>
           </div>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </motion.button>
 
-        {/* Botón VERDE — Test */}
+        {/* Botón VERDE */}
         <motion.button initial={{ opacity:0, y:10 }} animate={{ opacity:1, y:0 }}
-          transition={{ delay:.3, duration:.4 }} whileTap={{ scale:.97 }}
+          transition={{ delay:.3 }} whileTap={{ scale:.97 }}
           onClick={() => go.quiz()}
           className="w-full flex items-center justify-between px-6 rounded-2xl mb-7"
-          style={{ maxWidth:480, height:62, background:'linear-gradient(135deg,#00b377 0%,#00E5A0 100%)', boxShadow:'0 4px 24px rgba(0,229,160,.28)', border:'none', cursor:'pointer' }}>
+          style={{ maxWidth:480, height:62, background:'linear-gradient(135deg,#00b377,#00E5A0)', boxShadow:'0 4px 24px rgba(0,229,160,.28)', border:'none', cursor:'pointer' }}>
           <div className="flex items-center gap-3">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2.2" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            <span style={{ fontFamily:"'Outfit',sans-serif", fontSize:'1.08rem', fontWeight:700, color:'#000' }}>
-              Test de Blindaje
-            </span>
+            <span style={{ fontFamily:"'Outfit',sans-serif", fontSize:'1.08rem', fontWeight:700, color:'#000' }}>Test de Blindaje</span>
           </div>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </motion.button>
@@ -230,39 +206,38 @@ export default function HomeScreen({ go }) {
           </span>
         </motion.div>
 
-        {/* Grid tarjetas */}
+        {/* Grid */}
         <div className="w-full grid grid-cols-2 gap-[10px]" style={{ maxWidth:480 }}>
           {SITUATIONS.map((s, i) => (
             <motion.button key={i}
               initial={{ opacity:0, y:14 }} animate={{ opacity:1, y:0 }}
-              transition={{ delay:.38 + i * .06, duration:.35 }}
-              whileTap={{ scale:.96 }}
+              transition={{ delay:.38 + i * .06 }} whileTap={{ scale:.96 }}
               onClick={() => go.chat(s.msg)}
               className="flex flex-col items-start text-left"
               style={{ background:s.bg, border:`1.5px solid ${s.border}`, borderRadius:16, padding:'16px 14px', cursor:'pointer', minHeight:120, backdropFilter:'blur(6px)', WebkitBackdropFilter:'blur(6px)' }}>
-              <div style={{ width:44, height:44, borderRadius:12, background:`${s.color}1a`, border:`1px solid ${s.color}40`, display:'flex', alignItems:'center', justifyContent:'center', color:s.color, marginBottom:12, flexShrink:0 }}
+              <div style={{ width:44, height:44, borderRadius:12, background:`${s.color}1a`, border:`1px solid ${s.color}40`, display:'flex', alignItems:'center', justifyContent:'center', color:s.color, marginBottom:12 }}
                 dangerouslySetInnerHTML={{ __html: s.svg }} />
               <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.95rem', fontWeight:700, color:'#f0f6ff', lineHeight:1.25, marginBottom:4 }}>{s.title}</div>
-              <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.77rem', fontWeight:400, color:'#8fa8cc', lineHeight:1.4 }}>{s.desc}</div>
+              <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.77rem', color:'#8fa8cc', lineHeight:1.4 }}>{s.desc}</div>
             </motion.button>
           ))}
         </div>
 
-        {/* Botón Primeros Auxilios abajo */}
-        <motion.div initial={{ opacity:0, y:10 }} animate={{ opacity:1, y:0 }}
-          transition={{ delay:.85 }} className="w-full mt-4" style={{ maxWidth:480 }}>
-          <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.6rem', fontWeight:500, color:'#4a6080', letterSpacing:'.1em', textTransform:'uppercase', textAlign:'center', marginBottom:10 }}>
+        {/* Botón Primeros Auxilios */}
+        <motion.div initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:.9 }}
+          className="w-full mt-4 pb-8" style={{ maxWidth:480 }}>
+          <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.6rem', color:'#4a6080', letterSpacing:'.1em', textTransform:'uppercase', textAlign:'center', marginBottom:10 }}>
             ¿Ya fuiste víctima? Actuá ahora
           </div>
           <motion.button whileTap={{ scale:.97 }} onClick={() => setAuxOpen(true)}
             className="w-full flex items-center justify-between px-5 py-4 rounded-[16px]"
-            style={{ background:'rgba(239,68,68,.06)', border:'1.5px solid rgba(239,68,68,.25)', cursor:'pointer', backdropFilter:'blur(6px)', WebkitBackdropFilter:'blur(6px)' }}>
+            style={{ background:'rgba(239,68,68,.06)', border:'1.5px solid rgba(239,68,68,.25)', cursor:'pointer' }}>
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-[10px] flex items-center justify-center flex-shrink-0"
                 style={{ background:'rgba(239,68,68,.1)', border:'1px solid rgba(239,68,68,.3)' }}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16l.19.92z"/></svg>
               </div>
-              <div className="text-left">
+              <div>
                 <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.95rem', fontWeight:700, color:'#fff' }}>Primeros Auxilios Digitales</div>
                 <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.75rem', color:'#ef4444', marginTop:2 }}>Si te estafaron, hacé esto YA →</div>
               </div>
@@ -273,64 +248,66 @@ export default function HomeScreen({ go }) {
 
       </div>
 
-      {/* Modal Primeros Auxilios */}
+      {/* Modal centrado y compacto — sin scroll */}
       <AnimatePresence>
         {auxOpen && (
           <motion.div
             initial={{ opacity:0 }} animate={{ opacity:1 }} exit={{ opacity:0 }}
             transition={{ duration:.2 }}
-            className="fixed inset-0 z-50 flex items-end justify-center px-4 pb-6"
-            style={{ background:'rgba(5,13,26,.85)' }}
+            className="fixed inset-0 z-50 flex items-center justify-center px-5"
+            style={{ background:'rgba(5,13,26,.75)', backdropFilter:'blur(4px)' }}
             onClick={() => setAuxOpen(false)}>
             <motion.div
-              initial={{ y:80, opacity:0 }} animate={{ y:0, opacity:1 }} exit={{ y:80, opacity:0 }}
-              transition={{ duration:.35, ease:'easeOut' }}
-              className="w-full max-w-[480px] rounded-[24px] overflow-hidden"
-              style={{
-                background:'#0f1d35',
-                border:'1px solid rgba(239,68,68,.25)',
-                maxHeight:'75vh',
-                overflowY:'scroll',
-                WebkitOverflowScrolling:'touch',
-                overscrollBehavior:'contain',
-              }}
+              initial={{ opacity:0, scale:.92, y:16 }}
+              animate={{ opacity:1, scale:1, y:0 }}
+              exit={{ opacity:0, scale:.92, y:16 }}
+              transition={{ duration:.25, ease:'easeOut' }}
+              className="w-full rounded-[20px] overflow-hidden"
+              style={{ maxWidth:340, background:'#0d1a30', border:'1px solid rgba(239,68,68,.28)', boxShadow:'0 24px 64px rgba(0,0,0,.7)' }}
               onClick={e => e.stopPropagation()}>
+
               {/* Header */}
               <div className="flex items-center justify-between px-5 py-4"
                 style={{ borderBottom:'1px solid rgba(255,255,255,.06)' }}>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-[10px] flex items-center justify-center"
+                  <div className="w-9 h-9 rounded-[10px] flex items-center justify-center flex-shrink-0"
                     style={{ background:'rgba(239,68,68,.1)', border:'1px solid rgba(239,68,68,.25)' }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="1.8" strokeLinecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16l.19.92z"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16l.19.92z"/></svg>
                   </div>
                   <div>
-                    <div style={{ fontFamily:"'Outfit',sans-serif", fontWeight:700, fontSize:'.95rem', color:'#fff' }}>Primeros Auxilios Digitales</div>
-                    <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.72rem', color:'#ef4444' }}>Si te estafaron, hacé esto YA</div>
+                    <div style={{ fontFamily:"'Outfit',sans-serif", fontWeight:700, fontSize:'.92rem', color:'#fff' }}>Primeros Auxilios Digitales</div>
+                    <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.68rem', color:'#ef4444' }}>Si te estafaron, hacé esto YA</div>
                   </div>
                 </div>
                 <button onClick={() => setAuxOpen(false)}
-                  style={{ color:'#4a6080', background:'none', border:'none', cursor:'pointer', fontSize:'1.4rem', lineHeight:1 }}>✕</button>
+                  style={{ background:'rgba(255,255,255,.07)', border:'none', borderRadius:8, width:30, height:30, cursor:'pointer', color:'#8fa8cc', fontSize:'1rem', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
+                  ✕
+                </button>
               </div>
-              {/* Números */}
-              <div className="px-4 py-3 flex flex-col gap-2 pb-5">
+
+              {/* Números — compactos, sin scroll */}
+              <div className="px-4 pt-3 pb-4 flex flex-col gap-[6px]">
                 {AUX_ROWS.map(r => (
-                  <div key={r[0]} className="flex items-center gap-3 p-3 rounded-[10px]"
-                    style={{ background:'#080f20', border:'1px solid rgba(0,200,255,.08)' }}>
-                    <div className="w-6 h-6 rounded-[6px] flex items-center justify-center font-mono text-[.65rem] font-semibold flex-shrink-0"
-                      style={{ background:'#142040', border:'1px solid rgba(0,200,255,.12)', color:'#4a6080' }}>{r[0]}</div>
-                    <div className="flex-1">
-                      <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.75rem', color:'#8fa8cc', marginBottom:2 }}>{r[1]}</div>
-                      <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.92rem', fontWeight:600, color:'#f0f6ff' }}>{r[2]}</div>
+                  <div key={r[0]} className="flex items-center gap-3 px-3 py-[9px] rounded-[10px]"
+                    style={{ background:'rgba(255,255,255,.03)', border:'1px solid rgba(255,255,255,.05)' }}>
+                    <div className="w-5 h-5 rounded-[5px] flex items-center justify-center font-mono text-[.6rem] font-semibold flex-shrink-0"
+                      style={{ background:'#142040', color:'#4a6080' }}>{r[0]}</div>
+                    <div className="flex-1 min-w-0">
+                      <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.68rem', color:'#8fa8cc' }}>{r[1]}</div>
+                      <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.88rem', fontWeight:700, color:'#f0f6ff' }}>{r[2]}</div>
                     </div>
                   </div>
                 ))}
+
+                {/* Botón chat */}
                 <button
                   onClick={() => { setAuxOpen(false); go.chat('Creo que me estafaron, necesito ayuda urgente') }}
-                  className="w-full py-4 rounded-[14px] font-bold text-white mt-2"
-                  style={{ background:'linear-gradient(135deg,#c0392b,#e74c3c)', fontFamily:"'Outfit',sans-serif", fontSize:'.95rem', border:'none', cursor:'pointer' }}>
+                  className="w-full py-[13px] rounded-[12px] font-bold text-white mt-1"
+                  style={{ background:'linear-gradient(135deg,#c0392b,#e74c3c)', fontFamily:"'Outfit',sans-serif", fontSize:'.9rem', border:'none', cursor:'pointer' }}>
                   Hablar con el asistente →
                 </button>
               </div>
+
             </motion.div>
           </motion.div>
         )}
