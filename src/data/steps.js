@@ -69,6 +69,16 @@ export const STEPS = [
     fw: '😬 Esta estafa se llama "clonación de voz con IA". Los estafadores sacan audio de Facebook o Instagram y replican la voz en segundos. Siempre colgá y llamá vos al número guardado del familiar, sin excepción.'
   },
 
+
+  // ─── ¿SABÍAS QUE? — Telenoche millón ────────────────────
+  {
+    type: 'fact',
+    img: '<img src="/imgs/telenoche_millon.png" alt="Cuento del tío - un millón de pesos" style="width:100%;display:block;border-radius:12px 12px 0 0;object-fit:cover;max-height:220px;" />',
+    txt: '<strong style="color:#ef4444">📺 Caso real — Cuento del tío telefónico</strong><br><br>Se hicieron pasar por policías y lograron que una víctima transfiriera <strong>más de un millón de pesos</strong>. Todo empezó con una llamada al teléfono de línea de su casa.<br><br><strong style="color:#f59e0b">⚠️ Recordá siempre:</strong><br>• La Policía <strong>NUNCA</strong> te va a llamar para pedirte dinero<br>• Ningún funcionario oficial pide transferencias por teléfono<br>• Ante cualquier llamada sospechosa, <strong>colgá y llamá al 911 vos</strong><br><br><div style="margin-top:12px;padding:10px 14px;border-radius:10px;background:rgba(0,229,160,.07);border:1px solid rgba(0,229,160,.2);color:#00e5a0;font-size:.85rem">💬 Si te pasa algo así, consultá en nuestro <strong>chat de Escudo Digital</strong> — te ayudamos a actuar paso a paso ante cualquier situación.</div>',
+    stat: 'En Uruguay los estafadores llaman al teléfono de línea haciéndose pasar por policías o familiares para crear pánico y conseguir transferencias.',
+    src: 'Telenoche · Canal 4 Uruguay 2025'
+  },
+
   // ─── PREGUNTA 4: Código 6 dígitos WhatsApp ──────────────
   {
     type: 'q',
@@ -176,6 +186,16 @@ export const STEPS = [
     ok: 2,
     fc: '¡Excelente! 🎉 Si no participaste en ningún sorteo, no podés ganar nada. Abitab y ninguna empresa seria pide datos de tarjeta por email para entregarte un premio. La "urgencia de 24 horas" es el truco para que no pienses.',
     fw: '😬 Los premios falsos son una de las estafas más comunes. Si no participaste en un sorteo, no ganaste nada. Nunca ingreses tus datos en links de emails inesperados. Si querés verificar, llamá VOS a Abitab.'
+  },
+
+
+  // ─── ¿SABÍAS QUE? — Hombre estafado USD 18.000 ──────────
+  {
+    type: 'fact',
+    img: '<img src="/imgs/cuento_tio_hombre.png" alt="Hombre estafado USD 18.000" style="width:100%;display:block;border-radius:12px 12px 0 0;object-fit:cover;max-height:220px;" />',
+    txt: '<strong style="color:#ef4444">⚠️ Caso real — Cuento del tío: USD 18.000 y $350.000</strong><br><br>Un hombre de 67 años fue engañado por alguien que se hizo pasar por su hijo. Le dijeron que había tenido un accidente grave y necesitaba dinero urgente. Perdió <strong>USD 18.000 y $350.000 pesos</strong>.<br><br><strong style="color:#f59e0b">Antes de mandar cualquier dinero:</strong><br>• Llamá directamente al número guardado de tu familiar<br>• Consultá con otro familiar de confianza lo que está pasando<br>• Llamá al <strong style="color:#00c8ff">911</strong> si sentís presión o amenazas<br><br><div style="margin-top:12px;padding:10px 14px;border-radius:10px;background:rgba(0,229,160,.07);border:1px solid rgba(0,229,160,.2);color:#00e5a0;font-size:.85rem">💬 Ante cualquier situación de urgencia con dinero, usá nuestro <strong>chat de Escudo Digital</strong> — te orientamos antes de que tomes cualquier decisión.</div>',
+    stat: 'La mayoría de las víctimas del cuento del tío dicen que "la voz sonaba exactamente igual". Hoy la IA puede clonar cualquier voz con solo 3 segundos de audio.',
+    src: 'El País Uruguay · 31 de mayo de 2026'
   },
 
   // ─── PREGUNTA 9: DOS hombres con uniforme IM ────────────
