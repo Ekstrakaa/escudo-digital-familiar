@@ -95,7 +95,7 @@ function QuestionCard({ step, qNum, onAnswer, onShake }) {
         feedbackRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' })
       }
     }, 250)
-    setTimeout(() => onAnswer(correct), 1400)
+    setTimeout(() => onAnswer(correct), 3500)
   }
 
   const optStyle = (i) => {
@@ -176,20 +176,44 @@ function QuestionCard({ step, qNum, onAnswer, onShake }) {
         ))}
       </motion.div>
 
-      {/* Feedback text — sin cartel, solo texto sutil */}
+{/* Feedback — modal central */}
       <AnimatePresence>
         {answered && (
           <motion.div
-            ref={feedbackRef}
-            initial={{ opacity:0, y:8 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0 }}
-            transition={{ delay:.1 }}
-            className="mt-4 rounded-[14px] p-4 text-[.88rem] leading-relaxed"
-            style={{
-              background: chosen === step.ok ? 'rgba(0,229,160,.06)' : 'rgba(255,61,90,.06)',
-              border: `1px solid ${chosen === step.ok ? 'rgba(0,229,160,.2)' : 'rgba(255,61,90,.2)'}`,
-              color: chosen === step.ok ? '#00e5a0' : '#ff8fa0',
-            }}>
-            {chosen === step.ok ? step.fc : step.fw}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: .2 }}
+            className="fixed inset-0 flex items-center justify-center px-5"
+            style={{ zIndex: 100, background: 'rgba(5,13,26,.75)', backdropFilter: 'blur(8px)' }}
+          >
+            <motion.div
+              ref={feedbackRef}
+              initial={{ opacity: 0, scale: .85, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: .9, y: -10 }}
+              transition={{ duration: .3, ease: 'easeOut' }}
+              className="w-full max-w-[340px] rounded-[20px] p-6"
+              style={{
+                background: chosen === step.ok ? 'rgba(0,229,160,.10)' : 'rgba(255,61,90,.10)',
+                border: `2px solid ${chosen === step.ok ? 'rgba(0,229,160,.4)' : 'rgba(255,61,90,.4)'}`,
+                boxShadow: chosen === step.ok
+                  ? '0 0 40px rgba(0,229,160,.2)'
+                  : '0 0 40px rgba(255,61,90,.2)',
+              }}
+            >
+              {/* Ícono grande */}
+              <div className="text-[3rem] text-center mb-3">
+                {chosen === step.ok ? '✅' : '❌'}
+              </div>
+              {/* Texto feedback */}
+              <div
+                className="text-center text-[1rem] leading-relaxed font-medium"
+                style={{ color: chosen === step.ok ? '#00e5a0' : '#ff8fa0' }}
+              >
+                {chosen === step.ok ? step.fc : step.fw}
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
