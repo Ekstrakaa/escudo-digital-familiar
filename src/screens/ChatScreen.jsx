@@ -171,8 +171,16 @@ export default function ChatScreen({ go, seed }) {
     setTimeout(() => {
       if(msgsRef.current) {
         msgsRef.current.scrollTo({ top: msgsRef.current.scrollHeight, behavior: 'smooth' })
+        const last = msgsRef.current.lastElementChild
+        if(last) last.scrollIntoView({ behavior: 'smooth', block: 'end' })
       }
     }, 100)
+    // segundo scroll para cuando el teclado sube en mobile
+    setTimeout(() => {
+      if(msgsRef.current) {
+        msgsRef.current.scrollTo({ top: msgsRef.current.scrollHeight, behavior: 'smooth' })
+      }
+    }, 400)
   }
 
   const addBot = (text) => {
@@ -245,7 +253,7 @@ export default function ChatScreen({ go, seed }) {
   }
 
   return (
-    <div className="flex flex-col min-h-screen max-h-screen relative overflow-hidden" style={{ background: 'linear-gradient(160deg, #050d1a 0%, #071525 50%, #050d1a 100%)' }}>
+    <div className="flex flex-col relative overflow-hidden" style={{ height: '100dvh', maxHeight: '100dvh', background: 'linear-gradient(160deg, #050d1a 0%, #071525 50%, #050d1a 100%)' }}>
       {/* Partículas RGB de fondo */}
       <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 0 }}>
         <Particles />
@@ -325,6 +333,7 @@ export default function ChatScreen({ go, seed }) {
               e.target.style.height=Math.min(e.target.scrollHeight,100)+'px'
             }}
             onKeyDown={e => { if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); handleSend() }}}
+            onFocus={() => { setTimeout(() => { scrollDown(); taRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' }) }, 300) }}
             rows={1}
             placeholder="Contame qué pasó..."
             className="w-full bg-transparent outline-none resize-none text-white font-sans text-[.97rem] leading-relaxed placeholder:text-slate-600"
