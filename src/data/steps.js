@@ -86,16 +86,16 @@ export const STEPS = [
     cat: 'Autenticación',
     icon: '🔐',
     img: '<img src="/imgs/A2F.png" alt="Aplicaciones A2F Google y Microsoft Authenticator" style="width:100%;display:block;border-radius:12px 12px 0 0;object-fit:contain;max-height:180px;background:#f5f5f5;" />',
-    txt: '📱 Tu nieto te manda estas imágenes por WhatsApp y te dice:\n\n"Abuela, instalate una de estas apps, se llaman A2F. Con esto nadie te puede robar la cuenta del banco aunque te saquen la contraseña. Son de Google y Microsoft, son gratis y seguras."\n\n¿Qué harías?',
+    txt: '¿Instalarías alguna de estas aplicaciones en tu celular?\n\nSe llaman A2F — son gratuitas y son de Google y Microsoft.',
     opts: [
-      'No instalo nada — cualquier app desconocida puede ser un virus',
-      'Le pregunto a mi nieto qué hace exactamente antes de instalar',
-      'La instalo si alguien de confianza me explica cómo usarla — es una buena protección',
-      'Instalo las 3 de una vez para estar más protegida'
+      'No — pueden ser cualquier cosa peligrosa o un virus',
+      'Sí, claro — es la galería de Google, la uso todos los días',
+      'Sí, claro — instalo todas, son super seguras y necesarias',
+      'No instalo nada en mi celu sin que me lo pida el banco primero'
     ],
     ok: 2,
-    fc: '✅ ¡Muy bien! Pedir explicación antes de instalar es lo correcto. El A2F es real y muy seguro — es de Google y Microsoft. Pero siempre hay que entender qué instalamos antes de hacerlo.',
-    fw: '❌ El A2F es una herramienta real y muy segura de Google y Microsoft. Protege tus cuentas aunque te roben la contraseña. Lo ideal es que alguien de confianza te explique cómo usarla.'
+    fc: '✅ ¡Correcto! Son de Google y Microsoft — completamente seguras y muy necesarias. El A2F protege tus cuentas aunque alguien te robe la contraseña.',
+    fw: '❌ Ojo — el A2F no es la galería de fotos ni algo del banco. Es una app de seguridad de Google y Microsoft, gratuita y muy útil para protegerte.'
   },
 
   // ─── PREGUNTA 5: SMS SUCIVE multa falsa ─────────────────
