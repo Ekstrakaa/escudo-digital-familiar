@@ -186,7 +186,7 @@ export default function HomeScreen({ go }) {
         {/* Botón ROJO — abre panel de números */}
         <motion.button initial={{ opacity:0, y:10 }} animate={{ opacity:1, y:0 }}
           transition={{ delay:.24, duration:.4 }} whileTap={{ scale:.97 }}
-          onClick={() => setAuxOpen(true)}
+          onClick={() => go.chat(null)}
           className="w-full flex items-center justify-between px-6 rounded-2xl mb-3"
           style={{ maxWidth:480, height:62, background:'linear-gradient(135deg,#c0392b 0%,#e74c3c 100%)', boxShadow:'0 4px 24px rgba(220,60,50,.4)', border:'none', cursor:'pointer' }}>
           <div className="flex items-center gap-3">
