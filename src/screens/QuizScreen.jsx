@@ -80,6 +80,7 @@ function FactCard({ step, onNext }) {
 function QuestionCard({ step, qNum, onAnswer, onShake }) {
   const [answered, setAnswered] = useState(false)
   const [chosen, setChosen]     = useState(null)
+  const feedbackRef = useRef(null)
   const meta = CATS[step.cat] || { color:'#00c8ff', bg:'rgba(0,200,255,.1)', svg:'' }
 
   const select = (i) => {
@@ -88,6 +89,12 @@ function QuestionCard({ step, qNum, onAnswer, onShake }) {
     setChosen(i)
     const correct = i === step.ok
     if(!correct) onShake()   // vibración roja si errás
+    // Scroll al feedback después de que aparece
+    setTimeout(() => {
+      if(feedbackRef.current) {
+        feedbackRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' })
+      }
+    }, 250)
     setTimeout(() => onAnswer(correct), 1400)
   }
 
@@ -173,6 +180,7 @@ function QuestionCard({ step, qNum, onAnswer, onShake }) {
       <AnimatePresence>
         {answered && (
           <motion.div
+            ref={feedbackRef}
             initial={{ opacity:0, y:8 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0 }}
             transition={{ delay:.1 }}
             className="mt-4 rounded-[14px] p-4 text-[.88rem] leading-relaxed"
@@ -200,6 +208,7 @@ export default function QuizScreen({ go }) {
   const [shake, setShake]       = useState(false)
   const [showConfetti, setShowConfetti] = useState(false)
   const containerRef = useRef(null)
+  const topRef = useRef(null)
 
   const totalQs = STEPS.filter(s => s.type === 'q').length
   const pct     = Math.round((step / STEPS.length) * 100)
@@ -246,6 +255,10 @@ export default function QuizScreen({ go }) {
 
   useEffect(() => {
     if(current?.type === 'q') setQCount(c => c + 1)
+    // Scroll al tope cuando cambia la pregunta
+    setTimeout(() => {
+      if(topRef.current) topRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 50)
   }, [step])
 
   return (
@@ -301,6 +314,7 @@ export default function QuizScreen({ go }) {
 
       {/* Content */}
       <div className="flex-1 overflow-y-auto px-4 pb-10 pt-2">
+        <div ref={topRef} />
         <AnimatePresence mode="wait">
           {current?.type === 'fact'
             ? <FactCard key={step} step={current} onNext={handleNext} />
