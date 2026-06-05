@@ -12,7 +12,7 @@ export const STEPS = [
     id: 1,
     cat: 'Cuento del tío',
     icon: '🚪',
-    txt: 'Son las 2 de la tarde.🚪 Tocan el timbre.\n\nAbre la puerta y hay un señor mayor, bien vestido, con corbata y una credencial del Banco República. Con cara preocupada dice:\n\n"Buenas tardes. Soy Carlos García, supervisor del BROU. Su cuenta tiene un problema grave y si no resolvemos esto hoy antes de las 5pm, sus ahorros quedan bloqueados. Necesito su tarjeta y su clave para reactivar el servicio."\n\n¿Qué hacés?',
+    txt: '🚪 Son las 2 de la tarde. Tocan el timbre.\n\nAbre la puerta y hay un señor mayor, bien vestido, con corbata y una credencial del Banco República. Con cara preocupada dice:\n\n"Buenas tardes. Soy Carlos García, supervisor del BROU. Su cuenta tiene un problema grave y si no resolvemos esto hoy antes de las 5pm, sus ahorros quedan bloqueados. Necesito su tarjeta y su clave para reactivar el servicio."\n\n¿Qué hacés?',
     opts: [
       'Le doy la tarjeta y la clave — tiene credencial y parece muy serio',
       'Cierro la puerta, llamo YO al BROU al 1722 0001 para verificar',
@@ -79,22 +79,23 @@ export const STEPS = [
     src: 'Telenoche · Canal 4 Uruguay 2025'
   },
 
-  // ─── PREGUNTA 4: Código 6 dígitos WhatsApp ──────────────
+  // ─── PREGUNTA 4: A2F Autenticación de dos factores ──────
   {
     type: 'q',
     id: 4,
-    cat: 'WhatsApp código',
+    cat: 'Autenticación',
     icon: '🔐',
-    txt: '📱 Te llega este mensaje de WhatsApp de un número desconocido:\n\n"Hola, soy del soporte técnico de WhatsApp. Detectamos actividad inusual en tu cuenta. Por error te enviamos un código de seguridad de 6 dígitos a tu celular. ¿Me lo podés reenviar urgente para proteger tu cuenta?"\n\n¿Qué hacés?',
+    img: '<img src="/imgs/A2F.png" alt="Aplicaciones A2F Google y Microsoft Authenticator" style="width:100%;display:block;border-radius:12px 12px 0 0;object-fit:contain;max-height:180px;background:#f5f5f5;" />',
+    txt: '📱 Tu nieto te manda estas imágenes por WhatsApp y te dice:\n\n"Abuela, instalate una de estas apps, se llaman A2F. Con esto nadie te puede robar la cuenta del banco aunque te saquen la contraseña. Son de Google y Microsoft, son gratis y seguras."\n\n¿Qué harías?',
     opts: [
-      'Reenvío el código — quiero que mi cuenta esté segura',
-      'Le pido más información y documentación antes de enviarlo',
-      'WhatsApp NUNCA escribe ni pide códigos — bloqueo ese número ahora mismo',
-      'Llamo a un familiar para que me ayude a decidir qué hacer'
+      'No instalo nada — cualquier app desconocida puede ser un virus',
+      'Le pregunto a mi nieto qué hace exactamente antes de instalar',
+      'La instalo si alguien de confianza me explica cómo usarla — es una buena protección',
+      'Instalo las 3 de una vez para estar más protegida'
     ],
     ok: 2,
-    fc: '✅ ¡Perfecto! WhatsApp nunca pide códigos. Ese código es la llave de tu cuenta — si lo das, pierden el control de tu WhatsApp.',
-    fw: '❌ WhatsApp nunca pide códigos. Ese código activa tu cuenta en otro celular. Bloqueá ese número ya.'
+    fc: '✅ ¡Muy bien! Pedir explicación antes de instalar es lo correcto. El A2F es real y muy seguro — es de Google y Microsoft. Pero siempre hay que entender qué instalamos antes de hacerlo.',
+    fw: '❌ El A2F es una herramienta real y muy segura de Google y Microsoft. Protege tus cuentas aunque te roben la contraseña. Lo ideal es que alguien de confianza te explique cómo usarla.'
   },
 
   // ─── PREGUNTA 5: SMS SUCIVE multa falsa ─────────────────
