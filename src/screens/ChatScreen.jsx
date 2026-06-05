@@ -19,7 +19,7 @@ function Particles() {
       y:   Math.random() * canvas.height,
       vx:  (Math.random() - 0.5) * 0.28,
       vy:  (Math.random() - 0.5) * 0.28,
-      r:   Math.random() * 1.6 + 0.4,
+      r:   Math.random() * 2.8 + 1.0,
       a:   Math.random() * 0.45 + 0.15,
       hue: Math.random() * 360,
       dh:  (Math.random() * 0.5 + 0.15) * (Math.random() > 0.5 ? 1 : -1),
@@ -64,9 +64,9 @@ function now() {
 const EMERGENCY_NUMBERS = [
   { label: '🚨 911', sub: 'Policía', color: '#ef4444' },
   { label: '🕵️ 2030 4625', sub: 'Cibercrimen MI', color: '#00c8ff' },
-  { label: '🟣 1950 5555', sub: 'IM Adultos', color: '#8b7cf8'  },
-  { label: '🛡️ 1719', sub: 'CERTuy', color: '#10b981' },
   { label: '🏦 1722 0001', sub: 'BROU 24hs', color: '#f59e0b' },
+  { label: '🛡️ 1719', sub: 'CERTuy', color: '#10b981' },
+  { label: '🟣 1950 5555', sub: 'IM Adultos', color: '#8b7cf8' },
 ]
 
 function RobotAvatar({ typing }) {
