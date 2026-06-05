@@ -145,13 +145,22 @@ export default function HomeScreen({ go }) {
           <motion.img
             src="/imgs/LOGO.png"
             alt="Escudo Digital Familiar"
-            animate={{ scale: [1, 1.07, 1] }}
-            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+            animate={{
+              scale: [1, 1.13, 1],
+              filter: [
+                'drop-shadow(0 0 22px rgba(0,229,160,.9)) drop-shadow(0 0 10px rgba(0,229,160,.5))',
+                'drop-shadow(0 0 22px rgba(0,200,255,.9)) drop-shadow(0 0 10px rgba(0,200,255,.5))',
+                'drop-shadow(0 0 22px rgba(139,124,248,.9)) drop-shadow(0 0 10px rgba(139,124,248,.5))',
+                'drop-shadow(0 0 22px rgba(255,100,150,.9)) drop-shadow(0 0 10px rgba(255,100,150,.5))',
+                'drop-shadow(0 0 22px rgba(255,180,0,.9)) drop-shadow(0 0 10px rgba(255,180,0,.5))',
+                'drop-shadow(0 0 22px rgba(0,229,160,.9)) drop-shadow(0 0 10px rgba(0,229,160,.5))',
+              ]
+            }}
+            transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
             style={{
               width: 120,
               height: 120,
               objectFit: 'contain',
-              filter: 'drop-shadow(0 0 18px rgba(26,199,167,.8)) drop-shadow(0 0 8px rgba(0,200,255,.5))',
             }}
           />
         </motion.div>
@@ -187,7 +196,7 @@ export default function HomeScreen({ go }) {
             }}
           >
             <span style={{ color: '#ffffff' }}>Digital </span>
-            <span style={{ color: '#1AC7A7' }}>Familiar</span>
+            <span style={{ color: '#00E5A0' }}>Familiar</span>
           </div>
         </motion.div>
 
@@ -287,7 +296,7 @@ export default function HomeScreen({ go }) {
           style={{
             maxWidth: 480,
             height: 62,
-            background: 'linear-gradient(135deg, #0f9e84 0%, #1AC7A7 100%)',
+            background: 'linear-gradient(135deg, #00b377 0%, #00E5A0 100%)',
             boxShadow: '0 4px 24px rgba(26,199,167,.3)',
             border: 'none',
             cursor: 'pointer',
