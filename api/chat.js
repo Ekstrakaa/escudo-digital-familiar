@@ -136,7 +136,7 @@ export default async function handler(req, res) {
         'Authorization': `Bearer ${API_KEY}`,
       },
       body: JSON.stringify({
-        model: 'llama3-70b-8192', // Modelo estable y recomendado por Groq
+        model: 'llama3-70b-8192',
         messages,
         temperature: 0.75,
         max_tokens: 700,
