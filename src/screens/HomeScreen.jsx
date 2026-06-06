@@ -152,7 +152,6 @@ export default function HomeScreen({ go }) {
           transition={{ duration:.45, ease:'easeOut' }} className="text-center mb-2">
           <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'2.35rem', fontWeight:800, color:'#ffffff', lineHeight:1.15, letterSpacing:'-0.5px' }}>Escudo Digital</div>
           <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'2.35rem', fontWeight:800, lineHeight:1.15, letterSpacing:'-0.5px' }}>
-            <span style={{ color:'#ffffff' }}>Digital </span>
             <span style={{ color:'#00E5A0' }}>Familiar</span>
           </div>
         </motion.div>
@@ -174,7 +173,7 @@ export default function HomeScreen({ go }) {
         {/* Subtítulo */}
         <motion.p initial={{ opacity:0, y:-8 }} animate={{ opacity:1, y:0 }} transition={{ delay:.28, duration:.4 }}
           style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.9rem', color:'#c8d8ee', textAlign:'center', maxWidth:340, lineHeight:1.55, marginBottom:20 }}>
-          Tu herramienta de orientación ante estafas digitales y el cuento del tío, disponible 24/7.
+          Tu herramienta de orientación ante estafas digitales y el cuento del tío, disponible 24/7. No estás solo.
         </motion.p>
 
         {/* Botón VERDE — Test de Blindaje */}
@@ -312,7 +311,7 @@ export default function HomeScreen({ go }) {
             <img
               src="/imgs/logo_im.png"
               alt="Intendencia de Montevideo"
-              style={{ height:26, objectFit:'contain', opacity:.55, filter:'invert(1) brightness(2)' }}
+              style={{ height:26, objectFit:'contain', opacity:.7 }}
             />
             <div style={{ width:1, height:24, background:'rgba(255,255,255,.1)' }} />
             <img
@@ -322,7 +321,7 @@ export default function HomeScreen({ go }) {
             />
           </div>
           <span style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.62rem', color:'#4a6080', letterSpacing:'.05em', textAlign:'center' }}>
-            Intendencia de Montevideo · Ministerio del Interior · 2025
+            Intendencia de Montevideo · Ministerio del Interior · 2026
           </span>
         </motion.div>
 
