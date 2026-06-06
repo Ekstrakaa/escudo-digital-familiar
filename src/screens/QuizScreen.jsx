@@ -107,34 +107,39 @@ function FactCard({ step, onNext }) {
       className="flex flex-col"
       style={{ height:'calc(100dvh - 130px)' }}
     >
-      {/* Contenido scrolleable si es necesario */}
-      <div className="flex-1 overflow-y-auto rounded-2xl"
-        style={{ background:'#0f1d35', border:'1px solid rgba(0,200,255,.12)', WebkitOverflowScrolling:'touch' }}>
-        {step.img && <div dangerouslySetInnerHTML={{ __html: step.img }} />}
-        <div className="p-4">
-          <div className="flex items-center justify-center mb-3">
-            <div className="px-5 py-[8px] rounded-full font-bold text-[.85rem] tracking-widest uppercase"
-              style={{ background:'rgba(0,200,255,.10)', border:'1.5px solid rgba(0,200,255,.35)', color:'#00c8ff', letterSpacing:'.08em' }}>
+      {/* Tarjeta principal */}
+      <div className="flex-1 rounded-2xl overflow-hidden flex flex-col"
+        style={{ background:'#0f1d35', border:'1px solid rgba(0,200,255,.12)' }}>
+
+        {/* Imagen si hay */}
+        {step.img && (
+          <div className="flex-shrink-0" dangerouslySetInnerHTML={{ __html: step.img }} />
+        )}
+
+        {/* Contenido centrado */}
+        <div className="flex-1 flex flex-col justify-center px-5 py-4">
+
+          {/* Badge centrado */}
+          <div className="flex justify-center mb-4">
+            <div className="px-5 py-2 rounded-full font-bold text-[.9rem] tracking-widest uppercase"
+              style={{ background:'rgba(0,200,255,.10)', border:'1.5px solid rgba(0,200,255,.35)', color:'#00c8ff', letterSpacing:'.06em' }}>
               ¿Sabías que?
             </div>
           </div>
-          <div className="text-[.82rem] leading-[1.55] text-t1 mb-3"
-            dangerouslySetInnerHTML={{ __html: step.txt }} />
-          {step.stat && (
-            <div className="flex items-start gap-3 rounded-xl p-3 mb-3"
-              style={{ background:'rgba(139,124,248,.07)', border:'1px solid rgba(139,124,248,.18)' }}>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8b7cf8" strokeWidth="2" className="flex-shrink-0 mt-[2px]"><path d="M12 22V12m0 0V2m0 10H2m10 0h10"/></svg>
-              <div className="text-[.78rem] text-t2 leading-relaxed">{step.stat}</div>
-            </div>
-          )}
-          {step.src && <div className="font-mono text-[.62rem] text-t3 mb-2">Fuente: {step.src}</div>}
+
+          {/* Texto centrado y más grande */}
+          <div
+            className="text-center text-[.97rem] leading-[1.7] text-t1"
+            style={{ fontFamily:"'Outfit',sans-serif" }}
+            dangerouslySetInnerHTML={{ __html: step.txt }}
+          />
         </div>
       </div>
 
-      {/* Botón SIEMPRE visible abajo */}
+      {/* Botón siempre visible */}
       <button onClick={onNext}
         className="w-full flex items-center justify-center gap-2 rounded-[14px] text-black font-bold text-[1rem] transition-all active:scale-98 mt-3 flex-shrink-0"
-        style={{ background:'linear-gradient(135deg,#00e5a0,#10b981)', height:56 }}>
+        style={{ background:'linear-gradient(135deg,#00e5a0,#10b981)', height:54 }}>
         Continuar
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </button>
@@ -208,16 +213,17 @@ function QuestionCard({ step, qNum, onAnswer, onShake }) {
         <span style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.75rem', fontWeight:600, color:'#4a6080', marginLeft:'auto' }}>Pregunta {qNum}</span>
       </div>
 
-      {/* Imagen si hay */}
+      {/* Imagen si hay — compacta */}
       {step.img && (
         <div className="rounded-[12px] overflow-hidden mb-2"
+          style={{ maxHeight: 140 }}
           dangerouslySetInnerHTML={{ __html: step.img }} />
       )}
 
       {/* Pregunta */}
-      <div className="rounded-[14px] p-4 mb-3"
+      <div className="rounded-[14px] px-4 py-3 mb-3"
         style={{ background:'#0f1d35', border:'1px solid rgba(0,200,255,.1)' }}>
-        <div className="text-[1rem] font-semibold leading-[1.55] text-t1 whitespace-pre-wrap text-center mb-3">{step.txt.replace('¿Qué hacés?', '').trim()}</div>
+        <div className="text-[1rem] font-semibold leading-[1.55] text-t1 text-center mb-2">{step.txt.replace('¿Qué hacés?', '').trim()}</div>
         <div className="text-center font-bold text-[1.1rem] mt-2" style={{ color: meta.color }}>¿Qué hacés?</div>
       </div>
 
