@@ -12,7 +12,7 @@ export const STEPS = [
     id: 1,
     cat: 'Cuento del tío',
     icon: '🚪',
-    txt: 'Un señor en la puerta con credencial del BROU dice que tu cuenta tiene un problema y necesita tu tarjeta y clave. ¿Qué hacés?',
+    txt: '🚪 Un señor en la puerta con credencial del BROU dice que tu cuenta tiene un problema y necesita tu tarjeta y clave.\n\n¿Qué hacés?',
     opts: [
       'Le doy la tarjeta y la clave — tiene credencial y parece muy serio',
       'Cierro la puerta, llamo YO al BROU al 1722 0001 para verificar',
@@ -37,7 +37,7 @@ export const STEPS = [
     id: 2,
     cat: 'Ingeniería social',
     icon: '📱',
-    txt: 'WhatsApp de número desconocido: "Soy Matías, perdí el celu, tuve un accidente. Mandame $15.000 por Abitab urgente. No le digas a mamá." ¿Qué hacés?',
+    txt: '📱 WhatsApp de número desconocido:\n"Soy Matías, perdí el celu, tuve un accidente. Mandame $15.000 por Abitab urgente. No le digas a mamá."\n\n¿Qué hacés?',
     opts: [
       'Mando los $15.000 de inmediato — suena a que es mi nieto y lo necesita',
       'Le mando $5.000 nomás, por las dudas que sea verdad',
@@ -55,7 +55,7 @@ export const STEPS = [
     id: 3,
     cat: 'Clonación de voz IA',
     icon: '🤖',
-    txt: 'Te llama alguien con la voz de tu hija, llorando: "Tuve un accidente, mandame $10.000 ahora." ¿Qué hacés?',
+    txt: '📞 Te llama alguien con la voz de tu hija, llorando:\n"Tuve un accidente, mandame $10.000 ahora."\n\n¿Qué hacés?',
     opts: [
       'Transfiero de inmediato — reconozco perfectamente su voz, es ella',
       'Le pido más detalles del accidente antes de transferir',
@@ -82,7 +82,7 @@ export const STEPS = [
     cat: 'Autenticación',
     icon: '🔐',
     img: '<img src="/imgs/A2F.png" alt="Aplicaciones A2F Google y Microsoft Authenticator" style="width:100%;display:block;object-fit:contain;max-height:200px;" />',
-    txt: '¿Instalarías alguna de estas apps en tu celular? Se llaman A2F, son de Google y Microsoft.',
+    txt: '🔐 ¿Instalarías alguna de estas apps en tu celular?\nSe llaman A2F, son de Google y Microsoft.',
     opts: [
       'No — pueden ser cualquier cosa peligrosa o un virus',
       'Sí, claro — es la galería de Google, la uso todos los días',
@@ -100,7 +100,7 @@ export const STEPS = [
     id: 5,
     cat: 'SMS falso (phishing)',
     icon: '📨',
-    txt: 'SMS: "SUCIVE: Multa vencida, si no pagás hoy aumenta. Ingresá acá: asucive.cc/uy/multa" ¿Qué hacés?',
+    txt: '📨 SMS recibido:\n"SUCIVE: Multa vencida, si no pagás hoy aumenta. Ingresá acá: asucive.cc/uy/multa"\n\n¿Qué hacés?',
     opts: [
       'Entro rápido al link — no quiero que me aumenten la deuda',
       'Le muestro el SMS a un familiar para que entre él por mí',
@@ -125,7 +125,7 @@ export const STEPS = [
     id: 6,
     cat: 'Ingeniería social',
     icon: '📞',
-    txt: 'Te llaman de "Antel": detectaron un virus en tu router y necesitan acceso a tu Gmail para solucionarlo. ¿Qué hacés?',
+    txt: '📞 Te llaman de "Antel": detectaron un virus en tu router y necesitan acceso a tu Gmail para solucionarlo.\n\n¿Qué hacés?',
     opts: [
       'Les doy el Gmail — Antel es una empresa del Estado y es de confianza',
       'Les pido que me expliquen mejor qué virus encontraron',
@@ -144,7 +144,7 @@ export const STEPS = [
     cat: 'Robo de datos bancarios',
     icon: '💳',
     img: '<img src="/imgs/brou_ancap.png" alt="Publicidad falsa BROU ANCAP" style="width:100%;display:block;object-fit:contain;max-height:200px;" />',
-    txt: 'Te llega este WhatsApp con la imagen. ¿Qué hacés?',
+    txt: '💬 Te llega este WhatsApp con la imagen de arriba.\n\n¿Qué hacés?',
     opts: [
       'Entro y doy mis datos — es del BROU y ANCAP, parecen logos reales',
       'Le pregunto al banco más detalles antes de dar mis datos',
@@ -169,7 +169,7 @@ export const STEPS = [
     id: 8,
     cat: 'Premio falso',
     icon: '🎁',
-    txt: 'Email: "¡Ganaste un viaje a Punta del Este de Abitab! Ingresá tu tarjeta. Solo 24 horas." ¿Qué hacés?',
+    txt: '🎁 Email recibido:\n"¡Ganaste un viaje a Punta del Este de Abitab! Ingresá tu tarjeta. Solo 24 horas."\n\n¿Qué hacés?',
     opts: [
       'Entro rápido al link — ¡un viaje a Punta del Este sería increíble!',
       'Reenvío el email a un familiar para que lo revise por mí',
@@ -195,7 +195,7 @@ export const STEPS = [
     id: 9,
     cat: 'Persona en la puerta',
     icon: '🚪',
-    txt: 'Dos hombres con uniforme de la Intendencia en la puerta: "Inspección obligatoria, necesitamos entrar ahora." ¿Qué hacés?',
+    txt: '🚪 Dos hombres con uniforme de la Intendencia en la puerta:\n"Inspección obligatoria, necesitamos entrar ahora."\n\n¿Qué hacés?',
     opts: [
       'Los dejo pasar — tienen uniforme y dicen que es obligatorio',
       'Les pido el número de expediente y llamo a la Intendencia al 1950 0911 para verificar',
@@ -213,7 +213,7 @@ export const STEPS = [
     id: 10,
     cat: 'Cuento del tío',
     icon: '🏦',
-    txt: 'Hombre con traje del Banco República en la puerta: "Movimiento sospechoso en tu cuenta, necesito tu llave digital y CVV." ¿Qué hacés?',
+    txt: '🏦 Hombre con traje del Banco República en la puerta:\n"Movimiento sospechoso en tu cuenta, necesito tu llave digital y CVV."\n\n¿Qué hacés?',
     opts: [
       'Le doy la llave digital y el CVV — quiero proteger mis ahorros',
       'Le doy solo el CVV y guardo la llave digital para mí',
