@@ -375,7 +375,7 @@ export default function ChatScreen({ go, seed }) {
   }
 
   return (
-    <div className="flex flex-col relative overflow-hidden" style={{ height: '100dvh', maxHeight: '100dvh', background: 'linear-gradient(160deg, #050d1a 0%, #071525 50%, #050d1a 100%)' }}>
+    <div className="flex flex-col relative" style={{ height: '100dvh', maxHeight: '100dvh', overflow: 'hidden', position: 'fixed', inset: 0, background: 'linear-gradient(160deg, #050d1a 0%, #071525 50%, #050d1a 100%)' }}>
       {/* Partículas RGB de fondo */}
       <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 0 }}>
         <Particles />
@@ -500,7 +500,7 @@ export default function ChatScreen({ go, seed }) {
       </div>
 
       {/* Messages */}
-      <div ref={msgsRef} className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-3 relative" style={{ zIndex: 1 }}>
+      <div ref={msgsRef} className="flex-1 px-4 py-4 flex flex-col gap-3 relative" style={{ zIndex: 1, overflowY: 'scroll', overscrollBehavior: 'contain', WebkitOverflowScrolling: 'touch' }}>
 
         <AnimatePresence>
           {messages.map((m, i) => (
