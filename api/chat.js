@@ -126,7 +126,7 @@ export default async function handler(req, res) {
         'Authorization': `Bearer ${API_KEY}`,
       },
       body: JSON.stringify({
-        model: 'llama-3.3-70b-versatile',
+        model: 'llama-3.3-70b-specdec', // <-- Corregido el nombre del modelo
         messages,
         temperature: 0.75,
         max_tokens: 700,
@@ -136,13 +136,14 @@ export default async function handler(req, res) {
     const data = await resp.json()
 
     if (!resp.ok) {
-      return res.status(200).json({ reply: null, error: 'api_error' })
+      // Devolvemos el error real para que puedas debugear en la consola de tu frontend
+      return res.status(200).json({ reply: null, error: 'api_error', details: data?.error?.message || 'Unknown API error' })
     }
 
     const reply = data?.choices?.[0]?.message?.content || null
     return res.status(200).json({ reply })
 
   } catch (err) {
-    return res.status(200).json({ reply: null, error: 'fetch_failed' })
+    return res.status(200).json({ reply: null, error: 'fetch_failed', details: err.message })
   }
 }
