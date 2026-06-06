@@ -262,12 +262,15 @@ export default function ChatScreen({ go, seed }) {
 
   const addBot = (text) => {
     setMessages(m => [...m, { role:'bot', text }])
-    scrollDown()
+    // NO scrollDown aquí — el useEffect se encarga de ir al INICIO del mensaje
   }
 
   const addUser = (text) => {
     setMessages(m => [...m, { role:'user', text }])
-    scrollDown()
+    // Usuario → fondo para ver el input
+    setTimeout(() => {
+      if(msgsRef.current) msgsRef.current.scrollTop = msgsRef.current.scrollHeight
+    }, 50)
   }
 
   const lastMsgRef = useRef(null)
@@ -315,7 +318,7 @@ export default function ChatScreen({ go, seed }) {
     historyRef.current = newHistory
     setBtnOff(true)
     setTyping(true)
-    scrollDown()
+    // No scroll aquí — addUser ya lo hace
 
     let reply = null
 
