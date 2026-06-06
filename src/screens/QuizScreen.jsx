@@ -57,11 +57,13 @@ function FactCard({ step, onNext }) {
         style={{ background:'#0f1d35', border:'1px solid rgba(0,200,255,.12)', WebkitOverflowScrolling:'touch' }}>
         {step.img && <div dangerouslySetInnerHTML={{ __html: step.img }} />}
         <div className="p-4">
-          <div className="inline-flex items-center gap-2 px-3 py-[4px] rounded-full font-mono text-[.6rem] font-semibold tracking-wider uppercase text-cyan mb-3"
-            style={{ background:'rgba(0,200,255,.08)', border:'1px solid rgba(0,200,255,.2)' }}>
-            ¿Sabías que?
+          <div className="flex items-center justify-center mb-3">
+            <div className="px-5 py-[8px] rounded-full font-bold text-[.85rem] tracking-widest uppercase"
+              style={{ background:'rgba(0,200,255,.10)', border:'1.5px solid rgba(0,200,255,.35)', color:'#00c8ff', letterSpacing:'.08em' }}>
+              ¿Sabías que?
+            </div>
           </div>
-          <div className="text-[.88rem] leading-[1.65] text-t1 mb-3"
+          <div className="text-[.82rem] leading-[1.55] text-t1 mb-3"
             dangerouslySetInnerHTML={{ __html: step.txt }} />
           {step.stat && (
             <div className="flex items-start gap-3 rounded-xl p-3 mb-3"
@@ -147,8 +149,8 @@ function QuestionCard({ step, qNum, onAnswer, onShake }) {
         <div className="w-14 h-14 rounded-[14px] flex items-center justify-center flex-shrink-0"
           style={{ background:meta.bg, border:`1px solid ${meta.color}55` }}
           dangerouslySetInnerHTML={{ __html: meta.svg.replace('width="22"','width="28"').replace('height="22"','height="28"') }} />
-        <span className="font-mono text-[.95rem] tracking-widest uppercase font-semibold" style={{ color:meta.color }}>{step.cat}</span>
-        <span className="text-[.82rem] text-t3 ml-auto font-medium">Pregunta {qNum}</span>
+        <span style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.88rem', fontWeight:800, letterSpacing:'.04em', textTransform:'uppercase', color:meta.color }}>{step.cat}</span>
+        <span style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.75rem', fontWeight:600, color:'#4a6080', marginLeft:'auto' }}>Pregunta {qNum}</span>
       </div>
 
       {/* Imagen si hay */}
