@@ -1,6 +1,6 @@
 export const config = { runtime: 'nodejs' }
 
-const SYSTEM_PROMPT = `Sos el asistente digital de la Intendencia de Montevideo y el Ministerio del Interior. Ayudas a personas mayores uruguayas ante ciberestafas digitales y cuento del tio.
+const SYSTEM_PROMPT = `Sos el asistente digital de la Intendencia de Montevideo y el Ministerio del Interior. Ayudas a personas mayores uruguayas ante estafas digitales.
 
 PERSONALIDAD:
 Calido, humano, directo. Como un familiar que sabe del tema. Rioplatense uruguayo: vos, tenes, hace. Nunca frio ni protocolar.
@@ -18,7 +18,7 @@ Apenas el usuario describe algo, identificas de que tipo es y se lo decis brevem
 
 FORMATO OBLIGATORIO:
 Cada idea en su propia linea con linea en blanco entre ellas.
-Maximo 5-7 lineas por respuesta.
+Maximo 5-6 lineas por respuesta.
 **Negrita** para numeros de telefono y palabras de alerta clave.
 NUNCA texto pegado — siempre aireado y facil de leer.
 
@@ -42,7 +42,7 @@ Si podes, sacale una foto por la mirilla para registrarlo.
 
 Hiciste muy bien en escribirnos. Estas seguro/a adentro?
 
-EJEMPLO — llamada del banco pidiendo clave o datos:
+EJEMPLO — llamada del banco pidiendo clave:
 
 Eso es "vishing" — alguien haciendose pasar por el banco para robarte.
 
@@ -91,10 +91,8 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  const API_KEY = process.env.GROQ_API_KEY
-  if (!API_KEY) {
-    return res.status(200).json({ reply: null, error: 'no_key' })
-  }
+  const GEMINI_KEY = process.env.GEMINI_API_KEY
+  const GROQ_KEY = process.env.GROQ_API_KEY
 
   let userMessage = ''
   let history = []
@@ -118,31 +116,67 @@ export default async function handler(req, res) {
   }
   messages.push({ role: 'user', content: userMessage })
 
-  try {
-    const resp = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${API_KEY}`,
-      },
-      body: JSON.stringify({
-        model: 'llama-3.3-70b-versatile',
-        messages,
-        temperature: 0.75,
-        max_tokens: 700,
-      }),
-    })
+  // 1° Gemini gratis (1500 req/día) → 2° Groq gratis (1000 req/día) como backup
+  
+  // Intentar Gemini primero
+  if (GEMINI_KEY) {
+    try {
+      const geminiMessages = messages
+        .filter(m => m.role !== 'system')
+        .map(m => ({
+          role: m.role === 'assistant' ? 'model' : 'user',
+          parts: [{ text: m.content }]
+        }))
 
-    const data = await resp.json()
+      const resp = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
+            contents: geminiMessages,
+            generationConfig: { temperature: 0.75, maxOutputTokens: 700 },
+          }),
+        }
+      )
 
-    if (!resp.ok) {
-      return res.status(200).json({ reply: null, error: 'api_error' })
+      if (resp.ok) {
+        const data = await resp.json()
+        const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || null
+        if (reply) return res.status(200).json({ reply })
+      }
+    } catch (err) {
+      console.error('Gemini error:', err.message)
     }
-
-    const reply = data?.choices?.[0]?.message?.content || null
-    return res.status(200).json({ reply })
-
-  } catch (err) {
-    return res.status(200).json({ reply: null, error: 'fetch_failed' })
   }
+
+  // Fallback: Groq
+  if (GROQ_KEY) {
+    try {
+      const resp = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${GROQ_KEY}`,
+        },
+        body: JSON.stringify({
+          model: 'llama-3.3-70b-versatile',
+          messages,
+          temperature: 0.75,
+          max_tokens: 700,
+        }),
+      })
+
+      if (resp.ok) {
+        const data = await resp.json()
+        const reply = data?.choices?.[0]?.message?.content || null
+        if (reply) return res.status(200).json({ reply })
+      }
+    } catch (err) {
+      console.error('Groq error:', err.message)
+    }
+  }
+
+  return res.status(200).json({ reply: null, error: 'all_failed' })
 }
