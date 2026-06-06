@@ -72,73 +72,62 @@ const EMERGENCY_NUMBERS = [
 function RobotAvatar({ typing }) {
   return (
     <div className="flex-shrink-0 relative" style={{ width:46, height:46 }}>
-      {/* Glow exterior */}
       <motion.div
-        className="absolute rounded-full pointer-events-none"
-        style={{ inset:-3 }}
-        animate={{ boxShadow: typing
-          ? ['0 0 10px 3px rgba(0,200,255,.4)', '0 0 20px 6px rgba(0,200,255,.7)', '0 0 10px 3px rgba(0,200,255,.4)']
-          : ['0 0 6px 2px rgba(0,200,255,.2)', '0 0 10px 3px rgba(0,200,255,.35)', '0 0 6px 2px rgba(0,200,255,.2)']
-        }}
-        transition={{ duration: typing ? 0.7 : 2.5, repeat:Infinity, ease:'easeInOut' }}
-      />
-      {/* Cuerpo del robot */}
-      <motion.div
-        animate={typing ? { y:[0,-2,0] } : { y:0 }}
-        transition={{ repeat: typing ? Infinity : 0, duration:0.8, ease:'easeInOut' }}
+        animate={typing ? { scale:[1, 1.06, 1] } : { scale:1 }}
+        transition={{ repeat: typing ? Infinity : 0, duration:1, ease:'easeInOut' }}
         style={{ width:46, height:46 }}
       >
-        <svg width="46" height="46" viewBox="0 0 46 46" fill="none">
-          {/* Fondo circular */}
-          <circle cx="23" cy="23" r="22" fill="#0a1628" stroke="rgba(0,200,255,.5)" strokeWidth="1.5"/>
-
-          {/* Cabeza */}
-          <rect x="12" y="11" width="22" height="17" rx="5" fill="#0f2040" stroke="#00c8ff" strokeWidth="1.2"/>
-
+        <svg width="46" height="46" viewBox="0 0 110 110" fill="none">
+          {/* Sombra */}
+          <ellipse cx="57" cy="84" rx="24" ry="6" fill="#050810" opacity="0.5"/>
+          {/* Cabeza redonda */}
+          <circle cx="55" cy="52" r="38" fill="#2a1a4a" stroke="#3a2a5a" strokeWidth="2"/>
+          {/* Brillo 3D */}
+          <ellipse cx="43" cy="28" rx="14" ry="8" fill="rgba(255,255,255,.08)"/>
+          {/* Pantalla cara */}
+          <circle cx="55" cy="52" r="30" fill="#1a0a2e"/>
           {/* Ojos */}
-          <motion.ellipse
-            animate={typing ? { scaleY:[1,.2,1] } : { scaleY:1 }}
-            transition={{ repeat: typing ? Infinity : 0, duration:.8, delay:0 }}
-            cx="18" cy="20" rx="2.8" ry="2.8" fill="#00e5ff"
-            style={{ filter:'drop-shadow(0 0 3px #00e5ff)' }}
-          />
-          <motion.ellipse
-            animate={typing ? { scaleY:[1,.2,1] } : { scaleY:1 }}
-            transition={{ repeat: typing ? Infinity : 0, duration:.8, delay:.15 }}
-            cx="28" cy="20" rx="2.8" ry="2.8" fill="#00e5ff"
-            style={{ filter:'drop-shadow(0 0 3px #00e5ff)' }}
-          />
-
-          {/* Boca — sonrisa cuando no escribe, puntos cuando escribe */}
-          {!typing && (
-            <path d="M18 26 Q23 29.5 28 26" stroke="#00E5A0" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
-          )}
-          {typing && (<>
-            <motion.circle animate={{ opacity:[1,.2,1] }} transition={{ duration:.5, repeat:Infinity, delay:0 }} cx="19" cy="27" r="1.5" fill="#00E5A0"/>
-            <motion.circle animate={{ opacity:[1,.2,1] }} transition={{ duration:.5, repeat:Infinity, delay:.15 }} cx="23" cy="27" r="1.5" fill="#00E5A0"/>
-            <motion.circle animate={{ opacity:[1,.2,1] }} transition={{ duration:.5, repeat:Infinity, delay:.3 }} cx="27" cy="27" r="1.5" fill="#00E5A0"/>
-          </>)}
-
-          {/* Antena */}
-          <line x1="23" y1="11" x2="23" y2="7" stroke="#00c8ff" strokeWidth="1.2"/>
+          <circle cx="40" cy="47" r="11" fill="#a855f7" opacity="0.9"/>
+          <circle cx="40" cy="47" r="7" fill="#1a0a2e"/>
           <motion.circle
-            animate={{ fill:['#f59e0b','#00c8ff','#00E5A0','#f59e0b'] }}
-            transition={{ duration:2, repeat:Infinity, ease:'easeInOut' }}
-            cx="23" cy="6" r="2.2"
+            animate={typing ? { r:[4,1,4] } : { r:4 }}
+            transition={{ repeat: typing ? Infinity : 0, duration:0.8 }}
+            cx="40" cy="47" r="4" fill="#a855f7"
           />
-
-          {/* Cuerpo */}
-          <rect x="15" y="29" width="16" height="9" rx="4" fill="#0f2040" stroke="rgba(0,200,255,.4)" strokeWidth="1"/>
-          <circle cx="19" cy="33" r="2" fill="rgba(0,200,255,.3)" stroke="#00c8ff" strokeWidth=".8"/>
-          <circle cx="27" cy="33" r="2" fill="rgba(0,229,160,.3)" stroke="#00E5A0" strokeWidth=".8"/>
+          <circle cx="42" cy="44" r="2.5" fill="white" opacity="0.9"/>
+          <circle cx="70" cy="47" r="11" fill="#a855f7" opacity="0.9"/>
+          <circle cx="70" cy="47" r="7" fill="#1a0a2e"/>
+          <motion.circle
+            animate={typing ? { r:[4,1,4] } : { r:4 }}
+            transition={{ repeat: typing ? Infinity : 0, duration:0.8, delay:0.1 }}
+            cx="70" cy="47" r="4" fill="#a855f7"
+          />
+          <circle cx="72" cy="44" r="2.5" fill="white" opacity="0.9"/>
+          {/* Boca */}
+          {!typing && (
+            <path d="M40 63 Q55 73 70 63" stroke="#a855f7" strokeWidth="3" strokeLinecap="round" fill="none"/>
+          )}
+          {typing && (
+            <>
+              <motion.circle animate={{ opacity:[1,.2,1] }} transition={{ duration:.5, repeat:Infinity, delay:0 }} cx="44" cy="67" r="3" fill="#a855f7"/>
+              <motion.circle animate={{ opacity:[1,.2,1] }} transition={{ duration:.5, repeat:Infinity, delay:.15 }} cx="55" cy="67" r="3" fill="#a855f7"/>
+              <motion.circle animate={{ opacity:[1,.2,1] }} transition={{ duration:.5, repeat:Infinity, delay:.3 }} cx="66" cy="67" r="3" fill="#a855f7"/>
+            </>
+          )}
+          {/* Cachetes */}
+          <circle cx="25" cy="58" r="7" fill="#a855f7" opacity="0.18"/>
+          <circle cx="85" cy="58" r="7" fill="#a855f7" opacity="0.18"/>
+          {/* Orejas */}
+          <circle cx="16" cy="52" r="7" fill="#2a1a4a" stroke="#a855f7" strokeWidth="1.5"/>
+          <circle cx="94" cy="52" r="7" fill="#2a1a4a" stroke="#a855f7" strokeWidth="1.5"/>
         </svg>
       </motion.div>
-
       {/* Punto online */}
-      <div style={{ position:'absolute', bottom:1, right:1, width:9, height:9, borderRadius:'50%', background:'#00e5a0', border:'2px solid #050d1a' }} />
+      <div style={{ position:'absolute', bottom:1, right:1, width:10, height:10, borderRadius:'50%', background:'#00e5a0', border:'2px solid #050d1a' }} />
     </div>
   )
 }
+
 
 function BotBubble({ text, isTyping }) {
   const fmt = text
