@@ -350,7 +350,7 @@ export default function ChatScreen({ go, seed }) {
 
   useEffect(() => {
     setTimeout(() => {
-      addBot('¡Hola! 👋 Soy tu asistente digital de la **Intendencia de Montevideo**.\n\nEstoy acá para ayudarte ante cualquier situación de riesgo digital. Contame qué pasó o hacé clic en una de las opciones de abajo.')
+      addBot('¡Hola! Soy tu asistente digital de seguridad de la **Intendencia de Montevideo**, en conjunto con el **Ministerio del Interior**.\n\nEstoy acá para ayudarte ante cualquier situación de riesgo.\n\nContame qué te pasó.\n\nRecordá que nunca te voy a pedir datos personales y los mensajes no quedan guardados, para tu seguridad.\n\nEstoy aquí solo para guiarte y ayudarte.')
     }, 300)
     if(seed) setTimeout(() => sendMsg(seed), 900)
   }, [])
