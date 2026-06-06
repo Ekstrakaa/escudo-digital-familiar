@@ -143,12 +143,12 @@ function QuestionCard({ step, qNum, onAnswer, onShake }) {
     <motion.div key={step.id} initial={{ opacity:0, y:12 }} animate={{ opacity:1, y:0 }} transition={{ duration:.3 }}>
 
       {/* Header compacto: categoría + número */}
-      <div className="flex items-center gap-2 mb-2 px-1">
-        <div className="w-7 h-7 rounded-[8px] flex items-center justify-center flex-shrink-0"
-          style={{ background:meta.bg, border:`1px solid ${meta.color}33` }}
-          dangerouslySetInnerHTML={{ __html: meta.svg.replace('width="22" height="22"','width="14" height="14"') }} />
-        <span className="font-mono text-[.65rem] tracking-widest uppercase font-semibold" style={{ color:meta.color }}>{step.cat}</span>
-        <span className="text-[.65rem] text-t3 ml-auto">Pregunta {qNum}</span>
+      <div className="flex items-center gap-3 mb-3 px-1">
+        <div className="w-11 h-11 rounded-[12px] flex items-center justify-center flex-shrink-0"
+          style={{ background:meta.bg, border:`1px solid ${meta.color}55` }}
+          dangerouslySetInnerHTML={{ __html: meta.svg }} />
+        <span className="font-mono text-[.82rem] tracking-widest uppercase font-semibold" style={{ color:meta.color }}>{step.cat}</span>
+        <span className="text-[.75rem] text-t3 ml-auto font-medium">Pregunta {qNum}</span>
       </div>
 
       {/* Imagen si hay */}
