@@ -217,8 +217,8 @@ function QuestionCard({ step, qNum, onAnswer, onShake }) {
       {/* Pregunta */}
       <div className="rounded-[14px] p-4 mb-3"
         style={{ background:'#0f1d35', border:'1px solid rgba(0,200,255,.1)' }}>
-        <div className="text-[.92rem] font-semibold leading-[1.6] text-t1 whitespace-pre-wrap text-center mb-3">{step.txt.replace('¿Qué hacés?', '').trim()}</div>
-        <div className="text-center font-bold text-[1.05rem] mt-1" style={{ color: meta.color }}>¿Qué hacés?</div>
+        <div className="text-[1rem] font-semibold leading-[1.55] text-t1 whitespace-pre-wrap text-center mb-3">{step.txt.replace('¿Qué hacés?', '').trim()}</div>
+        <div className="text-center font-bold text-[1.1rem] mt-2" style={{ color: meta.color }}>¿Qué hacés?</div>
       </div>
 
       {/* Opciones compactas */}
@@ -231,7 +231,7 @@ function QuestionCard({ step, qNum, onAnswer, onShake }) {
               style={letterStyle(i)}>
               {LETTERS[i]}
             </div>
-            <span className="text-[.88rem] text-t1 leading-snug">{opt}</span>
+            <span className="text-[.93rem] text-t1 leading-snug">{opt}</span>
           </button>
         ))}
       </div>
@@ -382,9 +382,10 @@ export default function QuizScreen({ go }) {
       <div className="glass flex items-center gap-3 px-4 sticky top-0 z-50 border-b border-white/[.06]"
         style={{ paddingTop:`calc(env(safe-area-inset-top,0px) + 12px)`, paddingBottom:'12px' }}>
         <button onClick={go.home}
-          className="w-11 h-11 rounded-[12px] flex items-center justify-center text-t2 hover:text-cyan flex-shrink-0 transition-colors"
-          style={{ background:'#142040', border:'1px solid rgba(0,200,255,.18)' }}>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          className="flex items-center gap-2 px-3 py-2 rounded-[10px] transition-all flex-shrink-0"
+          style={{ background:'rgba(255,255,255,.05)', border:'1px solid rgba(255,255,255,.10)', backdropFilter:'blur(8px)' }}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" strokeWidth="2" strokeLinecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          <span style={{ fontSize:'.75rem', fontWeight:600, color:'rgba(255,255,255,.6)', fontFamily:"'Outfit',sans-serif" }}>Volver</span>
         </button>
         <div className="flex-1 min-w-0">
           <div className="font-bold text-[1rem] text-t1">{current?.type === 'fact' ? '¿Sabías que?' : `Pregunta ${qCount} de ${totalQs}`}</div>
