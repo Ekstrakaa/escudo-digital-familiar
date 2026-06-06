@@ -10,7 +10,7 @@ export const STEPS = [
   {
     type: 'q',
     id: 1,
-    cat: 'Cuento del tío',
+    cat: '¿Quién toca el timbre? 🔔',
     icon: '🚪',
     txt: '🚪 Un señor en la puerta con credencial del BROU dice que tu cuenta tiene un problema y necesita tu tarjeta y clave.\n\n¿Qué hacés?',
     opts: [
@@ -35,7 +35,7 @@ export const STEPS = [
   {
     type: 'q',
     id: 2,
-    cat: 'Ingeniería social',
+    cat: 'El mensaje misterioso 📱',
     icon: '📱',
     txt: '📱 WhatsApp de número desconocido:\n"Soy Matías, perdí el celu, tuve un accidente. Mandame $15.000 por Abitab urgente. No le digas a mamá."\n\n¿Qué hacés?',
     opts: [
@@ -53,7 +53,7 @@ export const STEPS = [
   {
     type: 'q',
     id: 3,
-    cat: 'Clonación de voz IA',
+    cat: '¿Esa voz es real? 🤔',
     icon: '🤖',
     txt: '📞 Te llama alguien con la voz de tu hija, llorando:\n"Tuve un accidente, mandame $10.000 ahora."\n\n¿Qué hacés?',
     opts: [
@@ -79,7 +79,7 @@ export const STEPS = [
   {
     type: 'q',
     id: 4,
-    cat: 'Autenticación',
+    cat: '¿App amiga o enemiga? 🔐',
     icon: '🔐',
     img: '<img src="/imgs/A2F.png" alt="Aplicaciones A2F Google y Microsoft Authenticator" style="width:100%;display:block;object-fit:contain;max-height:200px;" />',
     txt: '🔐 ¿Instalarías alguna de estas apps en tu celular?\nSe llaman A2F, son de Google y Microsoft.',
@@ -98,7 +98,7 @@ export const STEPS = [
   {
     type: 'q',
     id: 5,
-    cat: 'SMS falso (phishing)',
+    cat: 'El SMS del millón 💸',
     icon: '📨',
     txt: '📨 SMS recibido:\n"SUCIVE: Multa vencida, si no pagás hoy aumenta. Ingresá acá: asucive.cc/uy/multa"\n\n¿Qué hacés?',
     opts: [
@@ -123,7 +123,7 @@ export const STEPS = [
   {
     type: 'q',
     id: 6,
-    cat: 'Ingeniería social',
+    cat: 'Antel te llama... o no 📞',
     icon: '📞',
     txt: '📞 Te llaman de "Antel": detectaron un virus en tu router y necesitan acceso a tu Gmail para solucionarlo.\n\n¿Qué hacés?',
     opts: [
@@ -141,7 +141,7 @@ export const STEPS = [
   {
     type: 'q',
     id: 7,
-    cat: 'Robo de datos bancarios',
+    cat: 'Oferta del siglo 🤑',
     icon: '💳',
     img: '<img src="/imgs/brou_ancap.png" alt="Publicidad falsa BROU ANCAP" style="width:100%;display:block;object-fit:contain;max-height:200px;" />',
     txt: '💬 Te llega este WhatsApp con la imagen de arriba.\n\n¿Qué hacés?',
@@ -167,7 +167,7 @@ export const STEPS = [
   {
     type: 'q',
     id: 8,
-    cat: 'Premio falso',
+    cat: '¡Ganaste! ¿O no? 🎰',
     icon: '🎁',
     txt: '🎁 Email recibido:\n"¡Ganaste un viaje a Punta del Este de Abitab! Ingresá tu tarjeta. Solo 24 horas."\n\n¿Qué hacés?',
     opts: [
@@ -193,7 +193,7 @@ export const STEPS = [
   {
     type: 'q',
     id: 9,
-    cat: 'Persona en la puerta',
+    cat: 'Los inspectores 🦺',
     icon: '🚪',
     txt: '🚪 Dos hombres con uniforme de la Intendencia en la puerta:\n"Inspección obligatoria, necesitamos entrar ahora."\n\n¿Qué hacés?',
     opts: [
@@ -211,7 +211,7 @@ export const STEPS = [
   {
     type: 'q',
     id: 10,
-    cat: 'Cuento del tío',
+    cat: 'El señor del banco 🕴️',
     icon: '🏦',
     txt: '🏦 Hombre con traje del Banco República en la puerta:\n"Movimiento sospechoso en tu cuenta, necesito tu llave digital y CVV."\n\n¿Qué hacés?',
     opts: [
