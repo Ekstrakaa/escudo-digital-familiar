@@ -136,7 +136,7 @@ export default async function handler(req, res) {
         'Authorization': `Bearer ${API_KEY}`,
       },
       body: JSON.stringify({
-        model:'llama-3.1-8b-instant'
+        model: 'llama-3.3-70b-versatile', // Modelo arreglado y con la coma faltante al final
         messages,
         temperature: 0.75,
         max_tokens: 700,
