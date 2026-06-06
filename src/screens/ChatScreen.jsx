@@ -250,18 +250,14 @@ export default function ChatScreen({ go, seed }) {
   const taRef   = useRef(null)
   const historyRef = useRef([])
 
-  const scrollDown = (instant = false) => {
-    const doScroll = () => {
-      if(msgsRef.current) {
-        msgsRef.current.scrollTop = msgsRef.current.scrollHeight
-      }
+  const scrollDown = () => {
+    // Solo scroll al fondo para MENSAJES DEL USUARIO
+    if(msgsRef.current) {
+      msgsRef.current.scrollTop = msgsRef.current.scrollHeight
     }
-    // Scroll inmediato
-    doScroll()
-    // Scroll después de que el DOM actualice
-    setTimeout(doScroll, 50)
-    // Scroll después del teclado mobile
-    setTimeout(doScroll, 350)
+    setTimeout(() => {
+      if(msgsRef.current) msgsRef.current.scrollTop = msgsRef.current.scrollHeight
+    }, 300)
   }
 
   const addBot = (text) => {
@@ -276,32 +272,37 @@ export default function ChatScreen({ go, seed }) {
 
   const lastMsgRef = useRef(null)
   const prevMsgCount = useRef(0)
+  const prevTyping = useRef(false)
 
   useEffect(() => {
     const isNewMsg = messages.length > prevMsgCount.current
+    const lastMsg = messages[messages.length - 1]
     prevMsgCount.current = messages.length
 
-    if(!lastMsgRef.current || !msgsRef.current) return
+    if(!isNewMsg) return
 
-    if(isNewMsg) {
-      // Nuevo mensaje — ir al inicio del mensaje nuevo
+    setTimeout(() => {
+      if(!lastMsgRef.current) return
+      // Si el último mensaje es del BOT → mostrar el INICIO
+      if(lastMsg?.role === 'bot') {
+        lastMsgRef.current.scrollIntoView({ behavior:'smooth', block:'start' })
+      } else {
+        // Si es del USUARIO → ir al fondo para ver el input
+        if(msgsRef.current) msgsRef.current.scrollTop = msgsRef.current.scrollHeight
+      }
+    }, 120)
+  }, [messages])
+
+  // Cuando el bot termina de escribir → mostrar inicio de su respuesta
+  useEffect(() => {
+    if(prevTyping.current && !typing) {
       setTimeout(() => {
         if(lastMsgRef.current) {
-          lastMsgRef.current.scrollIntoView({ behavior:'smooth', block:'nearest' })
+          lastMsgRef.current.scrollIntoView({ behavior:'smooth', block:'start' })
         }
       }, 100)
     }
-  }, [messages])
-
-  // Cuando el bot empieza/termina de escribir, scroll al fondo
-  useEffect(() => {
-    if(!typing && msgsRef.current) {
-      setTimeout(() => {
-        if(lastMsgRef.current) {
-          lastMsgRef.current.scrollIntoView({ behavior:'smooth', block:'nearest' })
-        }
-      }, 150)
-    }
+    prevTyping.current = typing
   }, [typing])
 
   const sendMsg = async (text) => {
