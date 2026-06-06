@@ -242,10 +242,9 @@ export default function ChatScreen({ go, seed }) {
   const [connStatus, setConnStatus] = useState('connecting') // 'connecting' | 'establishing' | 'online'
 
   useEffect(() => {
-    const t1 = setTimeout(() => setConnStatus('establishing'), 900)
-    const t2 = setTimeout(() => setConnStatus('secured'), 1900)
-    const t3 = setTimeout(() => setConnStatus('online'), 3300)
-    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3) }
+    const t1 = setTimeout(() => setConnStatus('establishing'), 1400)
+    const t2 = setTimeout(() => setConnStatus('online'), 4000)
+    return () => { clearTimeout(t1); clearTimeout(t2) }
   }, [])
   const msgsRef = useRef(null)
   const taRef   = useRef(null)
@@ -415,14 +414,11 @@ export default function ChatScreen({ go, seed }) {
                   initial={{ opacity:0, y:8 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0, y:-8 }}
                   transition={{ duration:.4 }}
                   className="text-center px-8">
-                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'1.2rem', fontWeight:700, color:'#f0f6ff', marginBottom:8 }}>
-                    Iniciando asistente...
+                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'1.15rem', fontWeight:700, color:'#f0f6ff', marginBottom:6 }}>
+                    Conectando...
                   </div>
-                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.85rem', color:'#8fa8cc', lineHeight:1.6 }}>
-                    Tu consulta es privada y confidencial
-                  </div>
-                  <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.65rem', color:'#4a6080', letterSpacing:'.1em', marginTop:6 }}>
-                    ESCUDO DIGITAL · INTENDENCIA DE MONTEVIDEO
+                  <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.65rem', color:'#4a6080', letterSpacing:'.1em' }}>
+                    ESCUDO DIGITAL · IA
                   </div>
                 </motion.div>
               )}
@@ -431,30 +427,11 @@ export default function ChatScreen({ go, seed }) {
                   initial={{ opacity:0, y:8 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0, y:-8 }}
                   transition={{ duration:.4 }}
                   className="text-center px-8">
-                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'1.2rem', fontWeight:700, color:'#f0f6ff', marginBottom:8 }}>
-                    Estableciendo conexión segura...
+                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'1.15rem', fontWeight:700, color:'#00E5A0', marginBottom:6 }}>
+                    ¡Estás en un lugar seguro!
                   </div>
-                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.85rem', color:'#8fa8cc', lineHeight:1.6 }}>
-                    Estás conectado a un canal cifrado y protegido
-                  </div>
-                  <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.65rem', color:'#00E5A0', letterSpacing:'.1em', marginTop:6 }}>
-                    🔒 CANAL CIFRADO · DATOS PROTEGIDOS
-                  </div>
-                </motion.div>
-              )}
-              {connStatus === 'secured' && (
-                <motion.div key="c3"
-                  initial={{ opacity:0, y:8 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0, y:-8 }}
-                  transition={{ duration:.4 }}
-                  className="text-center px-8">
-                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'1.2rem', fontWeight:800, color:'#00E5A0', marginBottom:8 }}>
-                    ¡Bienvenido/a!
-                  </div>
-                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.9rem', color:'#f0f6ff', lineHeight:1.65, marginBottom:6 }}>
-                    Estás en un espacio seguro. Aquí podés consultar cualquier situación con total confianza.
-                  </div>
-                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.78rem', color:'#00E5A0' }}>
-                    🛡️ Protegido por Escudo Digital Familiar
+                  <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.65rem', color:'#00E5A0', letterSpacing:'.1em' }}>
+                    🔒 CANAL CIFRADO · EN LÍNEA
                   </div>
                 </motion.div>
               )}
@@ -465,25 +442,10 @@ export default function ChatScreen({ go, seed }) {
               <motion.div
                 className="h-full rounded-full"
                 style={{ background:'linear-gradient(90deg,#00E5A0,#00c8ff)' }}
-                animate={{ width: connStatus === 'connecting' ? '30%' : connStatus === 'establishing' ? '65%' : '100%' }}
-                transition={{ duration:.8, ease:'easeInOut' }}
+                animate={{ width: connStatus === 'connecting' ? '45%' : '100%' }}
+                transition={{ duration:1, ease:'easeInOut' }}
               />
             </div>
-
-            {/* Iconos de seguridad abajo */}
-            <motion.div
-              initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:.5 }}
-              className="flex items-center gap-4 mt-5">
-              {['🔒', '🛡️', '✅'].map((icon, i) => (
-                <motion.div key={i}
-                  initial={{ opacity:0, scale:.5 }}
-                  animate={{ opacity:1, scale:1 }}
-                  transition={{ delay: .5 + i * .2 }}
-                  style={{ fontSize:'1.4rem' }}>
-                  {icon}
-                </motion.div>
-              ))}
-            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
