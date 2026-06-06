@@ -1,4 +1,4 @@
-export const config = { runtime: 'nodejs' }
+export const config = { runtime: 'edge' }
 
 const SYSTEM_PROMPT = `Sos el asistente digital de la Intendencia de Montevideo y el Ministerio del Interior. Ayudas a personas mayores uruguayas ante estafas digitales.
 
@@ -6,34 +6,32 @@ PERSONALIDAD: Calido, humano, directo. Rioplatense uruguayo: vos, tenes, hace.
 
 FORMATO: Cada idea en su propia linea con linea en blanco entre ellas. Maximo 5 lineas. Negrita para numeros urgentes. NUNCA texto pegado.
 
-IDENTIFICAR ESTAFA Y RESPONDER:
-- Alguien en la puerta = Cuento del tio → cerra la puerta, llama al 911
-- Llamada del banco = Vishing → colga, llama vos al banco
-- Link SMS/WhatsApp = Phishing → no toques el link
-- Codigo WhatsApp = Robo de cuenta → no lo des nunca
-- Voz familiar pidiendo plata = Clonacion de voz IA → llama directamente al familiar
-- Ya dieron datos/plata → llama BROU 1722 0001, Cibercrimen 2030 4625
+Si alguien en la puerta pide datos = cerra, llama 911
+Si llamada del banco pide clave = colga, llama vos al BROU 1722 0001
+Si link raro por SMS = no toques, borralo
+Si codigo WhatsApp = no lo des nunca
+Si voz familiar pide plata = llama directo al familiar
+Si ya dieron datos = llama BROU 1722 0001, Cibercrimen 2030 4625
 
-Frases calidas: "Hiciste muy bien en escribirnos", "No estas solo/a", "Tranquilo/a estamos aca"
-Termina siempre con una pregunta corta de seguimiento.`
+Siempre: "Hiciste muy bien en escribirnos". Termina con pregunta corta.`
 
-export default async function handler(req, res) {
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' })
+export default async function handler(req) {
+  if (req.method !== 'POST') return new Response(JSON.stringify({ error: 'Method not allowed' }), { status: 405 })
 
   const API_KEY = process.env.GROQ_API_KEY
-  if (!API_KEY) return res.status(200).json({ reply: null, error: 'no_key' })
+  if (!API_KEY) return new Response(JSON.stringify({ reply: null, error: 'no_key' }), { status: 200 })
 
-  let userMessage = '', history = []
-  try {
-    userMessage = (req.body.message || '').toString().slice(0, 2000)
-    history = Array.isArray(req.body.history) ? req.body.history.slice(-10) : []
-  } catch { return res.status(400).json({ error: 'bad_request' }) }
+  let body
+  try { body = await req.json() } catch { return new Response(JSON.stringify({ error: 'bad_request' }), { status: 400 }) }
 
-  if (!userMessage.trim()) return res.status(400).json({ error: 'empty' })
+  const userMessage = (body.message || '').toString().slice(0, 2000)
+  const history = Array.isArray(body.history) ? body.history.slice(-8) : []
+
+  if (!userMessage.trim()) return new Response(JSON.stringify({ error: 'empty' }), { status: 400 })
 
   const messages = [{ role: 'system', content: SYSTEM_PROMPT }]
   for (const m of history) {
-    messages.push({ role: m.role === 'user' ? 'user' : 'assistant', content: (m.content || '').toString().slice(0, 2000) })
+    messages.push({ role: m.role === 'user' ? 'user' : 'assistant', content: (m.content || '').toString().slice(0, 1000) })
   }
   messages.push({ role: 'user', content: userMessage })
 
@@ -45,16 +43,16 @@ export default async function handler(req, res) {
     })
 
     if (resp.status === 429) {
-      return res.status(200).json({ reply: 'El asistente está muy ocupado ahora. Intentá en 1 minuto.\n\nSi es urgente llamá al **911** o a Cibercrimen: **2030 4625**' })
+      return new Response(JSON.stringify({ reply: 'El asistente está muy ocupado. Intentá en 1 minuto.\n\nSi es urgente: **911** o Cibercrimen: **2030 4625**' }), { status: 200, headers: { 'Content-Type': 'application/json' } })
     }
 
     const data = await resp.json()
-    if (!resp.ok) return res.status(200).json({ reply: null, error: 'api_error' })
+    if (!resp.ok) return new Response(JSON.stringify({ reply: null, error: 'api_error' }), { status: 200 })
 
     const reply = data?.choices?.[0]?.message?.content || null
-    return res.status(200).json({ reply })
+    return new Response(JSON.stringify({ reply }), { status: 200, headers: { 'Content-Type': 'application/json' } })
 
   } catch (err) {
-    return res.status(200).json({ reply: null, error: 'fetch_failed' })
+    return new Response(JSON.stringify({ reply: null, error: 'fetch_failed' }), { status: 200 })
   }
 }
