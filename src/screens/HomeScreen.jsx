@@ -158,15 +158,18 @@ export default function HomeScreen({ go }) {
         </motion.div>
 
         {/* Badge IM — debajo del título */}
-        <motion.div initial={{ opacity:0, scale:.92 }} animate={{ opacity:1, scale:1 }} transition={{ delay:.25 }}
-          className="flex items-center gap-2 px-4 py-[7px] rounded-full mb-3"
-          style={{ background:'rgba(139,124,248,.1)', border:'1px solid rgba(139,124,248,.25)' }}>
+        <motion.a
+          href="https://montevideo.gub.uy/area-tematica/inclusion-social/personas-mayores/programa-de-inclusion-digital"
+          target="_blank" rel="noopener noreferrer"
+          initial={{ opacity:0, scale:.92 }} animate={{ opacity:1, scale:1 }} transition={{ delay:.25 }}
+          className="flex items-center gap-2 px-4 py-[8px] rounded-full mb-3"
+          style={{ background:'rgba(139,124,248,.12)', border:'1px solid rgba(139,124,248,.35)', textDecoration:'none', cursor:'pointer' }}>
           <motion.div animate={{ opacity:[1,.3,1] }} transition={{ duration:2, repeat:Infinity }}
-            style={{ width:7, height:7, borderRadius:'50%', background:'#00e5a0', flexShrink:0 }} />
-          <span style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.72rem', fontWeight:600, color:'#00e5a0', letterSpacing:'.04em' }}>
+            style={{ width:8, height:8, borderRadius:'50%', background:'#00e5a0', flexShrink:0 }} />
+          <span style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.8rem', fontWeight:700, color:'#e0d4ff', letterSpacing:'.03em' }}>
             Programa de Inclusión Digital · IM
           </span>
-        </motion.div>
+        </motion.a>
 
         {/* Subtítulo */}
         <motion.p initial={{ opacity:0, y:-8 }} animate={{ opacity:1, y:0 }} transition={{ delay:.28, duration:.4 }}
@@ -255,7 +258,7 @@ export default function HomeScreen({ go }) {
         {/* Label */}
         <motion.div initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:.36 }}
           className="w-full mb-3" style={{ maxWidth:480 }}>
-          <span style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.62rem', fontWeight:500, color:'#4a6080', letterSpacing:'.12em', textTransform:'uppercase' }}>
+          <span style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.78rem', fontWeight:700, color:'#c8d8ee', letterSpacing:'.08em', textTransform:'uppercase' }}>
             ¿Qué te está pasando?
           </span>
         </motion.div>
@@ -280,7 +283,7 @@ export default function HomeScreen({ go }) {
         {/* Botón Primeros Auxilios */}
         <motion.div initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:.9 }}
           className="w-full mt-4 pb-8" style={{ maxWidth:480 }}>
-          <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.6rem', color:'#4a6080', letterSpacing:'.1em', textTransform:'uppercase', textAlign:'center', marginBottom:10 }}>
+          <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.78rem', fontWeight:700, color:'#c8d8ee', letterSpacing:'.06em', textTransform:'uppercase', textAlign:'center', marginBottom:10 }}>
             ¿Ya fuiste víctima? Actuá ahora
           </div>
           <motion.button whileTap={{ scale:.97 }} onClick={() => setAuxOpen(true)}
@@ -298,6 +301,29 @@ export default function HomeScreen({ go }) {
             </div>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round"><path d="M9 18l6-6-6-6"/></svg>
           </motion.button>
+        </motion.div>
+
+        {/* Logos footer */}
+        <motion.div
+          initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:1 }}
+          className="flex flex-col items-center gap-3 pb-10 pt-4"
+        >
+          <div className="flex items-center gap-6">
+            <img
+              src="/imgs/logo_im.png"
+              alt="Intendencia de Montevideo"
+              style={{ height:26, objectFit:'contain', opacity:.55, filter:'invert(1) brightness(2)' }}
+            />
+            <div style={{ width:1, height:24, background:'rgba(255,255,255,.1)' }} />
+            <img
+              src="/imgs/logo_ministerio.png"
+              alt="Ministerio del Interior"
+              style={{ height:26, objectFit:'contain', opacity:.55, filter:'invert(1) brightness(2)' }}
+            />
+          </div>
+          <span style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.62rem', color:'#4a6080', letterSpacing:'.05em', textAlign:'center' }}>
+            Intendencia de Montevideo · Ministerio del Interior · 2025
+          </span>
         </motion.div>
 
       </div>
