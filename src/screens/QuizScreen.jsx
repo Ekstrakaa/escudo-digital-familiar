@@ -3,6 +3,61 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { STEPS } from '../data/steps'
 import { CATS }  from '../data/cats'
 
+function Particles() {
+  const canvasRef = useRef(null)
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')
+    let animId
+    const resize = () => {
+      canvas.width  = canvas.offsetWidth
+      canvas.height = canvas.offsetHeight
+    }
+    resize()
+    window.addEventListener('resize', resize)
+    const dots = Array.from({ length: 60 }, () => ({
+      x:   Math.random() * canvas.width,
+      y:   Math.random() * canvas.height,
+      vx:  (Math.random() - 0.5) * 0.28,
+      vy:  (Math.random() - 0.5) * 0.28,
+      r:   Math.random() * 2.8 + 1.0,
+      a:   Math.random() * 0.45 + 0.15,
+      hue: Math.random() * 360,
+      dh:  (Math.random() * 0.5 + 0.15) * (Math.random() > 0.5 ? 1 : -1),
+    }))
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      dots.forEach(d => {
+        d.x  += d.vx; d.y += d.vy
+        d.hue = (d.hue + d.dh + 360) % 360
+        if (d.x < 0) d.x = canvas.width
+        if (d.x > canvas.width) d.x = 0
+        if (d.y < 0) d.y = canvas.height
+        if (d.y > canvas.height) d.y = 0
+        ctx.beginPath()
+        ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2)
+        ctx.fillStyle = `hsla(${d.hue}, 100%, 65%, ${d.a})`
+        ctx.fill()
+      })
+      dots.forEach((a, i) => dots.slice(i + 1).forEach(b => {
+        const dist = Math.hypot(a.x - b.x, a.y - b.y)
+        if (dist < 90) {
+          const midHue = (a.hue + b.hue) / 2
+          ctx.beginPath()
+          ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y)
+          ctx.strokeStyle = `hsla(${midHue}, 100%, 65%, ${0.10 * (1 - dist / 90)})`
+          ctx.stroke()
+        }
+      }))
+      animId = requestAnimationFrame(draw)
+    }
+    draw()
+    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', resize) }
+  }, [])
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex:0 }} />
+}
+
 const LETTERS = ['A','B','C','D']
 
 /* ──────────────────────────────────────────
@@ -293,7 +348,7 @@ export default function QuizScreen({ go }) {
   return (
     <motion.div
       ref={containerRef}
-      className="flex flex-col min-h-screen bg-bg"
+      className="flex flex-col min-h-screen bg-bg relative overflow-hidden"
       animate={shake ? {
         x: [0, -10, 12, -10, 8, -5, 3, 0],
         backgroundColor: ['#050d1a', '#2d0a0a', '#1a0505', '#050d1a'],
@@ -301,6 +356,11 @@ export default function QuizScreen({ go }) {
       transition={shake ? { duration: 0.55, ease: 'easeOut' } : {}}
       style={shake ? { boxShadow: 'inset 0 0 60px rgba(255,61,90,.35)' } : {}}
     >
+      {/* Partículas RGB de fondo */}
+      <div className="absolute inset-0 pointer-events-none" style={{ zIndex:0 }}>
+        <Particles />
+      </div>
+
       {/* Confetti */}
       {showConfetti && <ConfettiBurst />}
 
