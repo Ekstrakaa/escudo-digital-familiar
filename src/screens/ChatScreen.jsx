@@ -274,33 +274,36 @@ export default function ChatScreen({ go, seed }) {
   const prevMsgCount = useRef(0)
   const prevTyping = useRef(false)
 
+  // Función que scrollea al INICIO del último mensaje del bot
+  const scrollToLastMsg = () => {
+    if(!lastMsgRef.current || !msgsRef.current) return
+    const container = msgsRef.current
+    const el = lastMsgRef.current
+    // Posición del elemento relativa al contenedor
+    const elTop = el.offsetTop
+    container.scrollTo({ top: elTop - 12, behavior: 'smooth' })
+  }
+
   useEffect(() => {
     const isNewMsg = messages.length > prevMsgCount.current
     const lastMsg = messages[messages.length - 1]
     prevMsgCount.current = messages.length
-
     if(!isNewMsg) return
 
     setTimeout(() => {
-      if(!lastMsgRef.current) return
-      // Si el último mensaje es del BOT → mostrar el INICIO
       if(lastMsg?.role === 'bot') {
-        lastMsgRef.current.scrollIntoView({ behavior:'smooth', block:'start' })
+        scrollToLastMsg()
       } else {
-        // Si es del USUARIO → ir al fondo para ver el input
+        // Mensaje del usuario → fondo para ver input
         if(msgsRef.current) msgsRef.current.scrollTop = msgsRef.current.scrollHeight
       }
-    }, 120)
+    }, 100)
   }, [messages])
 
-  // Cuando el bot termina de escribir → mostrar inicio de su respuesta
+  // Cuando el bot termina de escribir → inicio de su respuesta
   useEffect(() => {
     if(prevTyping.current && !typing) {
-      setTimeout(() => {
-        if(lastMsgRef.current) {
-          lastMsgRef.current.scrollIntoView({ behavior:'smooth', block:'start' })
-        }
-      }, 100)
+      setTimeout(scrollToLastMsg, 150)
     }
     prevTyping.current = typing
   }, [typing])
@@ -351,9 +354,13 @@ export default function ChatScreen({ go, seed }) {
 
   useEffect(() => {
     setTimeout(() => {
-      addBot('¡Hola! Soy tu asistente digital de seguridad de la **Intendencia de Montevideo**, en conjunto con el **Ministerio del Interior**.\n\nEstoy acá para ayudarte ante cualquier situación de riesgo.\n\nContame qué te pasó.\n\nRecordá que nunca te voy a pedir datos personales y los mensajes no quedan guardados, para tu seguridad.\n\nEstoy aquí solo para guiarte y ayudarte.')
+      addBot('¡Hola! Soy tu asistente de la **Intendencia de Montevideo** y el **Ministerio del Interior**. Contame qué te pasó. Estoy acá para ayudarte ante cualquier estafa. Tus mensajes no quedan guardados y nunca pediré ningún dato personal, este sitio es completamente seguro 🔒')
     }, 300)
     if(seed) setTimeout(() => sendMsg(seed), 900)
+    // Al entrar al chat — siempre mostrar desde el principio
+    setTimeout(() => {
+      if(msgsRef.current) msgsRef.current.scrollTop = 0
+    }, 200)
   }, [])
 
   const handleSend = () => {
