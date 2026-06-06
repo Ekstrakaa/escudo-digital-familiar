@@ -12,7 +12,7 @@ export const STEPS = [
     id: 1,
     cat: 'Cuento del tío',
     icon: '🚪',
-    txt: 'Tocás el timbre. Hay un señor con corbata y credencial del BROU. Dice que tu cuenta tiene un problema grave y necesita tu tarjeta y clave para resolverlo hoy.\n\n¿Qué hacés?',
+    txt: 'Un señor en la puerta con credencial del BROU dice que tu cuenta tiene un problema y necesita tu tarjeta y clave. ¿Qué hacés?',
     opts: [
       'Le doy la tarjeta y la clave — tiene credencial y parece muy serio',
       'Cierro la puerta, llamo YO al BROU al 1722 0001 para verificar',
@@ -28,9 +28,7 @@ export const STEPS = [
   {
     type: 'fact',
     img: '<img src="/imgs/canal4_hombre.png" alt="Noticia Canal 4 - Hombre 90 años estafado" style="width:100%;display:block;object-fit:contain;max-height:200px;" />',
-    txt: '<strong style="color:#ef4444">📺 Caso real Uruguay — Canal 4</strong><br><br>Un hombre de <strong>90 años fue estafado por $46.000</strong> con el cuento del tío. Se hicieron pasar por su nieto y le pidieron que sacara un préstamo del banco.<br><br><strong style="color:#f59e0b">⚠️ Ante cualquier persona en la puerta pidiendo datos o dinero:</strong><br>Cerrá la puerta y llamá al <strong style="color:#10b981">911</strong> o al Ministerio del Interior: <strong style="color:#10b981">0800 5050</strong>',
-    stat: 'Las víctimas del cuento del tío en Uruguay pierden en promedio $40.000 pesos por caso denunciado.',
-    src: 'Canal 4 Uruguay · Telenoche 2025'
+    txt: '<strong style="color:#ef4444">📺 Caso real — Canal 4</strong><br><br>Un hombre de <strong>90 años</strong> perdió <strong>$46.000</strong>. Se hicieron pasar por su nieto.<br><br>🔒 Si alguien en la puerta pide datos o dinero → <strong>cerrá y llamá al 911</strong>',
   },
 
   // ─── PREGUNTA 2: WhatsApp falso nieto ───────────────────
@@ -39,7 +37,7 @@ export const STEPS = [
     id: 2,
     cat: 'Ingeniería social',
     icon: '📱',
-    txt: 'Te llega este WhatsApp de un número desconocido:\n\n"Hola abuela, soy Matías. Perdí el celu. Tuve un accidente, mandame $15.000 por Abitab urgente. No le digas a mamá."\n\n¿Qué hacés?',
+    txt: 'WhatsApp de número desconocido: "Soy Matías, perdí el celu, tuve un accidente. Mandame $15.000 por Abitab urgente. No le digas a mamá." ¿Qué hacés?',
     opts: [
       'Mando los $15.000 de inmediato — suena a que es mi nieto y lo necesita',
       'Le mando $5.000 nomás, por las dudas que sea verdad',
@@ -57,7 +55,7 @@ export const STEPS = [
     id: 3,
     cat: 'Clonación de voz IA',
     icon: '🤖',
-    txt: 'Te llama alguien con la voz exacta de tu hija. Llorando dice:\n\n"Mamá, tuve un accidente. Mandame $10.000 a la cuenta 00123792 ahora, después te explico."\n\n¿Qué hacés?',
+    txt: 'Te llama alguien con la voz de tu hija, llorando: "Tuve un accidente, mandame $10.000 ahora." ¿Qué hacés?',
     opts: [
       'Transfiero de inmediato — reconozco perfectamente su voz, es ella',
       'Le pido más detalles del accidente antes de transferir',
@@ -75,8 +73,6 @@ export const STEPS = [
     type: 'fact',
     img: '<img src="/imgs/telenoche_millon.png" alt="Cuento del tío - un millón de pesos" style="width:100%;display:block;object-fit:contain;max-height:200px;" />',
     txt: '<strong style="color:#ef4444">📺 Caso real — Cuento del tío telefónico</strong><br><br>Se hicieron pasar por policías y lograron que una víctima transfiriera <strong>más de un millón de pesos</strong>. Todo empezó con una llamada al teléfono de línea de su casa.<br><br><strong style="color:#f59e0b">⚠️ Recordá siempre:</strong><br>• La Policía <strong>NUNCA</strong> te va a llamar para pedirte dinero<br>• Ningún funcionario oficial pide transferencias por teléfono<br>• Ante cualquier llamada sospechosa, <strong>colgá y llamá al 911 vos</strong><br><br><div style="margin-top:12px;padding:10px 14px;border-radius:10px;background:rgba(0,229,160,.07);border:1px solid rgba(0,229,160,.2);color:#00e5a0;font-size:.85rem">💬 Si te pasa algo así, consultá en nuestro <strong>chat de Escudo Digital</strong> — te ayudamos a actuar paso a paso ante cualquier situación.</div>',
-    stat: 'En Uruguay los estafadores llaman al teléfono de línea haciéndose pasar por policías o familiares para crear pánico y conseguir transferencias.',
-    src: 'Telenoche · Canal 4 Uruguay 2025'
   },
 
   // ─── PREGUNTA 4: A2F Autenticación de dos factores ──────
@@ -86,7 +82,7 @@ export const STEPS = [
     cat: 'Autenticación',
     icon: '🔐',
     img: '<img src="/imgs/A2F.png" alt="Aplicaciones A2F Google y Microsoft Authenticator" style="width:100%;display:block;object-fit:contain;max-height:200px;" />',
-    txt: '¿Instalarías alguna de estas aplicaciones en tu celular?\n\nSe llaman A2F — son gratuitas y son de Google y Microsoft.',
+    txt: '¿Instalarías alguna de estas apps en tu celular? Se llaman A2F, son de Google y Microsoft.',
     opts: [
       'No — pueden ser cualquier cosa peligrosa o un virus',
       'Sí, claro — es la galería de Google, la uso todos los días',
@@ -104,7 +100,7 @@ export const STEPS = [
     id: 5,
     cat: 'SMS falso (phishing)',
     icon: '📨',
-    txt: 'Te llega este SMS:\n\n"SUCIVE: Tenés una multa vencida. Si no pagás hoy la deuda aumenta. Ingresá acá: asucive.cc/uy/multa"\n\n¿Qué hacés?',
+    txt: 'SMS: "SUCIVE: Multa vencida, si no pagás hoy aumenta. Ingresá acá: asucive.cc/uy/multa" ¿Qué hacés?',
     opts: [
       'Entro rápido al link — no quiero que me aumenten la deuda',
       'Le muestro el SMS a un familiar para que entre él por mí',
@@ -120,9 +116,7 @@ export const STEPS = [
   {
     type: 'fact',
     img: '<img src="/imgs/canal4_mujer.png" alt="Noticia Canal 4 - Mujer estafada por $90.000" style="width:100%;display:block;object-fit:contain;max-height:200px;" />',
-    txt: '<strong style="color:#ef4444">📺 Caso real Uruguay — Canal 4</strong><br><br>Una mujer fue <strong>estafada por casi $90.000</strong> con el cuento del tío. La denuncia policial muestra el monto exacto de lo robado.<br><br><strong style="color:#f59e0b">⚠️ Recordá siempre:</strong> Ningún banco, familiar ni funcionario tiene derecho a pedirte dinero o datos por teléfono, WhatsApp o en la puerta de tu casa.<br><br>Si creés que fuiste víctima llamá al <strong style="color:#10b981">911</strong> o al <strong style="color:#10b981">0800 5050</strong>',
-    stat: 'En Uruguay se denuncian más de 50 casos de cuento del tío por mes — y muchos más no se denuncian.',
-    src: 'Canal 4 Uruguay · Telenoche 2025'
+    txt: '<strong style="color:#ef4444">📺 Caso real — Canal 4</strong><br><br>Una mujer perdió <strong>casi $90.000</strong> con el cuento del tío.<br><br>🔒 Ningún banco ni funcionario pide dinero por teléfono o en la puerta. Si te pasó → <strong>911 o 0800 5050</strong>',
   },
 
   // ─── PREGUNTA 6: Antel virus router ─────────────────────
@@ -131,7 +125,7 @@ export const STEPS = [
     id: 6,
     cat: 'Ingeniería social',
     icon: '📞',
-    txt: 'Te llaman diciendo ser de Antel. Dicen que detectaron un virus en tu router y necesitan acceso a tu Gmail para solucionarlo.\n\n¿Qué hacés?',
+    txt: 'Te llaman de "Antel": detectaron un virus en tu router y necesitan acceso a tu Gmail para solucionarlo. ¿Qué hacés?',
     opts: [
       'Les doy el Gmail — Antel es una empresa del Estado y es de confianza',
       'Les pido que me expliquen mejor qué virus encontraron',
@@ -150,7 +144,7 @@ export const STEPS = [
     cat: 'Robo de datos bancarios',
     icon: '💳',
     img: '<img src="/imgs/brou_ancap.png" alt="Publicidad falsa BROU ANCAP" style="width:100%;display:block;object-fit:contain;max-height:200px;" />',
-    txt: '📱 Te llega un mensaje de WhatsApp con esta imagen:\n\n"¡Beneficio exclusivo para clientes BROU! 35% de descuento en combustible en todas las estaciones ANCAP. Para activarlo hacé clic aquí, asociá tu tarjeta y validá con tu llave digital. ¡Solo hoy!"\n\n¿Qué hacés?',
+    txt: 'Te llega este WhatsApp con la imagen. ¿Qué hacés?',
     opts: [
       'Entro y doy mis datos — es del BROU y ANCAP, parecen logos reales',
       'Le pregunto al banco más detalles antes de dar mis datos',
@@ -166,9 +160,7 @@ export const STEPS = [
   {
     type: 'fact',
     img: '<img src="/imgs/correo_uy.png" alt="Email falso Correo Uruguayo" style="width:100%;display:block;object-fit:contain;max-height:200px;" />',
-    txt: '<strong style="color:#ef4444">⚠️ Phishing — Correo Uruguayo falso</strong><br><br>Los estafadores envían emails copiando el diseño oficial del <strong>Correo Uruguayo</strong> para cobrar un supuesto "gasto de envío" de un paquete pendiente.<br><br><strong style="color:#f59e0b">Cómo reconocer un email falso:</strong><br>• El dominio no termina en <strong>.gub.uy</strong><br>• Te piden datos de tarjeta para pagar<br>• Dice "paquete pendiente" sin que hayas pedido nada<br><br><strong style="color:#10b981">Ante cualquier duda, llamá al Correo: 2916 0010</strong>',
-    stat: 'El phishing por email aumentó un 300% en Uruguay durante 2024-2025 según CERTuy.',
-    src: 'CERTuy · Ministerio del Interior Uruguay 2025'
+    txt: '<strong style="color:#ef4444">⚠️ Email falso — Correo Uruguayo</strong><br><br>Copian el diseño del Correo para cobrar gastos de envío falsos.<br><br>🔒 Si el link no termina en <strong>.gub.uy</strong> → es falso. No ingreses tu tarjeta.',
   },
 
   // ─── PREGUNTA 8: Premio falso Abitab ────────────────────
@@ -177,7 +169,7 @@ export const STEPS = [
     id: 8,
     cat: 'Premio falso',
     icon: '🎁',
-    txt: 'Recibís este email:\n\n"¡Ganaste un viaje a Punta del Este de Abitab! Ingresá tus datos y número de tarjeta. Solo tenés 24 horas."\n\n¿Qué hacés?',
+    txt: 'Email: "¡Ganaste un viaje a Punta del Este de Abitab! Ingresá tu tarjeta. Solo 24 horas." ¿Qué hacés?',
     opts: [
       'Entro rápido al link — ¡un viaje a Punta del Este sería increíble!',
       'Reenvío el email a un familiar para que lo revise por mí',
@@ -195,8 +187,6 @@ export const STEPS = [
     type: 'fact',
     img: '<img src="/imgs/cuento_tio_hombre.png" alt="Hombre estafado USD 18.000" style="width:100%;display:block;object-fit:contain;max-height:200px;" />',
     txt: '<strong style="color:#ef4444">⚠️ Caso real — Cuento del tío: USD 18.000 y $350.000</strong><br><br>Un hombre de 67 años fue engañado por alguien que se hizo pasar por su hijo. Le dijeron que había tenido un accidente grave y necesitaba dinero urgente. Perdió <strong>USD 18.000 y $350.000 pesos</strong>.<br><br><strong style="color:#f59e0b">Antes de mandar cualquier dinero:</strong><br>• Llamá directamente al número guardado de tu familiar<br>• Consultá con otro familiar de confianza lo que está pasando<br>• Llamá al <strong style="color:#00c8ff">911</strong> si sentís presión o amenazas<br><br><div style="margin-top:12px;padding:10px 14px;border-radius:10px;background:rgba(0,229,160,.07);border:1px solid rgba(0,229,160,.2);color:#00e5a0;font-size:.85rem">💬 Ante cualquier situación de urgencia con dinero, usá nuestro <strong>chat de Escudo Digital</strong> — te orientamos antes de que tomes cualquier decisión.</div>',
-    stat: 'La mayoría de las víctimas del cuento del tío dicen que "la voz sonaba exactamente igual". Hoy la IA puede clonar cualquier voz con solo 3 segundos de audio.',
-    src: 'El País Uruguay · 31 de mayo de 2026'
   },
 
   // ─── PREGUNTA 9: DOS hombres con uniforme IM ────────────
@@ -205,7 +195,7 @@ export const STEPS = [
     id: 9,
     cat: 'Persona en la puerta',
     icon: '🚪',
-    txt: 'Tocan el timbre. Hay dos hombres con uniforme de la Intendencia. Dicen que es una inspección obligatoria por humedad y necesitan entrar ahora mismo.\n\n¿Qué hacés?',
+    txt: 'Dos hombres con uniforme de la Intendencia en la puerta: "Inspección obligatoria, necesitamos entrar ahora." ¿Qué hacés?',
     opts: [
       'Los dejo pasar — tienen uniforme y dicen que es obligatorio',
       'Les pido el número de expediente y llamo a la Intendencia al 1950 0911 para verificar',
@@ -223,7 +213,7 @@ export const STEPS = [
     id: 10,
     cat: 'Cuento del tío',
     icon: '🏦',
-    txt: 'Un hombre con traje dice ser del Banco República. Dice que detectaron un movimiento sospechoso y necesita tu llave digital y CVV para proteger tu cuenta.\n\n¿Qué hacés?',
+    txt: 'Hombre con traje del Banco República en la puerta: "Movimiento sospechoso en tu cuenta, necesito tu llave digital y CVV." ¿Qué hacés?',
     opts: [
       'Le doy la llave digital y el CVV — quiero proteger mis ahorros',
       'Le doy solo el CVV y guardo la llave digital para mí',
@@ -239,9 +229,7 @@ export const STEPS = [
   {
     type: 'fact',
     img: '<img src="/imgs/manosdigital.png" alt="Curso inclusión digital personas mayores" style="width:100%;display:block;object-fit:contain;max-height:200px;" />',
-    txt: `<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><img src="/imgs/logo_im.png" alt="Intendencia Montevideo" style="height:32px;object-fit:contain" /><strong style="color:#10b981;font-size:1.05rem">Intendencia de Montevideo</strong></div><strong style="color:#10b981">🏛️ ¿Sabías que la IM tiene talleres GRATIS?</strong><br><br>La <strong>Intendencia de Montevideo</strong> tiene un Programa de Inclusión Digital especial para personas mayores donde podés aprender a usar el celular de forma segura, reconocer estafas y navegar internet con confianza.<br><br><strong style="color:#f59e0b">Son gratuitos, en tu barrio, y para todas las edades.</strong><br><br>Inscribite o consultá: <strong style="color:#10b981">montevideo.gub.uy/personas-mayores</strong><br>O llamá al <strong style="color:#8b7cf8">1950 5555</strong> (IM Adultos Mayores)<br><br><div style="margin-top:14px;padding:12px 14px;border-radius:12px;background:rgba(0,200,255,.07);border:1px solid rgba(0,200,255,.2)"><strong style="color:#00c8ff">🕵️ ¿Fuiste víctima de una estafa digital?</strong><br><br>Llamá al <strong style="color:#00c8ff;font-size:1.1rem">2030 4625</strong><br><span style="color:#8fa8cc;font-size:.85rem">Dirección General de Cibercrimen<br>Ministerio del Interior — Uruguay<br>Comisario Gral. Paulo Danilo Rocha Martínez</span></div>`,
-    stat: 'Más de 2.000 personas mayores participaron en talleres de inclusión digital de la IM en 2024.',
-    src: 'Intendencia de Montevideo · Programa de Inclusión Digital 2025'
+    txt: '<strong style="color:#10b981">🏛️ Talleres digitales GRATIS — IM</strong><br><br>La Intendencia de Montevideo tiene talleres para personas mayores: aprendé a usar el celular y reconocer estafas.<br><br>📞 <strong style="color:#8b7cf8">1950 5555</strong> · Estafas digitales: <strong style="color:#00c8ff">2030 4625</strong>',
   }
 
 ]
