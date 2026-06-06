@@ -427,7 +427,7 @@ export default function ChatScreen({ go, seed }) {
                   initial={{ opacity:0, y:8 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0, y:-8 }}
                   transition={{ duration:.4 }}
                   className="text-center px-8">
-                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'1.15rem', fontWeight:700, color:'#00E5A0', marginBottom:6 }}>
+                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'1.15rem', fontWeight:700, color:'#f0f6ff', marginBottom:6 }}>
                     ¡Estás en un lugar seguro!
                   </div>
                   <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.65rem', color:'#00E5A0', letterSpacing:'.1em' }}>
