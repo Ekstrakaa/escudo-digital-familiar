@@ -134,7 +134,7 @@ function BotBubble({ text, isTyping }) {
     .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
     .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
   return (
-    <div className="flex items-end gap-2 max-w-[88%] self-start">
+    <div className="flex items-end gap-2 w-full self-start">
       <RobotAvatar typing={false} />
       <div>
         {/* Burbuja estilo WhatsApp */}
@@ -167,7 +167,7 @@ function BotBubble({ text, isTyping }) {
 
 function UserBubble({ text }) {
   return (
-    <div className="max-w-[85%] self-end">
+    <div className="w-[92%] self-end">
       <div className="relative">
         {/* Triángulo esquina derecha */}
         <div style={{
@@ -201,7 +201,7 @@ function UserBubble({ text }) {
 
 function TypingIndicator() {
   return (
-    <div className="flex items-end gap-2 max-w-[90%] self-start">
+    <div className="flex items-end gap-2 w-full self-start">
       <RobotAvatar typing={true} />
       <div className="rounded-2xl rounded-bl-[4px] px-5 py-4"
         style={{ background: 'linear-gradient(135deg, #0d2137, #0f2d4a)', border: '1px solid rgba(0,200,255,.2)' }}>
@@ -254,9 +254,12 @@ export default function ChatScreen({ go, seed }) {
     scrollDown()
   }
 
-  // Scroll automático cada vez que llega un mensaje nuevo
+  // Scroll automático — va al último mensaje visible
+  const lastMsgRef = useRef(null)
   useEffect(() => {
-    if(msgsRef.current) {
+    if(lastMsgRef.current) {
+      lastMsgRef.current.scrollIntoView({ behavior:'smooth', block:'start' })
+    } else if(msgsRef.current) {
       msgsRef.current.scrollTop = msgsRef.current.scrollHeight
     }
   }, [messages, typing])
@@ -371,7 +374,7 @@ export default function ChatScreen({ go, seed }) {
 
         <AnimatePresence>
           {messages.map((m, i) => (
-            <motion.div key={i} initial={{ opacity:0, y:10 }} animate={{ opacity:1, y:0 }} transition={{ duration:.25 }}>
+            <motion.div key={i} ref={i === messages.length - 1 ? lastMsgRef : null} initial={{ opacity:0, y:10 }} animate={{ opacity:1, y:0 }} transition={{ duration:.25 }}>
               {m.role === 'bot' ? <BotBubble text={m.text} /> : <UserBubble text={m.text} />}
             </motion.div>
           ))}
