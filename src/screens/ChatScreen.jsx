@@ -134,14 +134,32 @@ function BotBubble({ text, isTyping }) {
     .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
     .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
   return (
-    <div className="flex items-end gap-2 max-w-[90%] self-start">
+    <div className="flex items-end gap-2 max-w-[88%] self-start">
       <RobotAvatar typing={false} />
       <div>
-        <div className="rounded-2xl rounded-bl-[4px] px-4 py-3 text-[.95rem] leading-relaxed text-white whitespace-pre-wrap"
-          style={{ background: 'linear-gradient(135deg, #0d2137, #0f2d4a)', border: '1px solid rgba(0,200,255,.2)', boxShadow: '0 4px 20px rgba(0,0,0,.3)' }}
-          dangerouslySetInnerHTML={{ __html: fmt }}
-        />
-        <div className="text-[.6rem] text-slate-500 mt-1 pl-1">Asistente · {now()}</div>
+        {/* Burbuja estilo WhatsApp */}
+        <div className="relative">
+          {/* Triángulo esquina izquierda */}
+          <div style={{
+            position:'absolute', left:-7, bottom:8,
+            width:0, height:0,
+            borderTop:'8px solid transparent',
+            borderRight:'8px solid #1e2d3d',
+            borderBottom:'0 solid transparent',
+          }} />
+          <div
+            className="rounded-2xl rounded-bl-[4px] px-4 py-3 text-[.95rem] leading-relaxed text-white"
+            style={{
+              background:'#1e2d3d',
+              boxShadow:'0 1px 4px rgba(0,0,0,.4)',
+              maxWidth:'100%',
+            }}
+            dangerouslySetInnerHTML={{ __html: fmt }}
+          />
+        </div>
+        <div className="text-[.6rem] text-slate-500 mt-1 pl-1 flex items-center gap-1">
+          Asistente · {now()}
+        </div>
       </div>
     </div>
   )
@@ -150,19 +168,33 @@ function BotBubble({ text, isTyping }) {
 function UserBubble({ text }) {
   return (
     <div className="max-w-[85%] self-end">
-      <motion.div
-        className="rounded-2xl rounded-br-[4px] px-4 py-3 text-[.95rem] leading-relaxed font-medium text-black relative overflow-hidden"
-        style={{ boxShadow: '0 4px 20px rgba(0,229,160,.3)' }}
-      >
-        <motion.div
-          className="absolute inset-0"
-          animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
-          transition={{ duration:4, repeat:Infinity, ease:'easeInOut' }}
-          style={{ background:'linear-gradient(135deg, #059669 0%, #00E5A0 50%, #34d399 100%)', backgroundSize:'200% 200%' }}
-        />
-        <span className="relative z-10">{text}</span>
-      </motion.div>
-      <div className="text-[.6rem] text-slate-500 mt-1 text-right pr-1">{now()}</div>
+      <div className="relative">
+        {/* Triángulo esquina derecha */}
+        <div style={{
+          position:'absolute', right:-7, bottom:8,
+          width:0, height:0,
+          borderTop:'8px solid transparent',
+          borderLeft:'8px solid #00b377',
+          borderBottom:'0 solid transparent',
+        }} />
+        <div
+          className="rounded-2xl rounded-br-[4px] px-4 py-3 text-[.95rem] leading-relaxed font-medium text-black"
+          style={{
+            background:'linear-gradient(135deg, #059669, #00E5A0)',
+            boxShadow:'0 1px 4px rgba(0,0,0,.3)',
+          }}
+        >
+          {text}
+        </div>
+      </div>
+      <div className="text-[.6rem] text-slate-500 mt-1 text-right pr-1 flex items-center justify-end gap-1">
+        {now()}
+        {/* Ticks de lectura estilo WhatsApp */}
+        <svg width="16" height="10" viewBox="0 0 16 10" fill="none">
+          <path d="M1 5l3 3 5-7" stroke="#00E5A0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M6 5l3 3 5-7" stroke="#00E5A0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </div>
     </div>
   )
 }
