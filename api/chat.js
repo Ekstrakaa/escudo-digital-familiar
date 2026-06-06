@@ -83,7 +83,7 @@ Denuncias: denuncias.minterior.gub.uy
 FRASES CALIDAS:
 Hiciste muy bien en escribirnos.
 Estas en el lugar correcto.
-No estas solo/a en esto.
+No estas solo/a in esto.
 Tranquilo/a, estamos aca para ayudarte.`;
 
 export default async function handler(req, res) {
@@ -96,11 +96,21 @@ export default async function handler(req, res) {
     return res.status(200).json({ reply: null, error: 'no_key' })
   }
 
+  // Se asegura de leer bien los datos si vienen stringificados
+  let body = req.body
+  if (typeof body === 'string') {
+    try {
+      body = JSON.parse(body)
+    } catch {
+      return res.status(400).json({ error: 'bad_request_json' })
+    }
+  }
+
   let userMessage = ''
   let history = []
   try {
-    userMessage = (req.body.message || '').toString().slice(0, 2000)
-    history = Array.isArray(req.body.history) ? req.body.history.slice(-10) : []
+    userMessage = (body.message || '').toString().slice(0, 2000)
+    history = Array.isArray(body.history) ? body.history.slice(-10) : []
   } catch {
     return res.status(400).json({ error: 'bad_request' })
   }
@@ -126,7 +136,7 @@ export default async function handler(req, res) {
         'Authorization': `Bearer ${API_KEY}`,
       },
       body: JSON.stringify({
-        model: 'llama-3.3-70b-specdec', //
+        model: 'llama3-70b-8192', // Modelo estable y recomendado por Groq
         messages,
         temperature: 0.75,
         max_tokens: 700,
@@ -136,7 +146,6 @@ export default async function handler(req, res) {
     const data = await resp.json()
 
     if (!resp.ok) {
-      // Devolvemos el error real para que puedas debugear en la consola de tu frontend
       return res.status(200).json({ reply: null, error: 'api_error', details: data?.error?.message || 'Unknown API error' })
     }
 
