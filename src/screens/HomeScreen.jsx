@@ -172,31 +172,69 @@ export default function HomeScreen({ go }) {
           Tu herramienta de orientación ante estafas digitales, disponible 24/7.
         </motion.p>
 
-        {/* Botón ROJO */}
-        <motion.button initial={{ opacity:0, y:10 }} animate={{ opacity:1, y:0 }}
-          transition={{ delay:.24 }} whileTap={{ scale:.97 }}
-          onClick={() => go.chat(null)}
-          className="w-full flex items-center justify-between px-6 rounded-2xl mb-3"
-          style={{ maxWidth:480, height:62, background:'linear-gradient(135deg,#c0392b,#e74c3c)', boxShadow:'0 4px 24px rgba(220,60,50,.4)', border:'none', cursor:'pointer' }}>
-          <div className="flex items-center gap-3">
-            <div style={{ width:11, height:11, borderRadius:'50%', background:'#ff6b6b', flexShrink:0 }} />
-            <span style={{ fontFamily:"'Outfit',sans-serif", fontSize:'1.08rem', fontWeight:700, color:'#fff' }}>Necesito ayuda ahora</span>
-          </div>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </motion.button>
+        {/* Botón ROJO — Necesito ayuda */}
+        <div className="relative w-full mb-3" style={{ maxWidth:480 }}>
+          {/* Glow pulsante */}
+          <motion.div className="absolute inset-0 rounded-2xl pointer-events-none"
+            animate={{ boxShadow: ['0 0 18px 4px rgba(239,68,68,.3)', '0 0 36px 10px rgba(239,68,68,.55)', '0 0 18px 4px rgba(239,68,68,.3)'] }}
+            transition={{ duration:2, repeat:Infinity, ease:'easeInOut' }}
+          />
+          <motion.button
+            initial={{ opacity:0, y:10 }} animate={{ opacity:1, y:0 }}
+            transition={{ delay:.24 }} whileTap={{ scale:.97 }}
+            onClick={() => go.chat(null)}
+            className="relative w-full overflow-hidden rounded-2xl"
+            style={{ height:68, border:'none', cursor:'pointer',
+              background:'linear-gradient(135deg, #b91c1c 0%, #ef4444 100%)',
+            }}>
+            <div className="absolute inset-0 pointer-events-none"
+              style={{ background:'linear-gradient(180deg, rgba(255,255,255,.15) 0%, transparent 55%)' }} />
+            <div className="relative flex items-center justify-between px-6 h-full">
+              <div className="flex items-center gap-4">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" strokeWidth="1.8" strokeLinecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16l.19.92z"/></svg>
+                <div className="text-left">
+                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'1.08rem', fontWeight:800, color:'#fff', lineHeight:1.2 }}>Necesito ayuda ahora</div>
+                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.7rem', color:'rgba(255,255,255,.65)', marginTop:1 }}>Hablá con nuestro asistente</div>
+                </div>
+              </div>
+              <motion.div animate={{ x:[0,4,0] }} transition={{ duration:1.5, repeat:Infinity, ease:'easeInOut' }}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.8)" strokeWidth="2.2" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </motion.div>
+            </div>
+          </motion.button>
+        </div>
 
-        {/* Botón VERDE */}
-        <motion.button initial={{ opacity:0, y:10 }} animate={{ opacity:1, y:0 }}
-          transition={{ delay:.3 }} whileTap={{ scale:.97 }}
-          onClick={() => go.quiz()}
-          className="w-full flex items-center justify-between px-6 rounded-2xl mb-7"
-          style={{ maxWidth:480, height:62, background:'linear-gradient(135deg,#00b377,#00E5A0)', boxShadow:'0 4px 24px rgba(0,229,160,.28)', border:'none', cursor:'pointer' }}>
-          <div className="flex items-center gap-3">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2.2" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            <span style={{ fontFamily:"'Outfit',sans-serif", fontSize:'1.08rem', fontWeight:700, color:'#000' }}>Test de Blindaje</span>
-          </div>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </motion.button>
+        {/* Botón VERDE — Test de Blindaje */}
+        <div className="relative w-full mb-7" style={{ maxWidth:480 }}>
+          {/* Glow pulsante */}
+          <motion.div className="absolute inset-0 rounded-2xl pointer-events-none"
+            animate={{ boxShadow: ['0 0 18px 4px rgba(0,229,160,.25)', '0 0 36px 10px rgba(0,229,160,.45)', '0 0 18px 4px rgba(0,229,160,.25)'] }}
+            transition={{ duration:2.2, repeat:Infinity, ease:'easeInOut', delay:.4 }}
+          />
+          <motion.button
+            initial={{ opacity:0, y:10 }} animate={{ opacity:1, y:0 }}
+            transition={{ delay:.3 }} whileTap={{ scale:.97 }}
+            onClick={() => go.quiz()}
+            className="relative w-full overflow-hidden rounded-2xl"
+            style={{ height:68, border:'none', cursor:'pointer',
+              background:'linear-gradient(135deg, #059669 0%, #00E5A0 100%)',
+            }}>
+            <div className="absolute inset-0 pointer-events-none"
+              style={{ background:'linear-gradient(180deg, rgba(255,255,255,.18) 0%, transparent 55%)' }} />
+            <div className="relative flex items-center justify-between px-6 h-full">
+              <div className="flex items-center gap-4">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,.7)" strokeWidth="1.8" strokeLinecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <div className="text-left">
+                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'1.08rem', fontWeight:800, color:'#000', lineHeight:1.2 }}>Test de Blindaje</div>
+                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.7rem', color:'rgba(0,0,0,.5)', marginTop:1 }}>¿Qué tan protegido estás?</div>
+                </div>
+              </div>
+              <motion.div animate={{ x:[0,4,0] }} transition={{ duration:1.5, repeat:Infinity, ease:'easeInOut', delay:.3 }}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,.6)" strokeWidth="2.2" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </motion.div>
+            </div>
+          </motion.button>
+        </div>
 
         {/* Label */}
         <motion.div initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:.36 }}
