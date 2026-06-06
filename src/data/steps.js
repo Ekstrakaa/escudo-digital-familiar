@@ -28,7 +28,7 @@ export const STEPS = [
   {
     type: 'fact',
     img: '<img src="/imgs/canal4_hombre.png" alt="Noticia Canal 4 - Hombre 90 años estafado" style="width:100%;display:block;object-fit:cover;max-height:200px;border-radius:10px;" />',
-    txt: '<strong style="color:#ef4444">📺 Caso real — Canal 4</strong><br><br>Un hombre de <strong>90 años</strong> perdió <strong>$46.000</strong>. Se hicieron pasar por su nieto.<br><br>🔒 Si alguien en la puerta pide datos o dinero → <strong>cerrá y llamá al 911</strong>',
+    txt: '<div style="font-size:1.05rem;font-weight:800;color:#ef4444;margin-bottom:10px;letter-spacing:.01em">📺 CASO REAL — CANAL 4</div><div style="font-size:.9rem;line-height:1.6;color:#f0f6ff;margin-bottom:10px">Un hombre de <strong>90 años</strong> fue estafado con el <strong>cuento del tío</strong>. Se hicieron pasar por su nieto, le inventaron un accidente y le pidieron un préstamo urgente. El hombre entregó su tarjeta y datos personales perdiendo <strong style="color:#ef4444">$46.000 pesos</strong>.</div><div style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);border-radius:10px;padding:10px 12px;font-size:.85rem;line-height:1.55;color:#f0f6ff">🔒 Si alguien en la puerta pide datos o dinero → <strong>cerrá y llamá al 911</strong><br><br>💬 <strong style="color:#00e5a0">Consultá en nuestra web</strong> — te ayudamos enseguida ante cualquier situación.</div>',
   },
 
   // ─── PREGUNTA 2: WhatsApp falso nieto ───────────────────
