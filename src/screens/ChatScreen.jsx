@@ -71,37 +71,71 @@ const EMERGENCY_NUMBERS = [
 
 function RobotAvatar({ typing }) {
   return (
-    <div className="flex-shrink-0 w-9 h-9 relative">
+    <div className="flex-shrink-0 relative" style={{ width:46, height:46 }}>
+      {/* Glow exterior */}
       <motion.div
-        animate={typing ? { scale: [1, 1.08, 1] } : { scale: 1 }}
-        transition={{ repeat: typing ? Infinity : 0, duration: 0.8 }}
-        className="w-9 h-9 rounded-full flex items-center justify-center"
-        style={{ background: 'linear-gradient(135deg, #0f3460, #16213e)', border: '2px solid rgba(0,200,255,.35)' }}
+        className="absolute rounded-full pointer-events-none"
+        style={{ inset:-3 }}
+        animate={{ boxShadow: typing
+          ? ['0 0 10px 3px rgba(0,200,255,.4)', '0 0 20px 6px rgba(0,200,255,.7)', '0 0 10px 3px rgba(0,200,255,.4)']
+          : ['0 0 6px 2px rgba(0,200,255,.2)', '0 0 10px 3px rgba(0,200,255,.35)', '0 0 6px 2px rgba(0,200,255,.2)']
+        }}
+        transition={{ duration: typing ? 0.7 : 2.5, repeat:Infinity, ease:'easeInOut' }}
+      />
+      {/* Cuerpo del robot */}
+      <motion.div
+        animate={typing ? { y:[0,-2,0] } : { y:0 }}
+        transition={{ repeat: typing ? Infinity : 0, duration:0.8, ease:'easeInOut' }}
+        style={{ width:46, height:46 }}
       >
-        <svg width="20" height="20" viewBox="0 0 40 40" fill="none">
-          {/* Head */}
-          <rect x="8" y="10" width="24" height="20" rx="6" fill="#1e3a5f" stroke="#00c8ff" strokeWidth="1.5"/>
-          {/* Eyes */}
-          <motion.circle
-            animate={typing ? { opacity: [1, 0.3, 1] } : { opacity: 1 }}
-            transition={{ repeat: typing ? Infinity : 0, duration: 0.6, delay: 0 }}
-            cx="15" cy="19" r="3" fill="#00c8ff"
+        <svg width="46" height="46" viewBox="0 0 46 46" fill="none">
+          {/* Fondo circular */}
+          <circle cx="23" cy="23" r="22" fill="#0a1628" stroke="rgba(0,200,255,.5)" strokeWidth="1.5"/>
+
+          {/* Cabeza */}
+          <rect x="12" y="11" width="22" height="17" rx="5" fill="#0f2040" stroke="#00c8ff" strokeWidth="1.2"/>
+
+          {/* Ojos */}
+          <motion.ellipse
+            animate={typing ? { scaleY:[1,.2,1] } : { scaleY:1 }}
+            transition={{ repeat: typing ? Infinity : 0, duration:.8, delay:0 }}
+            cx="18" cy="20" rx="2.8" ry="2.8" fill="#00e5ff"
+            style={{ filter:'drop-shadow(0 0 3px #00e5ff)' }}
           />
-          <motion.circle
-            animate={typing ? { opacity: [1, 0.3, 1] } : { opacity: 1 }}
-            transition={{ repeat: typing ? Infinity : 0, duration: 0.6, delay: 0.3 }}
-            cx="25" cy="19" r="3" fill="#00c8ff"
+          <motion.ellipse
+            animate={typing ? { scaleY:[1,.2,1] } : { scaleY:1 }}
+            transition={{ repeat: typing ? Infinity : 0, duration:.8, delay:.15 }}
+            cx="28" cy="20" rx="2.8" ry="2.8" fill="#00e5ff"
+            style={{ filter:'drop-shadow(0 0 3px #00e5ff)' }}
           />
-          {/* Mouth */}
-          <path d="M15 25 Q20 28 25 25" stroke="#10b981" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
-          {/* Antenna */}
-          <line x1="20" y1="10" x2="20" y2="6" stroke="#00c8ff" strokeWidth="1.5"/>
-          <circle cx="20" cy="5" r="2" fill="#f59e0b"/>
-          {/* Ears */}
-          <rect x="4" y="17" width="4" height="6" rx="2" fill="#1e3a5f" stroke="#00c8ff" strokeWidth="1"/>
-          <rect x="32" y="17" width="4" height="6" rx="2" fill="#1e3a5f" stroke="#00c8ff" strokeWidth="1"/>
+
+          {/* Boca — sonrisa cuando no escribe, puntos cuando escribe */}
+          {!typing && (
+            <path d="M18 26 Q23 29.5 28 26" stroke="#00E5A0" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+          )}
+          {typing && (<>
+            <motion.circle animate={{ opacity:[1,.2,1] }} transition={{ duration:.5, repeat:Infinity, delay:0 }} cx="19" cy="27" r="1.5" fill="#00E5A0"/>
+            <motion.circle animate={{ opacity:[1,.2,1] }} transition={{ duration:.5, repeat:Infinity, delay:.15 }} cx="23" cy="27" r="1.5" fill="#00E5A0"/>
+            <motion.circle animate={{ opacity:[1,.2,1] }} transition={{ duration:.5, repeat:Infinity, delay:.3 }} cx="27" cy="27" r="1.5" fill="#00E5A0"/>
+          </>)}
+
+          {/* Antena */}
+          <line x1="23" y1="11" x2="23" y2="7" stroke="#00c8ff" strokeWidth="1.2"/>
+          <motion.circle
+            animate={{ fill:['#f59e0b','#00c8ff','#00E5A0','#f59e0b'] }}
+            transition={{ duration:2, repeat:Infinity, ease:'easeInOut' }}
+            cx="23" cy="6" r="2.2"
+          />
+
+          {/* Cuerpo */}
+          <rect x="15" y="29" width="16" height="9" rx="4" fill="#0f2040" stroke="rgba(0,200,255,.4)" strokeWidth="1"/>
+          <circle cx="19" cy="33" r="2" fill="rgba(0,200,255,.3)" stroke="#00c8ff" strokeWidth=".8"/>
+          <circle cx="27" cy="33" r="2" fill="rgba(0,229,160,.3)" stroke="#00E5A0" strokeWidth=".8"/>
         </svg>
       </motion.div>
+
+      {/* Punto online */}
+      <div style={{ position:'absolute', bottom:1, right:1, width:9, height:9, borderRadius:'50%', background:'#00e5a0', border:'2px solid #050d1a' }} />
     </div>
   )
 }
