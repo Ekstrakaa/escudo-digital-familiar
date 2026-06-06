@@ -126,16 +126,7 @@ export default function HomeScreen({ go }) {
       <div className="relative z-10 flex flex-col items-center px-4"
         style={{ paddingTop: `calc(env(safe-area-inset-top, 0px) + 36px)`, paddingBottom: 40 }}>
 
-        {/* Badge */}
-        <motion.div initial={{ opacity:0, y:-10 }} animate={{ opacity:1, y:0 }} transition={{ delay:.1 }}
-          className="flex items-center gap-2 px-4 py-[7px] rounded-full mb-6"
-          style={{ background:'rgba(139,124,248,.1)', border:'1px solid rgba(139,124,248,.25)' }}>
-          <motion.div animate={{ opacity:[1,.3,1] }} transition={{ duration:2, repeat:Infinity }}
-            style={{ width:7, height:7, borderRadius:'50%', background:'#00e5a0', flexShrink:0 }} />
-          <span style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.72rem', fontWeight:600, color:'#00e5a0', letterSpacing:'.04em' }}>
-            Programa de Inclusión Digital · IM
-          </span>
-        </motion.div>
+
 
         {/* Logo */}
         <motion.div initial={{ opacity:0, scale:.8 }} animate={{ opacity:1, scale:1 }}
@@ -179,7 +170,7 @@ export default function HomeScreen({ go }) {
 
         {/* Subtítulo */}
         <motion.p initial={{ opacity:0, y:-8 }} animate={{ opacity:1, y:0 }} transition={{ delay:.28, duration:.4 }}
-          style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.9rem', color:'#8fa8cc', textAlign:'center', maxWidth:280, lineHeight:1.55, marginBottom:20 }}>
+          style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.9rem', color:'#c8d8ee', textAlign:'center', maxWidth:340, lineHeight:1.55, marginBottom:20 }}>
           Tu herramienta de orientación ante estafas digitales y el cuento del tío, disponible 24/7.
         </motion.p>
 
@@ -192,23 +183,27 @@ export default function HomeScreen({ go }) {
             onClick={() => go.quiz()}
             className="relative w-full overflow-hidden rounded-2xl"
             style={{ height:68, border:'none', cursor:'pointer',
-              background:'linear-gradient(135deg, #059669 0%, #00E5A0 100%)', boxShadow:'0 4px 20px rgba(16,185,129,.3)',
+              background:'#059669', boxShadow:'0 4px 20px rgba(16,185,129,.3)', overflow:'hidden',
             }}>
+            {/* Gradiente líquido animado */}
+            <motion.div className="absolute pointer-events-none"
+              animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
+              transition={{ duration:4, repeat:Infinity, ease:'easeInOut' }}
+              style={{
+                inset:0,
+                background:'linear-gradient(135deg, #059669 0%, #00E5A0 40%, #34d399 70%, #059669 100%)',
+                backgroundSize:'200% 200%',
+              }}
+            />
             {/* Brillo superior */}
             <div className="absolute inset-0 pointer-events-none"
               style={{ background:'linear-gradient(180deg, rgba(255,255,255,.18) 0%, transparent 55%)' }} />
-            {/* Shimmer — luz sutil que barre */}
-            <motion.div className="absolute inset-0 pointer-events-none"
-              animate={{ x:['-100%', '200%'] }}
-              transition={{ duration:3.5, repeat:Infinity, ease:'easeInOut', repeatDelay:2.5 }}
-              style={{ background:'linear-gradient(90deg, transparent 0%, rgba(255,255,255,.14) 50%, transparent 100%)', width:'50%' }}
-            />
             <div className="relative flex items-center justify-between px-6 h-full">
               <div className="flex items-center gap-4">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,.7)" strokeWidth="1.8" strokeLinecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                 <div className="text-left">
-                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'1.08rem', fontWeight:800, color:'#000', lineHeight:1.2 }}>Test de Blindaje</div>
-                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.7rem', color:'rgba(0,0,0,.5)', marginTop:1 }}>¿Qué tan protegido estás?</div>
+                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'1.15rem', fontWeight:900, color:'#000', lineHeight:1.2 }}>Test de Blindaje</div>
+                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.78rem', fontWeight:600, color:'rgba(0,0,0,.65)', marginTop:2 }}>¿Qué tan protegido estás?</div>
                 </div>
               </div>
               <motion.div animate={{ x:[0,4,0] }} transition={{ duration:1.5, repeat:Infinity, ease:'easeInOut', delay:.3 }}>
@@ -227,23 +222,27 @@ export default function HomeScreen({ go }) {
             onClick={() => go.chat(null)}
             className="relative w-full overflow-hidden rounded-2xl"
             style={{ height:68, border:'none', cursor:'pointer',
-              background:'linear-gradient(135deg, #b91c1c 0%, #ef4444 100%)', boxShadow:'0 4px 20px rgba(220,38,38,.35)',
+              background:'#b91c1c', boxShadow:'0 4px 20px rgba(220,38,38,.35)', overflow:'hidden',
             }}>
+            {/* Gradiente líquido animado */}
+            <motion.div className="absolute pointer-events-none"
+              animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
+              transition={{ duration:4, repeat:Infinity, ease:'easeInOut', delay:.8 }}
+              style={{
+                inset:0,
+                background:'linear-gradient(135deg, #b91c1c 0%, #ef4444 40%, #f87171 70%, #b91c1c 100%)',
+                backgroundSize:'200% 200%',
+              }}
+            />
             {/* Brillo superior */}
             <div className="absolute inset-0 pointer-events-none"
               style={{ background:'linear-gradient(180deg, rgba(255,255,255,.15) 0%, transparent 55%)' }} />
-            {/* Shimmer — luz sutil que barre */}
-            <motion.div className="absolute inset-0 pointer-events-none"
-              animate={{ x:['-100%', '200%'] }}
-              transition={{ duration:3.5, repeat:Infinity, ease:'easeInOut', repeatDelay:2 }}
-              style={{ background:'linear-gradient(90deg, transparent 0%, rgba(255,255,255,.12) 50%, transparent 100%)', width:'50%' }}
-            />
             <div className="relative flex items-center justify-between px-6 h-full">
               <div className="flex items-center gap-4">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" strokeWidth="1.8" strokeLinecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16l.19.92z"/></svg>
                 <div className="text-left">
-                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'1.08rem', fontWeight:800, color:'#fff', lineHeight:1.2 }}>Necesito ayuda ahora</div>
-                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.7rem', color:'rgba(255,255,255,.65)', marginTop:1 }}>Hablá con nuestro asistente</div>
+                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'1.15rem', fontWeight:900, color:'#fff', lineHeight:1.2 }}>Necesito ayuda ahora</div>
+                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.78rem', fontWeight:600, color:'rgba(255,255,255,.8)', marginTop:2 }}>Hablá con nuestro asistente</div>
                 </div>
               </div>
               <motion.div animate={{ x:[0,4,0] }} transition={{ duration:1.5, repeat:Infinity, ease:'easeInOut' }}>
