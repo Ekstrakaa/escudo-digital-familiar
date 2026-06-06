@@ -130,34 +130,47 @@ function RobotAvatar({ typing }) {
 
 
 function BotBubble({ text, isTyping }) {
+  // Formatear texto — párrafos, negritas, pasos numerados
   const fmt = text
     .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-    .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
+    // Negritas en verde
+    .replace(/\*\*(.*?)\*\*/g,'<strong style="color:#00E5A0;font-size:1rem">$1</strong>')
+    // Párrafos doble salto
+    .replace(/\n\n/g,'</p><p style="margin:10px 0 0 0">')
+    // Pasos numerados — cada uno destacado
+    .replace(/\n(\d+)\.\s/g, '</p><p style="margin:10px 0 0 0"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#00E5A0;color:#000;font-weight:800;font-size:.78rem;margin-right:8px;flex-shrink:0">$1</span>')
+    // Salto simple
+    .replace(/\n/g,'<br/>')
+    // Emoji 💡 en su propia línea destacada
+    .replace(/💡/g,'<br/><span style="color:#f59e0b;font-size:.9rem">💡</span>')
+
   return (
-    <div className="flex items-end gap-2 w-full self-start">
-      <RobotAvatar typing={false} />
-      <div>
-        {/* Burbuja estilo WhatsApp */}
+    <div className="flex items-start gap-3 w-full self-start">
+      <div className="flex-shrink-0 mt-1"><RobotAvatar typing={false} /></div>
+      <div className="flex-1 min-w-0">
+        {/* Burbuja */}
         <div className="relative">
-          {/* Triángulo esquina izquierda */}
           <div style={{
-            position:'absolute', left:-7, bottom:8,
+            position:'absolute', left:-7, top:14,
             width:0, height:0,
-            borderTop:'8px solid transparent',
-            borderRight:'8px solid #1e2d3d',
-            borderBottom:'0 solid transparent',
+            borderTop:'7px solid transparent',
+            borderRight:'8px solid #1a2a3a',
+            borderBottom:'7px solid transparent',
           }} />
           <div
-            className="rounded-2xl rounded-bl-[4px] px-4 py-3 text-[.95rem] leading-relaxed text-white"
+            className="rounded-2xl rounded-tl-[4px] px-4 py-4 text-white"
             style={{
-              background:'#1e2d3d',
-              boxShadow:'0 1px 4px rgba(0,0,0,.4)',
-              maxWidth:'100%',
+              background:'#1a2a3a',
+              boxShadow:'0 2px 8px rgba(0,0,0,.3)',
+              fontSize:'.97rem',
+              lineHeight:'1.8',
+              wordBreak:'break-word',
+              fontFamily:"'Outfit',sans-serif",
             }}
-            dangerouslySetInnerHTML={{ __html: fmt }}
+            dangerouslySetInnerHTML={{ __html: '<p style="margin:0">' + fmt + '</p>' }}
           />
         </div>
-        <div className="text-[.6rem] text-slate-500 mt-1 pl-1 flex items-center gap-1">
+        <div className="text-[.6rem] text-slate-500 mt-1 pl-1">
           Asistente · {now()}
         </div>
       </div>
@@ -226,6 +239,13 @@ export default function ChatScreen({ go, seed }) {
   const [typing, setTyping]     = useState(false)
   const [input, setInput]       = useState('')
   const [btnOff, setBtnOff]     = useState(false)
+  const [connStatus, setConnStatus] = useState('connecting') // 'connecting' | 'establishing' | 'online'
+
+  useEffect(() => {
+    const t1 = setTimeout(() => setConnStatus('establishing'), 1000)
+    const t2 = setTimeout(() => setConnStatus('online'), 2200)
+    return () => { clearTimeout(t1); clearTimeout(t2) }
+  }, [])
   const msgsRef = useRef(null)
   const taRef   = useRef(null)
   const historyRef = useRef([])
@@ -254,15 +274,35 @@ export default function ChatScreen({ go, seed }) {
     scrollDown()
   }
 
-  // Scroll automático — va al último mensaje visible
   const lastMsgRef = useRef(null)
+  const prevMsgCount = useRef(0)
+
   useEffect(() => {
-    if(lastMsgRef.current) {
-      lastMsgRef.current.scrollIntoView({ behavior:'smooth', block:'start' })
-    } else if(msgsRef.current) {
-      msgsRef.current.scrollTop = msgsRef.current.scrollHeight
+    const isNewMsg = messages.length > prevMsgCount.current
+    prevMsgCount.current = messages.length
+
+    if(!lastMsgRef.current || !msgsRef.current) return
+
+    if(isNewMsg) {
+      // Nuevo mensaje — ir al inicio del mensaje nuevo
+      setTimeout(() => {
+        if(lastMsgRef.current) {
+          lastMsgRef.current.scrollIntoView({ behavior:'smooth', block:'nearest' })
+        }
+      }, 100)
     }
-  }, [messages, typing])
+  }, [messages])
+
+  // Cuando el bot empieza/termina de escribir, scroll al fondo
+  useEffect(() => {
+    if(!typing && msgsRef.current) {
+      setTimeout(() => {
+        if(lastMsgRef.current) {
+          lastMsgRef.current.scrollIntoView({ behavior:'smooth', block:'nearest' })
+        }
+      }, 150)
+    }
+  }, [typing])
 
   const sendMsg = async (text) => {
     if(!text?.trim()) return
@@ -331,6 +371,83 @@ export default function ChatScreen({ go, seed }) {
       </div>
 
       {/* Todo el contenido sobre las partículas */}
+      {/* Overlay de conexión animado */}
+      <AnimatePresence>
+        {connStatus !== 'online' && (
+          <motion.div
+            initial={{ opacity:1 }}
+            exit={{ opacity:0 }}
+            transition={{ duration:.6 }}
+            className="absolute inset-0 z-[200] flex flex-col items-center justify-center"
+            style={{ background:'linear-gradient(160deg,#050d1a,#071a2e)' }}
+          >
+            {/* Robot grande */}
+            <motion.div
+              animate={{ scale:[1, 1.08, 1] }}
+              transition={{ duration:1.2, repeat:Infinity, ease:'easeInOut' }}
+              className="mb-6"
+            >
+              <svg width="90" height="90" viewBox="0 0 110 110" fill="none">
+                <circle cx="55" cy="52" r="38" fill="#0f2a20" stroke="#00E5A0" strokeWidth="2"/>
+                <ellipse cx="47" cy="38" rx="14" ry="8" fill="rgba(255,255,255,.06)"/>
+                <circle cx="55" cy="52" r="30" fill="#071a10"/>
+                <circle cx="40" cy="47" r="11" fill="#00E5A0" opacity="0.9"/>
+                <circle cx="40" cy="47" r="7" fill="#071a10"/>
+                <circle cx="40" cy="47" r="4" fill="#00E5A0"/>
+                <circle cx="42" cy="44" r="2.5" fill="white" opacity="0.9"/>
+                <circle cx="70" cy="47" r="11" fill="#00E5A0" opacity="0.9"/>
+                <circle cx="70" cy="47" r="7" fill="#071a10"/>
+                <circle cx="70" cy="47" r="4" fill="#00E5A0"/>
+                <circle cx="72" cy="44" r="2.5" fill="white" opacity="0.9"/>
+                <path d="M40 63 Q55 73 70 63" stroke="#00E5A0" strokeWidth="3" strokeLinecap="round" fill="none"/>
+                <circle cx="25" cy="58" r="7" fill="#00E5A0" opacity="0.15"/>
+                <circle cx="85" cy="58" r="7" fill="#00E5A0" opacity="0.15"/>
+                <circle cx="16" cy="52" r="7" fill="#0f2a20" stroke="#00E5A0" strokeWidth="1.5"/>
+                <circle cx="94" cy="52" r="7" fill="#0f2a20" stroke="#00E5A0" strokeWidth="1.5"/>
+              </svg>
+            </motion.div>
+
+            {/* Texto de estado animado */}
+            <AnimatePresence mode="wait">
+              {connStatus === 'connecting' && (
+                <motion.div key="c1"
+                  initial={{ opacity:0, y:8 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0, y:-8 }}
+                  className="text-center">
+                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'1.1rem', fontWeight:700, color:'#f0f6ff', marginBottom:6 }}>
+                    Conectando...
+                  </div>
+                  <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.7rem', color:'#4a6080', letterSpacing:'.1em' }}>
+                    ESCUDO DIGITAL · IA
+                  </div>
+                </motion.div>
+              )}
+              {connStatus === 'establishing' && (
+                <motion.div key="c2"
+                  initial={{ opacity:0, y:8 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0, y:-8 }}
+                  className="text-center">
+                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'1.1rem', fontWeight:700, color:'#f0f6ff', marginBottom:6 }}>
+                    Estableciendo conexión...
+                  </div>
+                  <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.7rem', color:'#00E5A0', letterSpacing:'.1em' }}>
+                    CIFRANDO CANAL SEGURO
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Barra de progreso */}
+            <div className="mt-6 w-48 h-[3px] rounded-full overflow-hidden" style={{ background:'#142040' }}>
+              <motion.div
+                className="h-full rounded-full"
+                style={{ background:'linear-gradient(90deg,#00E5A0,#00c8ff)' }}
+                animate={{ width: connStatus === 'connecting' ? '40%' : '85%' }}
+                transition={{ duration:1, ease:'easeInOut' }}
+              />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Topbar */}
       <div className="flex items-center gap-3 px-4 sticky top-0 z-50 border-b"
         style={{ paddingTop:`calc(env(safe-area-inset-top,0px) + 12px)`, paddingBottom:'12px',
