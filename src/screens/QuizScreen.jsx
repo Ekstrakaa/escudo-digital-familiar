@@ -133,7 +133,7 @@ function QuestionCard({ step, qNum, onAnswer, onShake }) {
   }
 
   const letterStyle = (i) => {
-    if(!answered) return { background:'#0f1d35', color:'#4a6080', border:'1px solid rgba(0,200,255,.2)' }
+    if(!answered) return { background:`${meta.color}18`, color:meta.color, border:`1px solid ${meta.color}55` }
     if(i === step.ok)          return { background:'#00e5a0', color:'#000', border:'none' }
     if(i === chosen && i !== step.ok) return { background:'#ff3d5a', color:'#fff', border:'none' }
     return { background:'#0f1d35', color:'#4a6080', border:'1px solid rgba(0,200,255,.1)' }
@@ -144,11 +144,11 @@ function QuestionCard({ step, qNum, onAnswer, onShake }) {
 
       {/* Header compacto: categoría + número */}
       <div className="flex items-center gap-3 mb-3 px-1">
-        <div className="w-11 h-11 rounded-[12px] flex items-center justify-center flex-shrink-0"
+        <div className="w-14 h-14 rounded-[14px] flex items-center justify-center flex-shrink-0"
           style={{ background:meta.bg, border:`1px solid ${meta.color}55` }}
-          dangerouslySetInnerHTML={{ __html: meta.svg }} />
-        <span className="font-mono text-[.82rem] tracking-widest uppercase font-semibold" style={{ color:meta.color }}>{step.cat}</span>
-        <span className="text-[.75rem] text-t3 ml-auto font-medium">Pregunta {qNum}</span>
+          dangerouslySetInnerHTML={{ __html: meta.svg.replace('width="22"','width="28"').replace('height="22"','height="28"') }} />
+        <span className="font-mono text-[.95rem] tracking-widest uppercase font-semibold" style={{ color:meta.color }}>{step.cat}</span>
+        <span className="text-[.82rem] text-t3 ml-auto font-medium">Pregunta {qNum}</span>
       </div>
 
       {/* Imagen si hay */}
