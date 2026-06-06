@@ -160,9 +160,10 @@ function QuestionCard({ step, qNum, onAnswer, onShake }) {
       )}
 
       {/* Pregunta */}
-      <div className="rounded-[14px] p-3 mb-3"
+      <div className="rounded-[14px] p-4 mb-3"
         style={{ background:'#0f1d35', border:'1px solid rgba(0,200,255,.1)' }}>
-        <div className="text-[.92rem] font-semibold leading-[1.5] text-t1 whitespace-pre-wrap">{step.txt}</div>
+        <div className="text-[.92rem] font-semibold leading-[1.6] text-t1 whitespace-pre-wrap text-center mb-3">{step.txt.replace('¿Qué hacés?', '').trim()}</div>
+        <div className="text-center font-bold text-[1.05rem] mt-1" style={{ color: meta.color }}>¿Qué hacés?</div>
       </div>
 
       {/* Opciones compactas */}
