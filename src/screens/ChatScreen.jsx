@@ -90,7 +90,7 @@ function RobotAvatar({ typing }) {
           <circle cx="40" cy="47" r="11" fill="#00E5A0" opacity="0.9"/>
           <circle cx="40" cy="47" r="7" fill="#071a10"/>
           <motion.circle
-            animate={typing ? { r:[4,1,4] } : { r:4 }}
+            animate={typing ? { opacity:[1,0.2,1] } : { opacity:1 }}
             transition={{ repeat: typing ? Infinity : 0, duration:0.8 }}
             cx="40" cy="47" r="4" fill="#00E5A0"
           />
@@ -98,7 +98,7 @@ function RobotAvatar({ typing }) {
           <circle cx="70" cy="47" r="11" fill="#00E5A0" opacity="0.9"/>
           <circle cx="70" cy="47" r="7" fill="#071a10"/>
           <motion.circle
-            animate={typing ? { r:[4,1,4] } : { r:4 }}
+            animate={typing ? { opacity:[1,0.2,1] } : { opacity:1 }}
             transition={{ repeat: typing ? Infinity : 0, duration:0.8, delay:0.1 }}
             cx="70" cy="47" r="4" fill="#00E5A0"
           />
@@ -322,24 +322,36 @@ export default function ChatScreen({ go, seed }) {
 
     let reply = null
 
-    try {
-      const controller = new AbortController()
-      const timeout = setTimeout(() => controller.abort(), 20000)
+    // Intentar hasta 2 veces si falla
+    for(let attempt = 0; attempt < 2; attempt++) {
+      try {
+        const controller = new AbortController()
+        const timeout = setTimeout(() => controller.abort(), 25000)
 
-      const resp = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text, history: newHistory.slice(0, -1) }),
-        signal: controller.signal
-      })
-      clearTimeout(timeout)
+        const resp = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text, history: newHistory.slice(0, -1) }),
+          signal: controller.signal
+        })
+        clearTimeout(timeout)
 
-      if(resp.ok) {
-        const data = await resp.json()
-        if(data && data.reply) reply = data.reply
+        if(resp.ok) {
+          const data = await resp.json()
+          if(data?.reply) {
+            reply = data.reply
+            break
+          }
+          // Rate limit específico
+          if(data?.error === 'rate_limit') {
+            reply = 'El asistente está ocupado ahora mismo. Intentá de nuevo en 1-2 minutos.\n\nSi es urgente llamá al **911** o a Cibercrimen: **2030 4625**'
+            break
+          }
+        }
+      } catch(e) {
+        console.log(`Intento ${attempt + 1} fallido:`, e)
+        if(attempt === 0) await new Promise(r => setTimeout(r, 1500)) // Esperar antes de reintentar
       }
-    } catch(e) {
-      console.log('Error:', e)
     }
 
     historyRef.current = [...historyRef.current, { role:'assistant', content: reply || '' }]
@@ -349,7 +361,7 @@ export default function ChatScreen({ go, seed }) {
       if(reply) {
         addBot(reply)
       } else {
-        addBot('Lo siento, en este momento no puedo conectarme. Por favor intentá de nuevo en unos segundos.\n\nSi es una emergencia llamá al **911** o al **CERTuy: 1719**.')
+        addBot('Tuve un problema de conexión. ¿Podés escribirme de nuevo?\n\nSi es una emergencia llamá ya al **911** o a Cibercrimen MI: **2030 4625**')
       }
       setBtnOff(false)
     }, 400)
