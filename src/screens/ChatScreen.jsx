@@ -234,6 +234,81 @@ function TypingIndicator() {
   )
 }
 
+function MicButton({ onTranscript, disabled }) {
+  const [recording, setRecording] = useState(false)
+  const [loading, setLoading]     = useState(false)
+  const mediaRef  = useRef(null)
+  const chunksRef = useRef([])
+
+  const start = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+      chunksRef.current = []
+      const mr = new MediaRecorder(stream, { mimeType: MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : 'audio/mp4' })
+      mr.ondataavailable = e => { if (e.data.size > 0) chunksRef.current.push(e.data) }
+      mr.onstop = async () => {
+        stream.getTracks().forEach(t => t.stop())
+        setLoading(true)
+        try {
+          const blob = new Blob(chunksRef.current, { type: mr.mimeType })
+          const fd   = new FormData()
+          fd.append('file', blob, 'audio.webm')
+          fd.append('model', 'whisper-1')
+          fd.append('language', 'es')
+          const resp = await fetch('https://api.openai.com/v1/audio/transcriptions', {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${import.meta.env.VITE_OPENAI_KEY || ''}` },
+            body: fd,
+          })
+          const data = await resp.json()
+          if (data?.text?.trim()) onTranscript(data.text.trim())
+        } catch(e) { console.error('Whisper error:', e) }
+        setLoading(false)
+      }
+      mr.start()
+      mediaRef.current = mr
+      setRecording(true)
+    } catch(e) {
+      alert('No se pudo acceder al micrófono. Activalo en la configuración del navegador.')
+    }
+  }
+
+  const stop = () => {
+    if (mediaRef.current && mediaRef.current.state !== 'inactive') mediaRef.current.stop()
+    setRecording(false)
+  }
+
+  return (
+    <motion.button
+      onClick={() => recording ? stop() : start()}
+      disabled={disabled || loading}
+      whileTap={{ scale: 0.9 }}
+      className="w-[52px] h-[52px] flex-shrink-0 rounded-[14px] flex items-center justify-center transition-all disabled:opacity-40"
+      style={{
+        background: recording ? 'linear-gradient(135deg, #ef4444, #b91c1c)' : 'rgba(255,255,255,.07)',
+        border: recording ? 'none' : '1.5px solid rgba(0,200,255,.2)',
+        boxShadow: recording ? '0 0 16px rgba(239,68,68,.5)' : 'none',
+      }}
+      title={recording ? 'Tocar para detener' : 'Tocar para hablar'}
+    >
+      {loading ? (
+        <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 0.8, ease: 'linear' }}
+          style={{ width:20, height:20, borderRadius:'50%', border:'2px solid #00E5A0', borderTopColor:'transparent' }} />
+      ) : recording ? (
+        <motion.div animate={{ scale:[1,1.15,1] }} transition={{ repeat:Infinity, duration:0.7 }}
+          style={{ width:16, height:16, borderRadius:3, background:'white' }} />
+      ) : (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="9" y="2" width="6" height="12" rx="3"/>
+          <path d="M5 10a7 7 0 0 0 14 0"/>
+          <line x1="12" y1="19" x2="12" y2="22"/>
+          <line x1="8" y1="22" x2="16" y2="22"/>
+        </svg>
+      )}
+    </motion.button>
+  )
+}
+
 export default function ChatScreen({ go, seed }) {
   const [messages, setMessages] = useState([])
   const [typing, setTyping]     = useState(false)
@@ -369,12 +444,9 @@ export default function ChatScreen({ go, seed }) {
 
   useEffect(() => {
     setTimeout(() => {
-      addBot('¡Hola! Soy el asistente de IA de la **Intendencia de Montevideo**, en conjunto con el **Ministerio del Interior**.\n\nEstoy acá para ayudarte ante cualquier ciberestafa o cuento del tío. Contame qué te pasó.')
+      addBot('¡Hola! Soy el asistente de IA de la **Intendencia de Montevideo**, en conjunto con el **Ministerio del Interior**.\n\nEstoy acá para ayudarte ante cualquier ciberestafa o cuento del tío. Contame qué te pasó.\n\n🔒 _Este sitio es seguro — las conversaciones no quedan guardadas y nunca te pediré datos personales._')
     }, 300)
-    setTimeout(() => {
-      addBot('🔒 Este sitio es completamente seguro. Las conversaciones no quedan guardadas y nunca voy a pedirte ningún dato personal.')
-    }, 1800)
-    if(seed) setTimeout(() => sendMsg(seed), 3200)
+    if(seed) setTimeout(() => sendMsg(seed), 900)
     // Al entrar al chat — siempre mostrar desde el principio
     setTimeout(() => {
       if(msgsRef.current) msgsRef.current.scrollTop = 0
@@ -387,6 +459,15 @@ export default function ChatScreen({ go, seed }) {
     setInput('')
     if(taRef.current) taRef.current.style.height = ''
     sendMsg(t)
+  }
+
+  const handleTranscript = (text) => {
+    setInput(text)
+    setTimeout(() => {
+      setInput('')
+      if(taRef.current) taRef.current.style.height = ''
+      sendMsg(text)
+    }, 800)
   }
 
   return (
@@ -535,9 +616,14 @@ export default function ChatScreen({ go, seed }) {
       </div>
 
       {/* Input */}
-      <div className="px-4 py-3 flex gap-3 items-end"
+      <div className="px-4 py-3 flex gap-2 items-end"
         style={{ background:'rgba(5,13,26,.85)', borderTop:'1px solid rgba(255,255,255,.06)', backdropFilter:'blur(12px)', WebkitBackdropFilter:'blur(12px)', position:'relative', zIndex: 2,
           paddingBottom:`calc(env(safe-area-inset-bottom,0px) + 12px)` }}>
+
+        {/* Micrófono */}
+        <MicButton onTranscript={handleTranscript} disabled={btnOff} />
+
+        {/* Texto */}
         <div className="flex-1 rounded-2xl px-4 py-3 transition-all"
           style={{ background:'rgba(255,255,255,.05)', border:'1.5px solid rgba(0,200,255,.2)' }}>
           <div className="font-mono text-[.55rem] text-cyan-500/50 tracking-widest uppercase mb-1">Tu consulta</div>
@@ -552,11 +638,13 @@ export default function ChatScreen({ go, seed }) {
             onKeyDown={e => { if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); handleSend() }}}
             onFocus={() => { setTimeout(scrollDown, 300) }}
             rows={1}
-            placeholder="Contame qué pasó..."
+            placeholder="Hablá o escribí acá..."
             className="w-full bg-transparent outline-none resize-none text-white font-sans text-[.97rem] leading-relaxed placeholder:text-slate-600"
             style={{ minHeight:'24px', maxHeight:'100px' }}
           />
         </div>
+
+        {/* Enviar */}
         <motion.button
           onClick={handleSend}
           disabled={btnOff}
