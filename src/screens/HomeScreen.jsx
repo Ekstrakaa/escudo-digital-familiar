@@ -124,91 +124,101 @@ export default function HomeScreen({ go }) {
       />
 
       <div className="relative z-10 flex flex-col items-center px-4"
-        style={{ paddingTop: `calc(env(safe-area-inset-top, 0px) + 36px)`, paddingBottom: 40 }}>
+        style={{ paddingTop: `calc(env(safe-area-inset-top, 0px) + 20px)`, paddingBottom: 40 }}>
 
+        {/* ── HERO CON IMAGEN ── */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: .5 }}
+          className="relative w-full overflow-hidden mb-5"
+          style={{ borderRadius: 24, maxWidth: 480 }}
+        >
+          {/* Foto abuelitos */}
+          <img
+            src="/imgs/hero_abuelitos.png"
+            alt="Adultos mayores usando el celular"
+            style={{ width: '100%', height: 220, objectFit: 'cover', objectPosition: 'center 15%', display: 'block' }}
+          />
+          {/* Overlay arriba y abajo */}
+          <div style={{
+            position: 'absolute', inset: 0,
+            background: 'linear-gradient(180deg, #060c1acc 0%, transparent 40%, transparent 50%, #060c1a 100%)',
+          }} />
 
+          {/* Badge institucional arriba */}
+          <div style={{ position: 'absolute', top: 12, left: 0, right: 0, display: 'flex', justifyContent: 'center' }}>
+            <motion.a
+              href="https://montevideo.gub.uy/area-tematica/inclusion-social/personas-mayores/programa-de-inclusion-digital"
+              target="_blank" rel="noopener noreferrer"
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: .3 }}
+              className="flex items-center gap-2 px-3 py-[5px] rounded-full"
+              style={{ background: 'rgba(0,0,0,.55)', border: '1px solid rgba(139,124,248,.35)', backdropFilter: 'blur(8px)', textDecoration: 'none' }}
+            >
+              <motion.div animate={{ opacity: [1, .3, 1] }} transition={{ duration: 2, repeat: Infinity }}
+                style={{ width: 6, height: 6, borderRadius: '50%', background: '#00e5a0', flexShrink: 0 }} />
+              <span style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.72rem', fontWeight: 700, color: '#e0d4ff', letterSpacing: '.03em' }}>
+                Programa de Inclusión Digital · IM
+              </span>
+            </motion.a>
+          </div>
 
-        {/* Logo */}
-        <motion.div initial={{ opacity:0, scale:.8 }} animate={{ opacity:1, scale:1 }}
-          transition={{ duration:.5, ease:'easeOut' }} className="flex items-center justify-center mb-5">
-          <motion.img src="/imgs/LOGO.png" alt="Escudo Digital Familiar"
-            animate={{
-              scale: [1, 1.13, 1],
-              filter: [
-                'drop-shadow(0 0 22px rgba(0,229,160,.9)) drop-shadow(0 0 10px rgba(0,229,160,.5))',
-                'drop-shadow(0 0 22px rgba(0,200,255,.9)) drop-shadow(0 0 10px rgba(0,200,255,.5))',
-                'drop-shadow(0 0 22px rgba(139,124,248,.9)) drop-shadow(0 0 10px rgba(139,124,248,.5))',
-                'drop-shadow(0 0 22px rgba(255,100,150,.9)) drop-shadow(0 0 10px rgba(255,100,150,.5))',
-                'drop-shadow(0 0 22px rgba(255,180,0,.9)) drop-shadow(0 0 10px rgba(255,180,0,.5))',
-                'drop-shadow(0 0 22px rgba(0,229,160,.9)) drop-shadow(0 0 10px rgba(0,229,160,.5))',
-              ]
-            }}
-            transition={{ duration:8, repeat:Infinity, ease:'easeInOut' }}
-            style={{ width:120, height:120, objectFit:'contain' }} />
-        </motion.div>
-
-        {/* Título */}
-        <motion.div initial={{ opacity:0, y:-14 }} animate={{ opacity:1, y:0 }}
-          transition={{ duration:.45, ease:'easeOut' }} className="text-center mb-2">
-          <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'2.35rem', fontWeight:800, color:'#ffffff', lineHeight:1.15, letterSpacing:'-0.5px' }}>Escudo Digital</div>
-          <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'2.35rem', fontWeight:800, lineHeight:1.15, letterSpacing:'-0.5px' }}>
-            <span style={{ color:'#00E5A0' }}>Familiar</span>
+          {/* Logo + título centrados sobre la imagen */}
+          <div style={{ position: 'absolute', bottom: 14, left: 0, right: 0, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <motion.img
+              src="/imgs/LOGO.png"
+              alt="Escudo Digital Familiar"
+              animate={{
+                scale: [1, 1.1, 1],
+                filter: [
+                  'drop-shadow(0 0 20px rgba(0,229,160,.95))',
+                  'drop-shadow(0 0 20px rgba(0,200,255,.95))',
+                  'drop-shadow(0 0 20px rgba(139,124,248,.95))',
+                  'drop-shadow(0 0 20px rgba(255,180,0,.95))',
+                  'drop-shadow(0 0 20px rgba(0,229,160,.95))',
+                ]
+              }}
+              transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+              style={{ width: 80, height: 80, objectFit: 'contain', marginBottom: 8 }}
+            />
+            <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '2rem', fontWeight: 800, color: '#fff', lineHeight: 1.1, letterSpacing: '-0.5px', textAlign: 'center', textShadow: '0 2px 16px rgba(0,0,0,.9)' }}>
+              Escudo Digital
+            </div>
+            <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '2rem', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-0.5px', textShadow: '0 2px 16px rgba(0,0,0,.9)' }}>
+              <span style={{ color: '#00E5A0' }}>Familiar</span>
+            </div>
           </div>
         </motion.div>
 
-        {/* Badge IM — debajo del título */}
-        <motion.a
-          href="https://montevideo.gub.uy/area-tematica/inclusion-social/personas-mayores/programa-de-inclusion-digital"
-          target="_blank" rel="noopener noreferrer"
-          initial={{ opacity:0, scale:.92 }} animate={{ opacity:1, scale:1 }} transition={{ delay:.25 }}
-          className="flex items-center gap-2 px-4 py-[8px] rounded-full mb-3"
-          style={{ background:'rgba(139,124,248,.12)', border:'1px solid rgba(139,124,248,.35)', textDecoration:'none', cursor:'pointer' }}>
-          <motion.div animate={{ opacity:[1,.3,1] }} transition={{ duration:2, repeat:Infinity }}
-            style={{ width:8, height:8, borderRadius:'50%', background:'#00e5a0', flexShrink:0 }} />
-          <span style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.8rem', fontWeight:700, color:'#e0d4ff', letterSpacing:'.03em' }}>
-            Programa de Inclusión Digital · IM
-          </span>
-        </motion.a>
-
         {/* Subtítulo */}
-        <motion.p initial={{ opacity:0, y:-8 }} animate={{ opacity:1, y:0 }} transition={{ delay:.28, duration:.4 }}
-          style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.9rem', color:'#c8d8ee', textAlign:'center', maxWidth:340, lineHeight:1.55, marginBottom:20 }}>
+        <motion.p initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .28, duration: .4 }}
+          style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.9rem', color: '#c8d8ee', textAlign: 'center', maxWidth: 340, lineHeight: 1.55, marginBottom: 20 }}>
           Tu herramienta de orientación ante estafas digitales y el cuento del tío, disponible 24/7. No estás solo.
         </motion.p>
 
         {/* Botón VERDE — Test de Blindaje */}
-        <div className="relative w-full mb-3" style={{ maxWidth:480 }}>
-
+        <div className="relative w-full mb-3" style={{ maxWidth: 480 }}>
           <motion.button
-            initial={{ opacity:0, y:10 }} animate={{ opacity:1, y:0 }}
-            transition={{ delay:.3 }} whileTap={{ scale:.97 }}
+            initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: .3 }} whileTap={{ scale: .97 }}
             onClick={() => go.quiz()}
             className="relative w-full overflow-hidden rounded-2xl"
-            style={{ height:68, border:'none', cursor:'pointer',
-              background:'#059669', boxShadow:'0 4px 20px rgba(16,185,129,.3)', overflow:'hidden',
-            }}>
-            {/* Gradiente líquido animado */}
+            style={{ height: 68, border: 'none', cursor: 'pointer', background: '#059669', boxShadow: '0 4px 20px rgba(16,185,129,.3)', overflow: 'hidden' }}>
             <motion.div className="absolute pointer-events-none"
               animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
-              transition={{ duration:4, repeat:Infinity, ease:'easeInOut' }}
-              style={{
-                inset:0,
-                background:'linear-gradient(135deg, #059669 0%, #00E5A0 40%, #34d399 70%, #059669 100%)',
-                backgroundSize:'200% 200%',
-              }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+              style={{ inset: 0, background: 'linear-gradient(135deg, #059669 0%, #00E5A0 40%, #34d399 70%, #059669 100%)', backgroundSize: '200% 200%' }}
             />
-            {/* Brillo superior */}
             <div className="absolute inset-0 pointer-events-none"
-              style={{ background:'linear-gradient(180deg, rgba(255,255,255,.18) 0%, transparent 55%)' }} />
+              style={{ background: 'linear-gradient(180deg, rgba(255,255,255,.18) 0%, transparent 55%)' }} />
             <div className="relative flex items-center justify-between px-6 h-full">
               <div className="flex items-center gap-4">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,.7)" strokeWidth="1.8" strokeLinecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                 <div className="text-left">
-                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'1.15rem', fontWeight:900, color:'#000', lineHeight:1.2 }}>Test de Blindaje</div>
-                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.78rem', fontWeight:600, color:'rgba(0,0,0,.65)', marginTop:2 }}>¿Qué tan protegido estás?</div>
+                  <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '1.15rem', fontWeight: 900, color: '#000', lineHeight: 1.2 }}>Test de Blindaje</div>
+                  <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.78rem', fontWeight: 600, color: 'rgba(0,0,0,.65)', marginTop: 2 }}>¿Qué tan protegido estás?</div>
                 </div>
               </div>
-              <motion.div animate={{ x:[0,4,0] }} transition={{ duration:1.5, repeat:Infinity, ease:'easeInOut', delay:.3 }}>
+              <motion.div animate={{ x: [0, 4, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut', delay: .3 }}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,.6)" strokeWidth="2.2" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </motion.div>
             </div>
@@ -216,38 +226,29 @@ export default function HomeScreen({ go }) {
         </div>
 
         {/* Botón ROJO — Necesito ayuda */}
-        <div className="relative w-full mb-7" style={{ maxWidth:480 }}>
-
+        <div className="relative w-full mb-7" style={{ maxWidth: 480 }}>
           <motion.button
-            initial={{ opacity:0, y:10 }} animate={{ opacity:1, y:0 }}
-            transition={{ delay:.24 }} whileTap={{ scale:.97 }}
+            initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: .24 }} whileTap={{ scale: .97 }}
             onClick={() => go.chat(null)}
             className="relative w-full overflow-hidden rounded-2xl"
-            style={{ height:68, border:'none', cursor:'pointer',
-              background:'#b91c1c', boxShadow:'0 4px 20px rgba(220,38,38,.35)', overflow:'hidden',
-            }}>
-            {/* Gradiente líquido animado */}
+            style={{ height: 68, border: 'none', cursor: 'pointer', background: '#b91c1c', boxShadow: '0 4px 20px rgba(220,38,38,.35)', overflow: 'hidden' }}>
             <motion.div className="absolute pointer-events-none"
               animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
-              transition={{ duration:4, repeat:Infinity, ease:'easeInOut', delay:.8 }}
-              style={{
-                inset:0,
-                background:'linear-gradient(135deg, #b91c1c 0%, #ef4444 40%, #f87171 70%, #b91c1c 100%)',
-                backgroundSize:'200% 200%',
-              }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: .8 }}
+              style={{ inset: 0, background: 'linear-gradient(135deg, #b91c1c 0%, #ef4444 40%, #f87171 70%, #b91c1c 100%)', backgroundSize: '200% 200%' }}
             />
-            {/* Brillo superior */}
             <div className="absolute inset-0 pointer-events-none"
-              style={{ background:'linear-gradient(180deg, rgba(255,255,255,.15) 0%, transparent 55%)' }} />
+              style={{ background: 'linear-gradient(180deg, rgba(255,255,255,.15) 0%, transparent 55%)' }} />
             <div className="relative flex items-center justify-between px-6 h-full">
               <div className="flex items-center gap-4">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" strokeWidth="1.8" strokeLinecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16l.19.92z"/></svg>
                 <div className="text-left">
-                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'1.15rem', fontWeight:900, color:'#fff', lineHeight:1.2 }}>Necesito ayuda ahora</div>
-                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.78rem', fontWeight:600, color:'rgba(255,255,255,.8)', marginTop:2 }}>Hablá con nuestro asistente</div>
+                  <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '1.15rem', fontWeight: 900, color: '#fff', lineHeight: 1.2 }}>Necesito ayuda ahora</div>
+                  <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.78rem', fontWeight: 600, color: 'rgba(255,255,255,.8)', marginTop: 2 }}>Hablá con nuestro asistente</div>
                 </div>
               </div>
-              <motion.div animate={{ x:[0,4,0] }} transition={{ duration:1.5, repeat:Infinity, ease:'easeInOut' }}>
+              <motion.div animate={{ x: [0, 4, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.8)" strokeWidth="2.2" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </motion.div>
             </div>
@@ -255,47 +256,47 @@ export default function HomeScreen({ go }) {
         </div>
 
         {/* Label */}
-        <motion.div initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:.36 }}
-          className="w-full mb-3" style={{ maxWidth:480 }}>
-          <span style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.78rem', fontWeight:700, color:'#c8d8ee', letterSpacing:'.08em', textTransform:'uppercase' }}>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: .36 }}
+          className="w-full mb-3" style={{ maxWidth: 480 }}>
+          <span style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.78rem', fontWeight: 700, color: '#c8d8ee', letterSpacing: '.08em', textTransform: 'uppercase' }}>
             ¿Qué te está pasando?
           </span>
         </motion.div>
 
-        {/* Grid */}
-        <div className="w-full grid grid-cols-2 gap-[10px]" style={{ maxWidth:480 }}>
+        {/* Grid situaciones */}
+        <div className="w-full grid grid-cols-2 gap-[10px]" style={{ maxWidth: 480 }}>
           {SITUATIONS.map((s, i) => (
             <motion.button key={i}
-              initial={{ opacity:0, y:14 }} animate={{ opacity:1, y:0 }}
-              transition={{ delay:.38 + i * .06 }} whileTap={{ scale:.96 }}
+              initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: .38 + i * .06 }} whileTap={{ scale: .96 }}
               onClick={() => go.chat(s.msg)}
               className="flex flex-col items-start text-left"
-              style={{ background:s.bg, border:`1.5px solid ${s.border}`, borderRadius:16, padding:'16px 14px', cursor:'pointer', minHeight:120, backdropFilter:'blur(6px)', WebkitBackdropFilter:'blur(6px)' }}>
-              <div style={{ width:44, height:44, borderRadius:12, background:`${s.color}1a`, border:`1px solid ${s.color}40`, display:'flex', alignItems:'center', justifyContent:'center', color:s.color, marginBottom:12 }}
+              style={{ background: s.bg, border: `1.5px solid ${s.border}`, borderRadius: 16, padding: '16px 14px', cursor: 'pointer', minHeight: 120, backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)' }}>
+              <div style={{ width: 44, height: 44, borderRadius: 12, background: `${s.color}1a`, border: `1px solid ${s.color}40`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: s.color, marginBottom: 12 }}
                 dangerouslySetInnerHTML={{ __html: s.svg }} />
-              <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.95rem', fontWeight:700, color:'#f0f6ff', lineHeight:1.25, marginBottom:4 }}>{s.title}</div>
-              <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.77rem', color:'#8fa8cc', lineHeight:1.4 }}>{s.desc}</div>
+              <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.95rem', fontWeight: 700, color: '#f0f6ff', lineHeight: 1.25, marginBottom: 4 }}>{s.title}</div>
+              <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.77rem', color: '#8fa8cc', lineHeight: 1.4 }}>{s.desc}</div>
             </motion.button>
           ))}
         </div>
 
         {/* Botón Primeros Auxilios */}
-        <motion.div initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:.9 }}
-          className="w-full mt-4 pb-8" style={{ maxWidth:480 }}>
-          <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.78rem', fontWeight:700, color:'#c8d8ee', letterSpacing:'.06em', textTransform:'uppercase', textAlign:'center', marginBottom:10 }}>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: .9 }}
+          className="w-full mt-4 pb-8" style={{ maxWidth: 480 }}>
+          <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.78rem', fontWeight: 700, color: '#c8d8ee', letterSpacing: '.06em', textTransform: 'uppercase', textAlign: 'center', marginBottom: 10 }}>
             ¿Ya fuiste víctima? Actuá ahora
           </div>
-          <motion.button whileTap={{ scale:.97 }} onClick={() => setAuxOpen(true)}
+          <motion.button whileTap={{ scale: .97 }} onClick={() => setAuxOpen(true)}
             className="w-full flex items-center justify-between px-5 py-4 rounded-[16px]"
-            style={{ background:'rgba(239,68,68,.06)', border:'1.5px solid rgba(239,68,68,.25)', cursor:'pointer' }}>
+            style={{ background: 'rgba(239,68,68,.06)', border: '1.5px solid rgba(239,68,68,.25)', cursor: 'pointer' }}>
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-[10px] flex items-center justify-center flex-shrink-0"
-                style={{ background:'rgba(239,68,68,.1)', border:'1px solid rgba(239,68,68,.3)' }}>
+                style={{ background: 'rgba(239,68,68,.1)', border: '1px solid rgba(239,68,68,.3)' }}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16l.19.92z"/></svg>
               </div>
               <div>
-                <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.95rem', fontWeight:700, color:'#fff' }}>Primeros Auxilios Digitales</div>
-                <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.75rem', color:'#ef4444', marginTop:2 }}>Si te estafaron, hacé esto YA →</div>
+                <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.95rem', fontWeight: 700, color: '#fff' }}>Primeros Auxilios Digitales</div>
+                <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.75rem', color: '#ef4444', marginTop: 2 }}>Si te estafaron, hacé esto YA →</div>
               </div>
             </div>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round"><path d="M9 18l6-6-6-6"/></svg>
@@ -303,90 +304,73 @@ export default function HomeScreen({ go }) {
         </motion.div>
 
         {/* Logos footer */}
-        <motion.div
-          initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:1 }}
-          className="flex flex-col items-center gap-3 pb-10 pt-4"
-        >
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}
+          className="flex flex-col items-center gap-3 pb-10 pt-4">
           <div className="flex items-center gap-6">
-            <img
-              src="/imgs/logo_im.png"
-              alt="Intendencia de Montevideo"
-              style={{ height:26, objectFit:'contain', opacity:.7 }}
-            />
-            <div style={{ width:1, height:24, background:'rgba(255,255,255,.1)' }} />
-            <img
-              src="/imgs/logo_ministerio.png"
-              alt="Ministerio del Interior"
-              style={{ height:26, objectFit:'contain', opacity:.55, filter:'invert(1) brightness(2)' }}
-            />
+            <img src="/imgs/logo_im.png" alt="Intendencia de Montevideo" style={{ height: 26, objectFit: 'contain', opacity: .7 }} />
+            <div style={{ width: 1, height: 24, background: 'rgba(255,255,255,.1)' }} />
+            <img src="/imgs/logo_ministerio.png" alt="Ministerio del Interior" style={{ height: 26, objectFit: 'contain', opacity: .55, filter: 'invert(1) brightness(2)' }} />
           </div>
-          <span style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.62rem', color:'#4a6080', letterSpacing:'.05em', textAlign:'center' }}>
+          <span style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.62rem', color: '#4a6080', letterSpacing: '.05em', textAlign: 'center' }}>
             Intendencia de Montevideo · Ministerio del Interior · 2026
           </span>
         </motion.div>
 
       </div>
 
-      {/* Modal centrado y compacto — sin scroll */}
+      {/* Modal Primeros Auxilios */}
       <AnimatePresence>
         {auxOpen && (
           <motion.div
-            initial={{ opacity:0 }} animate={{ opacity:1 }} exit={{ opacity:0 }}
-            transition={{ duration:.2 }}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            transition={{ duration: .2 }}
             className="fixed inset-0 z-50 flex items-center justify-center px-5"
-            style={{ background:'rgba(5,13,26,.75)', backdropFilter:'blur(4px)' }}
+            style={{ background: 'rgba(5,13,26,.75)', backdropFilter: 'blur(4px)' }}
             onClick={() => setAuxOpen(false)}>
             <motion.div
-              initial={{ opacity:0, scale:.92, y:16 }}
-              animate={{ opacity:1, scale:1, y:0 }}
-              exit={{ opacity:0, scale:.92, y:16 }}
-              transition={{ duration:.25, ease:'easeOut' }}
+              initial={{ opacity: 0, scale: .92, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: .92, y: 16 }}
+              transition={{ duration: .25, ease: 'easeOut' }}
               className="w-full rounded-[20px] overflow-hidden"
-              style={{ maxWidth:280, background:'#0d1a30', border:'1px solid rgba(239,68,68,.28)', boxShadow:'0 24px 64px rgba(0,0,0,.7)' }}
+              style={{ maxWidth: 280, background: '#0d1a30', border: '1px solid rgba(239,68,68,.28)', boxShadow: '0 24px 64px rgba(0,0,0,.7)' }}
               onClick={e => e.stopPropagation()}>
-
-              {/* Header */}
               <div className="flex items-center justify-between px-3 py-2"
-                style={{ borderBottom:'1px solid rgba(255,255,255,.06)' }}>
+                style={{ borderBottom: '1px solid rgba(255,255,255,.06)' }}>
                 <div className="flex items-center gap-3">
                   <div className="w-7 h-7 rounded-[8px] flex items-center justify-center flex-shrink-0"
-                    style={{ background:'rgba(239,68,68,.1)', border:'1px solid rgba(239,68,68,.25)' }}>
+                    style={{ background: 'rgba(239,68,68,.1)', border: '1px solid rgba(239,68,68,.25)' }}>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16l.19.92z"/></svg>
                   </div>
                   <div>
-                    <div style={{ fontFamily:"'Outfit',sans-serif", fontWeight:700, fontSize:'.82rem', color:'#fff' }}>Primeros Auxilios Digitales</div>
-                    <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.62rem', color:'#ef4444' }}>Si te estafaron, hacé esto YA</div>
+                    <div style={{ fontFamily: "'Poppins',sans-serif", fontWeight: 700, fontSize: '.82rem', color: '#fff' }}>Primeros Auxilios Digitales</div>
+                    <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.62rem', color: '#ef4444' }}>Si te estafaron, hacé esto YA</div>
                   </div>
                 </div>
                 <button onClick={() => setAuxOpen(false)}
-                  style={{ background:'rgba(255,255,255,.07)', border:'none', borderRadius:8, width:30, height:30, cursor:'pointer', color:'#8fa8cc', fontSize:'1rem', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
+                  style={{ background: 'rgba(255,255,255,.07)', border: 'none', borderRadius: 8, width: 30, height: 30, cursor: 'pointer', color: '#8fa8cc', fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   ✕
                 </button>
               </div>
-
-              {/* Números — compactos, sin scroll */}
               <div className="px-3 pt-2 pb-3 flex flex-col gap-[4px]">
                 {AUX_ROWS.map(r => (
                   <div key={r[0]} className="flex items-center gap-3 px-3 py-[9px] rounded-[10px]"
-                    style={{ background:'rgba(255,255,255,.03)', border:'1px solid rgba(255,255,255,.05)' }}>
+                    style={{ background: 'rgba(255,255,255,.03)', border: '1px solid rgba(255,255,255,.05)' }}>
                     <div className="w-5 h-5 rounded-[5px] flex items-center justify-center font-mono text-[.6rem] font-semibold flex-shrink-0"
-                      style={{ background:'#142040', color:'#4a6080' }}>{r[0]}</div>
+                      style={{ background: '#142040', color: '#4a6080' }}>{r[0]}</div>
                     <div className="flex-1 min-w-0">
-                      <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.6rem', color:'#8fa8cc' }}>{r[1]}</div>
-                      <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.78rem', fontWeight:700, color:'#f0f6ff' }}>{r[2]}</div>
+                      <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.6rem', color: '#8fa8cc' }}>{r[1]}</div>
+                      <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: '.78rem', fontWeight: 700, color: '#f0f6ff' }}>{r[2]}</div>
                     </div>
                   </div>
                 ))}
-
-                {/* Botón chat */}
                 <button
                   onClick={() => { setAuxOpen(false); go.chat('Creo que me estafaron, necesito ayuda urgente') }}
                   className="w-full py-[9px] rounded-[10px] font-bold text-white mt-1"
-                  style={{ background:'linear-gradient(135deg,#c0392b,#e74c3c)', fontFamily:"'Outfit',sans-serif", fontSize:'.82rem', border:'none', cursor:'pointer' }}>
+                  style={{ background: 'linear-gradient(135deg,#c0392b,#e74c3c)', fontFamily: "'Poppins',sans-serif", fontSize: '.82rem', border: 'none', cursor: 'pointer' }}>
                   Hablar con el asistente →
                 </button>
               </div>
-
             </motion.div>
           </motion.div>
         )}
