@@ -78,15 +78,10 @@ function RobotAvatar({ typing }) {
         style={{ width:58, height:58 }}
       >
         <svg width="46" height="46" viewBox="0 0 110 110" fill="none">
-          {/* Sombra */}
           <ellipse cx="57" cy="84" rx="24" ry="6" fill="#050810" opacity="0.5"/>
-          {/* Cabeza redonda */}
           <circle cx="55" cy="52" r="38" fill="#0f2a20" stroke="#00E5A0" strokeWidth="2"/>
-          {/* Brillo 3D */}
           <ellipse cx="43" cy="28" rx="14" ry="8" fill="rgba(255,255,255,.08)"/>
-          {/* Pantalla cara */}
           <circle cx="55" cy="52" r="30" fill="#071a10"/>
-          {/* Ojos */}
           <circle cx="40" cy="47" r="11" fill="#00E5A0" opacity="0.9"/>
           <circle cx="40" cy="47" r="7" fill="#071a10"/>
           <motion.circle
@@ -103,7 +98,6 @@ function RobotAvatar({ typing }) {
             cx="70" cy="47" r="4" fill="#00E5A0"
           />
           <circle cx="72" cy="44" r="2.5" fill="white" opacity="0.9"/>
-          {/* Boca */}
           {!typing && (
             <path d="M40 63 Q55 73 70 63" stroke="#00E5A0" strokeWidth="3" strokeLinecap="round" fill="none"/>
           )}
@@ -114,65 +108,39 @@ function RobotAvatar({ typing }) {
               <motion.circle animate={{ opacity:[1,.2,1] }} transition={{ duration:.5, repeat:Infinity, delay:.3 }} cx="66" cy="67" r="3" fill="#00E5A0"/>
             </>
           )}
-          {/* Cachetes */}
           <circle cx="25" cy="58" r="7" fill="#00E5A0" opacity="0.15"/>
           <circle cx="85" cy="58" r="7" fill="#00E5A0" opacity="0.15"/>
-          {/* Orejas */}
           <circle cx="16" cy="52" r="7" fill="#0f2a20" stroke="#00E5A0" strokeWidth="1.5"/>
           <circle cx="94" cy="52" r="7" fill="#0f2a20" stroke="#00E5A0" strokeWidth="1.5"/>
         </svg>
       </motion.div>
-      {/* Punto online */}
       <div style={{ position:'absolute', bottom:1, right:1, width:10, height:10, borderRadius:'50%', background:'#00e5a0', border:'2px solid #050d1a' }} />
     </div>
   )
 }
 
-
-function BotBubble({ text, isTyping }) {
-  // Formatear texto — párrafos, negritas, pasos numerados
+function BotBubble({ text }) {
   const fmt = text
     .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-    // Negritas en verde
     .replace(/\*\*(.*?)\*\*/g,'<strong style="color:#00E5A0;font-size:1rem">$1</strong>')
-    // Párrafos doble salto
     .replace(/\n\n/g,'</p><p style="margin:10px 0 0 0">')
-    // Pasos numerados — cada uno destacado
     .replace(/\n(\d+)\.\s/g, '</p><p style="margin:10px 0 0 0"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#00E5A0;color:#000;font-weight:800;font-size:.78rem;margin-right:8px;flex-shrink:0">$1</span>')
-    // Salto simple
     .replace(/\n/g,'<br/>')
-    // Emoji 💡 en su propia línea destacada
     .replace(/💡/g,'<br/><span style="color:#f59e0b;font-size:.9rem">💡</span>')
 
   return (
     <div className="flex items-start gap-3 w-full self-start">
       <div className="flex-shrink-0 mt-1"><RobotAvatar typing={false} /></div>
       <div className="flex-1 min-w-0">
-        {/* Burbuja */}
         <div className="relative">
-          <div style={{
-            position:'absolute', left:-7, top:14,
-            width:0, height:0,
-            borderTop:'7px solid transparent',
-            borderRight:'8px solid #1a2a3a',
-            borderBottom:'7px solid transparent',
-          }} />
+          <div style={{ position:'absolute', left:-7, top:14, width:0, height:0, borderTop:'7px solid transparent', borderRight:'8px solid #1a2a3a', borderBottom:'7px solid transparent' }} />
           <div
             className="rounded-2xl rounded-tl-[4px] px-4 py-4 text-white"
-            style={{
-              background:'#1a2a3a',
-              boxShadow:'0 2px 8px rgba(0,0,0,.3)',
-              fontSize:'.97rem',
-              lineHeight:'1.8',
-              wordBreak:'break-word',
-              fontFamily:"'Outfit',sans-serif",
-            }}
+            style={{ background:'#1a2a3a', boxShadow:'0 2px 8px rgba(0,0,0,.3)', fontSize:'.97rem', lineHeight:'1.8', wordBreak:'break-word', fontFamily:"'Outfit',sans-serif" }}
             dangerouslySetInnerHTML={{ __html: '<p style="margin:0">' + fmt + '</p>' }}
           />
         </div>
-        <div className="text-[.6rem] text-slate-500 mt-1 pl-1">
-          Asistente · {now()}
-        </div>
+        <div className="text-[.6rem] text-slate-500 mt-1 pl-1">Asistente · {now()}</div>
       </div>
     </div>
   )
@@ -182,27 +150,13 @@ function UserBubble({ text }) {
   return (
     <div className="w-[92%] self-end">
       <div className="relative">
-        {/* Triángulo esquina derecha */}
-        <div style={{
-          position:'absolute', right:-7, bottom:8,
-          width:0, height:0,
-          borderTop:'8px solid transparent',
-          borderLeft:'8px solid #00b377',
-          borderBottom:'0 solid transparent',
-        }} />
-        <div
-          className="rounded-2xl rounded-br-[4px] px-4 py-3 text-[.95rem] leading-relaxed font-medium text-black"
-          style={{
-            background:'linear-gradient(135deg, #059669, #00E5A0)',
-            boxShadow:'0 1px 4px rgba(0,0,0,.3)',
-          }}
-        >
+        <div style={{ position:'absolute', right:-7, bottom:8, width:0, height:0, borderTop:'8px solid transparent', borderLeft:'8px solid #00b377', borderBottom:'0 solid transparent' }} />
+        <div className="rounded-2xl rounded-br-[4px] px-4 py-3 text-[.95rem] leading-relaxed font-medium text-black" style={{ background:'linear-gradient(135deg, #059669, #00E5A0)', boxShadow:'0 1px 4px rgba(0,0,0,.3)' }}>
           {text}
         </div>
       </div>
       <div className="text-[.6rem] text-slate-500 mt-1 text-right pr-1 flex items-center justify-end gap-1">
         {now()}
-        {/* Ticks de lectura estilo WhatsApp */}
         <svg width="16" height="10" viewBox="0 0 16 10" fill="none">
           <path d="M1 5l3 3 5-7" stroke="#00E5A0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
           <path d="M6 5l3 3 5-7" stroke="#00E5A0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -216,17 +170,10 @@ function TypingIndicator() {
   return (
     <div className="flex items-end gap-2 w-full self-start">
       <RobotAvatar typing={true} />
-      <div className="rounded-2xl rounded-bl-[4px] px-5 py-4"
-        style={{ background: 'linear-gradient(135deg, #0d2137, #0f2d4a)', border: '1px solid rgba(0,200,255,.2)' }}>
+      <div className="rounded-2xl rounded-bl-[4px] px-5 py-4" style={{ background:'linear-gradient(135deg, #0d2137, #0f2d4a)', border:'1px solid rgba(0,200,255,.2)' }}>
         <div className="flex gap-[5px] items-center">
           {[0,1,2].map(i => (
-            <motion.div
-              key={i}
-              animate={{ y: [0, -5, 0], opacity: [0.4, 1, 0.4] }}
-              transition={{ repeat: Infinity, duration: 0.8, delay: i * 0.15 }}
-              className="w-2 h-2 rounded-full"
-              style={{ background: '#00E5A0' }}
-            />
+            <motion.div key={i} animate={{ y:[0,-5,0], opacity:[0.4,1,0.4] }} transition={{ repeat:Infinity, duration:0.8, delay:i*0.15 }} className="w-2 h-2 rounded-full" style={{ background:'#00E5A0' }} />
           ))}
         </div>
       </div>
@@ -234,123 +181,178 @@ function TypingIndicator() {
   )
 }
 
+// ─── Botón de micrófono con Whisper ───────────────────────────────────────────
+function MicButton({ onTranscript, disabled }) {
+  const [recording, setRecording] = useState(false)
+  const [loading, setLoading]     = useState(false)
+  const mediaRef  = useRef(null)
+  const chunksRef = useRef([])
+
+  const start = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+      chunksRef.current = []
+      const mr = new MediaRecorder(stream, { mimeType: MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : 'audio/mp4' })
+      mr.ondataavailable = e => { if (e.data.size > 0) chunksRef.current.push(e.data) }
+      mr.onstop = async () => {
+        stream.getTracks().forEach(t => t.stop())
+        setLoading(true)
+        try {
+          const blob = new Blob(chunksRef.current, { type: mr.mimeType })
+          const fd   = new FormData()
+          fd.append('file', blob, 'audio.webm')
+          fd.append('model', 'whisper-1')
+          fd.append('language', 'es')
+          const resp = await fetch('https://api.openai.com/v1/audio/transcriptions', {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${import.meta.env.VITE_OPENAI_KEY || ''}` },
+            body: fd,
+          })
+          const data = await resp.json()
+          if (data?.text?.trim()) onTranscript(data.text.trim())
+        } catch(e) {
+          console.error('Whisper error:', e)
+        }
+        setLoading(false)
+      }
+      mr.start()
+      mediaRef.current = mr
+      setRecording(true)
+    } catch(e) {
+      alert('No se pudo acceder al micrófono. Activalo en la configuración del navegador.')
+    }
+  }
+
+  const stop = () => {
+    if (mediaRef.current && mediaRef.current.state !== 'inactive') {
+      mediaRef.current.stop()
+    }
+    setRecording(false)
+  }
+
+  const toggle = () => { if (recording) stop(); else start() }
+
+  return (
+    <motion.button
+      onClick={toggle}
+      disabled={disabled || loading}
+      whileTap={{ scale: 0.9 }}
+      className="w-[52px] h-[52px] flex-shrink-0 rounded-[14px] flex items-center justify-center transition-all disabled:opacity-40"
+      style={{
+        background: recording
+          ? 'linear-gradient(135deg, #ef4444, #b91c1c)'
+          : 'rgba(255,255,255,.07)',
+        border: recording ? 'none' : '1.5px solid rgba(0,200,255,.2)',
+        boxShadow: recording ? '0 0 16px rgba(239,68,68,.5)' : 'none',
+      }}
+      title={recording ? 'Tocar para detener' : 'Tocar para hablar'}
+    >
+      {loading ? (
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ repeat: Infinity, duration: 0.8, ease: 'linear' }}
+          style={{ width:20, height:20, borderRadius:'50%', border:'2px solid #00E5A0', borderTopColor:'transparent' }}
+        />
+      ) : recording ? (
+        // Ícono stop (cuadrado) cuando graba
+        <motion.div
+          animate={{ scale:[1, 1.15, 1] }}
+          transition={{ repeat: Infinity, duration: 0.7 }}
+          style={{ width:16, height:16, borderRadius:3, background:'white' }}
+        />
+      ) : (
+        // Ícono micrófono
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="9" y="2" width="6" height="12" rx="3"/>
+          <path d="M5 10a7 7 0 0 0 14 0"/>
+          <line x1="12" y1="19" x2="12" y2="22"/>
+          <line x1="8" y1="22" x2="16" y2="22"/>
+        </svg>
+      )}
+    </motion.button>
+  )
+}
+
 export default function ChatScreen({ go, seed }) {
-  const [messages, setMessages] = useState([])
-  const [typing, setTyping]     = useState(false)
-  const [input, setInput]       = useState('')
-  const [btnOff, setBtnOff]     = useState(false)
-  const [connStatus, setConnStatus] = useState('connecting') // 'connecting' | 'establishing' | 'online'
+  const [messages, setMessages]     = useState([])
+  const [typing, setTyping]         = useState(false)
+  const [input, setInput]           = useState('')
+  const [btnOff, setBtnOff]         = useState(false)
+  const [connStatus, setConnStatus] = useState('connecting')
 
   useEffect(() => {
     const t1 = setTimeout(() => setConnStatus('establishing'), 1400)
     const t2 = setTimeout(() => setConnStatus('online'), 4000)
     return () => { clearTimeout(t1); clearTimeout(t2) }
   }, [])
-  const msgsRef = useRef(null)
-  const taRef   = useRef(null)
+
+  const msgsRef    = useRef(null)
+  const taRef      = useRef(null)
   const historyRef = useRef([])
+  const lastMsgRef    = useRef(null)
+  const prevMsgCount  = useRef(0)
+  const prevTyping    = useRef(false)
 
-  const scrollDown = () => {
-    // Solo scroll al fondo para MENSAJES DEL USUARIO
-    if(msgsRef.current) {
-      msgsRef.current.scrollTop = msgsRef.current.scrollHeight
-    }
-    setTimeout(() => {
-      if(msgsRef.current) msgsRef.current.scrollTop = msgsRef.current.scrollHeight
-    }, 300)
-  }
-
-  const addBot = (text) => {
-    setMessages(m => [...m, { role:'bot', text }])
-    // NO scrollDown aquí — el useEffect se encarga de ir al INICIO del mensaje
-  }
-
-  const addUser = (text) => {
-    setMessages(m => [...m, { role:'user', text }])
-    // Usuario → fondo para ver el input
-    setTimeout(() => {
-      if(msgsRef.current) msgsRef.current.scrollTop = msgsRef.current.scrollHeight
-    }, 50)
-  }
-
-  const lastMsgRef = useRef(null)
-  const prevMsgCount = useRef(0)
-  const prevTyping = useRef(false)
-
-  // Función que scrollea al INICIO del último mensaje del bot
   const scrollToLastMsg = () => {
-    if(!lastMsgRef.current || !msgsRef.current) return
+    if (!lastMsgRef.current || !msgsRef.current) return
     const container = msgsRef.current
     const el = lastMsgRef.current
-    // Posición del elemento relativa al contenedor
-    const elTop = el.offsetTop
-    container.scrollTo({ top: elTop - 12, behavior: 'smooth' })
+    container.scrollTo({ top: el.offsetTop - 12, behavior: 'smooth' })
+  }
+
+  const scrollDown = () => {
+    if (msgsRef.current) msgsRef.current.scrollTop = msgsRef.current.scrollHeight
+    setTimeout(() => { if (msgsRef.current) msgsRef.current.scrollTop = msgsRef.current.scrollHeight }, 300)
+  }
+
+  const addBot  = text => setMessages(m => [...m, { role:'bot', text }])
+  const addUser = text => {
+    setMessages(m => [...m, { role:'user', text }])
+    setTimeout(() => { if (msgsRef.current) msgsRef.current.scrollTop = msgsRef.current.scrollHeight }, 50)
   }
 
   useEffect(() => {
     const isNewMsg = messages.length > prevMsgCount.current
-    const lastMsg = messages[messages.length - 1]
+    const lastMsg  = messages[messages.length - 1]
     prevMsgCount.current = messages.length
-    if(!isNewMsg) return
-
+    if (!isNewMsg) return
     setTimeout(() => {
-      if(lastMsg?.role === 'bot') {
-        scrollToLastMsg()
-      } else {
-        // Mensaje del usuario → fondo para ver input
-        if(msgsRef.current) msgsRef.current.scrollTop = msgsRef.current.scrollHeight
-      }
+      if (lastMsg?.role === 'bot') scrollToLastMsg()
+      else if (msgsRef.current) msgsRef.current.scrollTop = msgsRef.current.scrollHeight
     }, 100)
   }, [messages])
 
-  // Cuando el bot termina de escribir → inicio de su respuesta
   useEffect(() => {
-    if(prevTyping.current && !typing) {
-      setTimeout(scrollToLastMsg, 150)
-    }
+    if (prevTyping.current && !typing) setTimeout(scrollToLastMsg, 150)
     prevTyping.current = typing
   }, [typing])
 
   const sendMsg = async (text) => {
-    if(!text?.trim()) return
+    if (!text?.trim()) return
     addUser(text)
     const newHistory = [...historyRef.current, { role:'user', content:text }]
     historyRef.current = newHistory
     setBtnOff(true)
     setTyping(true)
-    // No scroll aquí — addUser ya lo hace
 
     let reply = null
-
-    // Intentar hasta 2 veces si falla
-    for(let attempt = 0; attempt < 2; attempt++) {
+    for (let attempt = 0; attempt < 2; attempt++) {
       try {
         const controller = new AbortController()
         const timeout = setTimeout(() => controller.abort(), 25000)
-
         const resp = await fetch('/api/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ message: text, history: newHistory.slice(0, -1) }),
-          signal: controller.signal
+          signal: controller.signal,
         })
         clearTimeout(timeout)
-
-        if(resp.ok) {
+        if (resp.ok) {
           const data = await resp.json()
-          if(data?.reply) {
-            reply = data.reply
-            break
-          }
-          // Rate limit específico
-          if(data?.error === 'rate_limit') {
-            reply = 'El asistente está ocupado ahora mismo. Intentá de nuevo en 1-2 minutos.\n\nSi es urgente llamá al **911** o a Cibercrimen: **2030 4625**'
-            break
-          }
+          if (data?.reply) { reply = data.reply; break }
         }
       } catch(e) {
-        console.log(`Intento ${attempt + 1} fallido:`, e)
-        if(attempt === 0) await new Promise(r => setTimeout(r, 1500)) // Esperar antes de reintentar
+        if (attempt === 0) await new Promise(r => setTimeout(r, 1500))
       }
     }
 
@@ -358,11 +360,7 @@ export default function ChatScreen({ go, seed }) {
 
     setTimeout(() => {
       setTyping(false)
-      if(reply) {
-        addBot(reply)
-      } else {
-        addBot('Tuve un problema de conexión. ¿Podés escribirme de nuevo?\n\nSi es una emergencia llamá ya al **911** o a Cibercrimen MI: **2030 4625**')
-      }
+      addBot(reply || 'Tuve un problema de conexión. ¿Podés escribirme de nuevo?\n\nSi es una emergencia llamá ya al **911** o a Cibercrimen MI: **2030 4625**')
       setBtnOff(false)
     }, 400)
   }
@@ -371,48 +369,42 @@ export default function ChatScreen({ go, seed }) {
     setTimeout(() => {
       addBot('¡Hola! Soy tu asistente de la **Intendencia de Montevideo** y el **Ministerio del Interior**. Contame qué te pasó. Estoy acá para ayudarte ante cualquier estafa. Tus mensajes no quedan guardados y nunca pediré ningún dato personal, este sitio es completamente seguro 🔒')
     }, 300)
-    if(seed) setTimeout(() => sendMsg(seed), 900)
-    // Al entrar al chat — siempre mostrar desde el principio
-    setTimeout(() => {
-      if(msgsRef.current) msgsRef.current.scrollTop = 0
-    }, 200)
+    if (seed) setTimeout(() => sendMsg(seed), 900)
+    setTimeout(() => { if (msgsRef.current) msgsRef.current.scrollTop = 0 }, 200)
   }, [])
 
   const handleSend = () => {
     const t = input.trim()
-    if(!t) return
+    if (!t) return
     setInput('')
-    if(taRef.current) taRef.current.style.height = ''
+    if (taRef.current) taRef.current.style.height = ''
     sendMsg(t)
   }
 
+  // Cuando Whisper devuelve texto → lo pone en el input y envía
+  const handleTranscript = (text) => {
+    setInput(text)
+    // Pequeño delay para que el usuario vea lo que se transcribió antes de enviar
+    setTimeout(() => {
+      setInput('')
+      if (taRef.current) taRef.current.style.height = ''
+      sendMsg(text)
+    }, 800)
+  }
+
   return (
-    <div className="flex flex-col relative" style={{ height: '100dvh', maxHeight: '100dvh', overflow: 'hidden', position: 'fixed', inset: 0, background: 'linear-gradient(160deg, #050d1a 0%, #071525 50%, #050d1a 100%)' }}>
-      {/* Partículas RGB de fondo */}
-      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 0 }}>
+    <div className="flex flex-col relative" style={{ height:'100dvh', maxHeight:'100dvh', overflow:'hidden', position:'fixed', inset:0, background:'linear-gradient(160deg, #050d1a 0%, #071525 50%, #050d1a 100%)' }}>
+      <div className="absolute inset-0 pointer-events-none" style={{ zIndex:0 }}>
         <Particles />
       </div>
 
-      {/* Todo el contenido sobre las partículas */}
-      {/* Overlay de conexión animado */}
+      {/* Overlay conexión */}
       <AnimatePresence>
         {connStatus !== 'online' && (
-          <motion.div
-            initial={{ opacity:1 }}
-            exit={{ opacity:0 }}
-            transition={{ duration:.6 }}
-            className="absolute inset-0 z-[200] flex flex-col items-center justify-center"
-            style={{ background:'linear-gradient(160deg,#050d1a,#071a2e)' }}
-          >
-            {/* Robot grande */}
-            <motion.div
-              animate={{ scale:[1, 1.08, 1] }}
-              transition={{ duration:1.2, repeat:Infinity, ease:'easeInOut' }}
-              className="mb-6"
-            >
+          <motion.div initial={{ opacity:1 }} exit={{ opacity:0 }} transition={{ duration:.6 }} className="absolute inset-0 z-[200] flex flex-col items-center justify-center" style={{ background:'linear-gradient(160deg,#050d1a,#071a2e)' }}>
+            <motion.div animate={{ scale:[1,1.08,1] }} transition={{ duration:1.2, repeat:Infinity, ease:'easeInOut' }} className="mb-6">
               <svg width="90" height="90" viewBox="0 0 110 110" fill="none">
                 <circle cx="55" cy="52" r="38" fill="#0f2a20" stroke="#00E5A0" strokeWidth="2"/>
-                <ellipse cx="47" cy="38" rx="14" ry="8" fill="rgba(255,255,255,.06)"/>
                 <circle cx="55" cy="52" r="30" fill="#071a10"/>
                 <circle cx="40" cy="47" r="11" fill="#00E5A0" opacity="0.9"/>
                 <circle cx="40" cy="47" r="7" fill="#071a10"/>
@@ -423,64 +415,34 @@ export default function ChatScreen({ go, seed }) {
                 <circle cx="70" cy="47" r="4" fill="#00E5A0"/>
                 <circle cx="72" cy="44" r="2.5" fill="white" opacity="0.9"/>
                 <path d="M40 63 Q55 73 70 63" stroke="#00E5A0" strokeWidth="3" strokeLinecap="round" fill="none"/>
-                <circle cx="25" cy="58" r="7" fill="#00E5A0" opacity="0.15"/>
-                <circle cx="85" cy="58" r="7" fill="#00E5A0" opacity="0.15"/>
                 <circle cx="16" cy="52" r="7" fill="#0f2a20" stroke="#00E5A0" strokeWidth="1.5"/>
                 <circle cx="94" cy="52" r="7" fill="#0f2a20" stroke="#00E5A0" strokeWidth="1.5"/>
               </svg>
             </motion.div>
-
-            {/* Texto de estado animado */}
             <AnimatePresence mode="wait">
               {connStatus === 'connecting' && (
-                <motion.div key="c1"
-                  initial={{ opacity:0, y:8 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0, y:-8 }}
-                  transition={{ duration:.4 }}
-                  className="text-center px-8">
-                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'1.15rem', fontWeight:700, color:'#f0f6ff', marginBottom:6 }}>
-                    Conectando...
-                  </div>
-                  <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.65rem', color:'#4a6080', letterSpacing:'.1em' }}>
-                    ESCUDO DIGITAL · IA
-                  </div>
+                <motion.div key="c1" initial={{ opacity:0, y:8 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0, y:-8 }} transition={{ duration:.4 }} className="text-center px-8">
+                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'1.15rem', fontWeight:700, color:'#f0f6ff', marginBottom:6 }}>Conectando...</div>
+                  <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.65rem', color:'#4a6080', letterSpacing:'.1em' }}>ESCUDO DIGITAL · IA</div>
                 </motion.div>
               )}
               {connStatus === 'establishing' && (
-                <motion.div key="c2"
-                  initial={{ opacity:0, y:8 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0, y:-8 }}
-                  transition={{ duration:.4 }}
-                  className="text-center px-8">
-                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'1.15rem', fontWeight:700, color:'#f0f6ff', marginBottom:6 }}>
-                    ¡Estás en un lugar seguro!
-                  </div>
-                  <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.65rem', color:'#00E5A0', letterSpacing:'.1em' }}>
-                    🔒 CANAL CIFRADO · EN LÍNEA
-                  </div>
+                <motion.div key="c2" initial={{ opacity:0, y:8 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0, y:-8 }} transition={{ duration:.4 }} className="text-center px-8">
+                  <div style={{ fontFamily:"'Outfit',sans-serif", fontSize:'1.15rem', fontWeight:700, color:'#f0f6ff', marginBottom:6 }}>¡Estás en un lugar seguro!</div>
+                  <div style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'.65rem', color:'#00E5A0', letterSpacing:'.1em' }}>🔒 CANAL CIFRADO · EN LÍNEA</div>
                 </motion.div>
               )}
             </AnimatePresence>
-
-            {/* Barra de progreso */}
             <div className="mt-6 w-52 h-[3px] rounded-full overflow-hidden" style={{ background:'#142040' }}>
-              <motion.div
-                className="h-full rounded-full"
-                style={{ background:'linear-gradient(90deg,#00E5A0,#00c8ff)' }}
-                animate={{ width: connStatus === 'connecting' ? '45%' : '100%' }}
-                transition={{ duration:1, ease:'easeInOut' }}
-              />
+              <motion.div className="h-full rounded-full" style={{ background:'linear-gradient(90deg,#00E5A0,#00c8ff)' }} animate={{ width: connStatus === 'connecting' ? '45%' : '100%' }} transition={{ duration:1, ease:'easeInOut' }} />
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
       {/* Topbar */}
-      <div className="flex items-center gap-3 px-4 sticky top-0 z-50 border-b"
-        style={{ paddingTop:`calc(env(safe-area-inset-top,0px) + 12px)`, paddingBottom:'12px',
-          background: 'rgba(5,13,26,.95)', borderColor: 'rgba(0,200,255,.12)',
-          backdropFilter: 'blur(20px)' }}>
-        <button onClick={go.home}
-          className="flex items-center gap-2 px-3 py-2 rounded-[10px] transition-all flex-shrink-0"
-          style={{ background:'rgba(255,255,255,.05)', border:'1px solid rgba(255,255,255,.10)', backdropFilter:'blur(8px)' }}>
+      <div className="flex items-center gap-3 px-4 sticky top-0 z-50 border-b" style={{ paddingTop:`calc(env(safe-area-inset-top,0px) + 12px)`, paddingBottom:'12px', background:'rgba(5,13,26,.95)', borderColor:'rgba(0,200,255,.12)', backdropFilter:'blur(20px)' }}>
+        <button onClick={go.home} className="flex items-center gap-2 px-3 py-2 rounded-[10px] transition-all flex-shrink-0" style={{ background:'rgba(255,255,255,.05)', border:'1px solid rgba(255,255,255,.10)', backdropFilter:'blur(8px)' }}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" strokeWidth="2" strokeLinecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
           <span style={{ fontSize:'.75rem', fontWeight:600, color:'rgba(255,255,255,.6)', fontFamily:"'Outfit',sans-serif" }}>Volver</span>
         </button>
@@ -488,76 +450,69 @@ export default function ChatScreen({ go, seed }) {
         <div className="flex-1 min-w-0">
           <div className="font-bold text-[.98rem] text-white">Asistente Digital</div>
           <div className="flex items-center gap-[5px] text-[.68rem] text-slate-400 mt-[1px]">
-            <motion.div
-              animate={{ opacity: [1, 0.3, 1] }}
-              transition={{ repeat: Infinity, duration: 2 }}
-              className="w-[6px] h-[6px] rounded-full flex-shrink-0"
-              style={{ background: '#10b981' }}
-            />
+            <motion.div animate={{ opacity:[1,0.3,1] }} transition={{ repeat:Infinity, duration:2 }} className="w-[6px] h-[6px] rounded-full flex-shrink-0" style={{ background:'#10b981' }} />
             En línea · Intendencia de Montevideo
           </div>
         </div>
       </div>
 
-      {/* Emergency numbers bar */}
-      <div className="flex gap-2 px-4 py-2 overflow-x-auto" style={{ background: 'rgba(0,0,0,.2)', borderBottom: '1px solid rgba(255,255,255,.05)' }}>
+      {/* Emergency numbers */}
+      <div className="flex gap-2 px-4 py-2 overflow-x-auto" style={{ background:'rgba(0,0,0,.2)', borderBottom:'1px solid rgba(255,255,255,.05)' }}>
         {EMERGENCY_NUMBERS.map((n, i) => (
-          <a key={i} href={`tel:${n.label.replace(/\D/g,'')}`}
-            className="flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white no-underline transition-all active:scale-95"
-            style={{ background: `${n.color}22`, border: `1px solid ${n.color}55`, fontSize: '.72rem' }}>
-            <span className="font-bold" style={{ color: n.color }}>{n.label}</span>
+          <a key={i} href={`tel:${n.label.replace(/\D/g,'')}`} className="flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white no-underline transition-all active:scale-95" style={{ background:`${n.color}22`, border:`1px solid ${n.color}55`, fontSize:'.72rem' }}>
+            <span className="font-bold" style={{ color:n.color }}>{n.label}</span>
             <span className="text-slate-400">{n.sub}</span>
           </a>
         ))}
       </div>
 
       {/* Messages */}
-      <div ref={msgsRef} className="flex-1 px-4 py-4 flex flex-col gap-3 relative" style={{ zIndex: 1, overflowY: 'scroll', overscrollBehavior: 'contain', WebkitOverflowScrolling: 'touch' }}>
-
+      <div ref={msgsRef} className="flex-1 px-4 py-4 flex flex-col gap-3 relative" style={{ zIndex:1, overflowY:'scroll', overscrollBehavior:'contain', WebkitOverflowScrolling:'touch' }}>
         <AnimatePresence>
           {messages.map((m, i) => (
             <motion.div key={i} ref={i === messages.length - 1 ? lastMsgRef : null} initial={{ opacity:0, y:10 }} animate={{ opacity:1, y:0 }} transition={{ duration:.25 }}>
               {m.role === 'bot' ? <BotBubble text={m.text} /> : <UserBubble text={m.text} />}
             </motion.div>
           ))}
-
           {typing && (
             <motion.div key="typing" initial={{ opacity:0, y:10 }} animate={{ opacity:1, y:0 }}>
               <TypingIndicator />
             </motion.div>
           )}
         </AnimatePresence>
-
-
       </div>
 
       {/* Input */}
-      <div className="px-4 py-3 flex gap-3 items-end"
-        style={{ background:'rgba(5,13,26,.85)', borderTop:'1px solid rgba(255,255,255,.06)', backdropFilter:'blur(12px)', WebkitBackdropFilter:'blur(12px)', position:'relative', zIndex: 2,
-          paddingBottom:`calc(env(safe-area-inset-bottom,0px) + 12px)` }}>
-        <div className="flex-1 rounded-2xl px-4 py-3 transition-all"
-          style={{ background:'rgba(255,255,255,.05)', border:'1.5px solid rgba(0,200,255,.2)' }}>
+      <div className="px-4 py-3 flex gap-2 items-end" style={{ background:'rgba(5,13,26,.85)', borderTop:'1px solid rgba(255,255,255,.06)', backdropFilter:'blur(12px)', WebkitBackdropFilter:'blur(12px)', position:'relative', zIndex:2, paddingBottom:`calc(env(safe-area-inset-bottom,0px) + 12px)` }}>
+        
+        {/* Botón micrófono */}
+        <MicButton onTranscript={handleTranscript} disabled={btnOff} />
+
+        {/* Campo de texto */}
+        <div className="flex-1 rounded-2xl px-4 py-3 transition-all" style={{ background:'rgba(255,255,255,.05)', border:'1.5px solid rgba(0,200,255,.2)' }}>
           <div className="font-mono text-[.55rem] text-cyan-500/50 tracking-widest uppercase mb-1">Tu consulta</div>
           <textarea
             ref={taRef}
             value={input}
             onChange={e => {
               setInput(e.target.value)
-              e.target.style.height='auto'
-              e.target.style.height=Math.min(e.target.scrollHeight,100)+'px'
+              e.target.style.height = 'auto'
+              e.target.style.height = Math.min(e.target.scrollHeight, 100) + 'px'
             }}
-            onKeyDown={e => { if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); handleSend() }}}
+            onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend() }}}
             onFocus={() => { setTimeout(scrollDown, 300) }}
             rows={1}
-            placeholder="Contame qué pasó..."
+            placeholder="Hablá o escribí acá..."
             className="w-full bg-transparent outline-none resize-none text-white font-sans text-[.97rem] leading-relaxed placeholder:text-slate-600"
             style={{ minHeight:'24px', maxHeight:'100px' }}
           />
         </div>
+
+        {/* Botón enviar */}
         <motion.button
           onClick={handleSend}
           disabled={btnOff}
-          whileTap={{ scale: 0.92 }}
+          whileTap={{ scale:0.92 }}
           className="w-[52px] h-[52px] flex-shrink-0 rounded-[14px] flex items-center justify-center transition-all text-white disabled:opacity-40"
           style={{ background:'linear-gradient(135deg, #059669, #00E5A0)', boxShadow:'0 4px 20px rgba(0,229,160,.35)' }}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
