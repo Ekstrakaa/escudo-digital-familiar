@@ -321,6 +321,15 @@ export default function ChatScreen({ go, seed }) {
     const t2 = setTimeout(() => setConnStatus('online'), 4000)
     return () => { clearTimeout(t1); clearTimeout(t2) }
   }, [])
+
+  // Mostrar mensaje SOLO cuando termina el loading
+  useEffect(() => {
+    if (connStatus !== 'online') return
+    setTimeout(() => {
+      addBot('¡Hola! Soy el asistente de IA de la **Intendencia de Montevideo**, en conjunto con el **Ministerio del Interior**.\n\nEstoy acá para ayudarte ante cualquier ciberestafa o cuento del tío. Contame qué te pasó.\n\n🔒 _Este sitio es seguro — las conversaciones no quedan guardadas y nunca te pediré datos personales._')
+    }, 600)
+    if(seed) setTimeout(() => sendMsg(seed), 1800)
+  }, [connStatus])
   const msgsRef = useRef(null)
   const taRef   = useRef(null)
   const historyRef = useRef([])
@@ -442,12 +451,8 @@ export default function ChatScreen({ go, seed }) {
     }, 400)
   }
 
+
   useEffect(() => {
-    setTimeout(() => {
-      addBot('¡Hola! Soy el asistente de IA de la **Intendencia de Montevideo**, en conjunto con el **Ministerio del Interior**.\n\nEstoy acá para ayudarte ante cualquier ciberestafa o cuento del tío. Contame qué te pasó.\n\n🔒 _Este sitio es seguro — las conversaciones no quedan guardadas y nunca te pediré datos personales._')
-    }, 300)
-    if(seed) setTimeout(() => sendMsg(seed), 900)
-    // Al entrar al chat — siempre mostrar desde el principio
     setTimeout(() => {
       if(msgsRef.current) msgsRef.current.scrollTop = 0
     }, 200)
