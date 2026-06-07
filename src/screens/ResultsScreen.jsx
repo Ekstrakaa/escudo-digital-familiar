@@ -82,41 +82,7 @@ export default function ResultsScreen({ go, result }) {
           </div>
         </motion.div>
 
-        {/* Primeros Auxilios */}
-        <motion.div {...fadeUp(.1)} className="rounded-2xl overflow-hidden mb-4" style={{ background:'#0f1d35', border:'1px solid rgba(0,200,255,.1)' }}>
-          <button onClick={() => setAuxOpen(o => !o)}
-            className="w-full flex items-center gap-3 p-4 hover:bg-white/[.02] transition-colors text-left">
-            <div className="w-10 h-10 rounded-[10px] flex items-center justify-center flex-shrink-0"
-              style={{ background:'rgba(0,200,255,.08)', border:'1px solid rgba(0,200,255,.18)' }}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00c8ff" strokeWidth="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.12.96.32 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6z"/></svg>
-            </div>
-            <div className="flex-1">
-              <div className="font-bold text-[.92rem] text-t1">Primeros Auxilios Digitales</div>
-              <div className="text-[.72rem] text-t3 mt-[2px]">Si te estafaron, hacé esto YA</div>
-            </div>
-            <motion.div animate={{ rotate: auxOpen ? 180 : 0 }} transition={{ duration:.3 }}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4a6080" strokeWidth="2"><path d="M6 9l6 6 6-6"/></svg>
-            </motion.div>
-          </button>
-          <AnimatePresence>
-            {auxOpen && (
-              <motion.div initial={{ height:0 }} animate={{ height:'auto' }} exit={{ height:0 }} transition={{ duration:.35 }} className="overflow-hidden">
-                <div className="px-4 pb-4 flex flex-col gap-2">
-                  {AUX_ROWS.map(r => (
-                    <div key={r[0]} className="flex items-center gap-3 p-3 rounded-[10px]" style={{ background:'#080f20', border:'1px solid rgba(0,200,255,.08)' }}>
-                      <div className="w-6 h-6 rounded-[6px] flex items-center justify-center font-mono text-[.65rem] font-semibold text-t3 flex-shrink-0"
-                        style={{ background:'#142040', border:'1px solid rgba(0,200,255,.12)' }}>{r[0]}</div>
-                      <div className="flex-1">
-                        <div className="text-[.78rem] text-t2 mb-[2px]">{r[1]}</div>
-                        <div className="font-mono text-[.95rem] font-semibold text-t1">{r[2]}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </motion.div>
+
 
         {/* IM Card */}
         <motion.div {...fadeUp(.2)} className="rounded-2xl p-5 mb-4"
