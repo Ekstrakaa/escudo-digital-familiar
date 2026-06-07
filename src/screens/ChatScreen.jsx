@@ -322,13 +322,19 @@ export default function ChatScreen({ go, seed }) {
     return () => { clearTimeout(t1); clearTimeout(t2) }
   }, [])
 
-  // Mostrar mensaje SOLO cuando termina el loading
+  // Mostrar mensaje SOLO cuando termina el loading, con typing animation
   useEffect(() => {
     if (connStatus !== 'online') return
+    // 1. Mostrar typing indicator
+    setTimeout(() => setTyping(true), 400)
+    // 2. Después de 2 segundos, ocultar typing y mostrar mensaje
     setTimeout(() => {
-      addBot('¡Hola! Soy el asistente de IA de la **Intendencia de Montevideo**, en conjunto con el **Ministerio del Interior**.\n\nEstoy acá para ayudarte ante cualquier ciberestafa o cuento del tío. Contame qué te pasó.\n\n🔒 _Este sitio es seguro — las conversaciones no quedan guardadas y nunca te pediré datos personales._')
-    }, 600)
-    if(seed) setTimeout(() => sendMsg(seed), 1800)
+      setTyping(false)
+      setTimeout(() => {
+        addBot('¡Hola! Soy el asistente de IA de la **Intendencia de Montevideo**, en conjunto con el **Ministerio del Interior**.\n\nEstoy acá para ayudarte ante cualquier ciberestafa o cuento del tío. Contame qué te pasó.\n\n🔒 _Este sitio es seguro — las conversaciones no quedan guardadas y nunca te pediré datos personales._')
+      }, 150)
+    }, 2200)
+    if(seed) setTimeout(() => sendMsg(seed), 4000)
   }, [connStatus])
   const msgsRef = useRef(null)
   const taRef   = useRef(null)
