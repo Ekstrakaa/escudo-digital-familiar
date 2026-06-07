@@ -134,7 +134,7 @@ export default function HomeScreen({ go }) {
           <img
             src="/imgs/hero_abuelitos.png"
             alt="Adultos mayores usando el celular"
-            style={{ width: '100%', height: 200, objectFit: 'cover', objectPosition: 'center 10%', display: 'block' }}
+            style={{ width: '100%', height: 200, objectFit: 'cover', objectPosition: '50% 30%', display: 'block' }}
           />
           {/* Overlay solo abajo para transición suave al fondo oscuro */}
           <div style={{
@@ -309,11 +309,11 @@ export default function HomeScreen({ go }) {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}
             className="flex flex-col items-center gap-3 pb-10 pt-4">
             <div className="flex items-center gap-5">
-              <img src="/imgs/logo_im.png" alt="Intendencia de Montevideo" style={{ height: 26, objectFit: 'contain', opacity: .7 }} />
+              <img src="/imgs/logo_im.png" alt="Intendencia de Montevideo" style={{ height: 26, objectFit: 'contain', opacity: .8, filter: 'invert(1) brightness(2)' }} />
               <div style={{ width: 1, height: 24, background: 'rgba(255,255,255,.1)' }} />
-              <img src="/imgs/Logo_MInisterio.png" alt="Ministerio del Interior" style={{ height: 26, objectFit: 'contain', opacity: .55, filter: 'invert(1) brightness(2)' }} />
+              <img src="/imgs/Logo_MInisterio.png" alt="Ministerio del Interior" style={{ height: 26, objectFit: 'contain', opacity: .8, filter: 'invert(1) brightness(2)' }} />
               <div style={{ width: 1, height: 24, background: 'rgba(255,255,255,.1)' }} />
-              <img src="/imgs/MunicipioB.png" alt="Municipio B" style={{ height: 26, objectFit: 'contain', opacity: .6 }} />
+              <img src="/imgs/MunicipioB.png" alt="Municipio B" style={{ height: 26, objectFit: 'contain', opacity: .8, filter: 'invert(1) brightness(2)' }} />
             </div>
             <span style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.62rem', color: '#4a6080', letterSpacing: '.05em', textAlign: 'center' }}>
               Intendencia de Montevideo · Ministerio del Interior · Municipio B · 2026
