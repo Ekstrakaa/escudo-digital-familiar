@@ -141,22 +141,7 @@ export default function HomeScreen({ go }) {
             position: 'absolute', inset: 0,
             background: 'linear-gradient(180deg, transparent 50%, #060c1a 100%)',
           }} />
-          {/* Badge institucional arriba */}
-          <div style={{ position: 'absolute', top: `calc(env(safe-area-inset-top, 0px) + 12px)`, left: 0, right: 0, display: 'flex', justifyContent: 'center' }}>
-            <motion.a
-              href="https://montevideo.gub.uy/area-tematica/inclusion-social/personas-mayores/programa-de-inclusion-digital"
-              target="_blank" rel="noopener noreferrer"
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: .4 }}
-              className="flex items-center gap-2 px-3 py-[5px] rounded-full"
-              style={{ background: 'rgba(0,0,0,.5)', border: '1px solid rgba(139,124,248,.35)', backdropFilter: 'blur(8px)', textDecoration: 'none' }}
-            >
-              <motion.div animate={{ opacity: [1, .3, 1] }} transition={{ duration: 2, repeat: Infinity }}
-                style={{ width: 6, height: 6, borderRadius: '50%', background: '#00e5a0', flexShrink: 0 }} />
-              <span style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.72rem', fontWeight: 700, color: '#e0d4ff', letterSpacing: '.03em' }}>
-                Programa de Inclusión Digital · IM
-              </span>
-            </motion.a>
-          </div>
+
         </motion.div>
 
         {/* ── LOGO + TÍTULO debajo de la foto ── */}
@@ -165,7 +150,7 @@ export default function HomeScreen({ go }) {
             initial={{ opacity: 0, scale: .85 }} animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: .3, duration: .5 }}
             className="flex items-center justify-center"
-            style={{ marginTop: -28 }}
+            style={{ marginTop: -48 }}
           >
             <motion.img src="/imgs/LOGO.png" alt="Escudo Digital Familiar"
               animate={{
@@ -179,7 +164,7 @@ export default function HomeScreen({ go }) {
                 ]
               }}
               transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-              style={{ width: 100, height: 100, objectFit: 'contain' }}
+              style={{ width: 100, height: 100, objectFit: 'contain', marginBottom: 12 }}
             />
           </motion.div>
 
@@ -191,10 +176,25 @@ export default function HomeScreen({ go }) {
             </div>
           </motion.div>
 
+          {/* Badge institucional — debajo del título */}
+          <motion.a
+            href="https://montevideo.gub.uy/area-tematica/inclusion-social/personas-mayores/programa-de-inclusion-digital"
+            target="_blank" rel="noopener noreferrer"
+            initial={{ opacity: 0, scale: .92 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: .4 }}
+            className="flex items-center gap-2 px-4 py-[7px] rounded-full mb-3 mt-4"
+            style={{ background: 'rgba(139,124,248,.12)', border: '1px solid rgba(139,124,248,.35)', textDecoration: 'none' }}
+          >
+            <motion.div animate={{ opacity: [1, .3, 1] }} transition={{ duration: 2, repeat: Infinity }}
+              style={{ width: 7, height: 7, borderRadius: '50%', background: '#00e5a0', flexShrink: 0 }} />
+            <span style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.78rem', fontWeight: 700, color: '#e0d4ff', letterSpacing: '.03em' }}>
+              Programa de Inclusión Digital · IM
+            </span>
+          </motion.a>
+
           {/* Subtítulo */}
           <motion.p initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .38, duration: .4 }}
-            style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.9rem', color: '#c8d8ee', textAlign: 'center', maxWidth: 340, lineHeight: 1.55, marginBottom: 20, marginTop: 6 }}>
-            Tu herramienta de orientación ante estafas digitales y el cuento del tío, disponible 24/7. No estás solo.
+            style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.9rem', color: '#c8d8ee', textAlign: 'center', maxWidth: 300, lineHeight: 1.55, marginBottom: 20, marginTop: 6 }}>
+            Tu herramienta ante estafas digitales y el cuento del tío, disponible 24/7. No estás solo.
           </motion.p>
 
           {/* Botón VERDE — Test de Blindaje */}
@@ -259,7 +259,7 @@ export default function HomeScreen({ go }) {
 
           {/* Label */}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: .36 }}
-            className="w-full mb-3">
+            className="w-full mb-3" style={{ textAlign: 'center' }}>
             <span style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.78rem', fontWeight: 700, color: '#c8d8ee', letterSpacing: '.08em', textTransform: 'uppercase' }}>
               ¿Qué te está pasando?
             </span>
@@ -308,13 +308,15 @@ export default function HomeScreen({ go }) {
           {/* Logos footer */}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}
             className="flex flex-col items-center gap-3 pb-10 pt-4">
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-5">
               <img src="/imgs/logo_im.png" alt="Intendencia de Montevideo" style={{ height: 26, objectFit: 'contain', opacity: .7 }} />
               <div style={{ width: 1, height: 24, background: 'rgba(255,255,255,.1)' }} />
-              <img src="/imgs/logo_ministerio.png" alt="Ministerio del Interior" style={{ height: 26, objectFit: 'contain', opacity: .55, filter: 'invert(1) brightness(2)' }} />
+              <img src="/imgs/Logo_MInisterio.png" alt="Ministerio del Interior" style={{ height: 26, objectFit: 'contain', opacity: .55, filter: 'invert(1) brightness(2)' }} />
+              <div style={{ width: 1, height: 24, background: 'rgba(255,255,255,.1)' }} />
+              <img src="/imgs/MunicipioB.png" alt="Municipio B" style={{ height: 26, objectFit: 'contain', opacity: .6 }} />
             </div>
             <span style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.62rem', color: '#4a6080', letterSpacing: '.05em', textAlign: 'center' }}>
-              Intendencia de Montevideo · Ministerio del Interior · 2026
+              Intendencia de Montevideo · Ministerio del Interior · Municipio B · 2026
             </span>
           </motion.div>
         </div>
