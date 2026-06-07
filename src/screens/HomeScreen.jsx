@@ -193,8 +193,8 @@ export default function HomeScreen({ go }) {
 
           {/* Subtítulo */}
           <motion.p initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .38, duration: .4 }}
-            style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.9rem', color: '#c8d8ee', textAlign: 'center', maxWidth: 300, lineHeight: 1.55, marginBottom: 20, marginTop: 6 }}>
-            Tu herramienta ante estafas digitales y el cuento del tío, disponible 24/7. No estás solo.
+            style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.9rem', color: '#c8d8ee', textAlign: 'center', maxWidth: 340, lineHeight: 1.55, marginBottom: 20, marginTop: 6 }}>
+            Tu herramienta ante estafas digitales y el cuento del tío. Disponible 24/7, no estás solo.
           </motion.p>
 
           {/* Botón VERDE — Test de Blindaje */}
