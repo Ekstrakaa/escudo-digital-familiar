@@ -214,17 +214,15 @@ export default function HomeScreen({ go }) {
                 style={{ background: 'linear-gradient(180deg, rgba(255,255,255,.18) 0%, transparent 55%)' }} />
               <div className="relative flex items-center justify-between px-6 h-full">
                 <div className="flex items-center gap-4">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,.7)" strokeWidth="1.8" strokeLinecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  <motion.div animate={{ scale:[1,1.18,1] }} transition={{ duration:1.8, repeat:Infinity, ease:"easeInOut" }}><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,.8)" strokeWidth="1.8" strokeLinecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></motion.div>
                   <div className="text-left">
                     <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '1.2rem', fontWeight: 900, color: '#000', lineHeight: 1.2 }}>Test de Blindaje</div>
                     <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.83rem', fontWeight: 600, color: 'rgba(0,0,0,.65)', marginTop: 2 }}>¿Qué tan protegido estás?</div>
                   </div>
                 </div>
-                <div style={{ width:32, height:32, borderRadius:9, background:'rgba(0,0,0,.15)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
-                  <motion.div animate={{ x:[0,5,0] }} transition={{ duration:1.4, repeat:Infinity, ease:'easeInOut' }}>
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,.8)" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                  </motion.div>
-                </div>
+                <motion.div animate={{ x: [0, 4, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut', delay: .3 }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,.6)" strokeWidth="2.2" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </motion.div>
               </div>
             </motion.button>
           </div>
@@ -246,18 +244,15 @@ export default function HomeScreen({ go }) {
                 style={{ background: 'linear-gradient(180deg, rgba(255,255,255,.15) 0%, transparent 55%)' }} />
               <div className="relative flex items-center justify-between px-6 h-full">
                 <div className="flex items-center gap-4">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" strokeWidth="1.8" strokeLinecap="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                  <motion.div animate={{ scale:[1,1.18,1] }} transition={{ duration:1.8, repeat:Infinity, ease:"easeInOut", delay:.3 }}><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" strokeWidth="1.8" strokeLinecap="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></motion.div>
                   <div className="text-left">
                     <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '1.15rem', fontWeight: 900, color: '#fff', lineHeight: 1.2 }}>Detector de Estafas</div>
                     <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.78rem', fontWeight: 600, color: 'rgba(255,255,255,.7)', marginTop: 2 }}>Sacá foto a un mensaje sospechoso</div>
                   </div>
                 </div>
                 <motion.div animate={{ x: [0, 4, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut', delay: .6 }}>
-                <div style={{ width:32, height:32, borderRadius:9, background:'rgba(255,255,255,.2)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
-                  <motion.div animate={{ x:[0,5,0] }} transition={{ duration:1.4, repeat:Infinity, ease:'easeInOut', delay:.2 }}>
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                  </motion.div>
-                </div>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" strokeWidth="2.2" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </motion.div>
               </div>
             </motion.button>
           </div>
@@ -279,17 +274,15 @@ export default function HomeScreen({ go }) {
                 style={{ background: 'linear-gradient(180deg, rgba(255,255,255,.15) 0%, transparent 55%)' }} />
               <div className="relative flex items-center justify-between px-6 h-full">
                 <div className="flex items-center gap-4">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" strokeWidth="1.8" strokeLinecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16l.19.92z"/></svg>
+                  <motion.div animate={{ scale:[1,1.18,1] }} transition={{ duration:1.8, repeat:Infinity, ease:"easeInOut", delay:.6 }}><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" strokeWidth="1.8" strokeLinecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16l.19.92z"/></svg></motion.div>
                   <div className="text-left">
                     <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '1.15rem', fontWeight: 900, color: '#fff', lineHeight: 1.2 }}>Necesito ayuda ahora</div>
                     <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.78rem', fontWeight: 600, color: 'rgba(255,255,255,.8)', marginTop: 2 }}>Hablá con nuestro asistente</div>
                   </div>
                 </div>
-                <div style={{ width:32, height:32, borderRadius:9, background:'rgba(255,255,255,.2)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
-                  <motion.div animate={{ x:[0,5,0] }} transition={{ duration:1.4, repeat:Infinity, ease:'easeInOut', delay:.4 }}>
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                  </motion.div>
-                </div>
+                <motion.div animate={{ x: [0, 4, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.8)" strokeWidth="2.2" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </motion.div>
               </div>
             </motion.button>
           </div>
