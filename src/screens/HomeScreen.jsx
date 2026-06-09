@@ -296,18 +296,27 @@ export default function HomeScreen({ go }) {
           </motion.div>
 
           {/* Grid situaciones */}
-          <div className="w-full grid grid-cols-2 gap-[10px]">
+          <div className="w-full grid grid-cols-2 gap-[12px]">
             {SITUATIONS.map((s, i) => (
               <motion.button key={i}
                 initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: .38 + i * .06 }} whileTap={{ scale: .96 }}
                 onClick={() => go.chat(s.msg)}
-                className="flex flex-col items-start text-left"
-                style={{ background: s.bg, border: `1.5px solid ${s.border}`, borderRadius: 16, padding: '16px 14px', cursor: 'pointer', minHeight: 120, backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)' }}>
-                <div style={{ width: 44, height: 44, borderRadius: 12, background: `${s.color}1a`, border: `1px solid ${s.color}40`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: s.color, marginBottom: 12 }}
+                className="flex flex-col items-start text-left relative overflow-hidden"
+                style={{
+                  background: `linear-gradient(135deg, ${s.color}18, ${s.color}06)`,
+                  border: `1.5px solid ${s.color}40`,
+                  borderRadius: 20,
+                  padding: '20px 16px',
+                  cursor: 'pointer',
+                  minHeight: 140,
+                  boxShadow: `0 4px 20px ${s.color}10`,
+                }}>
+                <div style={{ position:'absolute', top:0, left:0, right:0, height:1, background:`linear-gradient(90deg,transparent,${s.color}25,transparent)` }} />
+                <div style={{ width:46, height:46, borderRadius:14, background:`${s.color}22`, border:`1px solid ${s.color}35`, display:'flex', alignItems:'center', justifyContent:'center', color:s.color, marginBottom:12, flexShrink:0 }}
                   dangerouslySetInnerHTML={{ __html: s.svg }} />
-                <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.95rem', fontWeight: 700, color: '#f0f6ff', lineHeight: 1.25, marginBottom: 4 }}>{s.title}</div>
-                <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.77rem', color: '#8fa8cc', lineHeight: 1.4 }}>{s.desc}</div>
+                <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'.97rem', fontWeight:800, color:'#f0f6ff', lineHeight:1.2, marginBottom:4 }}>{s.title}</div>
+                <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'.77rem', color:'rgba(255,255,255,.42)', lineHeight:1.4 }}>{s.desc}</div>
               </motion.button>
             ))}
           </div>
@@ -337,9 +346,10 @@ export default function HomeScreen({ go }) {
 
           {/* Logo footer */}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}
-            className="flex flex-col items-center gap-3 pb-10 pt-4">
-            <img src="/imgs/LOGO_fadu.png" alt="FADU - Universidad de la República" style={{ height: 32, objectFit: 'contain', opacity: .7, filter: 'brightness(0) invert(1)' }} />
-            <span style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.62rem', color: '#4a6080', letterSpacing: '.05em', textAlign: 'center' }}>
+            className="w-full flex flex-col items-center gap-2 py-4 mt-4"
+            style={{ background: 'rgba(255,255,255,.03)', borderTop: '1px solid rgba(255,255,255,.08)' }}>
+            <img src="/imgs/LOGO_fadu.png" alt="FADU - Universidad de la República" style={{ height: 28, objectFit: 'contain', opacity: .65, filter: 'brightness(0) invert(1)' }} />
+            <span style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.6rem', color: 'rgba(255,255,255,.2)', letterSpacing: '.06em', textAlign: 'center', textTransform: 'uppercase' }}>
               Facultad de Arquitectura, Diseño y Urbanismo · UDELAR · 2026
             </span>
           </motion.div>
