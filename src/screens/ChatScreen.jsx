@@ -290,9 +290,9 @@ function MicButton({ onTranscript, disabled }) {
       whileTap={{ scale: 0.9 }}
       className="w-[52px] h-[52px] flex-shrink-0 rounded-[14px] flex items-center justify-center transition-all disabled:opacity-40"
       style={{
-        background: recording ? 'linear-gradient(135deg, #ef4444, #b91c1c)' : 'rgba(255,255,255,.07)',
-        border: recording ? 'none' : '1.5px solid rgba(0,200,255,.2)',
-        boxShadow: recording ? '0 0 16px rgba(239,68,68,.5)' : 'none',
+        background: recording ? 'linear-gradient(135deg, #b91c1c, #7f1d1d)' : 'linear-gradient(135deg, #ef4444, #b91c1c)',
+        border: 'none',
+        boxShadow: recording ? '0 0 20px rgba(239,68,68,.7)' : '0 0 14px rgba(239,68,68,.4)',
       }}
       title={recording ? 'Tocar para detener' : 'Tocar para hablar'}
     >
