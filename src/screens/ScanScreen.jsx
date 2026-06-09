@@ -165,7 +165,7 @@ export default function ScanScreen({ go }) {
                   🖼️ Elegir imagen
                 </div>
               </div>
-              <input ref={fileRef} type="file" accept="image/*" capture="environment"
+              <input ref={fileRef} type="file" accept="image/*"
                 className="hidden" onChange={e => handleFile(e.target.files?.[0])} />
             </motion.div>
           ) : (
