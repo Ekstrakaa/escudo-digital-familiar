@@ -335,18 +335,12 @@ export default function HomeScreen({ go }) {
             </motion.button>
           </motion.div>
 
-          {/* Logos footer */}
+          {/* Logo footer */}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}
             className="flex flex-col items-center gap-3 pb-10 pt-4">
-            <div className="flex items-center gap-5">
-              <img src="/imgs/logo_im.png" alt="Intendencia de Montevideo" style={{ height: 26, objectFit: 'contain', opacity: .9, filter: 'brightness(0) invert(1)' }} />
-              <div style={{ width: 1, height: 24, background: 'rgba(255,255,255,.1)' }} />
-              <img src="/imgs/Logo_MInisterio.png" alt="Ministerio del Interior" style={{ height: 26, objectFit: 'contain', opacity: .9, filter: 'brightness(0) invert(1)' }} />
-              <div style={{ width: 1, height: 24, background: 'rgba(255,255,255,.1)' }} />
-              <img src="/imgs/MunicipioB.png" alt="Municipio B" style={{ height: 26, objectFit: 'contain', opacity: .9, filter: 'brightness(0) invert(1)' }} />
-            </div>
-            <span style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.62rem', color: '#4a6080', letterSpacing: '.05em', textAlign: 'center' }}>
-              Intendencia de Montevideo · Ministerio del Interior · Municipio B · 2026
+            <img src="/imgs/LOGO_fadu.png" alt="FADU - Universidad de la República" style={{ height: 32, objectFit: 'contain', opacity: .7, filter: 'brightness(0) invert(1)' }} />
+            <span style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.62rem', color: '#4a6080', letterSpacing: '.05em', textAlign: 'center' }}>
+              Facultad de Arquitectura, Diseño y Urbanismo · UDELAR · 2026
             </span>
           </motion.div>
         </div>
