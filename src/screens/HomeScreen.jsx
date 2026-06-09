@@ -227,6 +227,36 @@ export default function HomeScreen({ go }) {
             </motion.button>
           </div>
 
+          {/* Botón NARANJA — Detector de estafas */}
+          <div className="relative w-full mb-3">
+            <motion.button
+              initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: .27 }} whileTap={{ scale: .97 }}
+              onClick={() => go.scan()}
+              className="relative w-full overflow-hidden rounded-2xl"
+              style={{ height: 68, border: 'none', cursor: 'pointer', background: '#5b21b6', boxShadow: '0 4px 20px rgba(139,92,246,.35)', overflow: 'hidden' }}>
+              <motion.div className="absolute pointer-events-none"
+                animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: .4 }}
+                style={{ inset: 0, background: 'linear-gradient(135deg, #5b21b6 0%, #8b5cf6 40%, #a78bfa 70%, #5b21b6 100%)', backgroundSize: '200% 200%' }}
+              />
+              <div className="absolute inset-0 pointer-events-none"
+                style={{ background: 'linear-gradient(180deg, rgba(255,255,255,.15) 0%, transparent 55%)' }} />
+              <div className="relative flex items-center justify-between px-6 h-full">
+                <div className="flex items-center gap-4">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" strokeWidth="1.8" strokeLinecap="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                  <div className="text-left">
+                    <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '1.15rem', fontWeight: 900, color: '#fff', lineHeight: 1.2 }}>Detector de Estafas</div>
+                    <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.78rem', fontWeight: 600, color: 'rgba(255,255,255,.7)', marginTop: 2 }}>Sacá foto a un mensaje sospechoso</div>
+                  </div>
+                </div>
+                <motion.div animate={{ x: [0, 4, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut', delay: .6 }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" strokeWidth="2.2" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </motion.div>
+              </div>
+            </motion.button>
+          </div>
+
           {/* Botón ROJO — Necesito ayuda */}
           <div className="relative w-full mb-7">
             <motion.button
