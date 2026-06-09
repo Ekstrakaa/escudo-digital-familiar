@@ -48,23 +48,22 @@ export const STEPS = [
     fc: '✅ ¡Correcto! Llamar al número conocido del familiar es la única forma segura. "No le digas a nadie" es siempre señal de estafa.',
     fw: '❌ "No le digas a nadie" es siempre estafa. Nunca mandes plata sin llamar primero al número guardado de tu familiar.'
   },
-
-  // ─── PREGUNTA 3: Clonación de voz IA ────────────────────
+  // ─── PREGUNTA 3: Vishing call center ────────────────────
   {
     type: 'q',
     id: 3,
     cat: '¿Esa voz es real?',
-    icon: '🤖',
-    txt: '📲 Te llama alguien con la voz de tu hija, llorando: "Tuve un accidente, mandame $10.000 ahora." ¿Qué hacés?',
+    icon: '📞',
+    txt: '📲 Te llama un número desconocido. Una chica muy amable dice: "Hola, le llamo de Claro. Tenemos una promoción exclusiva para usted — internet ilimitado sin costo. Solo necesito confirmar su nombre completo, número de cédula y los últimos 4 dígitos de su tarjeta." Vos sos cliente de Tigo y nunca pediste nada. ¿Qué hacés?',
     opts: [
-      'Transfiero de inmediato — reconozco perfectamente su voz, es ella',
-      'Le pido más detalles del accidente antes de transferir',
-      'Cuelgo y llamo YO al número guardado de mi hija para verificar',
-      'Le digo que voy personalmente a verla al hospital'
+      'Le doy los datos — suena muy profesional y la oferta es buena',
+      'Le doy el nombre y cédula nomás, pero no los datos de la tarjeta',
+      'Cuelgo de inmediato — nunca solicité nada y ninguna empresa pide datos de tarjeta por teléfono',
+      'Le pido que me llame en otro momento cuando tenga tiempo'
     ],
     ok: 2,
-    fc: '✅ ¡Correcto! La IA puede copiar cualquier voz. La única defensa: colgá y llamá vos al número guardado de tu familiar.',
-    fw: '❌ Se llama clonación de voz con IA. Colgá siempre y llamá vos al número guardado del familiar.'
+    fc: '✅ ¡Correcto! Esto se llama Vishing — estafa por llamada. Nunca des datos personales ni bancarios por teléfono a alguien que llamó sin que vos lo pidieras. Colgá siempre.',
+    fw: '❌ Esto es Vishing — estafa por teléfono. Con tu nombre, cédula y datos de tarjeta pueden robarte dinero y suplantar tu identidad. Colgá siempre ante llamadas no solicitadas que pidan datos.'
   },
 
 
