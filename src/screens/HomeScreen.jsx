@@ -132,7 +132,7 @@ export default function HomeScreen({ go }) {
           style={{ borderRadius: '0 0 28px 28px', maxHeight: 200 }}
         >
           <img
-            src="/imgs/hero_abuelitos.png"
+            src="/imgs/hero_abuelitos.jpg"
             alt="Adultos mayores usando el celular"
             style={{ width: '100%', height: 200, objectFit: 'cover', objectPosition: '50% 30%', display: 'block' }}
           />
@@ -296,7 +296,7 @@ export default function HomeScreen({ go }) {
           </motion.div>
 
           {/* Grid situaciones */}
-          <div className="w-full grid grid-cols-2 gap-[12px]">
+          <div className="w-full grid grid-cols-2 gap-[10px]">
             {SITUATIONS.map((s, i) => (
               <motion.button key={i}
                 initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
@@ -307,16 +307,16 @@ export default function HomeScreen({ go }) {
                   background: `linear-gradient(135deg, ${s.color}18, ${s.color}06)`,
                   border: `1.5px solid ${s.color}40`,
                   borderRadius: 20,
-                  padding: '20px 16px',
+                  padding: '16px 14px',
                   cursor: 'pointer',
-                  minHeight: 140,
+                  minHeight: 120,
                   boxShadow: `0 4px 20px ${s.color}10`,
                 }}>
                 <div style={{ position:'absolute', top:0, left:0, right:0, height:1, background:`linear-gradient(90deg,transparent,${s.color}25,transparent)` }} />
                 <div style={{ width:46, height:46, borderRadius:14, background:`${s.color}22`, border:`1px solid ${s.color}35`, display:'flex', alignItems:'center', justifyContent:'center', color:s.color, marginBottom:12, flexShrink:0 }}
                   dangerouslySetInnerHTML={{ __html: s.svg }} />
-                <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'1.05rem', fontWeight:800, color:'#f0f6ff', lineHeight:1.2, marginBottom:4 }}>{s.title}</div>
-                <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'.83rem', color:'rgba(255,255,255,.45)', lineHeight:1.4 }}>{s.desc}</div>
+                <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'.95rem', fontWeight:800, color:'#f0f6ff', lineHeight:1.2, marginBottom:4 }}>{s.title}</div>
+                <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'.75rem', color:'rgba(255,255,255,.42)', lineHeight:1.4 }}>{s.desc}</div>
               </motion.button>
             ))}
           </div>
