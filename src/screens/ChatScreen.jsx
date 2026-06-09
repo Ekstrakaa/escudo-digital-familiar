@@ -251,19 +251,24 @@ function MicButton({ onTranscript, disabled }) {
         setLoading(true)
         try {
           const blob = new Blob(chunksRef.current, { type: mr.mimeType })
-          const fd   = new FormData()
-          fd.append('file', blob, 'audio.webm')
-          fd.append('model', 'whisper-1')
-          fd.append('language', 'es')
-          const resp = await fetch('https://api.openai.com/v1/audio/transcriptions', {
-            method: 'POST',
-            headers: { 'Authorization': `Bearer ${import.meta.env.VITE_OPENAI_KEY || ''}` },
-            body: fd,
-          })
-          const data = await resp.json()
-          if (data?.text?.trim()) onTranscript(data.text.trim())
-        } catch(e) { console.error('Whisper error:', e) }
-        setLoading(false)
+          // Convertir a base64 para mandar al backend seguro
+          const reader = new FileReader()
+          reader.onload = async (e) => {
+            const base64 = e.target.result.split(',')[1]
+            const resp = await fetch('/api/transcribe', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ audioBase64: base64, mimeType: mr.mimeType }),
+            })
+            const data = await resp.json()
+            if (data?.text) onTranscript(data.text)
+            setLoading(false)
+          }
+          reader.readAsDataURL(blob)
+        } catch(e) {
+          console.error('Transcribe error:', e)
+          setLoading(false)
+        }
       }
       mr.start()
       mediaRef.current = mr
