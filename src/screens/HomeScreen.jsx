@@ -216,13 +216,15 @@ export default function HomeScreen({ go }) {
                 <div className="flex items-center gap-4">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,.7)" strokeWidth="1.8" strokeLinecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                   <div className="text-left">
-                    <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '1.15rem', fontWeight: 900, color: '#000', lineHeight: 1.2 }}>Test de Blindaje</div>
-                    <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.78rem', fontWeight: 600, color: 'rgba(0,0,0,.65)', marginTop: 2 }}>¿Qué tan protegido estás?</div>
+                    <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '1.2rem', fontWeight: 900, color: '#000', lineHeight: 1.2 }}>Test de Blindaje</div>
+                    <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.83rem', fontWeight: 600, color: 'rgba(0,0,0,.65)', marginTop: 2 }}>¿Qué tan protegido estás?</div>
                   </div>
                 </div>
-                <motion.div animate={{ x: [0, 4, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut', delay: .3 }}>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,.6)" strokeWidth="2.2" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </motion.div>
+                <div style={{ width:32, height:32, borderRadius:9, background:'rgba(0,0,0,.15)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
+                  <motion.div animate={{ x:[0,5,0] }} transition={{ duration:1.4, repeat:Infinity, ease:'easeInOut' }}>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,.8)" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  </motion.div>
+                </div>
               </div>
             </motion.button>
           </div>
@@ -251,8 +253,11 @@ export default function HomeScreen({ go }) {
                   </div>
                 </div>
                 <motion.div animate={{ x: [0, 4, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut', delay: .6 }}>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" strokeWidth="2.2" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </motion.div>
+                <div style={{ width:32, height:32, borderRadius:9, background:'rgba(255,255,255,.2)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
+                  <motion.div animate={{ x:[0,5,0] }} transition={{ duration:1.4, repeat:Infinity, ease:'easeInOut', delay:.2 }}>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  </motion.div>
+                </div>
               </div>
             </motion.button>
           </div>
@@ -280,9 +285,11 @@ export default function HomeScreen({ go }) {
                     <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.78rem', fontWeight: 600, color: 'rgba(255,255,255,.8)', marginTop: 2 }}>Hablá con nuestro asistente</div>
                   </div>
                 </div>
-                <motion.div animate={{ x: [0, 4, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.8)" strokeWidth="2.2" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </motion.div>
+                <div style={{ width:32, height:32, borderRadius:9, background:'rgba(255,255,255,.2)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
+                  <motion.div animate={{ x:[0,5,0] }} transition={{ duration:1.4, repeat:Infinity, ease:'easeInOut', delay:.4 }}>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  </motion.div>
+                </div>
               </div>
             </motion.button>
           </div>
@@ -315,8 +322,8 @@ export default function HomeScreen({ go }) {
                 <div style={{ position:'absolute', top:0, left:0, right:0, height:1, background:`linear-gradient(90deg,transparent,${s.color}25,transparent)` }} />
                 <div style={{ width:46, height:46, borderRadius:14, background:`${s.color}22`, border:`1px solid ${s.color}35`, display:'flex', alignItems:'center', justifyContent:'center', color:s.color, marginBottom:12, flexShrink:0 }}
                   dangerouslySetInnerHTML={{ __html: s.svg }} />
-                <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'.97rem', fontWeight:800, color:'#f0f6ff', lineHeight:1.2, marginBottom:4 }}>{s.title}</div>
-                <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'.77rem', color:'rgba(255,255,255,.42)', lineHeight:1.4 }}>{s.desc}</div>
+                <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'1.05rem', fontWeight:800, color:'#f0f6ff', lineHeight:1.2, marginBottom:4 }}>{s.title}</div>
+                <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'.83rem', color:'rgba(255,255,255,.45)', lineHeight:1.4 }}>{s.desc}</div>
               </motion.button>
             ))}
           </div>
@@ -346,8 +353,8 @@ export default function HomeScreen({ go }) {
 
           {/* Logo footer */}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}
-            className="w-full flex flex-col items-center gap-2 py-4 mt-4"
-            style={{ background: 'rgba(255,255,255,.03)', borderTop: '1px solid rgba(255,255,255,.08)' }}>
+            className="w-full flex flex-col items-center gap-2 py-5 mt-4"
+            style={{ background: 'rgba(255,255,255,.03)', borderTop: '1px solid rgba(255,255,255,.08)', marginLeft: '-1rem', marginRight: '-1rem', paddingLeft: '1rem', paddingRight: '1rem' }}>
             <img src="/imgs/LOGO_fadu.png" alt="FADU - Universidad de la República" style={{ height: 28, objectFit: 'contain', opacity: .65, filter: 'brightness(0) invert(1)' }} />
             <span style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.6rem', color: 'rgba(255,255,255,.2)', letterSpacing: '.06em', textAlign: 'center', textTransform: 'uppercase' }}>
               Facultad de Arquitectura, Diseño y Urbanismo · UDELAR · 2026
