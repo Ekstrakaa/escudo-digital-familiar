@@ -129,48 +129,55 @@ function RobotAvatar({ typing }) {
 }
 
 
-function BotBubble({ text, isTyping }) {
-  // Formatear texto — párrafos, negritas, pasos numerados
+function BotBubble({ text }) {
+  // Detectar si hay número de teléfono urgente para mostrar card de alerta
+  const phoneMatch = text.match(/\*\*(\d[\d\s]{5,})\*\*/)
+  const urgentPhone = phoneMatch ? phoneMatch[1].trim() : null
+
   const fmt = text
     .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-    // Negritas en verde
-    .replace(/\*\*(.*?)\*\*/g,'<strong style="color:#00E5A0;font-size:1rem">$1</strong>')
-    // Párrafos doble salto
+    .replace(/\*\*(.*?)\*\*/g,'<strong style="color:#00E5A0;font-weight:800">$1</strong>')
     .replace(/\n\n/g,'</p><p style="margin:10px 0 0 0">')
-    // Pasos numerados — cada uno destacado
-    .replace(/\n(\d+)\.\s/g, '</p><p style="margin:10px 0 0 0"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#00E5A0;color:#000;font-weight:800;font-size:.78rem;margin-right:8px;flex-shrink:0">$1</span>')
-    // Salto simple
-    .replace(/\n/g,'<br/>')
-    // Emoji 💡 en su propia línea destacada
-    .replace(/💡/g,'<br/><span style="color:#f59e0b;font-size:.9rem">💡</span>')
+    .replace(/\n(\d+)\.\s/g, '</p><p style="margin:8px 0 0 0;display:flex;align-items:flex-start;gap:8px"><span style="display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;border-radius:50%;background:#00E5A0;color:#000;font-weight:900;font-size:.72rem;margin-top:2px;flex-shrink:0">$1</span><span>')
+    .replace(/\n/g,'</span></p><p style="margin:0">')
+    .replace(/💡/g,'<span style="color:#f59e0b">💡</span>')
 
   return (
-    <div className="flex items-start gap-3 w-full self-start">
+    <div className="flex items-start gap-2 w-full self-start">
       <div className="flex-shrink-0 mt-1"><RobotAvatar typing={false} /></div>
       <div className="flex-1 min-w-0">
-        {/* Burbuja */}
-        <div className="relative">
+        <div
+          style={{
+            background: '#111c2e',
+            border: '1px solid rgba(0,229,160,.15)',
+            borderLeft: '3px solid #00E5A0',
+            borderRadius: '0 16px 16px 0',
+            padding: '12px 14px',
+            fontSize: '.95rem',
+            lineHeight: '1.8',
+            wordBreak: 'break-word',
+            fontFamily: "'Nunito','Outfit',sans-serif",
+            color: '#dde8f8',
+          }}
+          dangerouslySetInnerHTML={{ __html: '<p style="margin:0">' + fmt + '</p>' }}
+        />
+        {urgentPhone && (
           <div style={{
-            position:'absolute', left:-7, top:14,
-            width:0, height:0,
-            borderTop:'7px solid transparent',
-            borderRight:'8px solid #1a2a3a',
-            borderBottom:'7px solid transparent',
-          }} />
-          <div
-            className="rounded-2xl rounded-tl-[4px] px-4 py-4 text-white"
-            style={{
-              background:'#1a2a3a',
-              boxShadow:'0 2px 8px rgba(0,0,0,.3)',
-              fontSize:'.97rem',
-              lineHeight:'1.8',
-              wordBreak:'break-word',
-              fontFamily:"'Outfit',sans-serif",
-            }}
-            dangerouslySetInnerHTML={{ __html: '<p style="margin:0">' + fmt + '</p>' }}
-          />
-        </div>
-        <div className="text-[.6rem] text-slate-500 mt-1 pl-1">
+            background: 'rgba(239,68,68,.08)',
+            border: '1px solid rgba(239,68,68,.22)',
+            borderRadius: '0 0 12px 12px',
+            padding: '8px 14px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 8,
+          }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6z"/></svg>
+            <span style={{ fontSize: '.82rem', color: '#f87171', fontWeight: 700, fontFamily: "'Nunito',sans-serif" }}>
+              Llamá ahora: {urgentPhone}
+            </span>
+          </div>
+        )}
+        <div style={{ fontSize: '.6rem', color: 'rgba(100,130,160,.6)', marginTop: 4, paddingLeft: 4 }}>
           Asistente · {now()}
         </div>
       </div>
@@ -238,7 +245,7 @@ function MicButton({ onTranscript, disabled }) {
   const [recording, setRecording] = useState(false)
   const [loading, setLoading]     = useState(false)
   const mediaRef  = useRef(null)
-  const chunksRef = useRef([])
+  const chunksRef = React.useRef([])
 
   const start = async () => {
     try {
@@ -251,7 +258,6 @@ function MicButton({ onTranscript, disabled }) {
         setLoading(true)
         try {
           const blob = new Blob(chunksRef.current, { type: mr.mimeType })
-          // Convertir a base64 para mandar al backend seguro
           const reader = new FileReader()
           reader.onload = async (e) => {
             const base64 = e.target.result.split(',')[1]
@@ -265,17 +271,12 @@ function MicButton({ onTranscript, disabled }) {
             setLoading(false)
           }
           reader.readAsDataURL(blob)
-        } catch(e) {
-          console.error('Transcribe error:', e)
-          setLoading(false)
-        }
+        } catch(e) { console.error('Transcribe error:', e); setLoading(false) }
       }
       mr.start()
       mediaRef.current = mr
       setRecording(true)
-    } catch(e) {
-      alert('No se pudo acceder al micrófono. Activalo en la configuración del navegador.')
-    }
+    } catch(e) { alert('No se pudo acceder al micrófono.') }
   }
 
   const stop = () => {
@@ -293,17 +294,15 @@ function MicButton({ onTranscript, disabled }) {
         background: recording ? 'linear-gradient(135deg, #b91c1c, #7f1d1d)' : 'linear-gradient(135deg, #ef4444, #b91c1c)',
         border: 'none',
         boxShadow: recording ? '0 0 20px rgba(239,68,68,.7)' : '0 0 14px rgba(239,68,68,.4)',
-      }}
-      title={recording ? 'Tocar para detener' : 'Tocar para hablar'}
-    >
+      }}>
       {loading ? (
         <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 0.8, ease: 'linear' }}
-          style={{ width:20, height:20, borderRadius:'50%', border:'2px solid #00E5A0', borderTopColor:'transparent' }} />
+          style={{ width:20, height:20, borderRadius:'50%', border:'2px solid #fff', borderTopColor:'transparent' }} />
       ) : recording ? (
         <motion.div animate={{ scale:[1,1.15,1] }} transition={{ repeat:Infinity, duration:0.7 }}
           style={{ width:16, height:16, borderRadius:3, background:'white' }} />
       ) : (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <rect x="9" y="2" width="6" height="12" rx="3"/>
           <path d="M5 10a7 7 0 0 0 14 0"/>
           <line x1="12" y1="19" x2="12" y2="22"/>
