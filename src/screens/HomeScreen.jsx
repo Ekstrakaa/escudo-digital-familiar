@@ -162,7 +162,7 @@ export default function HomeScreen({ go }) {
               ]
             }}
             transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-            style={{ width: 72, height: 72, objectFit: 'contain' }}
+            style={{ width: 82, height: 82, objectFit: 'contain' }}
           />
         </motion.div>
 
@@ -182,7 +182,7 @@ export default function HomeScreen({ go }) {
             href="https://montevideo.gub.uy/area-tematica/inclusion-social/personas-mayores/programa-de-inclusion-digital"
             target="_blank" rel="noopener noreferrer"
             initial={{ opacity: 0, scale: .92 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: .4 }}
-            className="flex items-center gap-2 px-4 py-[7px] rounded-full mb-3 mt-4"
+            className="flex items-center gap-2 px-4 py-[5px] rounded-full mb-2 mt-2"
             style={{ background: 'rgba(139,124,248,.12)', border: '1px solid rgba(139,124,248,.35)', textDecoration: 'none' }}
           >
             <motion.div animate={{ opacity: [1, .3, 1] }} transition={{ duration: 2, repeat: Infinity }}
@@ -194,8 +194,8 @@ export default function HomeScreen({ go }) {
 
           {/* Subtítulo */}
           <motion.p initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .38, duration: .4 }}
-            style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.85rem', color: '#c8d8ee', textAlign: 'center', maxWidth: 340, lineHeight: 1.5, marginBottom: 14, marginTop: 4 }}>
-            Tu herramienta ante estafas digitales y el cuento del tío. Disponible 24/7, no estás solo.
+            style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.85rem', color: '#c8d8ee', textAlign: 'center', maxWidth: 340, lineHeight: 1.4, marginBottom: 12, marginTop: 2 }}>
+            Protegete de estafas digitales. Estamos acá 24/7.
           </motion.p>
 
           {/* Botón VERDE — Test de Blindaje */}
