@@ -125,33 +125,25 @@ export default function HomeScreen({ go }) {
       <div className="relative z-10 flex flex-col items-center"
         style={{ paddingTop: `calc(env(safe-area-inset-top, 0px) + 0px)`, paddingBottom: 40 }}>
 
-        {/* ── FOTO ABUELITOS — solo imagen, sin texto encima ── */}
+        {/* ── FOTO + LOGO ENCIMA ── */}
         <motion.div
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: .6 }}
-          className="relative w-full overflow-hidden"
-          style={{ borderRadius: '0 0 28px 28px', maxHeight: 200 }}
+          className="relative w-full"
+          style={{ borderRadius: '0 0 24px 24px', overflow: 'hidden' }}
         >
           <img
             src="/imgs/hero_abuelitos.jpg"
             alt="Adultos mayores usando el celular"
             style={{ width: '100%', height: 'auto', display: 'block' }}
           />
-          {/* Overlay solo abajo para transición suave al fondo oscuro */}
+          {/* Overlay oscuro solo abajo */}
           <div style={{
-            position: 'absolute', inset: 0,
-            background: 'linear-gradient(180deg, transparent 50%, #060c1a 100%)',
+            position: 'absolute', bottom: 0, left: 0, right: 0, height: '45%',
+            background: 'linear-gradient(180deg, transparent, #060c1a)',
+            pointerEvents: 'none',
           }} />
-
-        </motion.div>
-
-        {/* ── LOGO + TÍTULO debajo de la foto ── */}
-        <div className="flex flex-col items-center px-4 w-full" style={{ maxWidth: 480 }}>
-          <motion.div
-            initial={{ opacity: 0, scale: .85 }} animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: .3, duration: .5 }}
-            className="flex items-center justify-center"
-            style={{ marginTop: -48 }}
-          >
+          {/* Logo encima de los pies, transparente */}
+          <div style={{ position: 'absolute', bottom: 10, left: 0, right: 0, display: 'flex', justifyContent: 'center' }}>
             <motion.img src="/imgs/LOGO.png" alt="Escudo Digital Familiar"
               animate={{
                 scale: [1, 1.1, 1],
@@ -164,12 +156,16 @@ export default function HomeScreen({ go }) {
                 ]
               }}
               transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-              style={{ width: 100, height: 100, objectFit: 'contain', marginBottom: 12 }}
+              style={{ width: 90, height: 90, objectFit: 'contain', opacity: .92 }}
             />
-          </motion.div>
+          </div>
+        </motion.div>
+
+        {/* ── TÍTULO debajo de la foto ── */}
+        <div className="flex flex-col items-center px-4 w-full" style={{ maxWidth: 480 }}>
 
           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: .35, duration: .4 }} className="text-center mb-1">
+            transition={{ delay: .35, duration: .4 }} className="text-center mb-1" style={{ marginTop: 20 }}>
             <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '2.2rem', fontWeight: 800, color: '#fff', lineHeight: 1.1, letterSpacing: '-0.5px' }}>Escudo Digital</div>
             <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '2.2rem', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-0.5px' }}>
               <span style={{ color: '#00E5A0' }}>Familiar</span>
@@ -338,7 +334,7 @@ export default function HomeScreen({ go }) {
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="1.8" strokeLinecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16l.19.92z"/></svg>
                   </motion.div>
                   <div className="text-left">
-                    <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '1.15rem', fontWeight: 900, color: '#fff', lineHeight: 1.2 }}>Primeros Auxilios Digitales</div>
+                    <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '1rem', fontWeight: 900, color: '#fff', lineHeight: 1.2 }}>Primeros Auxilios Digitales</div>
                     <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.78rem', fontWeight: 600, color: '#ef4444', marginTop: 2 }}>Si te estafaron, hacé esto YA →</div>
                   </div>
                 </div>
