@@ -114,6 +114,7 @@ function ScreenshotTutorial() {
 }
 
 export default function ScanScreen({ go }) {
+  const [showTutorial, setShowTutorial] = useState(false)
   const [image, setImage]       = useState(null)
   const [mimeType, setMimeType] = useState('image/jpeg')
   const [preview, setPreview]   = useState(null)
@@ -195,8 +196,50 @@ export default function ScanScreen({ go }) {
           <div style={{ fontSize:'.88rem', color:'rgba(255,255,255,.45)', lineHeight:1.6 }}>Sacale foto o subí la captura. La IA lo analiza en segundos y te dice si es una estafa.</div>
         </div>
 
-        {/* Tutorial screenshot */}
-        <ScreenshotTutorial />
+        {/* Botón tutorial */}
+        <motion.button
+          initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:.2 }}
+          onClick={() => setShowTutorial(true)}
+          style={{ display:'flex', alignItems:'center', gap:8, background:'rgba(139,124,248,.08)', border:'1px solid rgba(139,124,248,.25)', borderRadius:12, padding:'10px 14px', cursor:'pointer', width:'100%' }}>
+          <div style={{ width:32, height:32, borderRadius:9, background:'rgba(139,124,248,.15)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8b7cf8" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16" strokeWidth="3"/></svg>
+          </div>
+          <div style={{ textAlign:'left' }}>
+            <div style={{ fontSize:'.88rem', fontWeight:800, color:'#fff' }}>¿Cómo saco la captura?</div>
+            <div style={{ fontSize:'.72rem', color:'rgba(139,124,248,.7)', marginTop:1 }}>Ver tutorial para iPhone y Android</div>
+          </div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(139,124,248,.5)" strokeWidth="2" strokeLinecap="round" style={{ marginLeft:'auto', flexShrink:0 }}><path d="M9 18l6-6-6-6"/></svg>
+        </motion.button>
+
+        {/* Modal tutorial */}
+        <AnimatePresence>
+          {showTutorial && (
+            <motion.div
+              initial={{ opacity:0 }} animate={{ opacity:1 }} exit={{ opacity:0 }}
+              style={{ position:'fixed', inset:0, background:'rgba(0,0,0,.75)', zIndex:100, display:'flex', alignItems:'center', justifyContent:'center', padding:'0 20px' }}
+              onClick={() => setShowTutorial(false)}>
+              <motion.div
+                initial={{ opacity:0, scale:.9, y:20 }} animate={{ opacity:1, scale:1, y:0 }} exit={{ opacity:0, scale:.9, y:20 }}
+                transition={{ type:'spring', damping:20, stiffness:300 }}
+                onClick={e => e.stopPropagation()}
+                style={{ background:'#0d1628', border:'1px solid rgba(139,124,248,.3)', borderRadius:24, padding:'20px 16px', width:'100%', maxWidth:360 }}>
+                <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:16 }}>
+                  <div>
+                    <div style={{ fontSize:'1rem', fontWeight:900, color:'#fff' }}>¿Cómo sacar una captura?</div>
+                    <div style={{ fontSize:'.75rem', color:'rgba(255,255,255,.4)', marginTop:2 }}>Apretá estos dos botones al mismo tiempo</div>
+                  </div>
+                  <button onClick={() => setShowTutorial(false)}
+                    style={{ width:32, height:32, borderRadius:9, background:'rgba(255,255,255,.07)', border:'1px solid rgba(255,255,255,.1)', color:'rgba(255,255,255,.6)', cursor:'pointer', fontSize:'1rem', display:'flex', alignItems:'center', justifyContent:'center' }}>✕</button>
+                </div>
+                <ScreenshotTutorial />
+                <button onClick={() => setShowTutorial(false)}
+                  style={{ width:'100%', padding:'14px', borderRadius:14, border:'none', cursor:'pointer', background:'linear-gradient(135deg,#00e5a0,#00c48a)', fontWeight:900, fontSize:'1rem', color:'#000', marginTop:4 }}>
+                  ¡Entendido!
+                </button>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Zona de subida / resultado */}
         <AnimatePresence mode="wait">
