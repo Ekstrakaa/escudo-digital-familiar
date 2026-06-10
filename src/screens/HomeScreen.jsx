@@ -200,9 +200,9 @@ export default function HomeScreen({ go }) {
 
           {/* Subtítulo */}
           <motion.p initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .38, duration: .4 }}
-            style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.75rem', color: '#c8d8ee', textAlign: 'center', maxWidth: 340, lineHeight: 1.4, marginBottom: 12, marginTop: 2 }}>
-            Ante cualquier ciberestafa o cuento del tío, estamos acá para ti.
-Gratis, seguro, las 24hs. No estás solo, verificá.
+            style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.78rem', color: 'rgba(255,255,255,.75)', textAlign: 'center', maxWidth: 340, lineHeight: 1.4, marginBottom: 12, marginTop: 2 }}>
+            Ante cualquier ciberestafa o cuento del tío — estamos acá para ti.
+Gratis · Seguro · 24hs · No estás solo.
           </motion.p>
 
           {/* Botón VERDE — Test de Blindaje */}
