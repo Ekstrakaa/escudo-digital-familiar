@@ -59,7 +59,7 @@ function Particles() {
 const SITUATIONS = [
   {
     svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16l.19.92z"/></svg>`,
-    title: 'Llamada del banco', desc: 'Me piden datos o clave',
+    title: 'Banco sospechoso', desc: 'Me piden datos o clave',
     color: '#ef4444', bg: 'rgba(239,68,68,.04)', border: 'rgba(239,68,68,.30)',
     tag: 'VISHING',
     msg: 'Me llamaron del banco y me pidieron mi clave',
@@ -80,21 +80,21 @@ const SITUATIONS = [
   },
   {
     svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16" stroke-width="2.5"/></svg>`,
-    title: 'Caí en una estafa', desc: '¿Qué hago ahora?',
+    title: 'Caí en estafa', desc: '¿Qué hago ahora?',
     color: '#f97316', bg: 'rgba(249,115,22,.04)', border: 'rgba(249,115,22,.30)',
     tag: 'FRAUDE',
     msg: 'Creo que me estafaron, veo movimientos raros en mi cuenta',
   },
   {
     svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
-    title: 'Persona en la puerta', desc: 'Pide datos o dinero',
+    title: 'En la puerta', desc: 'Pide datos o dinero',
     color: '#8b7cf8', bg: 'rgba(139,124,248,.04)', border: 'rgba(139,124,248,.30)',
     tag: 'PRESENCIAL',
     msg: 'Hay una persona en la puerta pidiendo mis datos del banco',
   },
   {
     svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
-    title: 'Proteger familiar', desc: 'Guía para tu familia',
+    title: 'Proteger familia', desc: 'Guía para tu familia',
     color: '#06b6d4', bg: 'rgba(6,182,212,.04)', border: 'rgba(6,182,212,.30)',
     tag: 'GUÍA',
     msg: '¿Cómo puedo proteger a mi familiar mayor de las estafas?',
@@ -325,7 +325,7 @@ export default function HomeScreen({ go }) {
                     dangerouslySetInnerHTML={{ __html: s.svg }} />
                   <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'.68rem', fontWeight:800, color:s.color, letterSpacing:'.08em', opacity:.8, whiteSpace:'nowrap' }}>{s.tag}</div>
                 </div>
-                <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'1.05rem', fontWeight:800, color:'#f0f6ff', lineHeight:1.2, marginBottom:4 }}>{s.title}</div>
+                <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'.97rem', fontWeight:800, color:'#f0f6ff', lineHeight:1.2, marginBottom:4 }}>{s.title}</div>
                 <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'.82rem', color:'rgba(255,255,255,.42)', lineHeight:1.4 }}>{s.desc}</div>
               </motion.button>
             ))}
