@@ -143,7 +143,7 @@ export default function HomeScreen({ go }) {
             pointerEvents: 'none',
           }} />
           {/* Logo encima de los pies, transparente */}
-          <div style={{ position: 'absolute', bottom: 10, left: 0, right: 0, display: 'flex', justifyContent: 'center' }}>
+          <div style={{ position: 'absolute', bottom: -10, left: 0, right: 0, display: 'flex', justifyContent: 'center' }}>
             <motion.img src="/imgs/LOGO.png" alt="Escudo Digital Familiar"
               animate={{
                 scale: [1, 1.1, 1],
