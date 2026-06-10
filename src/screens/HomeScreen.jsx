@@ -134,7 +134,7 @@ export default function HomeScreen({ go }) {
           <img
             src="/imgs/hero_abuelitos.jpg"
             alt="Adultos mayores usando el celular"
-            style={{ width: '100%', height: 240, objectFit: 'cover', objectPosition: '50% 50%', display: 'block' }}
+            style={{ width: '100%', height: 'auto', display: 'block' }}
           />
           {/* Overlay solo abajo para transición suave al fondo oscuro */}
           <div style={{
