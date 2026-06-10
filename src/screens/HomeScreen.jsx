@@ -125,7 +125,7 @@ export default function HomeScreen({ go }) {
       <div className="relative z-10 flex flex-col items-center"
         style={{ paddingTop: `calc(env(safe-area-inset-top, 0px) + 0px)`, paddingBottom: 40 }}>
 
-        {/* ── FOTO + LOGO ENCIMA ── */}
+        {/* ── FOTO ── */}
         <motion.div
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: .6 }}
           className="relative w-full"
@@ -142,30 +142,35 @@ export default function HomeScreen({ go }) {
             background: 'linear-gradient(180deg, transparent, #060c1a)',
             pointerEvents: 'none',
           }} />
-          {/* Logo encima de los pies, transparente */}
-          <div style={{ position: 'absolute', bottom: -10, left: 0, right: 0, display: 'flex', justifyContent: 'center' }}>
-            <motion.img src="/imgs/LOGO.png" alt="Escudo Digital Familiar"
-              animate={{
-                scale: [1, 1.1, 1],
-                filter: [
-                  'drop-shadow(0 0 22px rgba(0,229,160,.95))',
-                  'drop-shadow(0 0 22px rgba(0,200,255,.95))',
-                  'drop-shadow(0 0 22px rgba(139,124,248,.95))',
-                  'drop-shadow(0 0 22px rgba(255,180,0,.95))',
-                  'drop-shadow(0 0 22px rgba(0,229,160,.95))',
-                ]
-              }}
-              transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-              style={{ width: 90, height: 90, objectFit: 'contain', opacity: .92 }}
-            />
-          </div>
         </motion.div>
 
-        {/* ── TÍTULO debajo de la foto ── */}
+        {/* ── LOGO flotando entre foto y título ── */}
+        <motion.div
+          initial={{ opacity: 0, scale: .85 }} animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: .3, duration: .5 }}
+          style={{ marginTop: -45, zIndex: 10, position: 'relative' }}
+        >
+          <motion.img src="/imgs/LOGO.png" alt="Escudo Digital Familiar"
+            animate={{
+              scale: [1, 1.1, 1],
+              filter: [
+                'drop-shadow(0 0 22px rgba(0,229,160,.95))',
+                'drop-shadow(0 0 22px rgba(0,200,255,.95))',
+                'drop-shadow(0 0 22px rgba(139,124,248,.95))',
+                'drop-shadow(0 0 22px rgba(255,180,0,.95))',
+                'drop-shadow(0 0 22px rgba(0,229,160,.95))',
+              ]
+            }}
+            transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+            style={{ width: 90, height: 90, objectFit: 'contain' }}
+          />
+        </motion.div>
+
+        {/* ── TÍTULO ── */}
         <div className="flex flex-col items-center px-4 w-full" style={{ maxWidth: 480 }}>
 
           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: .35, duration: .4 }} className="text-center mb-1" style={{ marginTop: 20 }}>
+            transition={{ delay: .35, duration: .4 }} className="text-center mb-1" style={{ marginTop: 8 }}>
             <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '2.2rem', fontWeight: 800, color: '#fff', lineHeight: 1.1, letterSpacing: '-0.5px' }}>Escudo Digital</div>
             <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '2.2rem', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-0.5px' }}>
               <span style={{ color: '#00E5A0' }}>Familiar</span>
