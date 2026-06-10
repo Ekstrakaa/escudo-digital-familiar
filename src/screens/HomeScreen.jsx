@@ -200,8 +200,9 @@ export default function HomeScreen({ go }) {
 
           {/* Subtítulo */}
           <motion.p initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .38, duration: .4 }}
-            style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.85rem', color: '#c8d8ee', textAlign: 'center', maxWidth: 340, lineHeight: 1.4, marginBottom: 12, marginTop: 2 }}>
-            Protegete de cualquier estafa digital y el cuento del tío. Estoy acá para vos, las 24 horas.
+            style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.75rem', color: '#c8d8ee', textAlign: 'center', maxWidth: 340, lineHeight: 1.4, marginBottom: 12, marginTop: 2 }}>
+            Ante cualquier ciberestafa o cuento del tío, estamos acá para ti.
+Gratis, seguro, las 24hs. No estás solo, verificá.
           </motion.p>
 
           {/* Botón VERDE — Test de Blindaje */}
@@ -211,7 +212,7 @@ export default function HomeScreen({ go }) {
               transition={{ delay: .3 }} whileTap={{ scale: .97 }}
               onClick={() => go.quiz()}
               className="relative w-full overflow-hidden rounded-2xl"
-              style={{ height: 68, border: 'none', cursor: 'pointer', background: '#059669', boxShadow: '0 4px 20px rgba(16,185,129,.3)', overflow: 'hidden' }}>
+              style={{ height: 58, border: 'none', cursor: 'pointer', background: '#059669', boxShadow: '0 4px 20px rgba(16,185,129,.3)', overflow: 'hidden' }}>
               <motion.div className="absolute pointer-events-none"
                 animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
@@ -241,7 +242,7 @@ export default function HomeScreen({ go }) {
               transition={{ delay: .27 }} whileTap={{ scale: .97 }}
               onClick={() => go.scan()}
               className="relative w-full overflow-hidden rounded-2xl"
-              style={{ height: 68, border: 'none', cursor: 'pointer', background: '#5b21b6', boxShadow: '0 4px 20px rgba(139,92,246,.35)', overflow: 'hidden' }}>
+              style={{ height: 58, border: 'none', cursor: 'pointer', background: '#5b21b6', boxShadow: '0 4px 20px rgba(139,92,246,.35)', overflow: 'hidden' }}>
               <motion.div className="absolute pointer-events-none"
                 animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: .4 }}
@@ -271,7 +272,7 @@ export default function HomeScreen({ go }) {
               transition={{ delay: .24 }} whileTap={{ scale: .97 }}
               onClick={() => go.chat(null)}
               className="relative w-full overflow-hidden rounded-2xl"
-              style={{ height: 68, border: 'none', cursor: 'pointer', background: '#b91c1c', boxShadow: '0 4px 20px rgba(220,38,38,.35)', overflow: 'hidden' }}>
+              style={{ height: 58, border: 'none', cursor: 'pointer', background: '#b91c1c', boxShadow: '0 4px 20px rgba(220,38,38,.35)', overflow: 'hidden' }}>
               <motion.div className="absolute pointer-events-none"
                 animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: .8 }}
@@ -339,7 +340,7 @@ export default function HomeScreen({ go }) {
             </div>
             <motion.button whileTap={{ scale: .97 }} onClick={() => setAuxOpen(true)}
               className="w-full relative overflow-hidden rounded-2xl"
-              style={{ height: 68, background: 'rgba(239,68,68,.08)', border: '1.5px solid rgba(239,68,68,.28)', cursor: 'pointer' }}>
+              style={{ height: 58, background: 'rgba(239,68,68,.08)', border: '1.5px solid rgba(239,68,68,.28)', cursor: 'pointer' }}>
               <div className="absolute inset-0 pointer-events-none"
                 style={{ background: 'linear-gradient(180deg, rgba(255,255,255,.06) 0%, transparent 55%)' }} />
               <div className="relative flex items-center justify-between px-6 h-full">
