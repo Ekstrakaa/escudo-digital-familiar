@@ -134,7 +134,7 @@ export default function HomeScreen({ go }) {
           <img
             src="/imgs/hero_abuelitos.jpg"
             alt="Adultos mayores usando el celular"
-            style={{ width: '100%', height: 200, objectFit: 'cover', objectPosition: '50% 30%', display: 'block' }}
+            style={{ width: '100%', height: 240, objectFit: 'cover', objectPosition: '50% 50%', display: 'block' }}
           />
           {/* Overlay solo abajo para transición suave al fondo oscuro */}
           <div style={{
@@ -170,8 +170,8 @@ export default function HomeScreen({ go }) {
 
           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
             transition={{ delay: .35, duration: .4 }} className="text-center mb-1">
-            <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '2.2rem', fontWeight: 800, color: '#fff', lineHeight: 1.1, letterSpacing: '-0.5px' }}>Escudo Digital</div>
-            <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '2.2rem', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-0.5px' }}>
+            <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '2.2rem', fontWeight: 800, color: '#fff', lineHeight: 1.1, letterSpacing: '-0.5px' }}>Escudo Digital</div>
+            <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '2.2rem', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-0.5px' }}>
               <span style={{ color: '#00E5A0' }}>Familiar</span>
             </div>
           </motion.div>
@@ -186,14 +186,14 @@ export default function HomeScreen({ go }) {
           >
             <motion.div animate={{ opacity: [1, .3, 1] }} transition={{ duration: 2, repeat: Infinity }}
               style={{ width: 7, height: 7, borderRadius: '50%', background: '#00e5a0', flexShrink: 0 }} />
-            <span style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.78rem', fontWeight: 700, color: '#e0d4ff', letterSpacing: '.03em' }}>
+            <span style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.78rem', fontWeight: 700, color: '#e0d4ff', letterSpacing: '.03em' }}>
               Programa de Inclusión Digital · IM
             </span>
           </motion.a>
 
           {/* Subtítulo */}
           <motion.p initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .38, duration: .4 }}
-            style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.9rem', color: '#c8d8ee', textAlign: 'center', maxWidth: 340, lineHeight: 1.55, marginBottom: 20, marginTop: 6 }}>
+            style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.9rem', color: '#c8d8ee', textAlign: 'center', maxWidth: 340, lineHeight: 1.55, marginBottom: 20, marginTop: 6 }}>
             Tu herramienta ante estafas digitales y el cuento del tío. Disponible 24/7, no estás solo.
           </motion.p>
 
@@ -216,8 +216,8 @@ export default function HomeScreen({ go }) {
                 <div className="flex items-center gap-4">
                   <motion.div animate={{ scale:[1,1.18,1] }} transition={{ duration:1.8, repeat:Infinity, ease:"easeInOut" }}><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,.8)" strokeWidth="1.8" strokeLinecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></motion.div>
                   <div className="text-left">
-                    <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '1.2rem', fontWeight: 900, color: '#000', lineHeight: 1.2 }}>Test de Blindaje</div>
-                    <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.83rem', fontWeight: 600, color: 'rgba(0,0,0,.65)', marginTop: 2 }}>¿Qué tan protegido estás?</div>
+                    <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '1.15rem', fontWeight: 900, color: '#000', lineHeight: 1.2 }}>Test de Blindaje</div>
+                    <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.78rem', fontWeight: 600, color: 'rgba(0,0,0,.65)', marginTop: 2 }}>¿Qué tan protegido estás?</div>
                   </div>
                 </div>
                 <motion.div animate={{ x: [0, 4, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut', delay: .3 }}>
@@ -276,8 +276,8 @@ export default function HomeScreen({ go }) {
                 <div className="flex items-center gap-4">
                   <motion.div animate={{ scale:[1,1.18,1] }} transition={{ duration:1.8, repeat:Infinity, ease:"easeInOut", delay:.6 }}><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" strokeWidth="1.8" strokeLinecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16l.19.92z"/></svg></motion.div>
                   <div className="text-left">
-                    <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '1.15rem', fontWeight: 900, color: '#fff', lineHeight: 1.2 }}>Necesito ayuda ahora</div>
-                    <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.78rem', fontWeight: 600, color: 'rgba(255,255,255,.8)', marginTop: 2 }}>Hablá con nuestro asistente</div>
+                    <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '1.15rem', fontWeight: 900, color: '#fff', lineHeight: 1.2 }}>Necesito ayuda ahora</div>
+                    <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.78rem', fontWeight: 600, color: 'rgba(255,255,255,.8)', marginTop: 2 }}>Hablá con nuestro asistente</div>
                   </div>
                 </div>
                 <motion.div animate={{ x: [0, 4, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}>
@@ -290,7 +290,7 @@ export default function HomeScreen({ go }) {
           {/* Label */}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: .36 }}
             className="w-full mb-3" style={{ textAlign: 'center' }}>
-            <span style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.78rem', fontWeight: 700, color: '#c8d8ee', letterSpacing: '.08em', textTransform: 'uppercase' }}>
+            <span style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.78rem', fontWeight: 700, color: '#c8d8ee', letterSpacing: '.08em', textTransform: 'uppercase' }}>
               ¿Qué te está pasando?
             </span>
           </motion.div>
@@ -315,8 +315,8 @@ export default function HomeScreen({ go }) {
                 <div style={{ position:'absolute', top:0, left:0, right:0, height:1, background:`linear-gradient(90deg,transparent,${s.color}25,transparent)` }} />
                 <div style={{ width:46, height:46, borderRadius:14, background:`${s.color}22`, border:`1px solid ${s.color}35`, display:'flex', alignItems:'center', justifyContent:'center', color:s.color, marginBottom:12, flexShrink:0 }}
                   dangerouslySetInnerHTML={{ __html: s.svg }} />
-                <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'.95rem', fontWeight:800, color:'#f0f6ff', lineHeight:1.2, marginBottom:4 }}>{s.title}</div>
-                <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'.75rem', color:'rgba(255,255,255,.42)', lineHeight:1.4 }}>{s.desc}</div>
+                <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'1.05rem', fontWeight:800, color:'#f0f6ff', lineHeight:1.2, marginBottom:4 }}>{s.title}</div>
+                <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'.82rem', color:'rgba(255,255,255,.42)', lineHeight:1.4 }}>{s.desc}</div>
               </motion.button>
             ))}
           </div>
@@ -324,37 +324,43 @@ export default function HomeScreen({ go }) {
           {/* Botón Primeros Auxilios */}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: .9 }}
             className="w-full mt-4 pb-8">
-            <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.78rem', fontWeight: 700, color: '#c8d8ee', letterSpacing: '.06em', textTransform: 'uppercase', textAlign: 'center', marginBottom: 10 }}>
+            <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.78rem', fontWeight: 700, color: '#c8d8ee', letterSpacing: '.06em', textTransform: 'uppercase', textAlign: 'center', marginBottom: 10 }}>
               ¿Ya fuiste víctima? Actuá ahora
             </div>
             <motion.button whileTap={{ scale: .97 }} onClick={() => setAuxOpen(true)}
-              className="w-full flex items-center justify-between px-5 py-4 rounded-[16px]"
-              style={{ background: 'rgba(239,68,68,.06)', border: '1.5px solid rgba(239,68,68,.25)', cursor: 'pointer' }}>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-[10px] flex items-center justify-center flex-shrink-0"
-                  style={{ background: 'rgba(239,68,68,.1)', border: '1px solid rgba(239,68,68,.3)' }}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16l.19.92z"/></svg>
+              className="w-full relative overflow-hidden rounded-2xl"
+              style={{ height: 68, background: 'rgba(239,68,68,.08)', border: '1.5px solid rgba(239,68,68,.28)', cursor: 'pointer' }}>
+              <div className="absolute inset-0 pointer-events-none"
+                style={{ background: 'linear-gradient(180deg, rgba(255,255,255,.06) 0%, transparent 55%)' }} />
+              <div className="relative flex items-center justify-between px-6 h-full">
+                <div className="flex items-center gap-4">
+                  <motion.div animate={{ scale:[1,1.18,1] }} transition={{ duration:1.8, repeat:Infinity, ease:'easeInOut', delay:.9 }}>
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="1.8" strokeLinecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16l.19.92z"/></svg>
+                  </motion.div>
+                  <div className="text-left">
+                    <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '1.15rem', fontWeight: 900, color: '#fff', lineHeight: 1.2 }}>Primeros Auxilios Digitales</div>
+                    <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.78rem', fontWeight: 600, color: '#ef4444', marginTop: 2 }}>Si te estafaron, hacé esto YA →</div>
+                  </div>
                 </div>
-                <div>
-                  <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.95rem', fontWeight: 700, color: '#fff' }}>Primeros Auxilios Digitales</div>
-                  <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.75rem', color: '#ef4444', marginTop: 2 }}>Si te estafaron, hacé esto YA →</div>
-                </div>
+                <motion.div animate={{ x: [0, 4, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(239,68,68,.7)" strokeWidth="2.2" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </motion.div>
               </div>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round"><path d="M9 18l6-6-6-6"/></svg>
             </motion.button>
           </motion.div>
 
-          {/* Logo footer */}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}
-            className="w-full flex flex-col items-center gap-2 py-5 mt-4"
-            style={{ background: 'rgba(255,255,255,.03)', borderTop: '1px solid rgba(255,255,255,.08)', marginLeft: '-1rem', marginRight: '-1rem', paddingLeft: '1rem', paddingRight: '1rem' }}>
-            <img src="/imgs/LOGO_fadu.png" alt="FADU - Universidad de la República" style={{ height: 28, objectFit: 'contain', opacity: .65, filter: 'brightness(0) invert(1)' }} />
-            <span style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.6rem', color: 'rgba(255,255,255,.2)', letterSpacing: '.06em', textAlign: 'center', textTransform: 'uppercase' }}>
-              Facultad de Arquitectura, Diseño y Urbanismo · UDELAR · 2026
-            </span>
-          </motion.div>
         </div>
       </div>
+
+      {/* Logo footer — FULL WIDTH fuera del contenedor */}
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}
+        className="w-full flex flex-col items-center gap-2 py-5"
+        style={{ background: 'rgba(255,255,255,.03)', borderTop: '1px solid rgba(255,255,255,.08)' }}>
+        <img src="/imgs/LOGO_fadu.png" alt="FADU - Universidad de la República" style={{ height: 28, objectFit: 'contain', opacity: .65, filter: 'brightness(0) invert(1)' }} />
+        <span style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.6rem', color: 'rgba(255,255,255,.2)', letterSpacing: '.06em', textAlign: 'center', textTransform: 'uppercase' }}>
+          Facultad de Arquitectura, Diseño y Urbanismo · UDELAR · 2026
+        </span>
+      </motion.div>
 
       {/* Modal Primeros Auxilios */}
       <AnimatePresence>
@@ -381,8 +387,8 @@ export default function HomeScreen({ go }) {
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16l.19.92z"/></svg>
                   </div>
                   <div>
-                    <div style={{ fontFamily: "'Poppins',sans-serif", fontWeight: 700, fontSize: '.82rem', color: '#fff' }}>Primeros Auxilios Digitales</div>
-                    <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.62rem', color: '#ef4444' }}>Si te estafaron, hacé esto YA</div>
+                    <div style={{ fontFamily: "'Nunito',sans-serif", fontWeight: 700, fontSize: '.82rem', color: '#fff' }}>Primeros Auxilios Digitales</div>
+                    <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.62rem', color: '#ef4444' }}>Si te estafaron, hacé esto YA</div>
                   </div>
                 </div>
                 <button onClick={() => setAuxOpen(false)}
@@ -397,7 +403,7 @@ export default function HomeScreen({ go }) {
                     <div className="w-5 h-5 rounded-[5px] flex items-center justify-center font-mono text-[.6rem] font-semibold flex-shrink-0"
                       style={{ background: '#142040', color: '#4a6080' }}>{r[0]}</div>
                     <div className="flex-1 min-w-0">
-                      <div style={{ fontFamily: "'Poppins',sans-serif", fontSize: '.6rem', color: '#8fa8cc' }}>{r[1]}</div>
+                      <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.6rem', color: '#8fa8cc' }}>{r[1]}</div>
                       <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: '.78rem', fontWeight: 700, color: '#f0f6ff' }}>{r[2]}</div>
                     </div>
                   </div>
@@ -405,7 +411,7 @@ export default function HomeScreen({ go }) {
                 <button
                   onClick={() => { setAuxOpen(false); go.chat('Creo que me estafaron, necesito ayuda urgente') }}
                   className="w-full py-[9px] rounded-[10px] font-bold text-white mt-1"
-                  style={{ background: 'linear-gradient(135deg,#c0392b,#e74c3c)', fontFamily: "'Poppins',sans-serif", fontSize: '.82rem', border: 'none', cursor: 'pointer' }}>
+                  style={{ background: 'linear-gradient(135deg,#c0392b,#e74c3c)', fontFamily: "'Nunito',sans-serif", fontSize: '.82rem', border: 'none', cursor: 'pointer' }}>
                   Hablar con el asistente →
                 </button>
               </div>
