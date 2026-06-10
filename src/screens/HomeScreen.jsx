@@ -61,42 +61,42 @@ const SITUATIONS = [
     svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16l.19.92z"/></svg>`,
     title: 'Llamada del banco', desc: 'Me piden datos o clave',
     color: '#ef4444', bg: 'rgba(239,68,68,.04)', border: 'rgba(239,68,68,.30)',
-    tag: '01 — VISHING',
+    tag: 'VISHING',
     msg: 'Me llamaron del banco y me pidieron mi clave',
   },
   {
     svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
     title: 'SMS sospechoso', desc: 'Con link o pedido raro',
     color: '#f59e0b', bg: 'rgba(245,158,11,.04)', border: 'rgba(245,158,11,.30)',
-    tag: '02 — PHISHING',
+    tag: 'PHISHING',
     msg: 'Recibí un SMS con un link raro para pagar una deuda',
   },
   {
     svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="2.5"/></svg>`,
     title: 'Código WhatsApp', desc: 'Me lo están pidiendo',
     color: '#10b981', bg: 'rgba(16,185,129,.04)', border: 'rgba(16,185,129,.30)',
-    tag: '03 — ROBO CUENTA',
+    tag: 'ROBO WA',
     msg: 'Me están pidiendo el código de 6 dígitos de WhatsApp',
   },
   {
     svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16" stroke-width="2.5"/></svg>`,
     title: 'Caí en una estafa', desc: '¿Qué hago ahora?',
     color: '#f97316', bg: 'rgba(249,115,22,.04)', border: 'rgba(249,115,22,.30)',
-    tag: '04 — FRAUDE',
+    tag: 'FRAUDE',
     msg: 'Creo que me estafaron, veo movimientos raros en mi cuenta',
   },
   {
     svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
     title: 'Persona en la puerta', desc: 'Pide datos o dinero',
     color: '#8b7cf8', bg: 'rgba(139,124,248,.04)', border: 'rgba(139,124,248,.30)',
-    tag: '05 — PRESENCIAL',
+    tag: 'PRESENCIAL',
     msg: 'Hay una persona en la puerta pidiendo mis datos del banco',
   },
   {
     svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
     title: 'Proteger familiar', desc: 'Guía para tu familia',
     color: '#06b6d4', bg: 'rgba(6,182,212,.04)', border: 'rgba(6,182,212,.30)',
-    tag: '06 — GUÍA',
+    tag: 'GUÍA',
     msg: '¿Cómo puedo proteger a mi familiar mayor de las estafas?',
   },
 ]
@@ -201,7 +201,7 @@ export default function HomeScreen({ go }) {
           {/* Subtítulo */}
           <motion.p initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .38, duration: .4 }}
             style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.85rem', color: '#c8d8ee', textAlign: 'center', maxWidth: 340, lineHeight: 1.4, marginBottom: 12, marginTop: 2 }}>
-            Protegete de estafas digitales. Estamos acá 24/7.
+            Protegete de cualquier estafa digital y el cuento del tío. Estoy acá para vos, las 24 horas.
           </motion.p>
 
           {/* Botón VERDE — Test de Blindaje */}
@@ -323,7 +323,7 @@ export default function HomeScreen({ go }) {
                 <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:12 }}>
                   <div style={{ width:42, height:42, borderRadius:12, background:`${s.color}22`, border:`1px solid ${s.color}35`, display:'flex', alignItems:'center', justifyContent:'center', color:s.color, flexShrink:0 }}
                     dangerouslySetInnerHTML={{ __html: s.svg }} />
-                  <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'.72rem', fontWeight:800, color:s.color, letterSpacing:'.06em', opacity:.8, lineHeight:1.3 }}>{s.tag}</div>
+                  <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'.68rem', fontWeight:800, color:s.color, letterSpacing:'.08em', opacity:.8, whiteSpace:'nowrap' }}>{s.tag}</div>
                 </div>
                 <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'1.05rem', fontWeight:800, color:'#f0f6ff', lineHeight:1.2, marginBottom:4 }}>{s.title}</div>
                 <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'.82rem', color:'rgba(255,255,255,.42)', lineHeight:1.4 }}>{s.desc}</div>
