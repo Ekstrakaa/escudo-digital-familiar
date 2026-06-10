@@ -612,7 +612,7 @@ export default function ChatScreen({ go, seed }) {
       </div>
 
       {/* Messages */}
-      <div ref={msgsRef} className="flex-1 px-4 py-4 flex flex-col gap-3 relative" style={{ zIndex: 1, overflowY: 'scroll', overscrollBehavior: 'contain', WebkitOverflowScrolling: 'touch' }}>
+      <div ref={msgsRef} className="flex-1 px-4 py-4 flex flex-col gap-3 relative" style={{ zIndex: 1, overflowY: 'scroll', overscrollBehavior: 'contain', WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
 
         <AnimatePresence>
           {messages.map((m, i) => (
