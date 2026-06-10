@@ -148,7 +148,7 @@ export default function HomeScreen({ go }) {
         <motion.div
           initial={{ opacity: 0, scale: .85 }} animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: .3, duration: .5 }}
-          style={{ marginTop: -36, zIndex: 10, position: 'relative' }}
+          style={{ marginTop: -46, zIndex: 10, position: 'relative' }}
         >
           <motion.img src="/imgs/LOGO.png" alt="Escudo Digital Familiar"
             animate={{
