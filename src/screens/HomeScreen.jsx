@@ -73,7 +73,7 @@ const SITUATIONS = [
   },
   {
     svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="2.5"/></svg>`,
-    title: 'Código WhatsApp', desc: 'Me lo están pidiendo',
+    title: 'Código de WA', desc: 'Me lo están pidiendo',
     color: '#10b981', bg: 'rgba(16,185,129,.04)', border: 'rgba(16,185,129,.30)',
     tag: 'ROBO WA',
     msg: 'Me están pidiendo el código de 6 dígitos de WhatsApp',
