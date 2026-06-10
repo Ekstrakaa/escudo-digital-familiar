@@ -129,7 +129,7 @@ export default function HomeScreen({ go }) {
         <motion.div
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: .6 }}
           className="relative w-full"
-          style={{ borderRadius: '0 0 24px 24px', overflow: 'hidden' }}
+          style={{ overflow: 'hidden' }}
         >
           <img
             src="/imgs/hero_abuelitos.jpg"
@@ -148,7 +148,7 @@ export default function HomeScreen({ go }) {
         <motion.div
           initial={{ opacity: 0, scale: .85 }} animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: .3, duration: .5 }}
-          style={{ marginTop: -45, zIndex: 10, position: 'relative' }}
+          style={{ marginTop: -36, zIndex: 10, position: 'relative' }}
         >
           <motion.img src="/imgs/LOGO.png" alt="Escudo Digital Familiar"
             animate={{
@@ -162,7 +162,7 @@ export default function HomeScreen({ go }) {
               ]
             }}
             transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-            style={{ width: 90, height: 90, objectFit: 'contain' }}
+            style={{ width: 72, height: 72, objectFit: 'contain' }}
           />
         </motion.div>
 
@@ -170,9 +170,9 @@ export default function HomeScreen({ go }) {
         <div className="flex flex-col items-center px-4 w-full" style={{ maxWidth: 480 }}>
 
           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: .35, duration: .4 }} className="text-center mb-1" style={{ marginTop: 8 }}>
-            <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '2.2rem', fontWeight: 800, color: '#fff', lineHeight: 1.1, letterSpacing: '-0.5px' }}>Escudo Digital</div>
-            <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '2.2rem', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-0.5px' }}>
+            transition={{ delay: .35, duration: .4 }} className="text-center mb-1" style={{ marginTop: 4 }}>
+            <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '1.9rem', fontWeight: 800, color: '#fff', lineHeight: 1.1, letterSpacing: '-0.5px' }}>Escudo Digital</div>
+            <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '1.9rem', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-0.5px' }}>
               <span style={{ color: '#00E5A0' }}>Familiar</span>
             </div>
           </motion.div>
@@ -194,7 +194,7 @@ export default function HomeScreen({ go }) {
 
           {/* Subtítulo */}
           <motion.p initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .38, duration: .4 }}
-            style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.9rem', color: '#c8d8ee', textAlign: 'center', maxWidth: 340, lineHeight: 1.55, marginBottom: 20, marginTop: 6 }}>
+            style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.85rem', color: '#c8d8ee', textAlign: 'center', maxWidth: 340, lineHeight: 1.5, marginBottom: 14, marginTop: 4 }}>
             Tu herramienta ante estafas digitales y el cuento del tío. Disponible 24/7, no estás solo.
           </motion.p>
 
