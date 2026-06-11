@@ -60,9 +60,9 @@ function ScreenshotTutorial() {
             <rect x="6" y="13" width="5" height="7" rx="2.5" fill="rgba(255,255,255,.15)"/>
             <rect x="6" y="38" width="5" height="10" rx="2.5" fill="rgba(255,255,255,.15)"/>
             <PhoneBtn x={57} y={24} w={5} h={18}/><RingAnim cx={59.5} cy={33}/>
-            <circle cx="67" cy="33" r="8" fill="#00e5a0"/><text x="67" y="37" textAnchor="middle" fontSize="10" fontWeight="900" fill="#000" fontFamily="Nunito">1</text>
             <PhoneBtn x={6} y={22} w={5} h={13}/><RingAnim cx={8.5} cy={28.5}/>
-            <circle cx="1" cy="28" r="8" fill="#00e5a0"/><text x="1" y="32" textAnchor="middle" fontSize="10" fontWeight="900" fill="#000" fontFamily="Nunito">2</text>
+            <text x="59.5" y="97" textAnchor="middle" fontSize="9" fontWeight="900" fill="#00e5a0" fontFamily="Nunito">1</text>
+            <text x="8.5" y="97" textAnchor="middle" fontSize="9" fontWeight="900" fill="#00e5a0" fontFamily="Nunito">2</text>
           </svg>
           <div style={{ fontSize:10, color:'rgba(255,255,255,.5)', textAlign:'center', lineHeight:1.5 }}><strong style={{color:'#00e5a0'}}>1</strong> Lateral + <strong style={{color:'#00e5a0'}}>2</strong> Vol ▲<br/>¡juntos!</div>
           <div style={{ display:'flex', alignItems:'center', gap:3 }}>
@@ -97,9 +97,9 @@ function ScreenshotTutorial() {
             <rect x="31" y="81" width="6" height="4" rx="1" fill="rgba(255,255,255,.15)"/>
             <path d="M40 85 L42 81 L44 85Z" fill="rgba(255,255,255,.15)"/>
             <PhoneBtn x={57} y={22} w={5} h={15}/><RingAnim cx={59.5} cy={29.5}/>
-            <circle cx="67" cy="29" r="8" fill="#00e5a0"/><text x="67" y="33" textAnchor="middle" fontSize="10" fontWeight="900" fill="#000" fontFamily="Nunito">1</text>
             <PhoneBtn x={57} y={40} w={5} h={16}/><RingAnim cx={59.5} cy={48}/>
-            <circle cx="67" cy="48" r="8" fill="#00e5a0"/><text x="67" y="52" textAnchor="middle" fontSize="10" fontWeight="900" fill="#000" fontFamily="Nunito">2</text>
+            <text x="59.5" y="29" textAnchor="start" fontSize="9" fontWeight="900" fill="#00e5a0" fontFamily="Nunito" dx="8">1</text>
+            <text x="59.5" y="48" textAnchor="start" fontSize="9" fontWeight="900" fill="#00e5a0" fontFamily="Nunito" dx="8">2</text>
           </svg>
           <div style={{ fontSize:10, color:'rgba(255,255,255,.5)', textAlign:'center', lineHeight:1.5 }}><strong style={{color:'#00e5a0'}}>1</strong> Encend. + <strong style={{color:'#00e5a0'}}>2</strong> Vol ▼<br/>¡juntos!</div>
           <div style={{ display:'flex', alignItems:'center', gap:3 }}>
