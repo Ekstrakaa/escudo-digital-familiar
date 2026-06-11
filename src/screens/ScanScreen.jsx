@@ -178,6 +178,7 @@ export default function ScanScreen({ go }) {
   const [result, setResult]     = useState(null)
   const [error, setError]       = useState(null)
   const fileRef = useRef(null)
+  const resultRef = useRef(null)
 
   const handleFile = (file) => {
     if (!file) return
@@ -213,16 +214,50 @@ export default function ScanScreen({ go }) {
 
   const reset = () => { setImage(null); setPreview(null); setResult(null); setError(null) }
 
-  const isScam    = result && (result.includes('ESTAFA') || result.includes('⚠️'))
-  const isSafe    = result && (result.includes('SEGURO') || result.includes('✅'))
+  useEffect(() => {
+    if (!result) return
+    const id = setTimeout(() => resultRef.current?.scrollIntoView({ behavior:'smooth', block:'center' }), 140)
+    return () => clearTimeout(id)
+  }, [result])
+
+  const parseResult = (raw) => {
+    if (!raw) return null
+    const lines = raw.replace(/\r/g,'').split('\n')
+    const out = { verdict:'', tipo:'', senales:[], queHacer:'' }
+    let section = null
+    for (const line of lines) {
+      const t = line.trim()
+      if (!t) continue
+      const low = t.toLowerCase().replace(/\*/g,'').trim()
+      if (/^veredicto/.test(low)) { out.verdict = t.replace(/\*/g,'').replace(/^veredicto\s*:?\s*/i,'').trim(); section='verdict'; continue }
+      if (/^tipo\s*:/.test(low)) { out.tipo = t.replace(/\*/g,'').replace(/^tipo\s*:?\s*/i,'').trim(); section='tipo'; continue }
+      if (/^se[ñn]ales/.test(low)) { section='senales'; continue }
+      if (/^qu[eé] hacer/.test(low)) { out.queHacer = t.replace(/\*/g,'').replace(/^qu[eé] hacer ahora\s*:?\s*/i,'').trim(); section='queHacer'; continue }
+      if (section==='senales') out.senales.push(t.replace(/^[-•\u2022\s]+/,'').replace(/\*/g,'').trim())
+      else if (section==='queHacer') out.queHacer = (out.queHacer ? out.queHacer+' ' : '') + t
+    }
+    return out
+  }
+
+  const parsed = parseResult(result)
+  const vtext = (parsed?.verdict || result || '')
+  const isScam    = /ESTAFA|FRAUDE|⚠️|PELIGRO/i.test(vtext)
+  const isSafe    = !isScam && /SEGURO|LEG[IÍ]TIMO|✅|CONFIABLE/i.test(vtext)
   const resultColor  = isScam ? '#ef4444' : isSafe ? '#00e5a0' : '#f59e0b'
   const resultBg     = isScam ? 'rgba(239,68,68,.06)' : isSafe ? 'rgba(0,229,160,.06)' : 'rgba(245,158,11,.06)'
   const resultBorder = isScam ? 'rgba(239,68,68,.25)' : isSafe ? 'rgba(0,229,160,.25)' : 'rgba(245,158,11,.25)'
+  const verdictLabel = isScam ? 'ESTAFA' : isSafe ? 'SEGURO' : 'SOSPECHOSO'
+  const verdictIcon  = isScam ? '⚠️' : isSafe ? '✅' : '🔍'
+  const verdictSub   = isScam ? 'No interactúes con este mensaje' : isSafe ? 'Parece una comunicación legítima' : 'Revisá con cuidado antes de actuar'
 
-  const formatResult = (text) => text
+  const formatResult = (text) => (text||'')
     .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-    .replace(/\*\*(.*?)\*\*/g,'<strong style="color:#00E5A0">$1</strong>')
+    .replace(/\*\*(.*?)\*\*/g,`<strong style="color:${resultColor}">$1</strong>`)
     .replace(/\n/g,'<br/>')
+
+  const boldColor = (text) => (text||'')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\*\*(.*?)\*\*/g,`<strong style="color:${resultColor};font-weight:800">$1</strong>`)
 
   return (
     <div className="relative flex flex-col min-h-screen overflow-x-hidden"
@@ -386,16 +421,76 @@ export default function ScanScreen({ go }) {
               )}
 
               {result && (
-                <motion.div initial={{ opacity:0, y:10 }} animate={{ opacity:1, y:0 }}
-                  style={{ background:resultBg, border:`1.5px solid ${resultBorder}`, borderRadius:20, padding:'18px' }}>
-                  <div style={{ fontSize:'.68rem', fontWeight:700, color:resultColor, letterSpacing:'.1em', textTransform:'uppercase', marginBottom:10, opacity:.7 }}>Resultado del análisis</div>
-                  <div style={{ fontSize:'.93rem', color:'#f0f6ff', lineHeight:1.8, fontFamily:"'Nunito',sans-serif" }} dangerouslySetInnerHTML={{ __html: formatResult(result) }} />
-                  <div className="flex gap-2 mt-4">
-                    <button onClick={reset} style={{ flex:1, padding:'11px', borderRadius:12, background:'rgba(255,255,255,.06)', border:'1px solid rgba(255,255,255,.1)', color:'rgba(255,255,255,.7)', fontWeight:700, fontSize:'.85rem', cursor:'pointer' }}>Analizar otra imagen</button>
-                    {isScam && (
-                      <button onClick={() => go.chat('Recibí un mensaje sospechoso y lo analicé, necesito más ayuda')}
-                        style={{ flex:1, padding:'11px', borderRadius:12, background:'linear-gradient(135deg,#ef4444,#b91c1c)', border:'none', color:'#fff', fontWeight:700, fontSize:'.85rem', cursor:'pointer' }}>Hablar con asistente</button>
+                <motion.div ref={resultRef} initial={{ opacity:0, y:10 }} animate={{ opacity:1, y:0 }}
+                  style={{ background:resultBg, border:`1.5px solid ${resultBorder}`, borderRadius:22, overflow:'hidden' }}>
+
+                  {/* Banner del veredicto */}
+                  <div style={{ padding:'18px 18px 16px', background:`linear-gradient(180deg, ${resultColor}1f, transparent)`, borderBottom:`1px solid ${resultBorder}` }}>
+                    <div style={{ fontSize:'.6rem', fontWeight:800, color:resultColor, letterSpacing:'.14em', textTransform:'uppercase', opacity:.75, marginBottom:10 }}>Resultado del análisis</div>
+                    <div style={{ display:'flex', alignItems:'center', gap:13 }}>
+                      <motion.div
+                        animate={ isScam
+                          ? { rotate:[0,-9,9,-9,9,0], boxShadow:[`0 0 0 0 ${resultColor}55`, `0 0 0 14px ${resultColor}00`] }
+                          : { scale:[1,1.06,1] } }
+                        transition={ isScam
+                          ? { duration:1, repeat:Infinity, repeatDelay:.7, ease:'easeInOut' }
+                          : { duration:2.4, repeat:Infinity, ease:'easeInOut' } }
+                        style={{ width:54, height:54, borderRadius:15, background:`${resultColor}1f`, border:`1.5px solid ${resultColor}66`, display:'flex', alignItems:'center', justifyContent:'center', fontSize:'1.7rem', flexShrink:0 }}>
+                        {verdictIcon}
+                      </motion.div>
+                      <div style={{ minWidth:0 }}>
+                        <div style={{ fontSize:'1.45rem', fontWeight:900, color:resultColor, lineHeight:1.05, letterSpacing:'-.01em' }}>{verdictLabel}</div>
+                        <div style={{ fontSize:'.82rem', color:'rgba(255,255,255,.62)', marginTop:3, fontWeight:600, lineHeight:1.3 }}>{verdictSub}</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Cuerpo */}
+                  <div style={{ padding:'16px 18px 18px' }}>
+
+                    {parsed?.tipo && (
+                      <div style={{ display:'flex', alignItems:'center', gap:9, marginBottom:18, flexWrap:'wrap' }}>
+                        <span style={{ fontSize:'.66rem', fontWeight:800, color:'rgba(255,255,255,.4)', textTransform:'uppercase', letterSpacing:'.08em' }}>Tipo</span>
+                        <span style={{ fontSize:'.85rem', fontWeight:800, color:'#fff', background:`${resultColor}1f`, border:`1px solid ${resultColor}44`, borderRadius:8, padding:'4px 11px' }}>{parsed.tipo}</span>
+                      </div>
                     )}
+
+                    {parsed?.senales?.length > 0 && (
+                      <div style={{ marginBottom:18 }}>
+                        <div style={{ fontSize:'.66rem', fontWeight:800, color:'rgba(255,255,255,.42)', textTransform:'uppercase', letterSpacing:'.08em', marginBottom:11 }}>Señales detectadas</div>
+                        <div style={{ display:'flex', flexDirection:'column', gap:11 }}>
+                          {parsed.senales.map((s,i) => (
+                            <motion.div key={i} initial={{ opacity:0, x:-6 }} animate={{ opacity:1, x:0 }} transition={{ delay:.08*i+.1 }}
+                              style={{ display:'flex', gap:11, alignItems:'flex-start' }}>
+                              <div style={{ width:7, height:7, borderRadius:'50%', background:resultColor, marginTop:8, flexShrink:0, boxShadow:`0 0 8px ${resultColor}aa` }} />
+                              <div style={{ fontSize:'.92rem', color:'rgba(240,246,255,.9)', lineHeight:1.55 }}>{s}</div>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {parsed?.queHacer && (
+                      <div style={{ background:'rgba(255,255,255,.04)', border:'1px solid rgba(255,255,255,.08)', borderRadius:14, padding:'14px 15px', display:'flex', gap:11 }}>
+                        <div style={{ fontSize:'1.15rem', flexShrink:0, lineHeight:1.2 }}>💡</div>
+                        <div style={{ minWidth:0 }}>
+                          <div style={{ fontSize:'.66rem', fontWeight:800, color:'rgba(255,255,255,.42)', textTransform:'uppercase', letterSpacing:'.08em', marginBottom:6 }}>Qué hacer ahora</div>
+                          <div style={{ fontSize:'.92rem', color:'rgba(240,246,255,.9)', lineHeight:1.6 }} dangerouslySetInnerHTML={{ __html: boldColor(parsed.queHacer) }} />
+                        </div>
+                      </div>
+                    )}
+
+                    {(!parsed || (!parsed.senales.length && !parsed.queHacer)) && (
+                      <div style={{ fontSize:'.92rem', color:'#f0f6ff', lineHeight:1.8 }} dangerouslySetInnerHTML={{ __html: formatResult(result) }} />
+                    )}
+
+                    <div className="flex gap-2 mt-4">
+                      <button onClick={reset} style={{ flex:1, padding:'12px', borderRadius:12, background:'rgba(255,255,255,.06)', border:'1px solid rgba(255,255,255,.12)', color:'rgba(255,255,255,.75)', fontWeight:800, fontSize:'.85rem', cursor:'pointer' }}>Analizar otra</button>
+                      {!isSafe && (
+                        <button onClick={() => go.chat('Recibí un mensaje y lo analicé con el detector, necesito más ayuda')}
+                          style={{ flex:1.4, padding:'12px', borderRadius:12, background:resultColor, border:'none', color:isScam?'#fff':'#1a1205', fontWeight:800, fontSize:'.85rem', cursor:'pointer', boxShadow:`0 4px 16px ${resultColor}40` }}>💬 Hablar con asistente</button>
+                      )}
+                    </div>
                   </div>
                 </motion.div>
               )}
