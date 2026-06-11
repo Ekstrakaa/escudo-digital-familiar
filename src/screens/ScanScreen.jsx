@@ -1,5 +1,61 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+
+
+function Particles() {
+  const canvasRef = useRef(null)
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')
+    let animId
+    const resize = () => {
+      canvas.width  = canvas.offsetWidth
+      canvas.height = canvas.offsetHeight
+    }
+    resize()
+    window.addEventListener('resize', resize)
+    const dots = Array.from({ length: 72 }, () => ({
+      x:   Math.random() * canvas.width,
+      y:   Math.random() * canvas.height,
+      vx:  (Math.random() - 0.5) * 0.32,
+      vy:  (Math.random() - 0.5) * 0.32,
+      r:   Math.random() * 2.8 + 1.0,
+      a:   Math.random() * 0.55 + 0.20,
+      hue: Math.random() * 360,
+      dh:  (Math.random() * 0.6 + 0.2) * (Math.random() > 0.5 ? 1 : -1),
+    }))
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      dots.forEach(d => {
+        d.x  += d.vx; d.y += d.vy
+        d.hue = (d.hue + d.dh + 360) % 360
+        if (d.x < 0) d.x = canvas.width
+        if (d.x > canvas.width) d.x = 0
+        if (d.y < 0) d.y = canvas.height
+        if (d.y > canvas.height) d.y = 0
+        ctx.beginPath()
+        ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2)
+        ctx.fillStyle = `hsla(${d.hue}, 100%, 65%, ${d.a})`
+        ctx.fill()
+      })
+      dots.forEach((a, i) => dots.slice(i + 1).forEach(b => {
+        const dist = Math.hypot(a.x - b.x, a.y - b.y)
+        if (dist < 95) {
+          const midHue = (a.hue + b.hue) / 2
+          ctx.beginPath()
+          ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y)
+          ctx.strokeStyle = `hsla(${midHue}, 100%, 65%, ${0.12 * (1 - dist / 95)})`
+          ctx.stroke()
+        }
+      }))
+      animId = requestAnimationFrame(draw)
+    }
+    draw()
+    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', resize) }
+  }, [])
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" />
+}
 
 const EXAMPLES = [
   { emoji: '💳', text: 'SMS del banco pidiendo verificar datos' },
@@ -171,6 +227,7 @@ export default function ScanScreen({ go }) {
   return (
     <div className="relative flex flex-col min-h-screen overflow-x-hidden"
       style={{ background:'linear-gradient(170deg,#060c1a 0%,#071626 50%,#060c1a 100%)', fontFamily:"'Nunito',system-ui,sans-serif" }}>
+      <Particles />
 
       {/* Topbar */}
       <div className="flex items-center gap-3 px-4 sticky top-0 z-50 border-b"
@@ -188,12 +245,16 @@ export default function ScanScreen({ go }) {
         </div>
       </div>
 
-      <div className="flex flex-col px-4 py-5 gap-4" style={{ maxWidth:480, margin:'0 auto', width:'100%' }}>
+      <div className="flex flex-col px-4 py-5 gap-4" style={{ maxWidth:480, margin:'0 auto', width:'100%', position:'relative', zIndex:1 }}>
 
         {/* Intro */}
         <div>
-          <div style={{ fontSize:'1.4rem', fontWeight:900, color:'#fff', lineHeight:1.2, marginBottom:6 }}>¿Recibiste un mensaje raro?</div>
-          <div style={{ fontSize:'.88rem', color:'rgba(255,255,255,.45)', lineHeight:1.6 }}>Sacale foto o subí la captura. La IA lo analiza en segundos y te dice si es una estafa.</div>
+          <div style={{ display:'inline-flex', alignItems:'center', gap:5, background:'rgba(139,92,246,.12)', border:'1px solid rgba(139,92,246,.25)', borderRadius:20, padding:'4px 10px', marginBottom:8 }}>
+            <div style={{ width:5, height:5, borderRadius:'50%', background:'#a78bfa' }} />
+            <span style={{ fontSize:'.65rem', fontWeight:800, color:'#c4b5fd', letterSpacing:'.04em', textTransform:'uppercase' }}>Herramienta gratuita</span>
+          </div>
+          <div style={{ fontSize:'1.45rem', fontWeight:900, color:'#fff', lineHeight:1.15, marginBottom:6 }}>¿Te llegó algo sospechoso?</div>
+          <div style={{ fontSize:'.88rem', color:'rgba(255,255,255,.65)', lineHeight:1.65 }}>Subí la captura y en segundos te decimos si es real o una estafa.</div>
         </div>
 
         {/* Botón tutorial */}
@@ -257,12 +318,12 @@ export default function ScanScreen({ go }) {
                 </svg>
               </motion.div>
               <div className="text-center">
-                <div style={{ fontSize:'1rem', fontWeight:800, color:'#fff', marginBottom:5 }}>Subí la captura de pantalla</div>
-                <div style={{ fontSize:'.83rem', color:'rgba(255,255,255,.4)', lineHeight:1.5 }}>Tocá acá para elegir una foto o sacar una nueva</div>
+                <div style={{ fontSize:'1.05rem', fontWeight:900, color:'#fff', marginBottom:5 }}>Subí la captura de pantalla</div>
+                <div style={{ fontSize:'.88rem', color:'rgba(255,255,255,.7)', lineHeight:1.5 }}>Tocá para elegir de la galería o sacar una foto ahora mismo</div>
               </div>
               <div style={{ display:'flex', gap:8 }}>
-                <div style={{ background:'rgba(0,229,160,.12)', border:'1px solid rgba(0,229,160,.25)', borderRadius:10, padding:'8px 16px', fontSize:'.8rem', fontWeight:700, color:'#00e5a0' }}>📷 Sacar foto</div>
-                <div style={{ background:'rgba(255,255,255,.06)', border:'1px solid rgba(255,255,255,.12)', borderRadius:10, padding:'8px 16px', fontSize:'.8rem', fontWeight:700, color:'rgba(255,255,255,.6)' }}>🖼️ Galería</div>
+                <div style={{ background:'rgba(0,229,160,.15)', border:'1.5px solid rgba(0,229,160,.4)', borderRadius:10, padding:'10px 16px', fontSize:'.85rem', fontWeight:800, color:'#00e5a0' }}>📷 Sacar foto</div>
+                <div style={{ background:'rgba(255,255,255,.1)', border:'1.5px solid rgba(255,255,255,.22)', borderRadius:10, padding:'10px 16px', fontSize:'.85rem', fontWeight:800, color:'rgba(255,255,255,.9)' }}>🖼️ Galería</div>
               </div>
               <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={e => handleFile(e.target.files?.[0])} />
             </motion.div>
@@ -319,10 +380,11 @@ export default function ScanScreen({ go }) {
         <div className="flex items-center gap-3 rounded-[14px] px-4 py-3"
           style={{ background:'rgba(255,255,255,.03)', border:'1px solid rgba(255,255,255,.06)' }}>
           <div style={{ fontSize:'1.1rem' }}>🔒</div>
-          <div style={{ fontSize:'.75rem', color:'rgba(255,255,255,.35)', lineHeight:1.5 }}>Las imágenes se analizan en el momento y no se guardan. Tu privacidad está protegida.</div>
+          <div style={{ fontSize:'.75rem', color:'rgba(255,255,255,.55)', lineHeight:1.5 }}>Las imágenes se analizan en el momento y no se guardan. Tu privacidad está protegida.</div>
         </div>
 
       </div>
     </div>
   )
 }
+
