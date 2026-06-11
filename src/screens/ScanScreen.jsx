@@ -309,11 +309,14 @@ export default function ScanScreen({ go }) {
               initial={{ opacity:0, y:10 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0 }}
               onDrop={handleDrop} onDragOver={e => e.preventDefault()}
               onClick={() => fileRef.current?.click()}
-              className="flex flex-col items-center justify-center gap-4 rounded-[20px] cursor-pointer"
-              style={{ border:'2px dashed rgba(0,229,160,.3)', padding:'36px 20px', background:'rgba(0,229,160,.03)', minHeight:180 }}>
+              className="flex flex-col items-center justify-center gap-4 cursor-pointer"
+              style={{ border:'2px dashed rgba(139,92,246,.45)', borderRadius:22, padding:'40px 22px', minHeight:200,
+                background:'linear-gradient(180deg, rgba(20,17,40,.94) 0%, rgba(12,12,28,.94) 100%)',
+                backdropFilter:'blur(6px)', WebkitBackdropFilter:'blur(6px)',
+                boxShadow:'0 16px 44px rgba(0,0,0,.5), 0 0 60px rgba(139,92,246,.10), inset 0 1px 0 rgba(255,255,255,.05)' }}>
               <motion.div animate={{ scale:[1,1.08,1] }} transition={{ duration:2, repeat:Infinity, ease:'easeInOut' }}
-                style={{ width:64, height:64, borderRadius:'50%', background:'rgba(0,229,160,.1)', border:'1.5px solid rgba(0,229,160,.3)', display:'flex', alignItems:'center', justifyContent:'center' }}>
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#00e5a0" strokeWidth="1.8" strokeLinecap="round">
+                style={{ width:72, height:72, borderRadius:'50%', background:'rgba(139,92,246,.16)', border:'1.5px solid rgba(139,92,246,.5)', display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'0 0 30px rgba(139,92,246,.4)' }}>
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" strokeWidth="1.8" strokeLinecap="round">
                   <rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
                 </svg>
               </motion.div>
@@ -322,7 +325,7 @@ export default function ScanScreen({ go }) {
                 <div style={{ fontSize:'.88rem', color:'rgba(255,255,255,.7)', lineHeight:1.5 }}>Tocá para elegir de la galería o sacar una foto ahora mismo</div>
               </div>
               <div style={{ display:'flex', gap:8 }}>
-                <div style={{ background:'rgba(0,229,160,.15)', border:'1.5px solid rgba(0,229,160,.4)', borderRadius:10, padding:'10px 16px', fontSize:'.85rem', fontWeight:800, color:'#00e5a0' }}>📷 Sacar foto</div>
+                <div style={{ background:'linear-gradient(135deg,#8b5cf6,#7c3aed)', border:'1px solid rgba(167,139,250,.5)', borderRadius:10, padding:'11px 18px', fontSize:'.85rem', fontWeight:800, color:'#fff', boxShadow:'0 6px 18px rgba(124,58,237,.4)' }}>📷 Sacar foto</div>
                 <div style={{ background:'rgba(255,255,255,.1)', border:'1.5px solid rgba(255,255,255,.22)', borderRadius:10, padding:'10px 16px', fontSize:'.85rem', fontWeight:800, color:'rgba(255,255,255,.9)' }}>🖼️ Galería</div>
               </div>
               <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={e => handleFile(e.target.files?.[0])} />
