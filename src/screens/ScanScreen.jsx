@@ -260,16 +260,21 @@ export default function ScanScreen({ go }) {
         {/* Botón tutorial */}
         <motion.button
           initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:.2 }}
+          whileTap={{ scale:.98 }}
           onClick={() => setShowTutorial(true)}
-          style={{ display:'flex', alignItems:'center', gap:8, background:'rgba(139,124,248,.08)', border:'1px solid rgba(139,124,248,.25)', borderRadius:12, padding:'10px 14px', cursor:'pointer', width:'100%' }}>
-          <div style={{ width:32, height:32, borderRadius:9, background:'rgba(139,124,248,.15)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8b7cf8" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16" strokeWidth="3"/></svg>
+          style={{ display:'flex', alignItems:'center', gap:10, background:'rgba(139,92,246,.13)', border:'1.5px solid rgba(139,92,246,.4)', borderRadius:14, padding:'12px 14px', cursor:'pointer', width:'100%', boxShadow:'0 4px 18px rgba(139,92,246,.14)' }}>
+          <div style={{ width:36, height:36, borderRadius:10, background:'rgba(139,92,246,.2)', border:'1px solid rgba(139,92,246,.3)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16" strokeWidth="3"/></svg>
           </div>
-          <div style={{ textAlign:'left' }}>
-            <div style={{ fontSize:'.88rem', fontWeight:800, color:'#fff' }}>¿Cómo saco la captura?</div>
-            <div style={{ fontSize:'.72rem', color:'rgba(139,124,248,.7)', marginTop:1 }}>Ver tutorial para iPhone y Android</div>
+          <div style={{ textAlign:'left', flex:1 }}>
+            <div style={{ fontSize:'.9rem', fontWeight:800, color:'#fff' }}>¿Cómo saco la captura?</div>
+            <div style={{ fontSize:'.74rem', color:'rgba(196,181,253,.85)', marginTop:1 }}>Tocá para ver el paso a paso · iPhone y Android</div>
           </div>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(139,124,248,.5)" strokeWidth="2" strokeLinecap="round" style={{ marginLeft:'auto', flexShrink:0 }}><path d="M9 18l6-6-6-6"/></svg>
+          <motion.div animate={{ x:[0,3,0] }} transition={{ duration:1.4, repeat:Infinity, ease:'easeInOut' }}
+            style={{ display:'flex', alignItems:'center', gap:4, background:'rgba(139,92,246,.25)', borderRadius:8, padding:'5px 9px', flexShrink:0 }}>
+            <span style={{ fontSize:'.72rem', fontWeight:800, color:'#c4b5fd' }}>Ver</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c4b5fd" strokeWidth="2.5" strokeLinecap="round"><path d="M9 18l6-6-6-6"/></svg>
+          </motion.div>
         </motion.button>
 
         {/* Modal tutorial */}
@@ -314,12 +319,31 @@ export default function ScanScreen({ go }) {
                 background:'linear-gradient(180deg, rgba(20,17,40,.94) 0%, rgba(12,12,28,.94) 100%)',
                 backdropFilter:'blur(6px)', WebkitBackdropFilter:'blur(6px)',
                 boxShadow:'0 16px 44px rgba(0,0,0,.5), 0 0 60px rgba(139,92,246,.10), inset 0 1px 0 rgba(255,255,255,.05)' }}>
-              <motion.div animate={{ scale:[1,1.08,1] }} transition={{ duration:2, repeat:Infinity, ease:'easeInOut' }}
-                style={{ width:72, height:72, borderRadius:'50%', background:'rgba(139,92,246,.16)', border:'1.5px solid rgba(139,92,246,.5)', display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'0 0 30px rgba(139,92,246,.4)' }}>
-                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" strokeWidth="1.8" strokeLinecap="round">
-                  <rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
-                </svg>
-              </motion.div>
+              <div style={{ position:'relative', display:'flex', alignItems:'center', justifyContent:'center' }}>
+                {/* anillo radar que se expande */}
+                <motion.div
+                  animate={{ scale:[1,1.9], opacity:[.5,0] }}
+                  transition={{ duration:2.4, repeat:Infinity, ease:'easeOut' }}
+                  style={{ position:'absolute', width:72, height:72, borderRadius:'50%', border:'1.5px solid rgba(139,92,246,.5)', pointerEvents:'none' }} />
+                {/* círculo con latido doble + glow pulsante */}
+                <motion.div
+                  animate={{
+                    scale:[1,1.14,1,1.14,1],
+                    boxShadow:[
+                      '0 0 22px rgba(139,92,246,.3)',
+                      '0 0 44px rgba(139,92,246,.65)',
+                      '0 0 22px rgba(139,92,246,.3)',
+                      '0 0 44px rgba(139,92,246,.65)',
+                      '0 0 22px rgba(139,92,246,.3)'
+                    ]
+                  }}
+                  transition={{ duration:2.4, repeat:Infinity, ease:'easeInOut', times:[0,.14,.28,.42,1] }}
+                  style={{ width:72, height:72, borderRadius:'50%', background:'rgba(139,92,246,.16)', border:'1.5px solid rgba(139,92,246,.5)', display:'flex', alignItems:'center', justifyContent:'center' }}>
+                  <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" strokeWidth="1.8" strokeLinecap="round">
+                    <rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+                  </svg>
+                </motion.div>
+              </div>
               <div className="text-center">
                 <div style={{ fontSize:'1.05rem', fontWeight:900, color:'#fff', marginBottom:5 }}>Subí la captura de pantalla</div>
                 <div style={{ fontSize:'.88rem', color:'rgba(255,255,255,.7)', lineHeight:1.5 }}>Tocá para elegir de la galería o sacar una foto ahora mismo</div>
