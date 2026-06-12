@@ -120,8 +120,8 @@ function ScreenshotTutorial() {
             <rect x="6" y="38" width="5" height="10" rx="2.5" fill="rgba(255,255,255,.15)"/>
             <PhoneBtn x={57} y={24} w={5} h={18}/><RingAnim cx={59.5} cy={33}/>
             <PhoneBtn x={6} y={22} w={5} h={13}/><RingAnim cx={8.5} cy={28.5}/>
-            <text x="59.5" y="97" textAnchor="middle" fontSize="9" fontWeight="900" fill="#00e5a0" fontFamily="Nunito">1</text>
-            <text x="8.5" y="97" textAnchor="middle" fontSize="9" fontWeight="900" fill="#00e5a0" fontFamily="Nunito">2</text>
+            <text x="64" y="37" textAnchor="middle" fontSize="11" fontWeight="900" fill="#00e5a0" fontFamily="Nunito">1</text>
+            <text x="3" y="32" textAnchor="middle" fontSize="11" fontWeight="900" fill="#00e5a0" fontFamily="Nunito">2</text>
           </svg>
         </div>
         <div style={{ flex:1, minWidth:0, display:'flex', flexDirection:'column', gap:8 }}>
@@ -328,8 +328,8 @@ export default function ScanScreen({ go }) {
                 initial={{ opacity:0, scale:.9, y:20 }} animate={{ opacity:1, scale:1, y:0 }} exit={{ opacity:0, scale:.9, y:20 }}
                 transition={{ type:'spring', damping:20, stiffness:300 }}
                 onClick={e => e.stopPropagation()}
-                style={{ background:'#0d1628', border:'1px solid rgba(139,124,248,.3)', borderRadius:24, padding:'20px 16px', width:'100%', maxWidth:380, maxHeight:'90vh', overflowY:'auto' }}>
-                <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:16 }}>
+                style={{ background:'#0d1628', border:'1px solid rgba(139,124,248,.3)', borderRadius:24, padding:'20px 16px', width:'100%', maxWidth:380, maxHeight:'90vh', display:'flex', flexDirection:'column' }}>
+                <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:16, flexShrink:0 }}>
                   <div>
                     <div style={{ fontSize:'1rem', fontWeight:900, color:'#fff' }}>¿Cómo sacar una captura?</div>
                     <div style={{ fontSize:'.75rem', color:'rgba(255,255,255,.4)', marginTop:2 }}>Apretá estos dos botones al mismo tiempo</div>
@@ -337,9 +337,11 @@ export default function ScanScreen({ go }) {
                   <button onClick={() => setShowTutorial(false)}
                     style={{ width:32, height:32, borderRadius:9, background:'rgba(255,255,255,.07)', border:'1px solid rgba(255,255,255,.1)', color:'rgba(255,255,255,.6)', cursor:'pointer', fontSize:'1rem', display:'flex', alignItems:'center', justifyContent:'center' }}>✕</button>
                 </div>
-                <ScreenshotTutorial />
+                <div style={{ overflowY:'auto', minHeight:0, flex:'1 1 auto', margin:'0 -4px', padding:'0 4px' }}>
+                  <ScreenshotTutorial />
+                </div>
                 <button onClick={() => setShowTutorial(false)}
-                  style={{ width:'100%', padding:'14px', borderRadius:14, border:'none', cursor:'pointer', background:'linear-gradient(135deg,#00e5a0,#00c48a)', fontWeight:900, fontSize:'1rem', color:'#000', marginTop:4 }}>
+                  style={{ width:'100%', padding:'14px', borderRadius:14, border:'none', cursor:'pointer', background:'linear-gradient(135deg,#00e5a0,#00c48a)', fontWeight:900, fontSize:'1rem', color:'#000', marginTop:8, flexShrink:0 }}>
                   ¡Entendido!
                 </button>
               </motion.div>
