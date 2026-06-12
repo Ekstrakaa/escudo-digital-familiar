@@ -336,7 +336,7 @@ export default function ChatScreen({ go, seed }) {
     setTimeout(() => {
       setTyping(false)
       setTimeout(() => {
-        addBot('¡Hola! Soy el asistente de IA de la **Intendencia de Montevideo**, en conjunto con el **Ministerio del Interior**.\n\nEstoy acá para ayudarte ante cualquier ciberestafa o cuento del tío. Contame qué te pasó.\n\n🔒 _Este sitio es seguro — las conversaciones no quedan guardadas y nunca te pediré datos personales._')
+        addBot('¡Hola! Soy **Escudo Digital**, una herramienta independiente de ayuda contra las ciberestafas.\n\nContame qué te pasó —un mensaje, una llamada o un correo sospechoso— y te ayudo a saber si es real o un engaño.\n\n🔒 _Privado y seguro: no guardo tus datos._')
       }, 150)
     }, 2200)
     if(seed) setTimeout(() => sendMsg(seed), 4000)
