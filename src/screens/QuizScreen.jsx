@@ -105,19 +105,19 @@ function FactCard({ step, onNext }) {
       key={step.id}
       initial={{ opacity:0, y:16 }} animate={{ opacity:1, y:0 }} transition={{ duration:.35 }}
       className="flex flex-col"
-      style={{ height:'calc(100dvh - 130px)' }}
+      style={{ minHeight:'calc(100dvh - 150px)' }}
     >
       {/* Tarjeta principal */}
-      <div className="flex-1 rounded-2xl overflow-hidden flex flex-col"
+      <div className="flex-1 rounded-2xl flex flex-col"
         style={{ background:'#0f1d35', border:'1px solid rgba(0,200,255,.12)' }}>
 
         {/* Imagen si hay */}
         {step.img && (
-          <div className="flex-shrink-0" dangerouslySetInnerHTML={{ __html: step.img }} />
+          <div className="flex-shrink-0 rounded-t-2xl overflow-hidden" dangerouslySetInnerHTML={{ __html: step.img }} />
         )}
 
         {/* Contenido centrado */}
-        <div className="flex-1 flex flex-col justify-center px-5 py-4">
+        <div className="flex-1 flex flex-col justify-center px-5 py-6">
 
           {/* Badge centrado */}
           <div className="flex justify-center mb-4">
