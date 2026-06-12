@@ -19,13 +19,12 @@ export default function ResultsScreen({ go, result }) {
   const [auxOpen, setAuxOpen] = useState(false)
   const { pct=0, hits=0, total=10, score=0 } = result || {}
 
-  let col, lbl, desc
-  if(pct >= 80) { col='#00e5a0'; lbl='BLINDADO';    desc='Excelente dominio sobre estafas digitales. Compartí este test con tu familia para protegerlos también.' }
-  else if(pct >= 50) { col='#ffc844'; lbl='EN PROCESO'; desc='Tenés conocimiento básico pero hay puntos ciegos. Revisá los feedbacks y practicá más.' }
-  else               { col='#ff3d5a'; lbl='VULNERABLE'; desc='Tu nivel de blindaje es bajo. Activá el doble factor de autenticación en todos tus dispositivos hoy.' }
+  let col, col2, lbl, desc
+  if(pct >= 80) { col='#00e5a0'; col2='#34f5c0'; lbl='BLINDADO';    desc='Excelente dominio sobre estafas digitales. Compartí este test con tu familia para protegerlos también.' }
+  else if(pct >= 50) { col='#ffc844'; col2='#ffd97a'; lbl='EN PROCESO'; desc='Tenés conocimiento básico pero hay puntos ciegos. Revisá los feedbacks y practicá más.' }
+  else               { col='#ff3d5a'; col2='#ff7a8f'; lbl='VULNERABLE'; desc='Tu nivel de blindaje es bajo. Activá el doble factor de autenticación en todos tus dispositivos hoy.' }
 
-  const arc    = 283
-  const offset = (283 - (283 * pct / 100)).toFixed(1)
+  const C = 527.79
 
   const share = () => {
     if(navigator.share) navigator.share({ title:'Escudo Digital Familiar', text:'Hacé el test de blindaje digital y protegete de estafas.', url:window.location.href })
@@ -49,36 +48,58 @@ export default function ResultsScreen({ go, result }) {
       <div className="flex-1 overflow-y-auto px-4 py-5 pb-20 max-w-[520px] w-full mx-auto">
 
         {/* Score card */}
-        <motion.div {...fadeUp(0)} className="rounded-3xl p-7 text-center mb-4 relative overflow-hidden"
+        <motion.div {...fadeUp(0)} className="rounded-3xl p-6 text-center mb-4 relative overflow-hidden"
           style={{ background:'#0f1d35', border:'1px solid rgba(0,200,255,.1)' }}>
-          <div className="absolute inset-0 pointer-events-none" style={{ background:'radial-gradient(ellipse at 50% -20%,rgba(0,200,255,.07),transparent 65%)' }} />
+          <div className="absolute inset-0 pointer-events-none" style={{ background:`radial-gradient(ellipse at 50% -10%, ${col}1f, transparent 60%)` }} />
 
-          {/* Arc */}
-          <svg width="200" height="110" viewBox="-10 0 220 110" className="overflow-visible block mx-auto mb-3">
-            <path d="M 10 100 A 90 90 0 0 1 190 100" fill="none" stroke="rgba(255,255,255,.06)" strokeWidth="14" strokeLinecap="round"/>
-            <motion.path d="M 10 100 A 90 90 0 0 1 190 100" fill="none" stroke={col} strokeWidth="14" strokeLinecap="round"
-              strokeDasharray={arc} initial={{ strokeDashoffset:arc }} animate={{ strokeDashoffset:offset }}
-              transition={{ duration:1.4, ease:[.4,0,.2,1], delay:.2 }} />
-          </svg>
+          {/* Anillo de puntaje */}
+          <div className="relative mx-auto mb-4" style={{ width:196, height:196 }}>
+            <svg width="196" height="196" viewBox="0 0 200 200" className="block">
+              <defs>
+                <linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor={col2} />
+                  <stop offset="100%" stopColor={col} />
+                </linearGradient>
+              </defs>
+              <circle cx="100" cy="100" r="84" fill="none" stroke="rgba(255,255,255,.06)" strokeWidth="14" />
+              <motion.circle cx="100" cy="100" r="84" fill="none" stroke="url(#gaugeGrad)" strokeWidth="14" strokeLinecap="round"
+                transform="rotate(-90 100 100)" strokeDasharray={C}
+                initial={{ strokeDashoffset:C }} animate={{ strokeDashoffset: C - C * pct / 100 }}
+                transition={{ duration:1.4, ease:[.4,0,.2,1], delay:.2 }}
+                style={{ filter:`drop-shadow(0 0 7px ${col}aa)` }} />
+            </svg>
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <motion.span className="text-[3.3rem] font-black leading-none tracking-tighter" style={{ color:col }}
+                initial={{ opacity:0, scale:.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:.5, type:'spring', stiffness:200 }}>
+                {pct}%
+              </motion.span>
+              <span className="font-mono text-[.68rem] tracking-[.2em] uppercase font-bold mt-1.5" style={{ color:col }}>{lbl}</span>
+            </div>
+          </div>
 
-          <motion.span className="block text-[3.8rem] font-black tracking-tighter leading-none mb-2" style={{ color:col }}
-            initial={{ opacity:0, scale:.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:.4, type:'spring', stiffness:200 }}>
-            {pct}%
-          </motion.span>
-          <span className="block font-mono text-[.9rem] tracking-[.18em] uppercase font-bold mb-5" style={{ color:col }}>{lbl}</span>
+          <div className="text-[.82rem] text-t3 mb-5">Acertaste {hits} de {total} situaciones</div>
 
-          <div className="grid grid-cols-3 gap-2 mb-4">
-            {[{val:hits,lbl:'Correctas',col:'#00e5a0'},{val:total-hits,lbl:'Incorrectas',col:'#ff3d5a'},{val:score,lbl:'Puntos',col:'#ffc844'}].map(s => (
-              <div key={s.lbl} className="rounded-[12px] py-3 px-2 text-center" style={{ background:'#142040', border:'1px solid rgba(0,200,255,.08)' }}>
-                <div className="text-[1.8rem] font-black" style={{ color:s.col }}>{s.val}</div>
-                <div className="font-mono text-[.6rem] text-t3 uppercase tracking-wider mt-1">{s.lbl}</div>
+          {/* Estadísticas */}
+          <div className="grid grid-cols-3 gap-2.5 mb-4">
+            {[
+              { val:hits, lbl:'Correctas', col:'#00e5a0', icon:<path d="M20 6L9 17l-5-5"/> },
+              { val:total-hits, lbl:'Incorrectas', col:'#ff3d5a', icon:<path d="M18 6L6 18M6 6l12 12"/> },
+              { val:score, lbl:'Puntos', col:'#ffc844', icon:<path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01z"/> },
+            ].map(s => (
+              <div key={s.lbl} className="rounded-2xl py-4 px-1.5 text-center"
+                style={{ background:`linear-gradient(180deg, ${s.col}14, rgba(20,32,64,.45))`, border:`1px solid ${s.col}33` }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={s.col} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" className="mx-auto mb-1.5">{s.icon}</svg>
+                <div className="text-[1.7rem] font-black leading-none" style={{ color:s.col }}>{s.val}</div>
+                <div className="font-mono text-[.55rem] text-t3 uppercase tracking-wider mt-1.5">{s.lbl}</div>
               </div>
             ))}
           </div>
 
-          <div className="text-[.92rem] text-t2 leading-[1.7] p-4 rounded-[12px] text-left"
-            style={{ background:'rgba(255,255,255,.025)', border:'1px solid rgba(0,200,255,.08)' }}>
-            {desc}
+          {/* Recomendación */}
+          <div className="flex items-start gap-3 p-4 rounded-2xl text-left"
+            style={{ background:`${col}10`, border:`1px solid ${col}30` }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={col} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0 mt-[1px]"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <div className="text-[.9rem] text-t2 leading-[1.65]">{desc}</div>
           </div>
         </motion.div>
 
