@@ -92,18 +92,21 @@ function FlashAnim({ x, y, w, h, rx }) {
 }
 
 function ScreenshotTutorial() {
-  const btnStyle = { height:18, borderRadius:5, fontSize:9, fontWeight:800, padding:'0 6px', background:'rgba(0,229,160,.12)', border:'1px solid rgba(0,229,160,.35)', color:'#00e5a0', display:'flex', alignItems:'center' }
+  const cardBox  = { background:'rgba(255,255,255,.04)', border:'1px solid rgba(255,255,255,.08)', borderRadius:16, padding:'14px', display:'flex', gap:14, alignItems:'center' }
+  const phoneWrap= { background:'rgba(0,0,0,.28)', borderRadius:14, padding:'8px 10px', flexShrink:0, border:'1px solid rgba(255,255,255,.05)' }
+  const stepBox  = { display:'flex', alignItems:'center', gap:10, background:'rgba(0,229,160,.08)', border:'1px solid rgba(0,229,160,.22)', borderRadius:12, padding:'9px 12px' }
+  const badge    = { width:26, height:26, borderRadius:'50%', background:'#00e5a0', color:'#06251c', fontSize:'.9rem', fontWeight:900, display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, boxShadow:'0 0 14px rgba(0,229,160,.45)' }
+  const stepTxt  = { fontSize:'.92rem', fontWeight:800, color:'#fff', lineHeight:1.2 }
+  const nameTxt  = { fontSize:'1.05rem', fontWeight:900, color:'#fff' }
+  const subTxt   = { fontSize:'.78rem', color:'rgba(255,255,255,.5)', marginTop:-3, marginBottom:2 }
+
   return (
-    <div style={{ background:'rgba(139,124,248,.06)', border:'1px solid rgba(139,124,248,.2)', borderRadius:16, padding:'12px 14px', marginBottom:14 }}>
-      <div style={{ fontSize:'.68rem', fontWeight:800, color:'#8b7cf8', letterSpacing:'.06em', textTransform:'uppercase', textAlign:'center', marginBottom:3 }}>¿Cómo sacar una captura?</div>
-      <div style={{ fontSize:'.72rem', color:'rgba(255,255,255,.35)', textAlign:'center', marginBottom:10 }}>Apretá estos dos botones al mismo tiempo</div>
-      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:8 }}>
+    <div style={{ display:'flex', flexDirection:'column', gap:12, marginBottom:14 }}>
 
-        {/* iPhone */}
-        <div style={{ background:'rgba(255,255,255,.04)', borderRadius:12, padding:'10px 8px', display:'flex', flexDirection:'column', alignItems:'center', gap:6 }}>
-          <div style={{ fontSize:11, fontWeight:900, color:'#fff' }}>iPhone</div>
-          <svg width="72" height="96" viewBox="0 0 72 96" style={{ overflow:'visible' }}>
-
+      {/* iPhone */}
+      <div style={cardBox}>
+        <div style={phoneWrap}>
+          <svg width="98" height="131" viewBox="0 0 72 96" style={{ overflow:'visible', display:'block' }}>
             <rect x="12" y="2" width="44" height="88" rx="10" fill="#1a1a2e" stroke="rgba(255,255,255,.25)" strokeWidth="1.5"/>
             <rect x="24" y="5" width="20" height="6" rx="3" fill="#000"/>
             <rect x="15" y="14" width="38" height="64" rx="6" fill="#0a0a18"/>
@@ -120,18 +123,19 @@ function ScreenshotTutorial() {
             <text x="59.5" y="97" textAnchor="middle" fontSize="9" fontWeight="900" fill="#00e5a0" fontFamily="Nunito">1</text>
             <text x="8.5" y="97" textAnchor="middle" fontSize="9" fontWeight="900" fill="#00e5a0" fontFamily="Nunito">2</text>
           </svg>
-          <div style={{ fontSize:10, color:'rgba(255,255,255,.5)', textAlign:'center', lineHeight:1.5 }}><strong style={{color:'#00e5a0'}}>1</strong> Lateral + <strong style={{color:'#00e5a0'}}>2</strong> Vol ▲<br/>¡juntos!</div>
-          <div style={{ display:'flex', alignItems:'center', gap:3 }}>
-            <div style={{ height:18, borderRadius:5, fontSize:9, fontWeight:800, padding:'0 6px', background:'rgba(0,229,160,.12)', border:'1px solid rgba(0,229,160,.35)', color:'#00e5a0', display:'flex', alignItems:'center' }}>lateral</div>
-            <span style={{ fontSize:11, color:'rgba(255,255,255,.25)', fontWeight:900 }}>+</span>
-            <div style={{ height:18, borderRadius:5, fontSize:9, fontWeight:800, padding:'0 6px', background:'rgba(0,229,160,.12)', border:'1px solid rgba(0,229,160,.35)', color:'#00e5a0', display:'flex', alignItems:'center' }}>vol ▲</div>
-          </div>
         </div>
+        <div style={{ flex:1, minWidth:0, display:'flex', flexDirection:'column', gap:8 }}>
+          <div style={nameTxt}>iPhone</div>
+          <div style={subTxt}>Apretá los dos a la vez</div>
+          <div style={stepBox}><div style={badge}>1</div><span style={stepTxt}>Botón lateral</span></div>
+          <div style={stepBox}><div style={badge}>2</div><span style={stepTxt}>Volumen arriba ▲</span></div>
+        </div>
+      </div>
 
-        {/* Android */}
-        <div style={{ background:'rgba(255,255,255,.04)', borderRadius:12, padding:'10px 8px', display:'flex', flexDirection:'column', alignItems:'center', gap:6 }}>
-          <div style={{ fontSize:11, fontWeight:900, color:'#fff' }}>Android</div>
-          <svg width="72" height="96" viewBox="0 0 72 96" style={{ overflow:'visible' }}>
+      {/* Android */}
+      <div style={cardBox}>
+        <div style={phoneWrap}>
+          <svg width="98" height="131" viewBox="0 0 72 96" style={{ overflow:'visible', display:'block' }}>
             <rect x="12" y="2" width="44" height="88" rx="8" fill="#1a2035" stroke="rgba(255,255,255,.25)" strokeWidth="1.5"/>
             <circle cx="34" cy="8" r="3" fill="#111"/>
             <circle cx="34" cy="8" r="1.5" fill="#1a2035"/>
@@ -157,14 +161,15 @@ function ScreenshotTutorial() {
             <text x="59.5" y="29" textAnchor="start" fontSize="9" fontWeight="900" fill="#00e5a0" fontFamily="Nunito" dx="8">1</text>
             <text x="59.5" y="48" textAnchor="start" fontSize="9" fontWeight="900" fill="#00e5a0" fontFamily="Nunito" dx="8">2</text>
           </svg>
-          <div style={{ fontSize:10, color:'rgba(255,255,255,.5)', textAlign:'center', lineHeight:1.5 }}><strong style={{color:'#00e5a0'}}>1</strong> Encend. + <strong style={{color:'#00e5a0'}}>2</strong> Vol ▼<br/>¡juntos!</div>
-          <div style={{ display:'flex', alignItems:'center', gap:3 }}>
-            <div style={{ height:18, borderRadius:5, fontSize:9, fontWeight:800, padding:'0 6px', background:'rgba(0,229,160,.12)', border:'1px solid rgba(0,229,160,.35)', color:'#00e5a0', display:'flex', alignItems:'center' }}>encend.</div>
-            <span style={{ fontSize:11, color:'rgba(255,255,255,.25)', fontWeight:900 }}>+</span>
-            <div style={{ height:18, borderRadius:5, fontSize:9, fontWeight:800, padding:'0 6px', background:'rgba(0,229,160,.12)', border:'1px solid rgba(0,229,160,.35)', color:'#00e5a0', display:'flex', alignItems:'center' }}>vol ▼</div>
-          </div>
+        </div>
+        <div style={{ flex:1, minWidth:0, display:'flex', flexDirection:'column', gap:8 }}>
+          <div style={nameTxt}>Android</div>
+          <div style={subTxt}>Apretá los dos a la vez</div>
+          <div style={stepBox}><div style={badge}>1</div><span style={stepTxt}>Botón de encendido</span></div>
+          <div style={stepBox}><div style={badge}>2</div><span style={stepTxt}>Volumen abajo ▼</span></div>
         </div>
       </div>
+
     </div>
   )
 }
@@ -323,7 +328,7 @@ export default function ScanScreen({ go }) {
                 initial={{ opacity:0, scale:.9, y:20 }} animate={{ opacity:1, scale:1, y:0 }} exit={{ opacity:0, scale:.9, y:20 }}
                 transition={{ type:'spring', damping:20, stiffness:300 }}
                 onClick={e => e.stopPropagation()}
-                style={{ background:'#0d1628', border:'1px solid rgba(139,124,248,.3)', borderRadius:24, padding:'20px 16px', width:'100%', maxWidth:360 }}>
+                style={{ background:'#0d1628', border:'1px solid rgba(139,124,248,.3)', borderRadius:24, padding:'20px 16px', width:'100%', maxWidth:380, maxHeight:'90vh', overflowY:'auto' }}>
                 <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:16 }}>
                   <div>
                     <div style={{ fontSize:'1rem', fontWeight:900, color:'#fff' }}>¿Cómo sacar una captura?</div>
