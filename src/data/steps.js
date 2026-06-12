@@ -54,7 +54,7 @@ export const STEPS = [
     id: 3,
     cat: '¿Esa voz es real?',
     icon: '📞',
-    txt: '📲 Te llama un número desconocido. Una chica muy amable dice: "Hola, le llamo de Claro. Tenemos una promoción exclusiva para usted — internet ilimitado sin costo. Solo necesito confirmar su nombre completo, número de cédula y los últimos 4 dígitos de su tarjeta." Vos sos cliente de Tigo y nunca pediste nada. ¿Qué hacés?',
+    txt: '📲 Te llama alguien de "Claro" ofreciendo internet gratis. Para activarlo te pide tu cédula y los datos de tu tarjeta. Pero vos sos cliente de Tigo y nunca pediste nada. ¿Qué hacés?',
     opts: [
       'Le doy los datos — suena muy profesional y la oferta es buena',
       'Le doy el nombre y cédula nomás, pero no los datos de la tarjeta',
@@ -122,18 +122,18 @@ export const STEPS = [
   {
     type: 'q',
     id: 6,
-    cat: 'Antel te llama... o no',
+    cat: 'La llamada de Antel',
     icon: '📞',
-    txt: '📡 Te llaman de "Antel": detectaron un virus en tu router y necesitan acceso a tu Gmail para solucionarlo. ¿Qué hacés?',
+    txt: '📞 Te llaman de "Antel": dicen que la tarjeta con la que pagás el teléfono fue rechazada y que, para no cortarte el servicio, necesitan que les confirmes el PIN de tu tarjeta. ¿Qué hacés?',
     opts: [
-      'Les doy el Gmail — Antel es una empresa del Estado y es de confianza',
-      'Les pido que me expliquen mejor qué virus encontraron',
-      'Llamo a un familiar para contarle antes de dar cualquier dato',
-      'Cuelgo y bloqueo el número — ninguna empresa pide el Gmail por teléfono'
+      'Les doy el PIN — no quiero que me corten el teléfono',
+      'Les doy el número de la tarjeta pero el PIN no',
+      'Cuelgo: el PIN no se dice por teléfono a nadie. Si tengo dudas, llamo yo a Antel',
+      'Les pido que me manden un mail con la deuda antes de pagar'
     ],
-    ok: 3,
-    fc: '✅ ¡Muy bien! Ninguna empresa llama para pedir el Gmail. Si das acceso, pueden ver tus claves bancarias y fotos.',
-    fw: '❌ Ninguna empresa pide el Gmail por teléfono. Es siempre estafa. Colgá y bloqueá el número.'
+    ok: 2,
+    fc: '✅ ¡Exacto! El PIN es secreto y NUNCA se dice por teléfono — ni a Antel, ni al banco, ni a nadie. Si dudás, colgá y llamá vos a Antel.',
+    fw: '❌ Ojo: el PIN de tu tarjeta es secreto. Ninguna empresa de verdad te lo pide por teléfono. Colgá y verificá llamando vos a Antel.'
   },
 
   // ─── PREGUNTA 7: BROU + ANCAP descuento WhatsApp ────────
@@ -192,18 +192,18 @@ export const STEPS = [
   {
     type: 'q',
     id: 9,
-    cat: 'Los inspectores',
-    icon: '🚪',
-    txt: '🔍 Dos hombres con uniforme de la Intendencia en la puerta: "Inspección obligatoria, necesitamos entrar ahora." ¿Qué hacés?',
+    cat: 'El nieto en problemas',
+    icon: '📞',
+    txt: '📞 Un "abogado" y un "policía" te llaman: tu nieto chocó a una embarazada, hay un juicio y tenés que mandar $60.000 YA para que no quede preso. No te dejan hablar con él. ¿Qué hacés?',
     opts: [
-      'Los dejo pasar — tienen uniforme y dicen que es obligatorio',
-      'Les pido el número de expediente y llamo a la Intendencia al 1950 0911 para verificar',
-      'Los dejo pasar pero me quedo mirando todo lo que hacen',
-      'Les digo que esperen afuera mientras llamo a un familiar'
+      'Mando los $60.000 enseguida — no quiero que mi nieto quede preso',
+      'Pido más datos del juicio y del policía antes de decidir',
+      'Corto y llamo yo al número guardado de mi nieto (o a otro familiar) para verificar',
+      'Mando una parte ahora y el resto cuando pueda hablar con él'
     ],
-    ok: 1,
-    fc: '✅ ¡Bien! Cualquier inspector real puede esperar. Cerrá la puerta y llamá vos a la Intendencia: 1950 0911.',
-    fw: '❌ Los uniformes se pueden falsificar. Nadie puede obligarte a abrir. Cerrá y llamá: 1950 0911.'
+    ok: 2,
+    fc: '✅ ¡Correcto! Es el cuento del tío. La Justicia y la Policía NUNCA piden dinero por teléfono. Cortá y llamá vos al número de tu nieto o a otro familiar para confirmar.',
+    fw: '❌ Es el cuento del tío. Ni un abogado ni la Policía piden plata urgente por teléfono. Cortá y llamá vos al número guardado de tu familiar antes de hacer nada.'
   },
 
   // ─── PREGUNTA 10: Señor con traje del Banco República ───
