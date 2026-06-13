@@ -1,234 +1,107 @@
-// ============================================================
-// ESCUDO DIGITAL FAMILIAR — steps.js
-// 10 preguntas + 4 tarjetas ¿Sabías que?
-// Imágenes referenciadas desde /public/imgs/
-// ============================================================
+// Test de Blindaje Digital — banco de preguntas
+// Tipos: 'mcq' (opción múltiple) · 'real' (¿Estafa o real?) · 'tf' (Verdadero o Falso)
+// Las tarjetas "¿Sabías que?" de la versión anterior quedan en el historial de Git.
 
 export const STEPS = [
-
-  // ─── PREGUNTA 1: Cuento del tío presencial ───────────────
   {
-    type: 'q',
-    id: 1,
-    cat: '¿Quién toca el timbre?',
-    icon: '🚪',
-    txt: '⚠️ Un señor en la puerta con credencial del BROU dice que tu cuenta tiene un problema y necesita tu tarjeta y clave. ¿Qué hacés?',
+    type: 'mcq', id: 1, cat: '¿Quién toca el timbre?', icon: '🚪',
+    q: 'Un señor con credencial del BROU toca tu puerta y dice que tu cuenta tiene un problema. Te pide la <b>tarjeta y la clave</b>. ¿Qué hacés?',
     opts: [
-      'Le doy la tarjeta y la clave — tiene credencial y parece muy serio',
-      'Cierro la puerta, llamo YO al BROU al 1722 0001 para verificar',
-      'Le doy la tarjeta pero no la clave, así no puede hacer nada raro',
-      'Lo hago pasar y llamamos juntos al banco desde mi casa'
+      'Le doy la tarjeta y la clave',
+      'Cierro y llamo yo al BROU (1722 0001)',
+      'Le doy la tarjeta pero no la clave',
+      'Lo hago pasar y llamamos juntos',
     ],
     ok: 1,
-    fc: '✅ ¡Correcto! Los bancos NUNCA mandan gente a tu casa. La urgencia es el truco. Cerrá y llamá vos al BROU: 1722 0001.',
-    fw: '❌ Cuidado. Ningún banco manda empleados a tu puerta. Cerrá y llamá vos al BROU: 1722 0001.'
+    okFb: ['¡Correcto!', 'Los bancos nunca mandan gente a tu casa. Cerrá y llamá vos al 1722 0001.'],
+    noFb: ['Ojo con esto', 'Ningún banco manda empleados a tu puerta. Cerrá y llamá vos al BROU: 1722 0001.'],
   },
-
-  // ─── ¿SABÍAS QUE? 1: Canal 4 hombre ─────────────────────
   {
-    type: 'fact',
-    img: '<img src="/imgs/canal4_hombre.png" alt="Noticia Canal 4 - Hombre 90 años estafado" style="width:100%;height:100%;object-fit:contain;display:block" />',
-    txt: '<strong style="color:#ef6a5a;font-size:1.05rem">📺 Caso real — Canal 4</strong><br><br>Un hombre de <strong>90 años</strong> perdió <strong>$46.000</strong> con el cuento del tío: se hicieron pasar por su nieto y le pidieron plata urgente.<br><br>🔒 Si en la puerta te piden datos o dinero → <strong>cerrá y llamá al 911</strong>.',
+    type: 'real', id: 2, channel: 'wa', sender: '+598 91 234 567', sub: 'número desconocido',
+    text: 'Hola abu, soy Marti. Cambié de número, guardalo. Perdí la tarjeta y necesito que me hagas un giro de <b style="color:#ffd9a0">$8.000</b> por Abitab. No le digas a nadie por ahora',
+    time: '11:42', answer: 'estafa',
+    okFb: ['¡Bien visto!', 'Clásico del "cambié de número". Tu nieto de verdad no te pide plata por Abitab… y menos en secreto.'],
+    noFb: ['Era estafa', '"Cambié de número + giro urgente + no le digas a nadie" es la receta del cuento del tío.'],
   },
-
-  // ─── PREGUNTA 2: WhatsApp falso nieto ───────────────────
   {
-    type: 'q',
-    id: 2,
-    cat: 'El mensaje misterioso',
-    icon: '📱',
-    txt: '💬 WhatsApp de número desconocido: "Soy Matías, perdí el celu, tuve un accidente. Mandame $15.000 por Abitab urgente. No le digas a mamá." ¿Qué hacés?',
+    type: 'tf', id: 3,
+    statement: 'El BROU <b style="color:#7ff0c8">nunca</b> te va a pedir tu clave ni el código que llega por SMS, ni por teléfono ni en la puerta.',
+    answer: 'verdadero',
+    okFb: ['¡Tal cual!', 'El banco jamás pide tu clave ni el código. Quien te lo pida, es chorro. Cortá.'],
+    noFb: ['Era verdadero', 'El banco nunca pide eso. Si alguien lo pide, es estafa segura.'],
+  },
+  {
+    type: 'real', id: 4, channel: 'sms', sender: 'SUCIVE', sub: 'remitente: SMS',
+    text: 'SUCIVE: Multa vencida. Si no pagás hoy aumenta. Ingresá acá: <span style="color:#7ab8ff;text-decoration:underline">asucive.cc/uy/multa</span>',
+    time: '09:15', answer: 'estafa',
+    okFb: ['¡Exacto!', 'Los sitios del Estado terminan en .gub.uy. Ese ".cc" es trucho de fábrica.'],
+    noFb: ['Es estafa', 'SUCIVE no manda links por SMS. El sitio real es sucive.gub.uy — borralo sin tocar.'],
+  },
+  {
+    type: 'mcq', id: 5, cat: 'La llamada inesperada', icon: '☎️',
+    q: 'Te llaman de una "empresa de premios": ganaste y para cobrar necesitan el número y el <b>código de seguridad</b> de tu tarjeta. ¿Qué hacés?',
     opts: [
-      'Mando los $15.000 de inmediato — suena a que es mi nieto y lo necesita',
-      'Le mando $5.000 nomás, por las dudas que sea verdad',
-      'Llamo al número viejo de Matías para verificar que sea realmente él',
-      'Le pido que me mande una foto para confirmar su identidad'
+      'Le doy los datos, la oferta es buenísima',
+      'Le doy el número pero el código no',
+      'Cuelgo: nunca participé y nadie pide datos de tarjeta por teléfono',
+      'Le pido que me llame más tarde',
     ],
     ok: 2,
-    fc: '✅ ¡Correcto! Llamar al número conocido del familiar es la única forma segura. "No le digas a nadie" es siempre señal de estafa.',
-    fw: '❌ "No le digas a nadie" es siempre estafa. Nunca mandes plata sin llamar primero al número guardado de tu familiar.'
+    okFb: ['¡Perfecto!', 'Si no participaste, no ganaste. Y el código de la tarjeta no se da por teléfono jamás.'],
+    noFb: ['Cuidado', 'Ningún premio real pide los datos de tu tarjeta. Cortá tranquila.'],
   },
-  // ─── PREGUNTA 3: Vishing call center ────────────────────
   {
-    type: 'q',
-    id: 3,
-    cat: '¿Esa voz es real?',
-    icon: '📞',
-    txt: '📲 Te llama alguien de "Claro" ofreciendo internet gratis. Para activarlo te pide tu cédula y los datos de tu tarjeta. Pero vos sos cliente de Tigo y nunca pediste nada. ¿Qué hacés?',
+    type: 'tf', id: 6,
+    statement: 'Si un <span style="background:linear-gradient(100deg,#c4b9ff,#7ad2ff);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:600">"príncipe"</span> de un país lejano te quiere regalar su fortuna por email, conviene aceptar antes de que se arrepienta.',
+    answer: 'falso',
+    okFb: ['¡Falso, obvio!', 'Jaja, ojalá. Ningún príncipe reparte herencias por mail: es el cuento más viejo de internet.'],
+    noFb: ['Era falso', 'Si suena demasiado bueno para ser verdad, casi siempre es chamuyo.'],
+  },
+  {
+    type: 'real', id: 7, channel: 'wa', sender: 'BROU Beneficios', sub: 'número desconocido',
+    text: '🎉 ¡Felicitaciones! Por ser cliente del BROU tenés un beneficio de <b style="color:#ffd9a0">$10.000</b>. Activalo hoy en: <span style="color:#7ab8ff;text-decoration:underline">brou-beneficios.com</span>',
+    time: '16:20', answer: 'estafa',
+    okFb: ['¡Muy bien!', 'El BROU no regala plata por WhatsApp, y su sitio es brou.com.uy — no "brou-beneficios.com".'],
+    noFb: ['Es estafa', 'El dominio "brou-beneficios.com" no es del banco. El BROU no regala beneficios por WhatsApp.'],
+  },
+  {
+    type: 'mcq', id: 8, cat: 'Detectá la pista', icon: '🔍',
+    q: 'Te llega un email del "Correo Uruguayo", con logo perfecto, para pagar un envío retenido. ¿Qué lo delata como falso?',
     opts: [
-      'Le doy los datos — suena muy profesional y la oferta es buena',
-      'Le doy el nombre y cédula nomás, pero no los datos de la tarjeta',
-      'Cuelgo de inmediato — nunca solicité nada y ninguna empresa pide datos de tarjeta por teléfono',
-      'Le pido que me llame en otro momento cuando tenga tiempo'
+      'Nada, el logo está impecable',
+      'El remitente es correo-uy@gmail.com (no termina en .gub.uy)',
+      'Que tenga el logo',
+      'Que hable de un paquete',
     ],
-    ok: 2,
-    fc: '✅ ¡Correcto! Esto se llama Vishing — estafa por llamada. Nunca des datos personales ni bancarios por teléfono a alguien que llamó sin que vos lo pidieras. Colgá siempre.',
-    fw: '❌ Esto es Vishing — estafa por teléfono. Con tu nombre, cédula y datos de tarjeta pueden robarte dinero y suplantar tu identidad. Colgá siempre ante llamadas no solicitadas que pidan datos.'
+    ok: 1,
+    okFb: ['¡Ojo de detective!', 'El logo se copia en 2 minutos. Lo que no se falsea es el dominio: el oficial termina en .gub.uy.'],
+    noFb: ['La pista era el remitente', 'Un email oficial del Correo nunca sale de un @gmail.com. Mirá la dirección, no el logo.'],
   },
-
-
-  // ─── ¿SABÍAS QUE? — Telenoche millón ────────────────────
   {
-    type: 'fact',
-    img: '<img src="/imgs/telenoche_millon.png" alt="Cuento del tío - un millón de pesos" style="width:100%;height:100%;object-fit:contain;display:block" />',
-    txt: '<strong style="color:#ef6a5a;font-size:1.05rem">📺 Caso real — Telenoche</strong><br><br>Se hicieron pasar por <strong>policías</strong> y una víctima transfirió <strong>más de un millón de pesos</strong>.<br><br>⚠️ La Policía <strong>nunca</strong> pide dinero por teléfono → <strong>colgá y llamá vos al 911</strong>.',
+    type: 'tf', id: 9,
+    statement: 'Si quien te escribe sabe tu nombre y los <b>últimos 4 dígitos</b> de tu tarjeta, entonces seguro es tu banco de verdad.',
+    answer: 'falso',
+    okFb: ['¡Falso!', 'Esos datos se filtran y se compran. Saber algo tuyo no prueba nada: el banco igual no te pide claves.'],
+    noFb: ['Era falso', 'Los estafadores muchas veces ya tienen algunos datos tuyos. Eso no los convierte en tu banco.'],
   },
-
-  // ─── PREGUNTA 4: A2F Autenticación de dos factores ──────
   {
-    type: 'q',
-    id: 4,
-    cat: '¿App amiga o enemiga?',
-    icon: '🔐',
-    img: '<img src="/imgs/A2F.png" alt="Aplicaciones A2F Google y Microsoft Authenticator" style="width:100%;display:block;object-fit:cover;max-height:200px;border-radius:10px;" />',
-    txt: '🛡️ ¿Instalarías alguna de estas apps en tu celular? Se llaman A2F, son de Google y Microsoft.',
+    type: 'mcq', id: 10, cat: 'La regla de oro', icon: '🛡️',
+    q: 'En una frase: ¿cuál es la mejor defensa contra casi todas estas estafas?',
     opts: [
-      'No — pueden ser cualquier cosa peligrosa o un virus',
-      'Sí, claro — es la galería de Google, la uso todos los días',
-      'Sí, claro — instalo todas, son super seguras y necesarias',
-      'No instalo nada en mi celu sin que me lo pida el banco primero'
+      'Tener una clave bien larga',
+      'Frenar, no apurarme y verificar yo por un canal oficial',
+      'No usar nunca el celular',
+      'Contestar siempre para no quedar mal',
     ],
-    ok: 2,
-    fc: '✅ ¡Correcto! Son de Google y Microsoft — completamente seguras y muy necesarias. El A2F protege tus cuentas aunque alguien te robe la contraseña.',
-    fw: '❌ Ojo — el A2F no es la galería de fotos ni algo del banco. Es una app de seguridad de Google y Microsoft, gratuita y muy útil para protegerte.'
+    ok: 1,
+    okFb: ['¡Esa es!', 'El apuro es el arma del estafador. Frenar y verificar vos por un número oficial te salva casi siempre.'],
+    noFb: ['La clave es frenar', 'Ninguna estafa resiste a que cortes y verifiques vos por un canal oficial. El apuro es su mejor arma.'],
   },
+]
 
-  // ─── PREGUNTA 5: SMS SUCIVE multa falsa ─────────────────
-  {
-    type: 'q',
-    id: 5,
-    cat: 'El SMS del millón',
-    icon: '📨',
-    txt: '✉️ SMS recibido: "SUCIVE: Multa vencida, si no pagás hoy aumenta. Ingresá acá: asucive.cc/uy/multa" ¿Qué hacés?',
-    opts: [
-      'Entro rápido al link — no quiero que me aumenten la deuda',
-      'Le muestro el SMS a un familiar para que entre él por mí',
-      'Borro el SMS — SUCIVE nunca manda links y el sitio real es sucive.gub.uy',
-      'Llamo al número que aparece en el SMS para consultar si es real'
-    ],
-    ok: 2,
-    fc: '✅ ¡Correcto! SUCIVE nunca manda links. Los sitios oficiales terminan en .gub.uy — cualquier otro es falso.',
-    fw: '❌ Links que no terminan en .gub.uy son siempre falsos. Borrá el mensaje sin tocarlo.'
-  },
-
-  // ─── ¿SABÍAS QUE? 2: Canal 4 mujer ──────────────────────
-  {
-    type: 'fact',
-    img: '<img src="/imgs/canal4_mujer.png" alt="Noticia Canal 4 - Mujer estafada por $90.000" style="width:100%;height:100%;object-fit:contain;display:block" />',
-    txt: '<strong style="color:#ef6a5a;font-size:1.05rem">📺 Caso real — Canal 4</strong><br><br>Una mujer perdió <strong>casi $90.000</strong> con el cuento del tío.<br><br>🔒 Ningún banco ni funcionario pide dinero por teléfono o en la puerta → <strong>911 o 0800 5050</strong>.',
-  },
-
-  // ─── PREGUNTA 6: Antel virus router ─────────────────────
-  {
-    type: 'q',
-    id: 6,
-    cat: 'La llamada de Antel',
-    icon: '📞',
-    txt: '📞 Te llaman de "Antel": dicen que la tarjeta con la que pagás el teléfono fue rechazada y que, para no cortarte el servicio, necesitan que les confirmes el PIN de tu tarjeta. ¿Qué hacés?',
-    opts: [
-      'Les doy el PIN — no quiero que me corten el teléfono',
-      'Les doy el número de la tarjeta pero el PIN no',
-      'Cuelgo: el PIN no se dice por teléfono a nadie. Si tengo dudas, llamo yo a Antel',
-      'Les pido que me manden un mail con la deuda antes de pagar'
-    ],
-    ok: 2,
-    fc: '✅ ¡Exacto! El PIN es secreto y NUNCA se dice por teléfono — ni a Antel, ni al banco, ni a nadie. Si dudás, colgá y llamá vos a Antel.',
-    fw: '❌ Ojo: el PIN de tu tarjeta es secreto. Ninguna empresa de verdad te lo pide por teléfono. Colgá y verificá llamando vos a Antel.'
-  },
-
-  // ─── PREGUNTA 7: BROU + ANCAP descuento WhatsApp ────────
-  {
-    type: 'q',
-    id: 7,
-    cat: 'Oferta del siglo',
-    icon: '💳',
-    img: '<img src="/imgs/brou_ancap.png" alt="Publicidad falsa BROU ANCAP" style="width:100%;display:block;object-fit:cover;max-height:200px;border-radius:10px;" />',
-    txt: '💳 Te llega este WhatsApp con la imagen de arriba. ¿Qué hacés?',
-    opts: [
-      'Entro y doy mis datos — es del BROU y ANCAP, parecen logos reales',
-      'Le pregunto al banco más detalles antes de dar mis datos',
-      'Cierro el WhatsApp y bloqueo — el BROU NUNCA regala beneficios así',
-      'Reenvío el mensaje a un familiar para ver si él también lo recibió'
-    ],
-    ok: 2,
-    fc: '✅ ¡Correcto! El BROU nunca da beneficios por WhatsApp. La "llave digital" son tus claves bancarias — nunca las des.',
-    fw: '❌ Fraude real en Uruguay. El BROU nunca da beneficios por WhatsApp. Bloqueá ese número.'
-  },
-
-  // ─── ¿SABÍAS QUE? 3: Correo Uruguayo falso ───────────────
-  {
-    type: 'fact',
-    img: '<img src="/imgs/correo_uy.png" alt="Email falso Correo Uruguayo" style="width:100%;height:100%;object-fit:contain;display:block" />',
-    txt: '<strong style="color:#ef6a5a;font-size:1.05rem">⚠️ Email falso — Correo Uruguayo</strong><br><br>Copian el diseño del Correo para cobrarte <strong>gastos de envío falsos</strong>.<br><br>🔒 Si el link no termina en <strong>.gub.uy</strong> → es falso, no ingreses tu tarjeta.',
-  },
-
-  // ─── PREGUNTA 8: Premio falso Abitab ────────────────────
-  {
-    type: 'q',
-    id: 8,
-    cat: '¡Ganaste! ¿O no?',
-    icon: '🎁',
-    txt: '📩 Email recibido: "¡Ganaste un viaje a Punta del Este de Abitab! Ingresá tu tarjeta. Solo 24 horas." ¿Qué hacés?',
-    opts: [
-      'Entro rápido al link — ¡un viaje a Punta del Este sería increíble!',
-      'Reenvío el email a un familiar para que lo revise por mí',
-      'Borro el email — Abitab nunca pide datos por email y no participé en ningún sorteo',
-      'Llamo al número que aparece en el email para verificar el premio'
-    ],
-    ok: 2,
-    fc: '✅ ¡Correcto! Si no participaste, no ganaste nada. Nadie pide datos de tarjeta para entregar premios.',
-    fw: '❌ Si no participaste en ningún sorteo, no podés ganar nada. Nunca des datos por email inesperado.'
-  },
-
-
-  // ─── ¿SABÍAS QUE? — Hombre estafado USD 18.000 ──────────
-  {
-    type: 'fact',
-    img: '<img src="/imgs/cuento_tio_hombre.png" alt="Hombre estafado USD 18.000" style="width:100%;height:100%;object-fit:contain;display:block" />',
-    txt: '<strong style="color:#ef6a5a;font-size:1.05rem">⚠️ Caso real — Cuento del tío</strong><br><br>Un hombre de <strong>67 años</strong> perdió <strong>USD 18.000 y $350.000</strong>: alguien se hizo pasar por su hijo accidentado.<br><br>✅ Antes de mandar plata → <strong>llamá al número guardado de tu familiar</strong> y verificá.',
-  },
-
-  // ─── PREGUNTA 9: DOS hombres con uniforme IM ────────────
-  {
-    type: 'q',
-    id: 9,
-    cat: 'El nieto en problemas',
-    icon: '📞',
-    txt: '📞 Un "abogado" y un "policía" te llaman: tu nieto chocó a una embarazada, hay un juicio y tenés que mandar $60.000 YA para que no quede preso. No te dejan hablar con él. ¿Qué hacés?',
-    opts: [
-      'Mando los $60.000 enseguida — no quiero que mi nieto quede preso',
-      'Pido más datos del juicio y del policía antes de decidir',
-      'Corto y llamo yo al número guardado de mi nieto (o a otro familiar) para verificar',
-      'Mando una parte ahora y el resto cuando pueda hablar con él'
-    ],
-    ok: 2,
-    fc: '✅ ¡Correcto! Es el cuento del tío. La Justicia y la Policía NUNCA piden dinero por teléfono. Cortá y llamá vos al número de tu nieto o a otro familiar para confirmar.',
-    fw: '❌ Es el cuento del tío. Ni un abogado ni la Policía piden plata urgente por teléfono. Cortá y llamá vos al número guardado de tu familiar antes de hacer nada.'
-  },
-
-  // ─── PREGUNTA 10: Señor con traje del Banco República ───
-  {
-    type: 'q',
-    id: 10,
-    cat: 'El señor del banco',
-    icon: '🏦',
-    txt: '🏛️ Hombre con traje del Banco República en la puerta: "Movimiento sospechoso en tu cuenta, necesito tu llave digital y CVV." ¿Qué hacés?',
-    opts: [
-      'Le doy la llave digital y el CVV — quiero proteger mis ahorros',
-      'Le doy solo el CVV y guardo la llave digital para mí',
-      'Cierro la puerta y llamo al BROU al 1722 0001 — el banco nunca manda gente a pedir datos',
-      'Le pido que me muestre más documentación antes de dar nada'
-    ],
-    ok: 2,
-    fc: '✅ ¡Correcto! El BROU nunca manda gente a pedir datos. Cerrá la puerta y llamá: 1722 0001.',
-    fw: '❌ El CVV y la llave digital son las llaves de tu cuenta. El BROU nunca los pide en persona. Cerrá y llamá: 1722 0001.'
-  },
-
-  // ─── ¿SABÍAS QUE? 4: Talleres IM ─────────────────────────
-  {
-    type: 'fact',
-    img: '<img src="/imgs/manosdigital.png" alt="Curso inclusión digital personas mayores" style="width:100%;height:100%;object-fit:contain;display:block" />',
-    txt: '<strong style="color:#10b981;font-size:1.05rem">🏛️ Talleres digitales gratis — IM</strong><br><br>La Intendencia de Montevideo tiene talleres para personas mayores: usar el celular y reconocer estafas.<br><br>📞 <strong>1950 5555</strong> · Estafas digitales: <strong>2030 4625</strong>.',
-  }
-
+// Reglas de oro que muestra la pantalla de resultados
+export const GOLDEN_RULES = [
+  'El banco nunca pide tu clave ni los códigos que llegan por SMS.',
+  'Si te apuran, frená: cortá y verificá vos por un número oficial.',
+  'Los sitios del Estado terminan en .gub.uy. El logo no garantiza nada.',
 ]
