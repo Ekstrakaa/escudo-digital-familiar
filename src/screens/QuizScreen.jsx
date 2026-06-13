@@ -142,6 +142,11 @@ export default function QuizScreen({ go }) {
   const timer = useRef(null)
 
   useEffect(() => () => clearTimeout(timer.current), [])
+  useEffect(() => {
+    const h = document.documentElement.style.overflow, b = document.body.style.overflow
+    document.documentElement.style.overflow = 'hidden'; document.body.style.overflow = 'hidden'
+    return () => { document.documentElement.style.overflow = h; document.body.style.overflow = b }
+  }, [])
 
   const step  = FLOW[idx]
   const qNum  = FLOW.slice(0, idx + 1).filter(s => s.t !== 'fact').length
@@ -281,7 +286,7 @@ function Binary({ v, ok, chosen, answered, cls, icon, c, label, idx, onPick }) {
 function Styles() {
   return (
     <style>{`
-    .bqx-root{position:relative;height:100dvh;overflow:hidden;background:#050a18;color:#f0f6ff;display:flex;justify-content:center;font-family:'Outfit',sans-serif}
+    .bqx-root{position:relative;height:100dvh;overflow:hidden;overscroll-behavior:none;background:#050a18;color:#f0f6ff;display:flex;justify-content:center;font-family:'Outfit',sans-serif}
     .bqx-particles{position:absolute;inset:0;z-index:0;opacity:.85}
     .bqx-app{position:relative;z-index:1;width:100%;max-width:430px;height:100dvh;display:flex;flex-direction:column;overflow:hidden;padding:max(env(safe-area-inset-top),12px) 16px max(env(safe-area-inset-bottom),14px)}
 
