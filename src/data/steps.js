@@ -27,8 +27,8 @@ export const STEPS = [
   // ─── ¿SABÍAS QUE? 1: Canal 4 hombre ─────────────────────
   {
     type: 'fact',
-    img: '<img src="/imgs/canal4_hombre.png" alt="Noticia Canal 4 - Hombre 90 años estafado" style="width:100%;display:block;object-fit:cover;max-height:200px;border-radius:10px;" />',
-    txt: '<div style="font-size:1.05rem;font-weight:800;color:#ef4444;margin-bottom:10px;letter-spacing:.01em">📺 CASO REAL — CANAL 4</div><div style="font-size:.9rem;line-height:1.6;color:#f0f6ff;margin-bottom:10px">Un hombre de <strong>90 años</strong> fue estafado con el <strong>cuento del tío</strong>. Se hicieron pasar por su nieto, le inventaron un accidente y le pidieron un préstamo urgente. El hombre entregó su tarjeta y datos personales perdiendo <strong style="color:#ef4444">$46.000 pesos</strong>.</div><div style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);border-radius:10px;padding:10px 12px;font-size:.85rem;line-height:1.55;color:#f0f6ff">🔒 Si alguien en la puerta pide datos o dinero → <strong>cerrá y llamá al 911</strong><br><br>💬 <strong style="color:#00e5a0">Consultá en nuestra web</strong> — te ayudamos enseguida ante cualquier situación.</div>',
+    img: '<img src="/imgs/canal4_hombre.png" alt="Noticia Canal 4 - Hombre 90 años estafado" style="width:100%;height:100%;object-fit:contain;display:block" />',
+    txt: '<strong style="color:#ef6a5a;font-size:1.05rem">📺 Caso real — Canal 4</strong><br><br>Un hombre de <strong>90 años</strong> perdió <strong>$46.000</strong> con el cuento del tío: se hicieron pasar por su nieto y le pidieron plata urgente.<br><br>🔒 Si en la puerta te piden datos o dinero → <strong>cerrá y llamá al 911</strong>.',
   },
 
   // ─── PREGUNTA 2: WhatsApp falso nieto ───────────────────
@@ -70,8 +70,8 @@ export const STEPS = [
   // ─── ¿SABÍAS QUE? — Telenoche millón ────────────────────
   {
     type: 'fact',
-    img: '<img src="/imgs/telenoche_millon.png" alt="Cuento del tío - un millón de pesos" style="width:100%;display:block;object-fit:cover;object-position:center top;max-height:200px;border-radius:10px;" />',
-    txt: '<strong style="color:#ef4444">📺 Caso real — Cuento del tío telefónico</strong><br><br>Se hicieron pasar por policías y lograron que una víctima transfiriera <strong>más de un millón de pesos</strong>. Todo empezó con una llamada al teléfono de línea de su casa.<br><br><strong style="color:#f59e0b">⚠️ Recordá siempre:</strong><br>• La Policía <strong>NUNCA</strong> te va a llamar para pedirte dinero<br>• Ningún funcionario oficial pide transferencias por teléfono<br>• Ante cualquier llamada sospechosa, <strong>colgá y llamá al 911 vos</strong><br><br><div style="margin-top:12px;padding:10px 14px;border-radius:10px;background:rgba(0,229,160,.07);border:1px solid rgba(0,229,160,.2);color:#00e5a0;font-size:.85rem">💬 Si te pasa algo así, consultá en nuestro <strong>chat de Escudo Digital</strong> — te ayudamos a actuar paso a paso ante cualquier situación.</div>',
+    img: '<img src="/imgs/telenoche_millon.png" alt="Cuento del tío - un millón de pesos" style="width:100%;height:100%;object-fit:contain;display:block" />',
+    txt: '<strong style="color:#ef6a5a;font-size:1.05rem">📺 Caso real — Telenoche</strong><br><br>Se hicieron pasar por <strong>policías</strong> y una víctima transfirió <strong>más de un millón de pesos</strong>.<br><br>⚠️ La Policía <strong>nunca</strong> pide dinero por teléfono → <strong>colgá y llamá vos al 911</strong>.',
   },
 
   // ─── PREGUNTA 4: A2F Autenticación de dos factores ──────
@@ -114,8 +114,8 @@ export const STEPS = [
   // ─── ¿SABÍAS QUE? 2: Canal 4 mujer ──────────────────────
   {
     type: 'fact',
-    img: '<img src="/imgs/canal4_mujer.png" alt="Noticia Canal 4 - Mujer estafada por $90.000" style="width:100%;display:block;object-fit:cover;max-height:200px;border-radius:10px;" />',
-    txt: '<strong style="color:#ef4444">📺 Caso real — Canal 4</strong><br><br>Una mujer perdió <strong>casi $90.000</strong> con el cuento del tío.<br><br>🔒 Ningún banco ni funcionario pide dinero por teléfono o en la puerta. Si te pasó → <strong>911 o 0800 5050</strong>',
+    img: '<img src="/imgs/canal4_mujer.png" alt="Noticia Canal 4 - Mujer estafada por $90.000" style="width:100%;height:100%;object-fit:contain;display:block" />',
+    txt: '<strong style="color:#ef6a5a;font-size:1.05rem">📺 Caso real — Canal 4</strong><br><br>Una mujer perdió <strong>casi $90.000</strong> con el cuento del tío.<br><br>🔒 Ningún banco ni funcionario pide dinero por teléfono o en la puerta → <strong>911 o 0800 5050</strong>.',
   },
 
   // ─── PREGUNTA 6: Antel virus router ─────────────────────
@@ -158,8 +158,8 @@ export const STEPS = [
   // ─── ¿SABÍAS QUE? 3: Correo Uruguayo falso ───────────────
   {
     type: 'fact',
-    img: '<img src="/imgs/correo_uy.png" alt="Email falso Correo Uruguayo" style="width:100%;display:block;object-fit:cover;max-height:200px;border-radius:10px;" />',
-    txt: '<strong style="color:#ef4444">⚠️ Email falso — Correo Uruguayo</strong><br><br>Copian el diseño del Correo para cobrar gastos de envío falsos.<br><br>🔒 Si el link no termina en <strong>.gub.uy</strong> → es falso. No ingreses tu tarjeta.',
+    img: '<img src="/imgs/correo_uy.png" alt="Email falso Correo Uruguayo" style="width:100%;height:100%;object-fit:contain;display:block" />',
+    txt: '<strong style="color:#ef6a5a;font-size:1.05rem">⚠️ Email falso — Correo Uruguayo</strong><br><br>Copian el diseño del Correo para cobrarte <strong>gastos de envío falsos</strong>.<br><br>🔒 Si el link no termina en <strong>.gub.uy</strong> → es falso, no ingreses tu tarjeta.',
   },
 
   // ─── PREGUNTA 8: Premio falso Abitab ────────────────────
@@ -184,8 +184,8 @@ export const STEPS = [
   // ─── ¿SABÍAS QUE? — Hombre estafado USD 18.000 ──────────
   {
     type: 'fact',
-    img: '<img src="/imgs/cuento_tio_hombre.png" alt="Hombre estafado USD 18.000" style="width:100%;display:block;object-fit:cover;max-height:200px;border-radius:10px;" />',
-    txt: '<strong style="color:#ef4444">⚠️ Caso real — Cuento del tío: USD 18.000 y $350.000</strong><br><br>Un hombre de 67 años fue engañado por alguien que se hizo pasar por su hijo. Le dijeron que había tenido un accidente grave y necesitaba dinero urgente. Perdió <strong>USD 18.000 y $350.000 pesos</strong>.<br><br><strong style="color:#f59e0b">Antes de mandar cualquier dinero:</strong><br>• Llamá directamente al número guardado de tu familiar<br>• Consultá con otro familiar de confianza lo que está pasando<br>• Llamá al <strong style="color:#00c8ff">911</strong> si sentís presión o amenazas<br><br><div style="margin-top:12px;padding:10px 14px;border-radius:10px;background:rgba(0,229,160,.07);border:1px solid rgba(0,229,160,.2);color:#00e5a0;font-size:.85rem">💬 Ante cualquier situación de urgencia con dinero, usá nuestro <strong>chat de Escudo Digital</strong> — te orientamos antes de que tomes cualquier decisión.</div>',
+    img: '<img src="/imgs/cuento_tio_hombre.png" alt="Hombre estafado USD 18.000" style="width:100%;height:100%;object-fit:contain;display:block" />',
+    txt: '<strong style="color:#ef6a5a;font-size:1.05rem">⚠️ Caso real — Cuento del tío</strong><br><br>Un hombre de <strong>67 años</strong> perdió <strong>USD 18.000 y $350.000</strong>: alguien se hizo pasar por su hijo accidentado.<br><br>✅ Antes de mandar plata → <strong>llamá al número guardado de tu familiar</strong> y verificá.',
   },
 
   // ─── PREGUNTA 9: DOS hombres con uniforme IM ────────────
@@ -227,8 +227,8 @@ export const STEPS = [
   // ─── ¿SABÍAS QUE? 4: Talleres IM ─────────────────────────
   {
     type: 'fact',
-    img: '<img src="/imgs/manosdigital.png" alt="Curso inclusión digital personas mayores" style="width:100%;display:block;object-fit:cover;max-height:200px;border-radius:10px;" />',
-    txt: '<strong style="color:#10b981">🏛️ Talleres digitales GRATIS — IM</strong><br><br>La Intendencia de Montevideo tiene talleres para personas mayores: aprendé a usar el celular y reconocer estafas.<br><br>📞 <strong style="color:#8b7cf8">1950 5555</strong> · Estafas digitales: <strong style="color:#00c8ff">2030 4625</strong>',
+    img: '<img src="/imgs/manosdigital.png" alt="Curso inclusión digital personas mayores" style="width:100%;height:100%;object-fit:contain;display:block" />',
+    txt: '<strong style="color:#10b981;font-size:1.05rem">🏛️ Talleres digitales gratis — IM</strong><br><br>La Intendencia de Montevideo tiene talleres para personas mayores: usar el celular y reconocer estafas.<br><br>📞 <strong>1950 5555</strong> · Estafas digitales: <strong>2030 4625</strong>.',
   }
 
 ]
