@@ -1,283 +1,424 @@
-import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { useState, useEffect, useRef } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { STEPS } from '../data/steps'
+import { CATS }  from '../data/cats'
 
-/* Iconos */
-const PATHS = {
-  back:  <path d="M19 12H5M12 5l-7 7 7 7" />,
-  arrow: <path d="M5 12h14M12 5l7 7-7 7" />,
-  flame: <><path d="M12 2c1 4 4 5 4 9a4 4 0 0 1-8 0c0-1 .5-2 1-3" /><path d="M12 22a6 6 0 0 0 6-6c0-3-2-4-3-6-2 3-3 3-5 4" /></>,
-  alert: <><path d="M12 2 2 20h20Z" /><path d="M12 9v5M12 17h.01" /></>,
-  check: <path d="M20 6 9 17l-5-5" />,
-  x:     <path d="M18 6 6 18M6 6l12 12" />,
-  user:  <><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 4-6 8-6s8 2 8 6" /></>,
-  shield:<><path d="M12 2 4 6v6c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6Z" /><path d="M9 12l2 2 4-4" /></>,
-}
-function Ic({ name, s = 18, c = 'currentColor', w = 2 }) {
-  return (
-    <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth={w} strokeLinecap="round" strokeLinejoin="round">
-      {PATHS[name]}
-    </svg>
-  )
-}
-
-export default function QuizScreen({ go }) {
-  const total = STEPS.length
-  const [phase, setPhase]     = useState('intro')   // intro | quiz
-  const [idx, setIdx]         = useState(0)
-  const [score, setScore]     = useState(0)
-  const [hits, setHits]       = useState(0)
-  const [streak, setStreak]   = useState(0)
-  const [answered, setAnswered] = useState(false)
-  const [chosen, setChosen]   = useState(null)      // índice (mcq) o valor (real/tf)
-  const [win, setWin]         = useState(false)
-
-  const step = STEPS[idx]
-
-  const grade = (correct, pick) => {
-    if (answered) return
-    setChosen(pick)
-    setWin(correct)
-    setAnswered(true)
-    if (correct) { setScore(s => s + 100); setHits(h => h + 1); setStreak(s => s + 1) }
-    else setStreak(0)
-  }
-
-  const advance = () => {
-    const finalHits  = hits
-    const finalScore = score
-    if (idx + 1 >= total) {
-      go.results({ pct: Math.round((finalHits / total) * 100), hits: finalHits, total, score: finalScore })
-    } else {
-      setIdx(i => i + 1); setAnswered(false); setChosen(null); setWin(false)
+function Particles() {
+  const canvasRef = useRef(null)
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')
+    let animId
+    const resize = () => {
+      canvas.width  = canvas.offsetWidth
+      canvas.height = canvas.offsetHeight
     }
-  }
+    resize()
+    window.addEventListener('resize', resize)
+    const dots = Array.from({ length: 60 }, () => ({
+      x:   Math.random() * canvas.width,
+      y:   Math.random() * canvas.height,
+      vx:  (Math.random() - 0.5) * 0.28,
+      vy:  (Math.random() - 0.5) * 0.28,
+      r:   Math.random() * 2.8 + 1.0,
+      a:   Math.random() * 0.45 + 0.15,
+      hue: Math.random() * 360,
+      dh:  (Math.random() * 0.5 + 0.15) * (Math.random() > 0.5 ? 1 : -1),
+    }))
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      dots.forEach(d => {
+        d.x  += d.vx; d.y += d.vy
+        d.hue = (d.hue + d.dh + 360) % 360
+        if (d.x < 0) d.x = canvas.width
+        if (d.x > canvas.width) d.x = 0
+        if (d.y < 0) d.y = canvas.height
+        if (d.y > canvas.height) d.y = 0
+        ctx.beginPath()
+        ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2)
+        ctx.fillStyle = `hsla(${d.hue}, 100%, 65%, ${d.a})`
+        ctx.fill()
+      })
+      dots.forEach((a, i) => dots.slice(i + 1).forEach(b => {
+        const dist = Math.hypot(a.x - b.x, a.y - b.y)
+        if (dist < 90) {
+          const midHue = (a.hue + b.hue) / 2
+          ctx.beginPath()
+          ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y)
+          ctx.strokeStyle = `hsla(${midHue}, 100%, 65%, ${0.10 * (1 - dist / 90)})`
+          ctx.stroke()
+        }
+      }))
+      animId = requestAnimationFrame(draw)
+    }
+    draw()
+    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', resize) }
+  }, [])
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex:0 }} />
+}
 
-  const start = () => { setPhase('quiz'); setIdx(0); setScore(0); setHits(0); setStreak(0); setAnswered(false); setChosen(null) }
+const LETTERS = ['A','B','C','D']
 
-  /* ── Pantalla de inicio ── */
-  if (phase === 'intro') {
-    return (
-      <div className="bq-root">
-        <Style />
-        <span className="bq-aura a1" /><span className="bq-aura a2" />
-        <div className="bq-shell">
-          <div className="bq-center">
-            <div className="bq-kicker">Test de Blindaje Digital</div>
-            <div className="bq-introbadge"><Ic name="shield" s={46} c="#36e6b4" /></div>
-            <div className="bq-bigtitle">¿Estás a prueba <span className="bq-grad">de estafas?</span></div>
-            <div className="bq-lead">10 situaciones reales para entrenar el ojo. No se trata de saber de tecnología, sino de reconocer las trampas a tiempo.</div>
-            <div className="bq-meta"><span><b>10</b> preguntas</span><span style={{ opacity: .4 }}>·</span><span>≈ <b>3</b> min</span></div>
-            <button className="bq-cta" style={{ maxWidth: 320 }} onClick={start}>Empezar <Ic name="arrow" s={16} c="#04231a" /></button>
-            <button className="bq-back-link" onClick={go.home}>Volver al inicio</button>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  const prog = Math.round(((idx + 1) / total) * 100)
-  const title = step.type === 'real' ? '¿Estafa o real?' : step.type === 'tf' ? 'Verdadero o Falso' : `Pregunta ${idx + 1} de ${total}`
-  const fb = answered ? (win ? step.okFb : step.noFb) : null
+/* ──────────────────────────────────────────
+   Confetti burst (verde cuando acertás)
+────────────────────────────────────────── */
+function ConfettiBurst() {
+  const pieces = Array.from({ length: 22 }, (_, i) => ({
+    id: i,
+    x: (Math.random() - 0.5) * 280,
+    y: -(Math.random() * 200 + 80),
+    rot: Math.random() * 720 - 360,
+    scale: Math.random() * 0.6 + 0.4,
+    color: ['#00e5a0','#00c8ff','#f59e0b','#10b981','#34d399'][Math.floor(Math.random()*5)],
+    shape: Math.random() > 0.5 ? 'rect' : 'circle',
+    delay: Math.random() * 0.15,
+  }))
 
   return (
-    <div className="bq-root">
-      <Style />
-      <span className="bq-aura a1" /><span className="bq-aura a2" />
-      <div className="bq-shell">
-
-        {/* Header */}
-        <div className="bq-hud">
-          <button className="bq-iconbtn" onClick={go.home}><Ic name="back" s={15} c="rgba(255,255,255,.75)" /></button>
-          <div className="bq-htitle"><h1>{title}</h1><p>Test de Blindaje Digital</p></div>
-          {streak >= 2 && <div className="bq-chip"><Ic name="flame" s={12} c="#f5a623" /><span>x{streak}</span></div>}
-          <div className="bq-pts">{score} pts</div>
-        </div>
-        <div className="bq-bar"><i style={{ width: `${prog}%` }} /></div>
-
-        {/* Pregunta */}
-        <motion.div key={idx} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .35 }} className="bq-stage">
-
-          {step.type === 'mcq' && (
-            <div className="bq-card">
-              <div className="bq-cat"><div className="bq-catic">{step.icon}</div><div className="bq-catnm">{step.cat}</div></div>
-              <div className="bq-qtext" dangerouslySetInnerHTML={{ __html: step.q }} />
-              <div className="bq-opts">
-                {step.opts.map((o, j) => {
-                  let cls = 'bq-opt'
-                  if (answered) {
-                    if (j === step.ok) cls += ' win'
-                    else { cls += ' dim'; if (j === chosen) cls += ' lose' }
-                  }
-                  return (
-                    <button key={j} className={cls} disabled={answered} onClick={() => grade(j === step.ok, j)}>
-                      <div className="bq-lt">{'ABCD'[j]}</div><span>{o}</span>
-                    </button>
-                  )
-                })}
-              </div>
-              {fb && <Feedback fb={fb} win={win} onNext={advance} last={idx + 1 >= total} />}
-            </div>
-          )}
-
-          {step.type === 'real' && (
-            <div className="bq-card">
-              <div className="bq-prompt">¿Qué hacés con este mensaje?</div>
-              <div className="bq-msg">
-                <div className="bq-msgtop">
-                  <div className={`bq-av ${step.channel}`}><Ic name="user" s={17} c="#cdfaec" /></div>
-                  <div><div className="bq-nm">{step.sender}</div><div className="bq-sub">{step.sub}</div></div>
-                  <span className="bq-tag">{step.channel === 'wa' ? 'WhatsApp' : 'SMS'}</span>
-                </div>
-                <div className={`bq-bubble ${step.channel}`} dangerouslySetInnerHTML={{ __html: step.text }} />
-                <div className="bq-time">{step.time}</div>
-              </div>
-              <Binary step={step} answered={answered} chosen={chosen}
-                a={{ v: 'estafa', cls: 'red', icon: 'alert', c: '#ff6378', label: 'Es estafa' }}
-                b={{ v: 'real', cls: 'green', icon: 'check', c: '#00e5a0', label: 'Es de verdad' }}
-                onPick={grade} />
-              {fb && <Feedback fb={fb} win={win} onNext={advance} last={idx + 1 >= total} />}
-            </div>
-          )}
-
-          {step.type === 'tf' && (
-            <>
-              <div className="bq-badgewrap"><div className="bq-badge">VERDADERO O FALSO</div></div>
-              <div className="bq-card">
-                <div className="bq-statement" dangerouslySetInnerHTML={{ __html: step.statement }} />
-                <Binary step={step} answered={answered} chosen={chosen}
-                  a={{ v: 'verdadero', cls: 'green', icon: 'check', c: '#00e5a0', label: 'Verdadero' }}
-                  b={{ v: 'falso', cls: 'red', icon: 'x', c: '#ff6378', label: 'Falso' }}
-                  onPick={grade} />
-                {fb && <Feedback fb={fb} win={win} onNext={advance} last={idx + 1 >= total} />}
-              </div>
-            </>
-          )}
-
-        </motion.div>
-      </div>
+    <div className="pointer-events-none fixed inset-0 z-50 flex items-center justify-center overflow-hidden">
+      {pieces.map(p => (
+        <motion.div
+          key={p.id}
+          initial={{ opacity: 1, x: 0, y: 0, rotate: 0, scale: p.scale }}
+          animate={{ opacity: 0, x: p.x, y: p.y, rotate: p.rot, scale: p.scale * 0.5 }}
+          transition={{ duration: 0.85, delay: p.delay, ease: 'easeOut' }}
+          style={{
+            position: 'absolute',
+            width: p.shape === 'rect' ? 10 : 8,
+            height: p.shape === 'rect' ? 6 : 8,
+            borderRadius: p.shape === 'circle' ? '50%' : 2,
+            background: p.color,
+          }}
+        />
+      ))}
     </div>
   )
 }
 
-/* Botones binarios (real / tf) */
-function Binary({ step, answered, chosen, a, b, onPick }) {
-  const render = (o) => {
-    let cls = `bq-ans ${o.cls}`
-    if (answered) {
-      if (o.v === step.answer) cls += ' win'
-      else { cls += ' dim'; if (o.v === chosen) cls += ' lose' }
-    }
-    return (
-      <button key={o.v} className={cls} disabled={answered} onClick={() => onPick(o.v === step.answer, o.v)}>
-        <Ic name={o.icon} s={o.icon === 'check' || o.icon === 'x' ? 22 : 19} c={o.c} />
-        <span>{o.label}</span>
-      </button>
-    )
-  }
-  return <div className="bq-answers">{render(a)}{render(b)}</div>
-}
-
-/* Panel de feedback + botón Continuar */
-function Feedback({ fb, win, onNext, last }) {
+/* ──────────────────────────────────────────
+   Tarjeta ¿Sabías que?
+────────────────────────────────────────── */
+function FactCard({ step, onNext }) {
   return (
-    <>
-      <div className={`bq-fb ${win ? 'ok' : 'no'}`}>
-        <div className="bq-fi"><Ic name={win ? 'check' : 'x'} s={16} c={win ? '#00e5a0' : '#ff6378'} /></div>
-        <div className="bq-ft"><b>{fb[0]}</b><span>{fb[1]}</span></div>
+    <motion.div
+      key={step.id}
+      initial={{ opacity:0, y:16 }} animate={{ opacity:1, y:0 }} transition={{ duration:.35 }}
+      className="flex flex-col h-full"
+    >
+      {/* Tarjeta principal */}
+      <div className="flex-1 rounded-2xl flex flex-col overflow-hidden"
+        style={{ background:'#0f1d35', border:'1px solid rgba(0,200,255,.12)' }}>
+
+        {/* Imagen si hay — altura fija + fondo, la foto va completa (contain) */}
+        {step.img && (
+          <div className="flex-shrink-0 overflow-hidden"
+            style={{ height:150, background:'#0a1426' }}
+            dangerouslySetInnerHTML={{ __html: step.img }} />
+        )}
+
+        {/* Contenido centrado */}
+        <div className="flex-1 flex flex-col justify-center px-5 py-5">
+
+          {/* Badge centrado */}
+          <div className="flex justify-center mb-4">
+            <div className="px-5 py-2 rounded-full font-bold text-[.9rem] tracking-widest uppercase"
+              style={{ background:'rgba(0,200,255,.10)', border:'1.5px solid rgba(0,200,255,.35)', color:'#00c8ff', letterSpacing:'.06em' }}>
+              ¿Sabías que?
+            </div>
+          </div>
+
+          {/* Texto centrado */}
+          <div
+            className="text-center text-[.95rem] leading-[1.6] text-t1"
+            style={{ fontFamily:"'Outfit',sans-serif" }}
+            dangerouslySetInnerHTML={{ __html: step.txt }}
+          />
+        </div>
       </div>
-      <button className="bq-cta" onClick={onNext}>{last ? 'Ver resultado' : 'Continuar'} <Ic name="arrow" s={16} c="#04231a" /></button>
-    </>
+
+      {/* Botón siempre visible */}
+      <button onClick={onNext}
+        className="w-full flex items-center justify-center gap-2 rounded-[14px] text-black font-bold text-[1rem] transition-all active:scale-98 mt-3 flex-shrink-0"
+        style={{ background:'linear-gradient(135deg,#00e5a0,#10b981)', height:54 }}>
+        Continuar
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </motion.div>
   )
 }
 
-/* Estilos del test (prefijo bq- para no chocar con el resto de la app) */
-function Style() {
+/* ──────────────────────────────────────────
+   Tarjeta de Pregunta
+────────────────────────────────────────── */
+function QuestionCard({ step, qNum, onAnswer, onShake }) {
+  const [answered, setAnswered] = useState(false)
+  const [chosen, setChosen]     = useState(null)
+  const feedbackRef = useRef(null)
+  const meta = CATS[step.cat] || { color:'#00c8ff', bg:'rgba(0,200,255,.1)', svg:'' }
+
+  const select = (i) => {
+    if(answered) return
+    setAnswered(true)
+    setChosen(i)
+    const correct = i === step.ok
+    if(!correct) onShake()   // vibración roja si errás
+    // Scroll al feedback después de que aparece
+    setTimeout(() => {
+      if(feedbackRef.current) {
+        feedbackRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' })
+      }
+    }, 250)
+    setTimeout(() => onAnswer(correct), 3500)
+  }
+
+  const optStyle = (i) => {
+    if(!answered) return {
+      background: '#142040',
+      border: '1.5px solid rgba(0,200,255,.18)',
+      opacity: 1,
+    }
+    if(i === step.ok) return {
+      background: 'rgba(0,229,160,.10)',
+      border: '1.5px solid #00e5a0',
+      opacity: 1,
+    }
+    if(i === chosen) return {
+      background: 'rgba(255,61,90,.10)',
+      border: '1.5px solid #ff3d5a',
+      opacity: 1,
+    }
+    return {
+      background: 'rgba(20,32,64,.4)',
+      border: '1.5px solid rgba(0,200,255,.08)',
+      opacity: 0.38,
+    }
+  }
+
+  const letterStyle = (i) => {
+    if(!answered) return { background:`${meta.color}18`, color:meta.color, border:`1px solid ${meta.color}55` }
+    if(i === step.ok)          return { background:'#00e5a0', color:'#000', border:'none' }
+    if(i === chosen && i !== step.ok) return { background:'#ff3d5a', color:'#fff', border:'none' }
+    return { background:'#0f1d35', color:'#4a6080', border:'1px solid rgba(0,200,255,.1)' }
+  }
+
   return (
-    <style>{`
-    .bq-root{position:relative;min-height:100vh;min-height:100dvh;display:flex;justify-content:center;overflow:hidden;
-      background:radial-gradient(130% 90% at 50% -10%,#0b1830 0%,#05070f 72%);
-      font-family:'Outfit','Nunito',system-ui,sans-serif;color:#eaf2ff;}
-    .bq-aura{position:fixed;border-radius:50%;filter:blur(10px);pointer-events:none;z-index:0}
-    .bq-aura.a1{top:-70px;left:-50px;width:240px;height:240px;background:radial-gradient(circle,rgba(0,229,160,.22),transparent 65%)}
-    .bq-aura.a2{bottom:-70px;right:-60px;width:260px;height:260px;background:radial-gradient(circle,rgba(139,124,248,.20),transparent 65%)}
-    .bq-shell{position:relative;z-index:1;width:100%;max-width:460px;display:flex;flex-direction:column;flex:1;
-      padding:max(env(safe-area-inset-top),16px) 18px 26px;min-height:100dvh}
+    <motion.div key={step.id} initial={{ opacity:0, y:12 }} animate={{ opacity:1, y:0 }} transition={{ duration:.3 }}>
 
-    .bq-hud{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-    .bq-iconbtn{width:36px;height:36px;border-radius:11px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none}
-    .bq-htitle{flex:1;min-width:0}
-    .bq-htitle h1{font-family:'Sora','Outfit',sans-serif;font-size:16px;font-weight:600;letter-spacing:.01em;margin:0}
-    .bq-htitle p{font-size:11.5px;color:#8aa0c0;margin:1px 0 0}
-    .bq-chip{display:flex;align-items:center;gap:5px;padding:6px 11px;border-radius:99px;font-size:12px;font-weight:600;font-family:'Sora',sans-serif;background:rgba(245,159,11,.12);border:1px solid rgba(245,159,11,.3);color:#f5c451}
-    .bq-pts{font-family:'Sora',sans-serif;font-size:13px;font-weight:600;color:#9fb6d6}
-    .bq-bar{height:6px;border-radius:99px;background:#0c1830;overflow:hidden;margin-bottom:16px}
-    .bq-bar > i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#00c8ff,#00e5a0);box-shadow:0 0 10px rgba(0,229,160,.6);transition:width .5s cubic-bezier(.4,0,.2,1)}
+      {/* Header compacto: categoría + número */}
+      <div className="flex items-center gap-3 mb-3 px-1">
+        <div className="w-14 h-14 rounded-[14px] flex items-center justify-center flex-shrink-0"
+          style={{ background:meta.bg, border:`1px solid ${meta.color}55` }}
+          dangerouslySetInnerHTML={{ __html: meta.svg.replace('width="22"','width="28"').replace('height="22"','height="28"') }} />
+        <span style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.88rem', fontWeight:800, letterSpacing:'.04em', textTransform:'uppercase', color:meta.color }}>{step.cat}</span>
+        <span style={{ fontFamily:"'Outfit',sans-serif", fontSize:'.75rem', fontWeight:600, color:'#4a6080', marginLeft:'auto' }}>Pregunta {qNum}</span>
+      </div>
 
-    .bq-stage{flex:1;display:flex;flex-direction:column;justify-content:center}
-    .bq-card{border-radius:24px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);
-      backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 18px 40px rgba(0,0,0,.32);padding:18px 16px}
+      {/* Imagen si hay — compacta */}
+      {step.img && (
+        <div className="rounded-[12px] overflow-hidden mb-2"
+          style={{ maxHeight: 140 }}
+          dangerouslySetInnerHTML={{ __html: step.img }} />
+      )}
 
-    .bq-badgewrap{display:flex;justify-content:center;margin-bottom:18px}
-    .bq-badge{display:inline-flex;align-items:center;gap:7px;padding:7px 15px;border-radius:99px;font-family:'Sora',sans-serif;font-size:11px;font-weight:600;letter-spacing:.07em;background:rgba(139,124,248,.14);border:1px solid rgba(139,124,248,.42);color:#c4b9ff}
-    .bq-cat{display:flex;align-items:center;gap:8px;margin-bottom:13px}
-    .bq-catic{width:34px;height:34px;border-radius:11px;background:rgba(0,200,255,.10);border:1px solid rgba(0,200,255,.28);display:flex;align-items:center;justify-content:center;font-size:17px;flex:none}
-    .bq-catnm{font-family:'Sora',sans-serif;font-size:12px;font-weight:600;letter-spacing:.04em;color:#7fd3ff}
-    .bq-qtext{font-size:15.5px;line-height:1.5;color:#f1f6ff;margin-bottom:16px}
-    .bq-prompt{text-align:center;font-family:'Sora',sans-serif;font-size:13px;font-weight:600;color:#cdddf5;margin-bottom:14px}
-    .bq-statement{text-align:center;font-family:'Sora',sans-serif;font-size:18.5px;font-weight:500;line-height:1.45;color:#f1f6ff;padding:8px 4px 4px}
+      {/* Pregunta */}
+      <div className="rounded-[14px] px-4 py-3 mb-3"
+        style={{ background:'#0f1d35', border:'1px solid rgba(0,200,255,.1)' }}>
+        <div className="text-[1rem] font-semibold leading-[1.55] text-t1 text-center mb-2">{step.txt.replace('¿Qué hacés?', '').trim()}</div>
+        <div className="text-center font-bold text-[1.1rem] mt-2" style={{ color: meta.color }}>¿Qué hacés?</div>
+      </div>
 
-    .bq-opts{display:flex;flex-direction:column;gap:10px}
-    .bq-opt{display:flex;align-items:center;gap:11px;padding:13px;border-radius:15px;width:100%;text-align:left;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);cursor:pointer;transition:transform .12s ease,box-shadow .2s ease,opacity .2s ease,border-color .2s ease;color:inherit}
-    .bq-opt:active{transform:scale(.985)}
-    .bq-opt .bq-lt{width:25px;height:25px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#9fb6d6;flex:none;font-family:'Sora',sans-serif}
-    .bq-opt span{font-size:13.5px;line-height:1.4;color:#dce8f7}
-    .bq-opt.dim{opacity:.34}
-    .bq-opt.win{background:linear-gradient(160deg,rgba(0,229,160,.14),rgba(0,229,160,.03));border-color:rgba(0,229,160,.55);box-shadow:0 8px 20px rgba(0,200,140,.16)}
-    .bq-opt.win .bq-lt{background:rgba(0,229,160,.2);border-color:rgba(0,229,160,.45);color:#7ff0c8}
-    .bq-opt.lose{background:linear-gradient(160deg,rgba(255,61,90,.12),rgba(255,61,90,.03));border-color:rgba(255,90,110,.55)}
-    .bq-opt.lose .bq-lt{background:rgba(255,61,90,.2);border-color:rgba(255,90,110,.45);color:#ff8a9c}
+      {/* Opciones compactas */}
+      <div className="flex flex-col gap-[7px]">
+        {step.opts.map((opt, i) => (
+          <button key={i} onClick={() => select(i)} disabled={answered}
+            className="flex items-center gap-3 w-full text-left px-3 py-[10px] rounded-[12px] transition-all duration-200"
+            style={{ ...optStyle(i), cursor: answered ? 'default' : 'pointer', minHeight: 44 }}>
+            <div className="w-[26px] h-[26px] rounded-[7px] flex items-center justify-center flex-shrink-0 font-mono text-[.68rem] font-semibold transition-all"
+              style={letterStyle(i)}>
+              {LETTERS[i]}
+            </div>
+            <span className="text-[.93rem] text-t1 leading-snug">{opt}</span>
+          </button>
+        ))}
+      </div>
 
-    .bq-msg{background:linear-gradient(180deg,#0c1426,#0a101f);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:13px;display:flex;flex-direction:column;gap:9px;box-shadow:0 12px 24px rgba(0,0,0,.35)}
-    .bq-msgtop{display:flex;align-items:center;gap:9px;padding-bottom:9px;border-bottom:1px solid rgba(255,255,255,.06)}
-    .bq-av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none}
-    .bq-av.wa{background:linear-gradient(135deg,#1f7a5a,#125a6e)} .bq-av.sms{background:linear-gradient(135deg,#3a4a78,#2a3358)}
-    .bq-nm{font-size:13px;font-weight:500} .bq-sub{font-size:11px;color:#7c8aa3}
-    .bq-tag{margin-left:auto;font-size:10px;font-weight:600;letter-spacing:.06em;color:#7c8aa3;border:1px solid rgba(255,255,255,.1);padding:3px 7px;border-radius:7px}
-    .bq-bubble{align-self:flex-start;max-width:93%;border-radius:14px 14px 14px 4px;padding:11px 12px;font-size:13.5px;line-height:1.55;color:#eaf3ff;box-shadow:0 4px 12px rgba(0,0,0,.3)}
-    .bq-bubble.wa{background:linear-gradient(135deg,#1a2c49,#152138)} .bq-bubble.sms{background:linear-gradient(135deg,#222a44,#1a2036)}
-    .bq-time{font-size:10.5px;color:#7c8aa3;padding-left:3px}
+{/* Feedback — modal central */}
+      <AnimatePresence>
+        {answered && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: .2 }}
+            className="fixed inset-0 flex items-center justify-center px-5"
+            style={{ zIndex: 100, background: 'rgba(5,13,26,.75)', backdropFilter: 'blur(8px)' }}
+          >
+            <motion.div
+              ref={feedbackRef}
+              initial={{ opacity: 0, scale: .85, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: .9, y: -10 }}
+              transition={{ duration: .3, ease: 'easeOut' }}
+              className="w-full max-w-[340px] rounded-[20px] p-6"
+              style={{
+                background: chosen === step.ok ? 'rgba(0,229,160,.10)' : 'rgba(255,61,90,.10)',
+                border: `2px solid ${chosen === step.ok ? 'rgba(0,229,160,.4)' : 'rgba(255,61,90,.4)'}`,
+                boxShadow: chosen === step.ok
+                  ? '0 0 40px rgba(0,229,160,.2)'
+                  : '0 0 40px rgba(255,61,90,.2)',
+              }}
+            >
+              {/* Ícono grande */}
+              <div className="text-[3rem] text-center mb-3">
+                {chosen === step.ok ? '✅' : '❌'}
+              </div>
+              {/* Texto feedback */}
+              <div
+                className="text-center text-[1rem] leading-relaxed font-medium"
+                style={{ color: chosen === step.ok ? '#00e5a0' : '#ff8fa0' }}
+              >
+                {chosen === step.ok ? step.fc : step.fw}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  )
+}
 
-    .bq-answers{display:flex;gap:12px;margin-top:16px}
-    .bq-ans{flex:1;min-height:60px;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;border:1px solid;transition:transform .12s ease,box-shadow .2s ease,opacity .2s ease;font-family:'Sora',sans-serif;font-weight:600;font-size:13.5px;padding:8px;text-align:center;color:inherit}
-    .bq-ans:active{transform:scale(.97)}
-    .bq-ans.green{background:linear-gradient(160deg,rgba(0,229,160,.16),rgba(0,229,160,.04));border-color:rgba(0,229,160,.5);color:#7ff0c8;box-shadow:0 8px 20px rgba(0,200,140,.16)}
-    .bq-ans.red{background:linear-gradient(160deg,rgba(255,61,90,.16),rgba(255,61,90,.04));border-color:rgba(255,90,110,.5);color:#ff8a9c;box-shadow:0 8px 20px rgba(255,61,90,.16)}
-    .bq-ans.dim{opacity:.34} .bq-ans.win{box-shadow:0 0 0 2px rgba(0,229,160,.7),0 10px 26px rgba(0,200,140,.3)} .bq-ans.lose{box-shadow:0 0 0 2px rgba(255,90,110,.7)}
-    .bq-ans span{font-size:13.5px}
+/* ──────────────────────────────────────────
+   Pantalla principal del Quiz
+────────────────────────────────────────── */
+export default function QuizScreen({ go }) {
+  const [step, setStep]         = useState(0)
+  const [score, setScore]       = useState(0)
+  const [hits, setHits]         = useState(0)
+  const [qCount, setQCount]     = useState(0)
+  const [shake, setShake]       = useState(false)
+  const [showConfetti, setShowConfetti] = useState(false)
+  const containerRef = useRef(null)
+  const topRef = useRef(null)
 
-    .bq-fb{margin-top:14px;border-radius:16px;padding:14px;display:flex;gap:11px;align-items:flex-start}
-    .bq-fb.ok{background:rgba(0,229,160,.08);border:1px solid rgba(0,229,160,.3)} .bq-fb.no{background:rgba(255,61,90,.08);border:1px solid rgba(255,90,110,.32)}
-    .bq-fi{flex:none;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center}
-    .bq-fb.ok .bq-fi{background:rgba(0,229,160,.16)} .bq-fb.no .bq-fi{background:rgba(255,61,90,.16)}
-    .bq-ft b{font-family:'Sora',sans-serif;font-size:13.5px;font-weight:600;display:block;margin-bottom:3px} .bq-fb.ok .bq-ft b{color:#7ff0c8} .bq-fb.no .bq-ft b{color:#ff8a9c}
-    .bq-ft span{font-size:13px;line-height:1.5;color:#cdddf5}
+  const totalQs = STEPS.filter(s => s.type === 'q').length
+  const pct     = Math.round((step / STEPS.length) * 100)
+  const current = STEPS[step]
 
-    .bq-cta{margin-top:16px;width:100%;height:54px;border:none;border-radius:15px;cursor:pointer;font-family:'Sora',sans-serif;font-size:15px;font-weight:600;color:#04231a;display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#00e5a0,#10b981);box-shadow:0 10px 26px rgba(0,200,140,.4),inset 0 1px 0 rgba(255,255,255,.4)}
-    .bq-cta:active{transform:scale(.99)}
+  /* Efecto rojo de vibración al errar */
+  const triggerShake = () => {
+    setShake(true)
+    setTimeout(() => setShake(false), 600)
+  }
 
-    .bq-center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:14px 8px}
-    .bq-kicker{font-size:11px;font-weight:600;letter-spacing:.24em;color:#00c8ff;text-transform:uppercase;margin-bottom:14px}
-    .bq-introbadge{width:96px;height:96px;border-radius:28px;background:rgba(0,229,160,.10);border:1px solid rgba(0,229,160,.3);display:flex;align-items:center;justify-content:center;margin-bottom:20px;box-shadow:0 16px 40px rgba(0,200,160,.2)}
-    .bq-bigtitle{font-family:'Sora',sans-serif;font-size:27px;font-weight:700;line-height:1.18;letter-spacing:-.01em;margin-bottom:12px}
-    .bq-grad{background:linear-gradient(100deg,#7ff0c8,#5ad2ff 60%,#a99bff);-webkit-background-clip:text;background-clip:text;color:transparent}
-    .bq-lead{font-size:14px;line-height:1.6;color:#aebfd8;max-width:320px;margin-bottom:8px}
-    .bq-meta{font-size:12px;color:#8aa0c0;margin:14px 0 26px;display:flex;gap:14px;align-items:center}
-    .bq-meta b{color:#cdddf5;font-family:'Sora',sans-serif}
-    .bq-back-link{margin-top:16px;background:none;border:none;color:#7e93b4;font-size:13px;cursor:pointer;font-family:inherit}
+  /* Efecto verde/confetti al acertar */
+  const triggerConfetti = () => {
+    setShowConfetti(true)
+    setTimeout(() => setShowConfetti(false), 950)
+  }
 
-    @media (prefers-reduced-motion: reduce){.bq-bar > i{transition:none}}
-    `}</style>
+  const handleAnswer = (correct) => {
+    if(correct) {
+      triggerConfetti()
+      setHits(h => h + 1)
+      setScore(s => s + 200)
+    }
+    setTimeout(() => {
+      const next = step + 1
+      if(next >= STEPS.length) {
+        go.results({
+          pct: Math.round(((hits + (correct?1:0)) / totalQs) * 100),
+          hits: hits + (correct?1:0),
+          total: totalQs,
+          score: score + (correct?200:0)
+        })
+      } else {
+        setStep(next)
+      }
+    }, 1500)
+  }
+
+  const handleNext = () => {
+    const next = step + 1
+    if(next >= STEPS.length) go.results({ pct: Math.round((hits/totalQs)*100), hits, total: totalQs, score })
+    else setStep(next)
+  }
+
+  useEffect(() => {
+    if(current?.type === 'q') setQCount(c => c + 1)
+    // Scroll al tope cuando cambia la pregunta
+    setTimeout(() => {
+      if(topRef.current) topRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 50)
+  }, [step])
+
+  return (
+    <motion.div
+      ref={containerRef}
+      className="flex flex-col min-h-screen bg-bg relative overflow-hidden"
+      animate={shake ? {
+        x: [0, -10, 12, -10, 8, -5, 3, 0],
+        backgroundColor: ['#050d1a', '#2d0a0a', '#1a0505', '#050d1a'],
+      } : { x: 0 }}
+      transition={shake ? { duration: 0.55, ease: 'easeOut' } : {}}
+      style={shake ? { boxShadow: 'inset 0 0 60px rgba(255,61,90,.35)' } : {}}
+    >
+      {/* Partículas RGB de fondo */}
+      <div className="absolute inset-0 pointer-events-none" style={{ zIndex:0 }}>
+        <Particles />
+      </div>
+
+      {/* Confetti */}
+      {showConfetti && <ConfettiBurst />}
+
+      {/* Flash verde al acertar */}
+      <AnimatePresence>
+        {showConfetti && (
+          <motion.div
+            key="greenflash"
+            className="pointer-events-none fixed inset-0 z-40"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 0.18, 0] }}
+            transition={{ duration: 0.5 }}
+            style={{ background: 'radial-gradient(ellipse at center, #00e5a0 0%, transparent 70%)' }}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Topbar */}
+      <div className="glass flex items-center gap-3 px-4 sticky top-0 z-50 border-b border-white/[.06]"
+        style={{ paddingTop:`calc(env(safe-area-inset-top,0px) + 12px)`, paddingBottom:'12px' }}>
+        <button onClick={go.home}
+          className="flex items-center gap-2 px-3 py-2 rounded-[10px] transition-all flex-shrink-0"
+          style={{ background:'rgba(255,255,255,.05)', border:'1px solid rgba(255,255,255,.10)', backdropFilter:'blur(8px)' }}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" strokeWidth="2" strokeLinecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          <span style={{ fontSize:'.75rem', fontWeight:600, color:'rgba(255,255,255,.6)', fontFamily:"'Outfit',sans-serif" }}>Volver</span>
+        </button>
+        <div className="flex-1 min-w-0">
+          <div className="font-bold text-[1rem] text-t1">{current?.type === 'fact' ? '¿Sabías que?' : `Pregunta ${qCount} de ${totalQs}`}</div>
+          <div className="text-t3 text-[.7rem] mt-[1px]">Test de Blindaje Digital</div>
+        </div>
+        <div className="font-mono text-[.82rem] text-yellow font-semibold flex-shrink-0 ml-auto">{score} pts</div>
+      </div>
+
+      {/* Progress bar */}
+      <div className="px-4 pt-4 pb-2">
+        <div className="h-[3px] rounded-full overflow-hidden" style={{ background:'#142040' }}>
+          <motion.div className="h-full rounded-full" style={{ background:'linear-gradient(90deg,#00c8ff,#00e5a0)' }}
+            initial={{ width:0 }} animate={{ width:`${pct}%` }} transition={{ duration:.5, ease:'easeOut' }} />
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="flex-1 overflow-y-auto px-4 pb-10 pt-2">
+        <div ref={topRef} />
+        <AnimatePresence mode="wait">
+          {current?.type === 'fact'
+            ? <FactCard key={step} step={current} onNext={handleNext} />
+            : <QuestionCard key={step} step={current} qNum={qCount} onAnswer={handleAnswer} onShake={triggerShake} />
+          }
+        </AnimatePresence>
+      </div>
+    </motion.div>
   )
 }
