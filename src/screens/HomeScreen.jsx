@@ -295,6 +295,36 @@ Gratis · Seguro · 24hs · No estás solo.
             </motion.button>
           </div>
 
+          {/* Botón CYAN — Aprendé a protegerte */}
+          <div className="relative w-full mb-3">
+            <motion.button
+              initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: .21 }} whileTap={{ scale: .97 }}
+              onClick={() => go.aprender()}
+              className="relative w-full overflow-hidden rounded-2xl"
+              style={{ height: 58, border: 'none', cursor: 'pointer', background: '#0e7490', boxShadow: '0 4px 20px rgba(6,182,212,.32)', overflow: 'hidden' }}>
+              <motion.div className="absolute pointer-events-none"
+                animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+                style={{ inset: 0, background: 'linear-gradient(135deg, #0e7490 0%, #06b6d4 40%, #22d3ee 70%, #0e7490 100%)', backgroundSize: '200% 200%' }}
+              />
+              <div className="absolute inset-0 pointer-events-none"
+                style={{ background: 'linear-gradient(180deg, rgba(255,255,255,.15) 0%, transparent 55%)' }} />
+              <div className="relative flex items-center justify-between px-6 h-full">
+                <div className="flex items-center gap-4">
+                  <motion.div animate={{ scale:[1,1.18,1] }} transition={{ duration:1.8, repeat:Infinity, ease:"easeInOut", delay:1 }}><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14v7"/><path d="M5 11v4c0 1.5 3 3 7 3s7-1.5 7-3v-4"/></svg></motion.div>
+                  <div className="text-left">
+                    <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '1.15rem', fontWeight: 900, color: '#fff', lineHeight: 1.2 }}>Aprendé a protegerte</div>
+                    <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.78rem', fontWeight: 600, color: 'rgba(255,255,255,.8)', marginTop: 2 }}>6 temas para reconocer cada engaño</div>
+                  </div>
+                </div>
+                <motion.div animate={{ x: [0, 4, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut', delay: .9 }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.8)" strokeWidth="2.2" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </motion.div>
+              </div>
+            </motion.button>
+          </div>
+
           {/* Label */}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: .36 }}
             className="w-full mb-3" style={{ textAlign: 'center' }}>
