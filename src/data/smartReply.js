@@ -5,6 +5,9 @@ export function getSmartReply(text) {
   if (/hola|buenas|como est/.test(t)) {
     return '\u00a1Hola! Soy el asistente de seguridad digital de la Intendencia de Montevideo.' + nl + nl + 'Estoy ac\u00e1 para ayudarte. Cont\u00e1me si recibiste un mensaje raro, te llamaron del banco, o ten\u00e9s cualquier duda sobre estafas digitales.' + nl + nl + '\u00bfQu\u00e9 pas\u00f3?';
   }
+  if (/violenc|maltrat|abus|me amenaz|me pegan|me golpe|me grit|me humill|vulnerab|me lastim|me hacen sentir mal|no me respet/.test(t)) {
+    return 'Lamento mucho que est\u00e9s pasando por esto. Lo que sent\u00eds es v\u00e1lido y no es tu culpa.' + nl + nl + 'No est\u00e1s solo/a: hay personas preparadas para escucharte y acompa\u00f1arte.' + nl + nl + 'Comunicate con la Secretar\u00eda de las Personas Mayores de la Intendencia de Montevideo. Te van a escuchar y ayudar, con respeto y sin juzgarte:' + nl + '\u2022 WhatsApp: 099 019 500 (escrib\u00ed "mayores")' + nl + '\u2022 Tel\u00e9fono: 1950 5555 (L-V 8-19, S\u00e1b 8-14)' + nl + nl + 'Si est\u00e1s en peligro en este momento, llam\u00e1 al 911.' + nl + nl + 'Hablarlo con alguien de confianza tambi\u00e9n ayuda. Dar el primer paso ya es muy valiente.';
+  }
   if (/sms|mensaje.*texto|link|enlace|sucive|multa/.test(t) || (t.indexOf('brou') >= 0 && t.indexOf('link') >= 0)) {
     return '\u00a1Eso es una estafa! Los bancos y el Estado NUNCA mandan links por SMS.' + nl + nl + 'Hac\u00e9 esto ahora:' + nl + '\u2022 NO hagas clic en ning\u00fan link' + nl + '\u2022 Borr\u00e1 el mensaje' + nl + '\u2022 Si ten\u00e9s dudas llam\u00e1 al BROU: 1722 0001' + nl + nl + 'El BROU real siempre usa brou.com.uy. Cualquier otro dominio es falso.';
   }
