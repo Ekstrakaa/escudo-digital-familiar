@@ -41,6 +41,18 @@ function Particles() {
   return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" />
 }
 
+/* ── Conteo animado de números ── */
+function CountUp({ to, dur = 1100, suffix = '' }) {
+  const [v, setV] = useState(0)
+  useEffect(() => {
+    let raf; const start = performance.now()
+    const tick = t => { const p = Math.min(1, (t - start) / dur); setV(Math.round(to * (1 - Math.pow(1 - p, 3)))); if (p < 1) raf = requestAnimationFrame(tick) }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [to, dur])
+  return <>{v}{suffix}</>
+}
+
 /* ── Teléfonos y protocolos (todos detrás del botón) ── */
 const IM_ROWS = [
   { lbl:'WhatsApp IM', val:'099 019 500', hrs:'Escribí la palabra "mayores"', href:'https://wa.me/59899019500', ic:'msg' },
@@ -111,52 +123,57 @@ export default function ResultsScreen({ go, result }) {
         {/* Card profesional con TODO el resultado */}
         <div className="res-mid">
           <motion.div className="res-card" initial={{ opacity: 0, y: 16, scale: .98 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: .4, ease: [.4,0,.2,1] }}>
-            <div className="res-accent" style={{ background: `linear-gradient(90deg, ${col}, ${col2}55 60%, transparent)` }} />
-            <div className="res-hd">
-              <span className="res-hdlbl">Tus Resultados</span>
-              <span className="res-hdsub">Test de Blindaje Digital</span>
-            </div>
+            <div className="res-glow" style={{ background: `radial-gradient(ellipse 130% 75% at 50% -6%, ${col}33, transparent 58%)` }} />
+            <div className="res-accent" style={{ background: `linear-gradient(90deg, ${col}, ${col2} 55%, transparent)`, boxShadow: `0 0 12px ${col}` }} />
 
-            <div className="res-ringwrap">
-              <svg width="150" height="150" viewBox="0 0 200 200">
-                <defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor={col2} /><stop offset="100%" stopColor={col} /></linearGradient></defs>
-                <circle cx="100" cy="100" r="84" fill="none" stroke="rgba(255,255,255,.06)" strokeWidth="14" />
-                <motion.circle cx="100" cy="100" r="84" fill="none" stroke="url(#rg)" strokeWidth="14" strokeLinecap="round"
-                  transform="rotate(-90 100 100)" strokeDasharray={C} initial={{ strokeDashoffset: C }}
-                  animate={{ strokeDashoffset: C - C * pct / 100 }} transition={{ duration: 1.3, ease: [.4,0,.2,1], delay: .25 }}
-                  style={{ filter: `drop-shadow(0 0 6px ${col}aa)` }} />
-              </svg>
-              <div className="res-ringtx">
-                <motion.span className="res-pct" style={{ color: col }} initial={{ opacity: 0, scale: .8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: .55, type: 'spring', stiffness: 200 }}>{pct}%</motion.span>
-                <span className="res-lbl" style={{ color: col }}>{lbl}</span>
+            <div className="res-inner">
+              <div className="res-hd">
+                <span className="res-hdlbl">Tus Resultados</span>
+                <span className="res-hdsub">Test de Blindaje Digital</span>
               </div>
-            </div>
 
-            <div className="res-sub">Acertaste <b>{hits}</b> de <b>{total}</b> situaciones</div>
-
-            <div className="res-stats">
-              {stats.map(s => (
-                <div key={s.l} className="res-stat" style={{ borderColor: `${s.c}33`, background: `linear-gradient(180deg, ${s.c}14, rgba(20,32,64,.4))` }}>
-                  <span className="res-static" dangerouslySetInnerHTML={{ __html: I(s.ic, s.c, 15, 2.4) }} />
-                  <div className="res-sv" style={{ color: s.c }}>{s.v}</div>
-                  <div className="res-sl">{s.l}</div>
+              <div className="res-ringwrap">
+                <div className="res-ringglow" style={{ background: `radial-gradient(circle, ${col}40, transparent 66%)` }} />
+                <svg width="150" height="150" viewBox="0 0 200 200">
+                  <defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor={col2} /><stop offset="100%" stopColor={col} /></linearGradient></defs>
+                  <circle cx="100" cy="100" r="84" fill="none" stroke="rgba(255,255,255,.07)" strokeWidth="15" />
+                  <motion.circle cx="100" cy="100" r="84" fill="none" stroke="url(#rg)" strokeWidth="15" strokeLinecap="round"
+                    transform="rotate(-90 100 100)" strokeDasharray={C} initial={{ strokeDashoffset: C }}
+                    animate={{ strokeDashoffset: C - C * pct / 100 }} transition={{ duration: 1.3, ease: [.4,0,.2,1], delay: .25 }}
+                    style={{ filter: `drop-shadow(0 0 8px ${col})` }} />
+                </svg>
+                <div className="res-ringtx">
+                  <span className="res-pct" style={{ color: col }}><CountUp to={pct} suffix="%" /></span>
                 </div>
-              ))}
-            </div>
+              </div>
 
-            <div className="res-advice" style={{ background: `${col}10`, border: `1px solid ${col}30` }}>
-              <span className="res-advic" dangerouslySetInnerHTML={{ __html: I('shield', col, 19) }} />
-              <span style={{ color: '#aebfd8' }}>{desc}</span>
-            </div>
+              <div className="res-pill" style={{ color: col, background: `${col}1c`, border: `1px solid ${col}55`, boxShadow: `0 4px 18px ${col}26` }}>{lbl}</div>
+              <div className="res-sub">Acertaste <b>{hits}</b> de <b>{total}</b> situaciones</div>
 
-            <div className="res-actions">
-              <button className="res-cta" onClick={() => setModal(true)}>
-                <span dangerouslySetInnerHTML={{ __html: I('phone', '#04231a', 17, 2.4) }} />
-                Teléfonos y qué hacer
-              </button>
-              <div className="res-actrow">
-                <button className="res-ghost" onClick={go.home}>Volver al inicio</button>
-                <button className="res-ghost" onClick={go.quiz}>Repetir test</button>
+              <div className="res-stats">
+                {stats.map((s, i) => (
+                  <div key={s.l} className="res-stat" style={{ borderColor: `${s.c}4d`, background: `linear-gradient(165deg, ${s.c}2b, ${s.c}0a)`, animationDelay: `${.5 + i * .12}s` }}>
+                    <span className="res-statchip" style={{ background: `${s.c}26`, border: `1px solid ${s.c}45` }} dangerouslySetInnerHTML={{ __html: I(s.ic, s.c, 14, 2.6) }} />
+                    <div className="res-sv" style={{ color: s.c }}><CountUp to={s.v} /></div>
+                    <div className="res-sl">{s.l}</div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="res-advice" style={{ background: `${col}16`, border: `1px solid ${col}3d` }}>
+                <span className="res-advchip" style={{ background: `${col}22`, border: `1px solid ${col}4d` }} dangerouslySetInnerHTML={{ __html: I('shield', col, 17) }} />
+                <span style={{ color: '#c2d2ea' }}>{desc}</span>
+              </div>
+
+              <div className="res-actions">
+                <button className="res-cta" onClick={() => setModal(true)}>
+                  <span dangerouslySetInnerHTML={{ __html: I('phone', '#04231a', 17, 2.4) }} />
+                  Teléfonos y qué hacer
+                </button>
+                <div className="res-actrow">
+                  <button className="res-ghost" onClick={go.home}>Volver al inicio</button>
+                  <button className="res-ghost" onClick={go.quiz}>Repetir test</button>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -199,34 +216,37 @@ function Style() {
     .res-iconbtn.sm{width:32px;height:32px;border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.05)}
 
     .res-mid{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;overflow-y:auto;padding:2px 0}
-    .res-card{position:relative;width:100%;background:linear-gradient(180deg,#10203c,#0a1428);border:1px solid rgba(255,255,255,.06);border-radius:24px;padding:20px 18px 18px;box-shadow:0 28px 64px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.07);overflow:hidden;display:flex;flex-direction:column;align-items:center}
-    .res-card::after{content:'';position:absolute;inset:0;border-radius:24px;padding:1px;background:linear-gradient(150deg,rgba(255,255,255,.18),rgba(255,255,255,.02) 45%,rgba(0,200,255,.12));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
-    .res-accent{position:absolute;top:0;left:22px;right:22px;height:2px;border-radius:99px;z-index:1}
+    .res-card{position:relative;width:100%;background:linear-gradient(180deg,#15294c,#0b1730);border:1px solid rgba(255,255,255,.07);border-radius:24px;box-shadow:0 30px 70px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.09);overflow:hidden}
+    .res-card::after{content:'';position:absolute;inset:0;border-radius:24px;padding:1px;background:linear-gradient(150deg,rgba(255,255,255,.22),rgba(255,255,255,.03) 45%,rgba(0,200,255,.16));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+    .res-glow{position:absolute;inset:0;pointer-events:none;z-index:0}
+    .res-accent{position:absolute;top:0;left:22px;right:22px;height:2.5px;border-radius:99px;z-index:2}
+    .res-inner{position:relative;z-index:1;padding:20px 18px 18px;display:flex;flex-direction:column;align-items:center}
 
     .res-hd{text-align:center;margin-bottom:10px}
     .res-hdlbl{display:block;font-family:'Sora','Outfit',sans-serif;font-size:16px;font-weight:700}
-    .res-hdsub{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#4a6080}
+    .res-hdsub{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#5a76a0}
 
-    .res-ringwrap{position:relative;width:150px;height:150px;flex:none;margin-bottom:10px}
-    .res-ringtx{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-    .res-pct{font-family:'Sora',sans-serif;font-size:42px;font-weight:800;line-height:1;letter-spacing:-.02em}
-    .res-lbl{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;margin-top:6px}
-    .res-sub{font-size:14px;color:#8fa8cc;margin-bottom:13px} .res-sub b{color:#f0f6ff;font-weight:700}
+    .res-ringwrap{position:relative;width:150px;height:150px;flex:none;display:flex;align-items:center;justify-content:center}
+    .res-ringglow{position:absolute;width:170px;height:170px;border-radius:50%;filter:blur(14px);opacity:.7;animation:resfade .8s ease both}
+    .res-ringtx{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+    .res-pct{font-family:'Sora',sans-serif;font-size:44px;font-weight:800;line-height:1;letter-spacing:-.02em;text-shadow:0 2px 16px rgba(0,0,0,.4)}
+    .res-pill{margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:7px 16px;border-radius:99px;animation:respop .5s cubic-bezier(.2,.9,.3,1.3) .7s both}
+    .res-sub{font-size:14px;color:#8fa8cc;margin-top:9px;margin-bottom:14px} .res-sub b{color:#f0f6ff;font-weight:700}
 
-    .res-stats{display:flex;gap:9px;width:100%;margin-bottom:13px}
-    .res-stat{flex:1;border-radius:15px;padding:11px 6px 10px;text-align:center;border:1px solid}
-    .res-static{display:block;margin:0 auto 4px;height:15px}
-    .res-sv{font-family:'Sora',sans-serif;font-size:25px;font-weight:800;line-height:1}
-    .res-sl{font-family:'JetBrains Mono',monospace;font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:.06em;margin-top:5px}
+    .res-stats{display:flex;gap:9px;width:100%;margin-bottom:14px}
+    .res-stat{flex:1;border-radius:16px;padding:11px 6px 10px;text-align:center;border:1px solid;box-shadow:inset 0 1px 0 rgba(255,255,255,.06);animation:resup .45s ease both;opacity:0}
+    .res-statchip{width:28px;height:28px;border-radius:9px;display:flex;align-items:center;justify-content:center;margin:0 auto 7px}
+    .res-sv{font-family:'Sora',sans-serif;font-size:26px;font-weight:800;line-height:1}
+    .res-sl{font-family:'JetBrains Mono',monospace;font-size:9px;color:#7088b0;text-transform:uppercase;letter-spacing:.06em;margin-top:5px}
 
-    .res-advice{display:flex;align-items:flex-start;gap:10px;padding:13px;border-radius:15px;width:100%;font-size:13.5px;line-height:1.5;margin-bottom:15px}
-    .res-advic{flex:none;margin-top:1px}
+    .res-advice{display:flex;align-items:center;gap:11px;padding:13px;border-radius:16px;width:100%;font-size:13.5px;line-height:1.5;margin-bottom:15px;animation:resup .45s ease .9s both;opacity:0}
+    .res-advchip{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:none}
 
     .res-actions{width:100%;display:flex;flex-direction:column;gap:9px}
-    .res-cta{height:52px;border:none;border-radius:14px;background:linear-gradient(135deg,#00c8ff,#00e5a0);color:#04231a;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;gap:9px;cursor:pointer;box-shadow:0 10px 26px rgba(0,200,200,.3)}
+    .res-cta{height:52px;border:none;border-radius:14px;background:linear-gradient(135deg,#00c8ff,#00e5a0);color:#04231a;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;gap:9px;cursor:pointer;box-shadow:0 10px 28px rgba(0,210,180,.35)}
     .res-cta:active{transform:scale(.99)}
     .res-actrow{display:flex;gap:9px}
-    .res-ghost{flex:1;height:46px;border-radius:13px;background:rgba(255,255,255,.04);border:1.5px solid rgba(0,200,255,.18);color:#cdddf5;font-family:inherit;font-weight:600;font-size:13.5px;cursor:pointer}
+    .res-ghost{flex:1;height:46px;border-radius:13px;background:rgba(255,255,255,.05);border:1.5px solid rgba(0,200,255,.22);color:#cdddf5;font-family:inherit;font-weight:600;font-size:13.5px;cursor:pointer}
     .res-ghost:active{transform:scale(.98)}
 
     .res-ovbg{position:fixed;inset:0;z-index:80;display:flex;align-items:flex-end;justify-content:center;background:rgba(4,8,16,.7);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
@@ -244,7 +264,11 @@ function Style() {
     .res-rowtx b{font-size:14.5px;font-weight:600;color:#f0f6ff}
     .res-rowtx em{font-style:normal;font-size:12px;color:#8fa8cc}
     .res-rowch{flex:none}
-    @media (prefers-reduced-motion: reduce){*{animation:none!important}}
+
+    @keyframes resup{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes respop{0%{opacity:0;transform:scale(.7)}60%{transform:scale(1.06)}100%{opacity:1;transform:scale(1)}}
+    @keyframes resfade{from{opacity:0}to{opacity:.7}}
+    @media (prefers-reduced-motion: reduce){*{animation:none!important}.res-stat,.res-advice{opacity:1!important}}
     `}</style>
   )
 }
