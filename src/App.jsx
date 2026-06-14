@@ -5,6 +5,7 @@ import ChatScreen    from './screens/ChatScreen'
 import QuizScreen    from './screens/QuizScreen'
 import ResultsScreen from './screens/ResultsScreen'
 import ScanScreen    from './screens/ScanScreen'
+import AprenderScreen from './screens/AprenderScreen'
 
 const pageVariants = {
   initial: { opacity: 0, y: 20 },
@@ -23,6 +24,7 @@ export default function App() {
     quiz:    ()        => setScreen('quiz'),
     results: (data)    => { setQuizResult(data); setScreen('results') },
     scan:    ()        => setScreen('scan'),
+    aprender:()        => setScreen('aprender'),
   }
 
   return (
@@ -58,6 +60,11 @@ export default function App() {
         {screen === 'scan' && (
           <motion.div key="scan" variants={pageVariants} initial="initial" animate="animate" exit="exit">
             <ScanScreen go={go} />
+          </motion.div>
+        )}
+        {screen === 'aprender' && (
+          <motion.div key="aprender" variants={pageVariants} initial="initial" animate="animate" exit="exit">
+            <AprenderScreen go={go} />
           </motion.div>
         )}
       </AnimatePresence>
