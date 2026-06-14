@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 /* ── Partículas de fondo (idénticas al resto de la app) ── */
@@ -153,6 +153,17 @@ export default function QuizScreen({ go }) {
   const qNum  = FLOW.slice(0, idx + 1).filter(s => s.t !== 'fact').length
   const pct   = Math.round(((idx + 1) / FLOW.length) * 100)
 
+  const confetti = useMemo(() => {
+    const cols = ['#00e5a0', '#00c8ff', '#ffc844', '#ffffff', '#8b7cf8']
+    return Array.from({ length: 14 }).map((_, i) => {
+      const ang = (Math.PI * 2 * i) / 14 + Math.random() * 0.5
+      const dist = 46 + Math.random() * 72
+      const x = Math.cos(ang) * dist, y = Math.sin(ang) * dist + 28
+      const sz = 7 + Math.round(Math.random() * 4)
+      return <span key={i} className="bqx-conf" style={{ '--x': `${x.toFixed(0)}px`, '--y': `${y.toFixed(0)}px`, '--r': `${(Math.random() * 520 - 260).toFixed(0)}deg`, '--dl': `${(Math.random() * 0.12).toFixed(2)}s`, width: sz, height: sz, background: cols[i % cols.length] }} />
+    })
+  }, [idx])
+
   const finish = (sc, ht) => go.results({ pct: Math.round((ht / TOTAL_Q) * 100), hits: ht, total: TOTAL_Q, score: sc })
 
   const goNext = (sc, ht) => {
@@ -264,9 +275,18 @@ export default function QuizScreen({ go }) {
 
       {/* Feedback automático */}
       {overlay && (
-        <div className="bqx-ov">
+        <div className={`bqx-ov ${win ? 'ok' : 'no'}`}>
+          <div className="bqx-ovaura" />
           <div className={`bqx-ovcard ${win ? 'ok' : 'no'}`}>
-            <div className="bqx-ovic"><Ic n={win ? 'check' : 'x'} s={30} c={win ? '#00e5a0' : '#ff3d5a'} w={2.6} /></div>
+            <div className="bqx-ovic">
+              <span className="bqx-ring r1" /><span className="bqx-ring r2" />
+              <svg className="bqx-drawic" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke={win ? '#00e5a0' : '#ff3d5a'} strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+                {win
+                  ? <path className="bqx-draw" d="M20 6 9 17l-5-5" />
+                  : <><path className="bqx-draw" d="M18 6 6 18" /><path className="bqx-draw d2" d="M6 6l12 12" /></>}
+              </svg>
+            </div>
+            {win && <div className="bqx-confetti">{confetti}</div>}
             <div className="bqx-ovt">{win ? step.okT : step.noT}</div>
             <div className="bqx-ovd">{win ? step.okD : step.noD}</div>
             <div className="bqx-nl">Siguiente pregunta</div>
@@ -358,23 +378,36 @@ function Styles() {
     .bqx-facttext b{color:#f0f6ff}
     .bqx-seguir{height:50px;border:none;border-radius:13px;background:linear-gradient(135deg,#00e5a0,#10b981);color:#04231a;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;flex:none;font-family:inherit;box-shadow:0 10px 24px rgba(0,200,140,.28)}
 
-    .bqx-ov{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:26px;background:rgba(4,8,16,.82);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);animation:bqxfade .25s ease both}
-    .bqx-ovcard{position:relative;width:100%;max-width:320px;border-radius:22px;padding:26px 22px 16px;text-align:center;background:#0c1730;animation:bqxpop .34s cubic-bezier(.2,.9,.3,1.25) both;overflow:hidden}
-    .bqx-ovcard.ok{border:2px solid rgba(0,229,160,.5);box-shadow:0 0 56px rgba(0,229,160,.22)}
-    .bqx-ovcard.no{border:2px solid rgba(255,61,90,.5);box-shadow:0 0 56px rgba(255,61,90,.22)}
-    .bqx-ovic{position:relative;width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;animation:bqxiconpop .55s cubic-bezier(.2,.9,.3,1.5) both}
-    .bqx-ovcard.ok .bqx-ovic{background:rgba(0,229,160,.16)}
-    .bqx-ovcard.no .bqx-ovic{background:rgba(255,61,90,.16)}
-    .bqx-ovic::after{content:'';position:absolute;inset:-7px;border-radius:50%;border:2px solid;opacity:0;animation:bqxring .75s ease-out .12s both}
-    .bqx-ovcard.ok .bqx-ovic::after{border-color:#00e5a0}
-    .bqx-ovcard.no .bqx-ovic::after{border-color:#ff3d5a}
-    .bqx-ovt{font-size:21px;font-weight:700;margin-bottom:7px}
+    .bqx-ov{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:26px;background:rgba(4,8,16,.8);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);animation:bqxfade .25s ease both}
+    .bqx-ovaura{position:absolute;inset:0;pointer-events:none;animation:bqxfade .5s ease both}
+    .bqx-ov.ok .bqx-ovaura{background:radial-gradient(circle at 50% 42%, rgba(0,229,160,.30), transparent 46%)}
+    .bqx-ov.no .bqx-ovaura{background:radial-gradient(circle at 50% 42%, rgba(255,61,90,.26), transparent 46%)}
+    .bqx-ovcard{position:relative;width:100%;max-width:322px;border-radius:24px;padding:30px 24px 18px;text-align:center;background:linear-gradient(180deg,#101f3a,#0a1428);overflow:visible}
+    .bqx-ovcard.ok{box-shadow:0 24px 70px rgba(0,229,160,.28), inset 0 1px 0 rgba(255,255,255,.08);animation:bqxpopwin .55s cubic-bezier(.2,.9,.3,1.3) both}
+    .bqx-ovcard.no{box-shadow:0 24px 70px rgba(255,61,90,.26), inset 0 1px 0 rgba(255,255,255,.08);animation:bqxpoplose .6s ease both}
+    .bqx-ovcard::after{content:'';position:absolute;inset:0;border-radius:24px;padding:1.5px;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+    .bqx-ovcard.ok::after{background:linear-gradient(150deg,rgba(0,229,160,.75),rgba(0,229,160,.12) 55%,rgba(0,229,160,.4))}
+    .bqx-ovcard.no::after{background:linear-gradient(150deg,rgba(255,61,90,.75),rgba(255,61,90,.12) 55%,rgba(255,61,90,.4))}
+    .bqx-ovic{position:relative;width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 15px;animation:bqxiconpop .55s cubic-bezier(.2,.9,.3,1.5) both}
+    .bqx-ovcard.ok .bqx-ovic{background:radial-gradient(circle,rgba(0,229,160,.3),rgba(0,229,160,.08))}
+    .bqx-ovcard.no .bqx-ovic{background:radial-gradient(circle,rgba(255,61,90,.3),rgba(255,61,90,.08))}
+    .bqx-ring{position:absolute;inset:0;border-radius:50%;border:2px solid;opacity:0}
+    .bqx-ovcard.ok .bqx-ring{border-color:#00e5a0}
+    .bqx-ovcard.no .bqx-ring{border-color:#ff3d5a}
+    .bqx-ring.r1{animation:bqxripple 1s ease-out .12s}
+    .bqx-ring.r2{animation:bqxripple 1s ease-out .34s}
+    .bqx-drawic{position:relative;z-index:1}
+    .bqx-draw{stroke-dasharray:32;stroke-dashoffset:32;animation:bqxdraw .45s cubic-bezier(.6,0,.3,1) .18s forwards}
+    .bqx-draw.d2{animation-delay:.34s}
+    .bqx-confetti{position:absolute;top:62px;left:50%;width:0;height:0;pointer-events:none;z-index:2}
+    .bqx-conf{position:absolute;border-radius:2px;opacity:0;animation:bqxconf 1.05s cubic-bezier(.15,.6,.3,1) var(--dl,0s) forwards}
+    .bqx-ovt{font-size:22px;font-weight:800;margin-bottom:7px;animation:bqxup .4s ease .22s both}
     .bqx-ovcard.ok .bqx-ovt{color:#7ff0c8} .bqx-ovcard.no .bqx-ovt{color:#ff8fa0}
-    .bqx-ovd{font-size:14.5px;line-height:1.55;color:#aebfd8;margin-bottom:18px}
+    .bqx-ovd{font-size:14.5px;line-height:1.55;color:#aebfd8;margin-bottom:18px;animation:bqxup .4s ease .3s both}
     .bqx-nl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#4a6080;margin-bottom:7px}
-    .bqx-auto{height:4px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden}
-    .bqx-auto > i{display:block;height:100%;width:100%;border-radius:99px;background:linear-gradient(90deg,#00c8ff,#00e5a0);animation:bqxdrain 3.2s linear forwards}
-    .bqx-ovcard.no .bqx-auto > i{background:linear-gradient(90deg,#ff3d5a,#ff8aa0)}
+    .bqx-auto{height:5px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+    .bqx-auto > i{display:block;height:100%;width:100%;border-radius:99px;background:linear-gradient(90deg,#00c8ff,#00e5a0);box-shadow:0 0 10px rgba(0,229,160,.5);animation:bqxdrain 3.2s linear forwards}
+    .bqx-ovcard.no .bqx-auto > i{background:linear-gradient(90deg,#ff3d5a,#ff8aa0);box-shadow:0 0 10px rgba(255,61,90,.5)}
 
     @keyframes bqxpop{from{opacity:0;transform:scale(.88)}to{opacity:1;transform:scale(1)}}
     @keyframes bqxfade{from{opacity:0}to{opacity:1}}
@@ -385,6 +418,12 @@ function Styles() {
     @keyframes bqxaccent{from{transform:scaleX(0)}to{transform:scaleX(1)}}
     @keyframes bqxiconpop{0%{opacity:0;transform:scale(.4)}60%{transform:scale(1.14)}100%{opacity:1;transform:scale(1)}}
     @keyframes bqxring{0%{opacity:.55;transform:scale(.7)}100%{opacity:0;transform:scale(1.3)}}
+    @keyframes bqxup{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes bqxdraw{to{stroke-dashoffset:0}}
+    @keyframes bqxripple{0%{opacity:.5;transform:scale(.75)}100%{opacity:0;transform:scale(1.95)}}
+    @keyframes bqxconf{0%{opacity:0;transform:translate(-50%,-50%) scale(.4) rotate(0)}14%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(.85) rotate(var(--r))}}
+    @keyframes bqxpopwin{0%{opacity:0;transform:scale(.8)}60%{opacity:1;transform:scale(1.04)}100%{transform:scale(1)}}
+    @keyframes bqxpoplose{0%{opacity:0;transform:scale(.85)}38%{opacity:1;transform:scale(1.02) translateX(0)}54%{transform:translateX(-7px)}70%{transform:translateX(6px)}85%{transform:translateX(-3px)}100%{transform:translateX(0) scale(1)}}
     @media (prefers-reduced-motion: reduce){*{animation:none!important}.bqx-hbar>i,.bqx-auto>i{transition:none}}
     `}</style>
   )
