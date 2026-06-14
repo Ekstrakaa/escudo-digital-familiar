@@ -200,7 +200,10 @@ export default function QuizScreen({ go }) {
         {/* Header */}
         <div className="bqx-head">
           <div className="bqx-htop">
-            <button className="bqx-logo" onClick={go.home} aria-label="Volver"><Ic n="arrow" s={17} c="#00c8ff" w={2.2} /></button>
+            <button className="bqx-back" onClick={go.home} aria-label="Salir del test">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00c8ff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+              <span>Salir</span>
+            </button>
             <div className="bqx-hname">Blindaje Digital</div>
             {streak >= 2 && <div className="bqx-streak"><Ic n="flame" s={13} c="#ffc844" /><span>x{streak}</span></div>}
             <div className="bqx-score">{score}</div>
@@ -313,8 +316,10 @@ function Styles() {
 
     .bqx-head{flex:none}
     .bqx-htop{display:flex;align-items:center;gap:9px;margin-bottom:11px}
-    .bqx-logo{width:33px;height:33px;border-radius:9px;background:rgba(0,200,255,.10);border:1px solid rgba(0,200,255,.3);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;transform:rotate(180deg)}
-    .bqx-hname{font-size:14px;font-weight:600;flex:1;letter-spacing:.01em}
+    .bqx-back{display:flex;align-items:center;gap:4px;height:38px;padding:0 13px 0 9px;border-radius:11px;background:rgba(0,200,255,.1);border:1px solid rgba(0,200,255,.32);color:#00c8ff;font-family:inherit;font-weight:600;font-size:14px;cursor:pointer;flex:none}
+    .bqx-back:active{transform:scale(.97)}
+    .bqx-back span{line-height:1}
+    .bqx-hname{font-size:14px;font-weight:600;flex:1;letter-spacing:.01em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
     .bqx-streak{display:flex;align-items:center;gap:4px;font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;color:#ffc844;padding:3px 8px;border-radius:99px;background:rgba(255,200,68,.10);border:1px solid rgba(255,200,68,.28);animation:bqxpop .3s ease both}
     .bqx-score{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:#ffc844}
     .bqx-hbar{height:5px;border-radius:99px;background:#142040;overflow:hidden}
