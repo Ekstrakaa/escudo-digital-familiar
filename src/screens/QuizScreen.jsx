@@ -178,7 +178,7 @@ export default function QuizScreen({ go }) {
     setChosen(pick); setWin(correct); setAnswered(true)
     setScore(ns); setHits(nh); setStreak(correct ? streak + 1 : 0)
     setOverlay(true)
-    timer.current = setTimeout(() => goNext(ns, nh), 3400)
+    timer.current = setTimeout(() => goNext(ns, nh), 4500)
   }
 
   const seguir = () => { if (idx + 1 >= FLOW.length) finish(score, hits); else { setIdx(idx + 1); setAnswered(false); setChosen(null) } }
@@ -406,7 +406,7 @@ function Styles() {
     .bqx-ovd{font-size:14.5px;line-height:1.55;color:#aebfd8;margin-bottom:18px;animation:bqxup .4s ease .3s both}
     .bqx-nl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#4a6080;margin-bottom:7px}
     .bqx-auto{height:5px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
-    .bqx-auto > i{display:block;height:100%;width:100%;border-radius:99px;background:linear-gradient(90deg,#00c8ff,#00e5a0);box-shadow:0 0 10px rgba(0,229,160,.5);animation:bqxdrain 3.2s linear forwards}
+    .bqx-auto > i{display:block;height:100%;width:100%;border-radius:99px;background:linear-gradient(90deg,#00c8ff,#00e5a0);box-shadow:0 0 10px rgba(0,229,160,.5);animation:bqxdrain 4.3s linear forwards}
     .bqx-ovcard.no .bqx-auto > i{background:linear-gradient(90deg,#ff3d5a,#ff8aa0);box-shadow:0 0 10px rgba(255,61,90,.5)}
 
     @keyframes bqxpop{from{opacity:0;transform:scale(.88)}to{opacity:1;transform:scale(1)}}
