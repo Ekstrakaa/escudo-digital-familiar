@@ -83,6 +83,10 @@ const FLOW = [
   { t:'fact', ic:'bulb', col:'#00e5a0', img:'/imgs/telenoche_millon.png',
     text:'<b>Caso real (Telenoche).</b> Una familia perdió más de <b>un millón de pesos</b>: se hicieron pasar por policías. La Policía nunca pide dinero.' },
 
+  { t:'tf', ic:'help', col:'#8b7cf8', tag:'Verdadero o Falso', img:'/imgs/brou_ancap.png', fit:'contain',
+    statement:'Te llega esta promo del <b>BROU + ANCAP</b> con 35% de descuento en combustibles. <b>¿Es de verdad?</b>', ans:'f',
+    okT:'¡Bien!', okD:'Es falso. La página "Beneficios Ebank" no es del BROU. El banco no regala descuentos así por redes; los reales salen en brou.com.uy.', noT:'Es falso', noD:'Es trucha: se hace pasar por el BROU + ANCAP. Los beneficios reales salen en brou.com.uy, no en una página rara.' },
+
   { t:'mcq', ic:'phone', col:'#00c8ff', tag:'La llamada', sub:'Te llaman de la nada',
     q:'Te llaman de una "empresa de premios": para cobrar, necesitan el número y el <b>código de seguridad</b> de tu tarjeta. ¿Qué hacés?',
     opts:['Le doy los datos, ¡gané!','Le doy el número, el código no','Cuelgo: no participé y nadie pide datos así','Le pido que me llame más tarde'], ok:2,
@@ -111,9 +115,6 @@ const FLOW = [
   { t:'tf', ic:'help', col:'#8b7cf8', tag:'Verdadero o Falso', img:'/imgs/correo_uy.png', fit:'contain',
     statement:'Te llega este correo del "Correo Uruguayo" para pagar un envío. <b>¿Es de verdad?</b>', ans:'f',
     okT:'¡Bien!', okD:'Es falso (phishing): copian el diseño, pero el Correo no cobra envíos por mail. Fijate que el dominio no sea .gub.uy.', noT:'Es falso', noD:'Es phishing: copian el logo. El remitente no es del Correo. Nunca pagues desde un link así.' },
-
-  { t:'fact', ic:'bulb', col:'#00e5a0', img:'/imgs/brou_ancap.png', fit:'contain',
-    text:'Este <b>"35% de descuento" del BROU + ANCAP</b> es falso. La página "Beneficios Ebank" no es del banco. Los beneficios reales salen en brou.com.uy.' },
 
   { t:'real', ic:'msg', col:'#ffc844', tag:'¿Estafa o real?', sender:'Antel', sub:'remitente: SMS',
     text:'ANTEL: tenés una deuda y te vamos a cortar el servicio hoy. Para evitarlo, confirmá tu PIN respondiendo este mensaje.', ans:'estafa',
