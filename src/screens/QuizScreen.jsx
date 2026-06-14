@@ -76,7 +76,7 @@ const FLOW = [
     statement:'El BROU <b style="color:#00e5a0">nunca</b> te pide la clave ni el código que llega por SMS.', ans:'v',
     okT:'¡Tal cual!', okD:'El banco jamás pide eso. Quien te lo pida, es chorro.', noT:'Era verdadero', noD:'El banco nunca pide claves ni códigos por SMS.' },
 
-  { t:'real', ic:'msg', col:'#ffc844', tag:'¿Estafa o real?', sender:'SUCIVE', sub:'remitente: SMS',
+  { t:'real', ic:'msg', col:'#ffc844', tag:'¿Estafa o real?', sender:'SUCIVE', sub:'remitente: SMS', img:'/imgs/sucive_real.png',
     text:'SUCIVE: Multa vencida. Si no pagás hoy aumenta. Ingresá: <span style="color:#7ab8ff;text-decoration:underline">asucive.cc/uy/multa</span>', ans:'estafa',
     okT:'¡Exacto!', okD:'Los sitios del Estado terminan en .gub.uy. Ese ".cc" es trucho.', noT:'Es estafa', noD:'SUCIVE no manda links por SMS. El real es sucive.gub.uy.' },
 
@@ -116,7 +116,7 @@ const FLOW = [
     statement:'Te llega este correo del "Correo Uruguayo" para pagar un envío. <b>¿Es de verdad?</b>', ans:'f',
     okT:'¡Bien!', okD:'Es falso (phishing): copian el diseño, pero el Correo no cobra envíos por mail. Fijate que el dominio no sea .gub.uy.', noT:'Es falso', noD:'Es phishing: copian el logo. El remitente no es del Correo. Nunca pagues desde un link así.' },
 
-  { t:'real', ic:'msg', col:'#ffc844', tag:'¿Estafa o real?', sender:'Antel', sub:'remitente: SMS',
+  { t:'real', ic:'msg', col:'#ffc844', tag:'¿Estafa o real?', sender:'Antel', sub:'remitente: SMS', img:'/imgs/antel_real.png',
     text:'ANTEL: tenés una deuda y te vamos a cortar el servicio hoy. Para evitarlo, confirmá tu PIN respondiendo este mensaje.', ans:'estafa',
     okT:'¡Tal cual!', okD:'El PIN no se comparte con nadie. Antel no pide datos por SMS. Consultá vos al *611.', noT:'Es estafa', noD:'El PIN no se dice nunca. Antel no pide datos por SMS para "no cortarte".' },
 
@@ -256,6 +256,8 @@ export default function QuizScreen({ go }) {
                   </div>
                   <div className="bqx-bubble" dangerouslySetInnerHTML={{ __html: step.text }} />
                 </div>
+                {step.img && <div className="bqx-rcap">Ejemplo real</div>}
+                {step.img && <img className="bqx-rphoto" src={step.img} alt="Ejemplo real" />}
                 <div className="bqx-answers">
                   <Binary v="estafa" ok={step.ans} chosen={chosen} answered={answered} cls="red" icon="alert" c="#ff3d5a" label="Es estafa" idx={0} onPick={answer} />
                   <Binary v="real" ok={step.ans} chosen={chosen} answered={answered} cls="green" icon="check" c="#00e5a0" label="Es de verdad" idx={1} onPick={answer} />
@@ -375,6 +377,8 @@ function Styles() {
     .bqx-chip{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;color:#4a6080;border:1px solid rgba(255,255,255,.12);padding:3px 7px;border-radius:6px}
     .bqx-bubble{background:#1b2236;border-radius:11px;padding:11px 12px;font-size:13.5px;line-height:1.5;color:#eaf3ff}
     .bqx-prompt{text-align:center;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:#8fa8cc;margin-bottom:12px;flex:none}
+    .bqx-rcap{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:#5a76a0;text-align:center;margin:0 0 5px;flex:none}
+    .bqx-rphoto{width:100%;flex:1 1 auto;min-height:0;max-height:21vh;object-fit:contain;border-radius:11px;border:1px solid rgba(255,255,255,.08);background:#eef2f8;padding:5px;margin-bottom:12px}
 
     .bqx-fact{align-items:stretch}
     .bqx-factimg{width:100%;flex:1;min-height:0;object-fit:cover;border-radius:13px;border:1px solid rgba(255,255,255,.08);margin-bottom:12px;background:#0a1426}
