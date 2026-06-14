@@ -108,13 +108,14 @@ const FLOW = [
     opts:['Nada, parece oficial','El remitente no termina en .gub.uy','Que hable de impuestos','Que tenga el logo de DGI'], ok:1,
     okT:'¡Ojo de detective!', okD:'Los organismos del Estado usan .gub.uy. Si el remitente es @gmail o un .com raro, es trucho.', noT:'La pista es el remitente', noD:'La DGI nunca escribe desde un @gmail. Mirá el dominio, no el logo.' },
 
-  { t:'real', ic:'msg', col:'#ffc844', tag:'¿Estafa o real?', sender:'BROU Beneficios', sub:'número desconocido',
-    text:'¡Felicitaciones! Por ser cliente del BROU tenés <b style="color:#ffd9a0">$10.000</b>. Activalo en: <span style="color:#7ab8ff;text-decoration:underline">brou-beneficios.com</span>', ans:'estafa',
-    okT:'¡Muy bien!', okD:'El sitio del banco es brou.com.uy, no "brou-beneficios.com". No regala plata por WhatsApp.', noT:'Es estafa', noD:'El dominio "brou-beneficios.com" no es del banco. Es trucho.' },
-
   { t:'tf', ic:'help', col:'#8b7cf8', tag:'Verdadero o Falso', img:'/imgs/correo_uy.png', fit:'contain',
     statement:'Te llega este correo del "Correo Uruguayo" para pagar un envío. <b>¿Es de verdad?</b>', ans:'f',
     okT:'¡Bien!', okD:'Es falso (phishing): copian el diseño, pero el Correo no cobra envíos por mail. Fijate que el dominio no sea .gub.uy.', noT:'Es falso', noD:'Es phishing: copian el logo. El remitente no es del Correo. Nunca pagues desde un link así.' },
+
+  { t:'mcq', ic:'lock', col:'#00c8ff', tag:'Tu contraseña', sub:'¿Cuál es la más fuerte?',
+    q:'¿Cuál de estas contraseñas es la <b>más segura</b>?',
+    opts:['123456','Maria1955','MiGataTomaMate!7','uruguay'], ok:2,
+    okT:'¡Exacto!', okD:'Las más seguras son largas, tipo frase, con mayúsculas, números y algún símbolo. Cuanto más larga, mejor.', noT:'Ojo con eso', noD:'La más segura es la frase larga: "MiGataTomaMate!7". Evitá nombres, fechas o palabras sueltas: se adivinan fácil.' },
 
   { t:'real', ic:'msg', col:'#ffc844', tag:'¿Estafa o real?', sender:'Antel', sub:'remitente: SMS', img:'/imgs/antel_real.png',
     text:'ANTEL: tenés una deuda y te vamos a cortar el servicio hoy. Para evitarlo, confirmá tu PIN respondiendo este mensaje.', ans:'estafa',
