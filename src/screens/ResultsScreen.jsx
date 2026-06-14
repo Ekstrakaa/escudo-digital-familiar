@@ -134,7 +134,7 @@ export default function ResultsScreen({ go, result }) {
 
               <div className="res-ringwrap">
                 <div className="res-ringglow" style={{ background: `radial-gradient(circle, ${col}40, transparent 66%)` }} />
-                <svg width="150" height="150" viewBox="0 0 200 200">
+                <svg width="130" height="130" viewBox="0 0 200 200">
                   <defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor={col2} /><stop offset="100%" stopColor={col} /></linearGradient></defs>
                   <circle cx="100" cy="100" r="84" fill="none" stroke="rgba(255,255,255,.07)" strokeWidth="15" />
                   <motion.circle cx="100" cy="100" r="84" fill="none" stroke="url(#rg)" strokeWidth="15" strokeLinecap="round"
@@ -211,42 +211,42 @@ function Style() {
     .res-particles{position:absolute;inset:0;z-index:0;opacity:.85}
     .res-app{position:relative;z-index:1;width:100%;max-width:430px;height:100dvh;display:flex;flex-direction:column;overflow:hidden;padding:max(env(safe-area-inset-top),12px) 16px max(env(safe-area-inset-bottom),14px)}
 
-    .res-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex:none}
+    .res-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex:none}
     .res-iconbtn{width:38px;height:38px;border-radius:11px;background:#142040;border:1px solid rgba(0,200,255,.2);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none}
     .res-iconbtn.sm{width:32px;height:32px;border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.05)}
 
-    .res-mid{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;overflow-y:auto;padding:2px 0}
-    .res-card{position:relative;width:100%;background:linear-gradient(180deg,#15294c,#0b1730);border:1px solid rgba(255,255,255,.07);border-radius:24px;box-shadow:0 30px 70px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.09);overflow:hidden}
+    .res-mid{flex:1;min-height:0;display:flex;flex-direction:column;overflow-y:auto;overscroll-behavior:contain}
+    .res-card{position:relative;width:100%;margin:auto 0;flex:none;background:linear-gradient(180deg,#15294c,#0b1730);border:1px solid rgba(255,255,255,.07);border-radius:24px;box-shadow:0 30px 70px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.09);overflow:hidden}
     .res-card::after{content:'';position:absolute;inset:0;border-radius:24px;padding:1px;background:linear-gradient(150deg,rgba(255,255,255,.22),rgba(255,255,255,.03) 45%,rgba(0,200,255,.16));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
     .res-glow{position:absolute;inset:0;pointer-events:none;z-index:0}
     .res-accent{position:absolute;top:0;left:22px;right:22px;height:2.5px;border-radius:99px;z-index:2}
-    .res-inner{position:relative;z-index:1;padding:20px 18px 18px;display:flex;flex-direction:column;align-items:center}
+    .res-inner{position:relative;z-index:1;padding:16px 16px 14px;display:flex;flex-direction:column;align-items:center}
 
-    .res-hd{text-align:center;margin-bottom:10px}
-    .res-hdlbl{display:block;font-family:'Sora','Outfit',sans-serif;font-size:16px;font-weight:700}
-    .res-hdsub{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#5a76a0}
+    .res-hd{text-align:center;margin-bottom:6px}
+    .res-hdlbl{display:block;font-family:'Sora','Outfit',sans-serif;font-size:15.5px;font-weight:700}
+    .res-hdsub{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#5a76a0}
 
-    .res-ringwrap{position:relative;width:150px;height:150px;flex:none;display:flex;align-items:center;justify-content:center}
-    .res-ringglow{position:absolute;width:170px;height:170px;border-radius:50%;filter:blur(14px);opacity:.7;animation:resfade .8s ease both}
+    .res-ringwrap{position:relative;width:130px;height:130px;flex:none;display:flex;align-items:center;justify-content:center}
+    .res-ringglow{position:absolute;width:146px;height:146px;border-radius:50%;filter:blur(12px);opacity:.7;animation:resfade .8s ease both}
     .res-ringtx{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-    .res-pct{font-family:'Sora',sans-serif;font-size:44px;font-weight:800;line-height:1;letter-spacing:-.02em;text-shadow:0 2px 16px rgba(0,0,0,.4)}
-    .res-pill{margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:7px 16px;border-radius:99px;animation:respop .5s cubic-bezier(.2,.9,.3,1.3) .7s both}
-    .res-sub{font-size:14px;color:#8fa8cc;margin-top:9px;margin-bottom:14px} .res-sub b{color:#f0f6ff;font-weight:700}
+    .res-pct{font-family:'Sora',sans-serif;font-size:38px;font-weight:800;line-height:1;letter-spacing:-.02em;text-shadow:0 2px 16px rgba(0,0,0,.4)}
+    .res-pill{margin-top:9px;font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:6px 15px;border-radius:99px;animation:respop .5s cubic-bezier(.2,.9,.3,1.3) .7s both}
+    .res-sub{font-size:13.5px;color:#8fa8cc;margin-top:7px;margin-bottom:11px} .res-sub b{color:#f0f6ff;font-weight:700}
 
-    .res-stats{display:flex;gap:9px;width:100%;margin-bottom:14px}
-    .res-stat{flex:1;border-radius:16px;padding:11px 6px 10px;text-align:center;border:1px solid;box-shadow:inset 0 1px 0 rgba(255,255,255,.06);animation:resup .45s ease both;opacity:0}
-    .res-statchip{width:28px;height:28px;border-radius:9px;display:flex;align-items:center;justify-content:center;margin:0 auto 7px}
-    .res-sv{font-family:'Sora',sans-serif;font-size:26px;font-weight:800;line-height:1}
-    .res-sl{font-family:'JetBrains Mono',monospace;font-size:9px;color:#7088b0;text-transform:uppercase;letter-spacing:.06em;margin-top:5px}
+    .res-stats{display:flex;gap:9px;width:100%;margin-bottom:11px}
+    .res-stat{flex:1;border-radius:15px;padding:9px 6px 8px;text-align:center;border:1px solid;box-shadow:inset 0 1px 0 rgba(255,255,255,.06);animation:resup .45s ease both;opacity:0}
+    .res-statchip{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin:0 auto 5px}
+    .res-sv{font-family:'Sora',sans-serif;font-size:23px;font-weight:800;line-height:1}
+    .res-sl{font-family:'JetBrains Mono',monospace;font-size:8.5px;color:#7088b0;text-transform:uppercase;letter-spacing:.05em;margin-top:4px}
 
-    .res-advice{display:flex;align-items:center;gap:11px;padding:13px;border-radius:16px;width:100%;font-size:13.5px;line-height:1.5;margin-bottom:15px;animation:resup .45s ease .9s both;opacity:0}
-    .res-advchip{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:none}
+    .res-advice{display:flex;align-items:center;gap:10px;padding:11px;border-radius:15px;width:100%;font-size:13px;line-height:1.45;margin-bottom:12px;animation:resup .45s ease .9s both;opacity:0}
+    .res-advchip{width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:none}
 
-    .res-actions{width:100%;display:flex;flex-direction:column;gap:9px}
-    .res-cta{height:52px;border:none;border-radius:14px;background:linear-gradient(135deg,#00c8ff,#00e5a0);color:#04231a;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;gap:9px;cursor:pointer;box-shadow:0 10px 28px rgba(0,210,180,.35)}
+    .res-actions{width:100%;display:flex;flex-direction:column;gap:8px}
+    .res-cta{height:48px;border:none;border-radius:14px;background:linear-gradient(135deg,#00c8ff,#00e5a0);color:#04231a;font-family:'Sora',sans-serif;font-weight:700;font-size:14.5px;display:flex;align-items:center;justify-content:center;gap:9px;cursor:pointer;box-shadow:0 8px 24px rgba(0,210,180,.32)}
     .res-cta:active{transform:scale(.99)}
-    .res-actrow{display:flex;gap:9px}
-    .res-ghost{flex:1;height:46px;border-radius:13px;background:rgba(255,255,255,.05);border:1.5px solid rgba(0,200,255,.22);color:#cdddf5;font-family:inherit;font-weight:600;font-size:13.5px;cursor:pointer}
+    .res-actrow{display:flex;gap:8px}
+    .res-ghost{flex:1;height:44px;border-radius:13px;background:rgba(255,255,255,.05);border:1.5px solid rgba(0,200,255,.22);color:#cdddf5;font-family:inherit;font-weight:600;font-size:13.5px;cursor:pointer}
     .res-ghost:active{transform:scale(.98)}
 
     .res-ovbg{position:fixed;inset:0;z-index:80;display:flex;align-items:flex-end;justify-content:center;background:rgba(4,8,16,.7);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
