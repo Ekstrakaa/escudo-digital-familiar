@@ -183,24 +183,9 @@ export default function HomeScreen({ go }) {
             </div>
           </motion.div>
 
-          {/* Badge institucional — debajo del título */}
-          <motion.a
-            href="https://montevideo.gub.uy/area-tematica/inclusion-social/personas-mayores/programa-de-inclusion-digital"
-            target="_blank" rel="noopener noreferrer"
-            initial={{ opacity: 0, scale: .92 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: .4 }}
-            className="flex items-center gap-2 px-4 py-[5px] rounded-full mb-2 mt-2"
-            style={{ background: 'rgba(139,124,248,.12)', border: '1px solid rgba(139,124,248,.35)', textDecoration: 'none' }}
-          >
-            <motion.div animate={{ opacity: [1, .3, 1] }} transition={{ duration: 2, repeat: Infinity }}
-              style={{ width: 7, height: 7, borderRadius: '50%', background: '#00e5a0', flexShrink: 0 }} />
-            <span style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.78rem', fontWeight: 700, color: '#e0d4ff', letterSpacing: '.03em' }}>
-              Programa de Inclusión Digital · IM
-            </span>
-          </motion.a>
-
           {/* Subtítulo */}
           <motion.p initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .38, duration: .4 }}
-            style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.78rem', color: 'rgba(255,255,255,.75)', textAlign: 'center', maxWidth: 340, lineHeight: 1.4, marginBottom: 12, marginTop: 2 }}>
+            style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.78rem', color: 'rgba(255,255,255,.75)', textAlign: 'center', maxWidth: 340, lineHeight: 1.4, marginBottom: 8, marginTop: 0 }}>
             Ante cualquier ciberestafa o cuento del tío — estamos acá para ti.
 Gratis · Seguro · 24hs · No estás solo.
           </motion.p>
@@ -324,6 +309,21 @@ Gratis · Seguro · 24hs · No estás solo.
               </div>
             </motion.button>
           </div>
+
+          {/* Badge institucional — debajo de los botones principales */}
+          <motion.a
+            href="https://montevideo.gub.uy/area-tematica/inclusion-social/personas-mayores/programa-de-inclusion-digital"
+            target="_blank" rel="noopener noreferrer"
+            initial={{ opacity: 0, scale: .92 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: .45 }}
+            className="flex items-center gap-2 px-4 py-[6px] rounded-full mb-4 mt-1"
+            style={{ background: 'rgba(139,124,248,.12)', border: '1px solid rgba(139,124,248,.35)', textDecoration: 'none' }}
+          >
+            <motion.div animate={{ opacity: [1, .3, 1] }} transition={{ duration: 2, repeat: Infinity }}
+              style={{ width: 7, height: 7, borderRadius: '50%', background: '#00e5a0', flexShrink: 0 }} />
+            <span style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.78rem', fontWeight: 700, color: '#e0d4ff', letterSpacing: '.03em' }}>
+              Programa de Inclusión Digital · IM
+            </span>
+          </motion.a>
 
           {/* Label */}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: .36 }}
