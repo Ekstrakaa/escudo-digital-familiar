@@ -129,6 +129,10 @@ function RobotAvatar({ typing }) {
 }
 
 
+function cleanForSpeech(t) {
+  return t.replace(/\*\*(.*?)\*\*/g, '$1').replace(/[•·▪]/g, ' ').replace(/\s+/g, ' ').trim()
+}
+
 function BotBubble({ text, isTyping }) {
   // Formatear texto — párrafos, negritas, pasos numerados
   const fmt = text
@@ -143,6 +147,22 @@ function BotBubble({ text, isTyping }) {
     .replace(/\n/g,'<br/>')
     // Emoji 💡 en su propia línea destacada
     .replace(/💡/g,'<br/><span style="color:#f59e0b;font-size:.9rem">💡</span>')
+
+  const [speaking, setSpeaking] = useState(false)
+  const speak = () => {
+    if (typeof window === 'undefined' || !('speechSynthesis' in window)) return
+    if (speaking) { window.speechSynthesis.cancel(); setSpeaking(false); return }
+    window.speechSynthesis.cancel()
+    const u = new SpeechSynthesisUtterance(cleanForSpeech(text))
+    u.lang = 'es-ES'; u.rate = 0.95; u.pitch = 1
+    const vs = window.speechSynthesis.getVoices()
+    const es = vs.find(v => /^es/i.test(v.lang)) || vs.find(v => /spanish|español/i.test(v.name))
+    if (es) u.voice = es
+    u.onend = () => setSpeaking(false)
+    u.onerror = () => setSpeaking(false)
+    setSpeaking(true)
+    window.speechSynthesis.speak(u)
+  }
 
   return (
     <div className="flex items-start gap-3 w-full self-start">
@@ -170,8 +190,14 @@ function BotBubble({ text, isTyping }) {
             dangerouslySetInnerHTML={{ __html: '<p style="margin:0">' + fmt + '</p>' }}
           />
         </div>
-        <div className="text-[.6rem] text-slate-500 mt-1 pl-1">
-          Asistente · {now()}
+        <div className="flex items-center gap-2 mt-1 pl-1">
+          <span className="text-[.6rem] text-slate-500">Asistente · {now()}</span>
+          <button onClick={speak} aria-label={speaking ? 'Detener lectura' : 'Escuchar en voz alta'}
+            style={{ display:'inline-flex', alignItems:'center', gap:5, height:26, padding:'0 11px', borderRadius:99, border:'1px solid rgba(0,229,160,.4)', background:'rgba(0,229,160,.12)', color:'#00E5A0', fontSize:'.72rem', fontWeight:800, cursor:'pointer', fontFamily:"'Nunito',sans-serif" }}>
+            {speaking
+              ? <><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>Detener</>
+              : <><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>Escuchar</>}
+          </button>
         </div>
       </div>
     </div>
