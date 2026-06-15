@@ -1,6 +1,34 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
+const VOICE_KEY = 'edf_voice'
+function spanishVoices() {
+  if (typeof window === 'undefined' || !window.speechSynthesis) return []
+  return window.speechSynthesis.getVoices().filter(v => /^es/i.test(v.lang) || /español|spanish/i.test(v.name))
+}
+function bestVoice(list) {
+  const score = v => {
+    const n = (v.name + ' ' + v.lang).toLowerCase()
+    let s = 0
+    if (n.includes('google')) s += 6
+    if (n.includes('microsoft')) s += 4
+    if (/m[oó]nica|paulina|jorge|juan|diego|marisol|catalina|enhanced|natural|premium|neural|wavenet/.test(n)) s += 6
+    if (v.localService === false) s += 2
+    if (/es-(es|us|mx|419)/.test(v.lang.toLowerCase())) s += 1
+    if (/espeak|compact|default|veena|albert|fred/.test(n)) s -= 6
+    return s
+  }
+  return [...list].sort((a, b) => score(b) - score(a))[0] || null
+}
+function chosenVoice() {
+  const list = spanishVoices()
+  if (!list.length) return null
+  let saved = null
+  try { saved = localStorage.getItem(VOICE_KEY) } catch {}
+  if (saved) { const m = list.find(v => v.voiceURI === saved); if (m) return m }
+  return bestVoice(list)
+}
+
 function Particles() {
   const canvasRef = useRef(null)
   useEffect(() => {
@@ -154,10 +182,9 @@ function BotBubble({ text, isTyping }) {
     if (speaking) { window.speechSynthesis.cancel(); setSpeaking(false); return }
     window.speechSynthesis.cancel()
     const u = new SpeechSynthesisUtterance(cleanForSpeech(text))
-    u.lang = 'es-ES'; u.rate = 0.95; u.pitch = 1
-    const vs = window.speechSynthesis.getVoices()
-    const es = vs.find(v => /^es/i.test(v.lang)) || vs.find(v => /spanish|español/i.test(v.name))
-    if (es) u.voice = es
+    u.rate = 0.95; u.pitch = 1
+    const v = chosenVoice()
+    if (v) { u.voice = v; u.lang = v.lang } else { u.lang = 'es-ES' }
     u.onend = () => setSpeaking(false)
     u.onerror = () => setSpeaking(false)
     setSpeaking(true)
@@ -346,6 +373,14 @@ export default function ChatScreen({ go, seed }) {
   const [input, setInput]       = useState('')
   const [btnOff, setBtnOff]     = useState(false)
   const [connStatus, setConnStatus] = useState('connecting') // 'connecting' | 'establishing' | 'online'
+  const [voices, setVoices]     = useState([])
+  const [voiceURI, setVoiceURI] = useState(() => { try { return localStorage.getItem(VOICE_KEY) || '' } catch { return '' } })
+  useEffect(() => {
+    const load = () => setVoices(spanishVoices())
+    load()
+    if (typeof window !== 'undefined' && window.speechSynthesis) window.speechSynthesis.onvoiceschanged = load
+    return () => { if (typeof window !== 'undefined' && window.speechSynthesis) window.speechSynthesis.onvoiceschanged = null }
+  }, [])
 
   useEffect(() => {
     const t1 = setTimeout(() => setConnStatus('establishing'), 1400)
@@ -623,6 +658,16 @@ export default function ChatScreen({ go, seed }) {
             En línea · Intendencia de Montevideo
           </div>
         </div>
+        {voices.length > 0 && (
+          <select value={voiceURI}
+            onChange={e => { setVoiceURI(e.target.value); try { localStorage.setItem(VOICE_KEY, e.target.value) } catch {} }}
+            aria-label="Elegir voz"
+            className="flex-shrink-0"
+            style={{ maxWidth:118, fontSize:'.72rem', fontWeight:700, color:'#00E5A0', background:'rgba(0,229,160,.1)', border:'1px solid rgba(0,229,160,.35)', borderRadius:10, padding:'7px 8px', fontFamily:"'Nunito',sans-serif", cursor:'pointer' }}>
+            <option value="">🔊 Voz auto</option>
+            {voices.map(v => <option key={v.voiceURI} value={v.voiceURI} style={{ color:'#000' }}>{v.name.replace(/Google |Microsoft /,'')}</option>)}
+          </select>
+        )}
       </div>
 
       {/* Emergency numbers bar */}
