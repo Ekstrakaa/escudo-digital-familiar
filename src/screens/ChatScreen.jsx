@@ -2,9 +2,10 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const VOICE_KEY = 'edf_voice'
+const JUNK_VOICE = /shelley|grandma|grandpa|rocko|flo|sandy|eddy|reed|junior|kathy|ralph|fred|albert|bahh|bells|boing|bubbles|cellos|wobble|jester|organ|superstar|trinoids|whisper|zarvox|good news|bad news|novelty/i
 function spanishVoices() {
   if (typeof window === 'undefined' || !window.speechSynthesis) return []
-  return window.speechSynthesis.getVoices().filter(v => /^es/i.test(v.lang) || /español|spanish/i.test(v.name))
+  return window.speechSynthesis.getVoices().filter(v => (/^es/i.test(v.lang) || /español|spanish/i.test(v.name)) && !JUNK_VOICE.test(v.name))
 }
 function bestVoice(list) {
   const score = v => {
@@ -375,12 +376,29 @@ export default function ChatScreen({ go, seed }) {
   const [connStatus, setConnStatus] = useState('connecting') // 'connecting' | 'establishing' | 'online'
   const [voices, setVoices]     = useState([])
   const [voiceURI, setVoiceURI] = useState(() => { try { return localStorage.getItem(VOICE_KEY) || '' } catch { return '' } })
+  const [voiceMenu, setVoiceMenu] = useState(false)
   useEffect(() => {
     const load = () => setVoices(spanishVoices())
     load()
     if (typeof window !== 'undefined' && window.speechSynthesis) window.speechSynthesis.onvoiceschanged = load
     return () => { if (typeof window !== 'undefined' && window.speechSynthesis) window.speechSynthesis.onvoiceschanged = null }
   }, [])
+  const sampleVoice = (uri) => {
+    if (typeof window === 'undefined' || !window.speechSynthesis) return
+    window.speechSynthesis.cancel()
+    const u = new SpeechSynthesisUtterance('Hola, soy tu asistente. Así suena mi voz.')
+    u.rate = 0.95
+    const list = spanishVoices()
+    const v = uri ? list.find(x => x.voiceURI === uri) : bestVoice(list)
+    if (v) { u.voice = v; u.lang = v.lang } else { u.lang = 'es-ES' }
+    window.speechSynthesis.speak(u)
+  }
+  const pickVoice = (uri) => {
+    setVoiceURI(uri)
+    try { localStorage.setItem(VOICE_KEY, uri) } catch {}
+    sampleVoice(uri)
+    setVoiceMenu(false)
+  }
 
   useEffect(() => {
     const t1 = setTimeout(() => setConnStatus('establishing'), 1400)
@@ -647,39 +665,41 @@ export default function ChatScreen({ go, seed }) {
         </button>
         <RobotAvatar typing={typing} />
         <div className="flex-1 min-w-0">
-          <div className="font-bold text-[.98rem] text-white">Asistente Digital</div>
-          <div className="flex items-center gap-[5px] text-[.68rem] text-slate-400 mt-[1px]">
+          <div className="font-bold text-[.98rem] text-white truncate">Asistente Digital</div>
+          <div className="flex items-center gap-[5px] text-[.68rem] text-slate-400 mt-[1px] min-w-0">
             <motion.div
               animate={{ opacity: [1, 0.3, 1] }}
               transition={{ repeat: Infinity, duration: 2 }}
               className="w-[6px] h-[6px] rounded-full flex-shrink-0"
               style={{ background: '#10b981' }}
             />
-            En línea · Intendencia de Montevideo
+            <span className="truncate">En línea · Intendencia de Montevideo</span>
           </div>
         </div>
-        {voices.length > 0 && (
-          <select value={voiceURI}
-            onChange={e => { setVoiceURI(e.target.value); try { localStorage.setItem(VOICE_KEY, e.target.value) } catch {} }}
-            aria-label="Elegir voz"
-            className="flex-shrink-0"
-            style={{ maxWidth:118, fontSize:'.72rem', fontWeight:700, color:'#00E5A0', background:'rgba(0,229,160,.1)', border:'1px solid rgba(0,229,160,.35)', borderRadius:10, padding:'7px 8px', fontFamily:"'Nunito',sans-serif", cursor:'pointer' }}>
-            <option value="">🔊 Voz auto</option>
-            {voices.map(v => <option key={v.voiceURI} value={v.voiceURI} style={{ color:'#000' }}>{v.name.replace(/Google |Microsoft /,'')}</option>)}
-          </select>
+        <button onClick={() => setVoiceMenu(o => !o)} aria-label="Elegir voz"
+          className="flex-shrink-0 flex items-center justify-center"
+          style={{ width:38, height:38, borderRadius:11, background: voiceMenu ? 'rgba(0,229,160,.2)' : 'rgba(0,229,160,.1)', border:'1px solid rgba(0,229,160,.35)', cursor:'pointer' }}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+        </button>
+        {voiceMenu && (
+          <>
+            <div onClick={() => setVoiceMenu(false)} style={{ position:'fixed', inset:0, zIndex:60 }} />
+            <div style={{ position:'absolute', top:'100%', right:12, marginTop:6, zIndex:61, width:230, maxHeight:'58vh', overflowY:'auto', background:'#0c1730', border:'1px solid rgba(255,255,255,.12)', borderRadius:14, boxShadow:'0 16px 40px rgba(0,0,0,.5)', padding:6 }}>
+              <div style={{ fontSize:'.62rem', fontFamily:"'JetBrains Mono',monospace", letterSpacing:'.08em', textTransform:'uppercase', color:'#5a76a0', padding:'6px 8px 5px' }}>Elegí una voz · se escucha al tocar</div>
+              <button onClick={() => pickVoice('')} className="w-full text-left"
+                style={{ display:'block', padding:'11px 10px', borderRadius:9, background: voiceURI==='' ? 'rgba(0,229,160,.14)' : 'transparent', border:'none', color: voiceURI==='' ? '#00E5A0' : '#e6eefb', fontFamily:"'Nunito',sans-serif", fontSize:'.88rem', fontWeight:700, cursor:'pointer' }}>
+                Voz automática (recomendada)
+              </button>
+              {voices.map(v => (
+                <button key={v.voiceURI} onClick={() => pickVoice(v.voiceURI)} className="w-full text-left"
+                  style={{ display:'block', padding:'11px 10px', borderRadius:9, background: voiceURI===v.voiceURI ? 'rgba(0,229,160,.14)' : 'transparent', border:'none', color: voiceURI===v.voiceURI ? '#00E5A0' : '#e6eefb', fontFamily:"'Nunito',sans-serif", fontSize:'.88rem', fontWeight:600, cursor:'pointer' }}>
+                  {v.name.replace(/Google |Microsoft /,'')}
+                </button>
+              ))}
+              {voices.length === 0 && <div style={{ padding:'10px', fontSize:'.8rem', color:'#8fa8cc', lineHeight:1.5 }}>No hay voces en español instaladas en este celular.</div>}
+            </div>
+          </>
         )}
-      </div>
-
-      {/* Emergency numbers bar */}
-      <div className="flex gap-2 px-4 py-2 overflow-x-auto" style={{ background: 'rgba(0,0,0,.2)', borderBottom: '1px solid rgba(255,255,255,.05)' }}>
-        {EMERGENCY_NUMBERS.map((n, i) => (
-          <a key={i} href={`tel:${n.label.replace(/\D/g,'')}`}
-            className="flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white no-underline transition-all active:scale-95"
-            style={{ background: `${n.color}22`, border: `1px solid ${n.color}55`, fontSize: '.72rem' }}>
-            <span className="font-bold" style={{ color: n.color }}>{n.label}</span>
-            <span className="text-slate-400">{n.sub}</span>
-          </a>
-        ))}
       </div>
 
       {/* Messages */}
@@ -700,6 +720,18 @@ export default function ChatScreen({ go, seed }) {
         </AnimatePresence>
 
 
+      </div>
+
+      {/* Emergency numbers bar (abajo) */}
+      <div className="flex gap-2 px-4 py-2 overflow-x-auto" style={{ background: 'rgba(0,0,0,.25)', borderTop: '1px solid rgba(255,255,255,.06)' }}>
+        {EMERGENCY_NUMBERS.map((n, i) => (
+          <a key={i} href={`tel:${n.label.replace(/\D/g,'')}`}
+            className="flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white no-underline transition-all active:scale-95"
+            style={{ background: `${n.color}22`, border: `1px solid ${n.color}55`, fontSize: '.72rem' }}>
+            <span className="font-bold" style={{ color: n.color }}>{n.label}</span>
+            <span className="text-slate-400">{n.sub}</span>
+          </a>
+        ))}
       </div>
 
       {/* Input */}
