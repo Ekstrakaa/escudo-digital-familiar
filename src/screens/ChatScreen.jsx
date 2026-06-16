@@ -5,7 +5,9 @@ const VOICE_KEY = 'edf_voice'
 const JUNK_VOICE = /shelley|grandma|grandpa|rocko|flo|sandy|eddy|reed|junior|kathy|ralph|fred|albert|bahh|bells|boing|bubbles|cellos|wobble|jester|organ|superstar|trinoids|whisper|zarvox|good news|bad news|novelty/i
 function spanishVoices() {
   if (typeof window === 'undefined' || !window.speechSynthesis) return []
-  return window.speechSynthesis.getVoices().filter(v => (/^es/i.test(v.lang) || /español|spanish/i.test(v.name)) && !JUNK_VOICE.test(v.name))
+  const all = window.speechSynthesis.getVoices().filter(v => (/^es/i.test(v.lang) || /español|spanish/i.test(v.name)) && !JUNK_VOICE.test(v.name))
+  const seen = new Set()
+  return all.filter(v => { const k = v.name.toLowerCase().trim(); if (seen.has(k)) return false; seen.add(k); return true })
 }
 function bestVoice(list) {
   const score = v => {
@@ -386,7 +388,7 @@ export default function ChatScreen({ go, seed }) {
   const sampleVoice = (uri) => {
     if (typeof window === 'undefined' || !window.speechSynthesis) return
     window.speechSynthesis.cancel()
-    const u = new SpeechSynthesisUtterance('Hola, soy tu asistente. Así suena mi voz.')
+    const u = new SpeechSynthesisUtterance('Hola, soy tu asistente. Estoy acá para ayudarte a cuidarte de las estafas.')
     u.rate = 0.95
     const list = spanishVoices()
     const v = uri ? list.find(x => x.voiceURI === uri) : bestVoice(list)
