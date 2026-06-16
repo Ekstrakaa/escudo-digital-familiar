@@ -379,6 +379,7 @@ export default function ChatScreen({ go, seed }) {
   const [voices, setVoices]     = useState([])
   const [voiceURI, setVoiceURI] = useState(() => { try { return localStorage.getItem(VOICE_KEY) || '' } catch { return '' } })
   const [voiceMenu, setVoiceMenu] = useState(false)
+  const [voiceHelp, setVoiceHelp] = useState(false)
   useEffect(() => {
     const load = () => setVoices(spanishVoices())
     load()
@@ -699,6 +700,28 @@ export default function ChatScreen({ go, seed }) {
                 </button>
               ))}
               {voices.length === 0 && <div style={{ padding:'10px', fontSize:'.8rem', color:'#8fa8cc', lineHeight:1.5 }}>No hay voces en español instaladas en este celular.</div>}
+              <div style={{ height:1, background:'rgba(255,255,255,.08)', margin:'7px 6px' }} />
+              <button onClick={() => setVoiceHelp(h => !h)} className="w-full text-left"
+                style={{ display:'flex', alignItems:'center', gap:7, padding:'10px', borderRadius:9, background:'transparent', border:'none', color:'#00c8ff', fontFamily:"'Nunito',sans-serif", fontSize:'.82rem', fontWeight:800, cursor:'pointer' }}>
+                <span style={{ fontSize:'1.1rem', lineHeight:1, marginTop:-2 }}>＋</span> Agregar voces de hombre (gratis)
+              </button>
+              {voiceHelp && (
+                <div style={{ padding:'2px 12px 10px', fontSize:'.8rem', color:'#c4d4ee', lineHeight:1.7, fontFamily:"'Nunito',sans-serif" }}>
+                  {/iphone|ipad|ipod/i.test(typeof navigator!=='undefined'?navigator.userAgent:'') ? (
+                    <>Una sola vez en tu iPhone:<br/>
+                    <b>1.</b> Ajustes › Accesibilidad<br/>
+                    <b>2.</b> Contenido hablado › Voces › Español<br/>
+                    <b>3.</b> Bajá <b style={{color:'#7cc4ff'}}>Jorge</b>, <b style={{color:'#7cc4ff'}}>Juan</b> o <b style={{color:'#7cc4ff'}}>Diego</b> (voces de hombre). Tocá la nube ☁️ y elegí la versión <b>Mejorada</b> o <b>Premium</b> — esas suenan naturales, no robot.<br/>
+                    <b>4.</b> Volvé acá: aparecen solas en la lista.</>
+                  ) : (
+                    <>Una sola vez en tu Android:<br/>
+                    <b>1.</b> Ajustes › Accesibilidad › Texto a voz<br/>
+                    <b>2.</b> Motor de Google › Instalar voces › Español<br/>
+                    <b>3.</b> Bajá las voces disponibles.<br/>
+                    <b>4.</b> Volvé acá: aparecen solas en la lista.</>
+                  )}
+                </div>
+              )}
             </div>
           </>
         )}
