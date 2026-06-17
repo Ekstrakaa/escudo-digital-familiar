@@ -17,10 +17,10 @@ function Particles() {
     const dots = Array.from({ length: 72 }, () => ({
       x:   Math.random() * canvas.width,
       y:   Math.random() * canvas.height,
-      vx:  (Math.random() - 0.5) * 0.32,
-      vy:  (Math.random() - 0.5) * 0.32,
-      r:   Math.random() * 2.8 + 1.0,
-      a:   Math.random() * 0.55 + 0.20,
+      vx:  (Math.random() - 0.5) * 0.42,
+      vy:  (Math.random() - 0.5) * 0.42,
+      r:   Math.random() * 2.8 + 1.1,
+      a:   Math.random() * 0.55 + 0.30,
       hue: Math.random() * 360,
       dh:  (Math.random() * 0.6 + 0.2) * (Math.random() > 0.5 ? 1 : -1),
     }))
@@ -44,7 +44,7 @@ function Particles() {
           const midHue = (a.hue + b.hue) / 2
           ctx.beginPath()
           ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y)
-          ctx.strokeStyle = `hsla(${midHue}, 100%, 65%, ${0.12 * (1 - dist / 95)})`
+          ctx.strokeStyle = `hsla(${midHue}, 100%, 65%, ${0.16 * (1 - dist / 95)})`
           ctx.stroke()
         }
       }))
@@ -342,22 +342,24 @@ Gratis · Seguro · 24hs · No estás solo.
                 onClick={() => go.chat(s.msg)}
                 className="flex flex-col items-start text-left relative overflow-hidden"
                 style={{
-                  background: `linear-gradient(135deg, ${s.color}18, ${s.color}06)`,
+                  background: `linear-gradient(135deg, ${s.color}16, ${s.color}08), rgba(16,28,52,.62)`,
                   border: `1.5px solid ${s.color}40`,
                   borderRadius: 20,
                   padding: '16px 14px',
                   cursor: 'pointer',
                   minHeight: 120,
-                  boxShadow: `0 4px 20px ${s.color}10`,
+                  boxShadow: '0 8px 24px rgba(0,0,0,.28)',
+                  backdropFilter: 'blur(7px)',
+                  WebkitBackdropFilter: 'blur(7px)',
                 }}>
                 <div style={{ position:'absolute', top:0, left:0, right:0, height:1, background:`linear-gradient(90deg,transparent,${s.color}25,transparent)` }} />
                 <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:12 }}>
                   <div style={{ width:42, height:42, borderRadius:12, background:`${s.color}22`, border:`1px solid ${s.color}35`, display:'flex', alignItems:'center', justifyContent:'center', color:s.color, flexShrink:0 }}
                     dangerouslySetInnerHTML={{ __html: s.svg }} />
-                  <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'.68rem', fontWeight:800, color:s.color, letterSpacing:'.08em', opacity:.8, whiteSpace:'nowrap' }}>{s.tag}</div>
+                  <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'.68rem', fontWeight:800, color:s.color, letterSpacing:'.08em', opacity:.95, whiteSpace:'nowrap' }}>{s.tag}</div>
                 </div>
                 <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'.97rem', fontWeight:800, color:'#f0f6ff', lineHeight:1.2, marginBottom:4 }}>{s.title}</div>
-                <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'.82rem', color:'rgba(255,255,255,.42)', lineHeight:1.4 }}>{s.desc}</div>
+                <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'.83rem', color:'rgba(240,246,255,.74)', lineHeight:1.4 }}>{s.desc}</div>
               </motion.button>
             ))}
           </div>
