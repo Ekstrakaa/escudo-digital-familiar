@@ -340,26 +340,24 @@ Gratis · Seguro · 24hs · No estás solo.
                 initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: .38 + i * .06 }} whileTap={{ scale: .96 }}
                 onClick={() => go.chat(s.msg)}
-                className="flex flex-col items-start text-left relative overflow-hidden"
+                className="flex flex-col items-center justify-center text-center relative overflow-hidden"
                 style={{
                   background: `linear-gradient(135deg, ${s.color}16, ${s.color}08), rgba(16,28,52,.62)`,
                   border: `1.5px solid ${s.color}40`,
                   borderRadius: 20,
-                  padding: '16px 14px',
+                  padding: '12px 10px',
                   cursor: 'pointer',
-                  minHeight: 120,
+                  height: 152,
                   boxShadow: '0 8px 24px rgba(0,0,0,.28)',
                   backdropFilter: 'blur(7px)',
                   WebkitBackdropFilter: 'blur(7px)',
                 }}>
                 <div style={{ position:'absolute', top:0, left:0, right:0, height:1, background:`linear-gradient(90deg,transparent,${s.color}25,transparent)` }} />
-                <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:12 }}>
-                  <div style={{ width:42, height:42, borderRadius:12, background:`${s.color}22`, border:`1px solid ${s.color}35`, display:'flex', alignItems:'center', justifyContent:'center', color:s.color, flexShrink:0 }}
-                    dangerouslySetInnerHTML={{ __html: s.svg }} />
-                  <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'.68rem', fontWeight:800, color:s.color, letterSpacing:'.08em', opacity:.95, whiteSpace:'nowrap' }}>{s.tag}</div>
-                </div>
-                <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'.97rem', fontWeight:800, color:'#f0f6ff', lineHeight:1.2, marginBottom:4 }}>{s.title}</div>
-                <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'.83rem', color:'rgba(240,246,255,.74)', lineHeight:1.4 }}>{s.desc}</div>
+                <div style={{ width:38, height:38, borderRadius:11, background:`${s.color}22`, border:`1px solid ${s.color}35`, display:'flex', alignItems:'center', justifyContent:'center', color:s.color, flexShrink:0, marginBottom:8 }}
+                  dangerouslySetInnerHTML={{ __html: s.svg }} />
+                <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'.71rem', fontWeight:900, color:s.color, letterSpacing:'.06em', marginBottom:4, whiteSpace:'nowrap' }}>{s.tag}</div>
+                <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'.92rem', fontWeight:800, color:'#f4f8ff', lineHeight:1.15 }}>{s.title}</div>
+                <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'.75rem', fontWeight:600, color:'rgba(240,246,255,.7)', lineHeight:1.3, marginTop:2 }}>{s.desc}</div>
               </motion.button>
             ))}
           </div>
