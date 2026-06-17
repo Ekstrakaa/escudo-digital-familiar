@@ -190,14 +190,14 @@ export default function HomeScreen({ go }) {
 Gratis · Seguro · 24hs · No estás solo.
           </motion.p>
 
-          {/* Botón VERDE — Test de Blindaje */}
-          <div className="relative w-full mb-3">
+          {/* Botón VERDE — Necesito ayuda (arriba de todo) */}
+          <div className="relative w-full mb-2.5">
             <motion.button
               initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: .3 }} whileTap={{ scale: .97 }}
-              onClick={() => go.quiz()}
+              transition={{ delay: .24 }} whileTap={{ scale: .97 }}
+              onClick={() => go.chat(null)}
               className="relative w-full overflow-hidden rounded-2xl"
-              style={{ height: 58, border: 'none', cursor: 'pointer', background: '#059669', boxShadow: '0 4px 20px rgba(16,185,129,.3)', overflow: 'hidden' }}>
+              style={{ height: 52, border: 'none', cursor: 'pointer', background: '#059669', boxShadow: '0 4px 20px rgba(16,185,129,.3)', overflow: 'hidden' }}>
               <motion.div className="absolute pointer-events-none"
                 animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
@@ -207,10 +207,10 @@ Gratis · Seguro · 24hs · No estás solo.
                 style={{ background: 'linear-gradient(180deg, rgba(255,255,255,.18) 0%, transparent 55%)' }} />
               <div className="relative flex items-center justify-between px-6 h-full">
                 <div className="flex items-center gap-4">
-                  <motion.div animate={{ scale:[1,1.18,1] }} transition={{ duration:1.8, repeat:Infinity, ease:"easeInOut" }}><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,.8)" strokeWidth="1.8" strokeLinecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></motion.div>
+                  <motion.div animate={{ scale:[1,1.18,1] }} transition={{ duration:1.8, repeat:Infinity, ease:"easeInOut" }}><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,.8)" strokeWidth="1.8" strokeLinecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16l.19.92z"/></svg></motion.div>
                   <div className="text-left">
-                    <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '1.15rem', fontWeight: 900, color: '#000', lineHeight: 1.2 }}>Test de Blindaje</div>
-                    <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.78rem', fontWeight: 600, color: 'rgba(0,0,0,.65)', marginTop: 2 }}>¿Qué tan protegido estás?</div>
+                    <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '1.15rem', fontWeight: 900, color: '#000', lineHeight: 1.2 }}>Necesito ayuda ahora</div>
+                    <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.78rem', fontWeight: 600, color: 'rgba(0,0,0,.65)', marginTop: 2 }}>Hablá con nuestro asistente</div>
                   </div>
                 </div>
                 <motion.div animate={{ x: [0, 4, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut', delay: .3 }}>
@@ -221,13 +221,13 @@ Gratis · Seguro · 24hs · No estás solo.
           </div>
 
           {/* Botón NARANJA — Detector de estafas */}
-          <div className="relative w-full mb-3">
+          <div className="relative w-full mb-2.5">
             <motion.button
               initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
               transition={{ delay: .27 }} whileTap={{ scale: .97 }}
               onClick={() => go.scan()}
               className="relative w-full overflow-hidden rounded-2xl"
-              style={{ height: 58, border: 'none', cursor: 'pointer', background: '#5b21b6', boxShadow: '0 4px 20px rgba(139,92,246,.35)', overflow: 'hidden' }}>
+              style={{ height: 52, border: 'none', cursor: 'pointer', background: '#5b21b6', boxShadow: '0 4px 20px rgba(139,92,246,.35)', overflow: 'hidden' }}>
               <motion.div className="absolute pointer-events-none"
                 animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: .4 }}
@@ -250,14 +250,14 @@ Gratis · Seguro · 24hs · No estás solo.
             </motion.button>
           </div>
 
-          {/* Botón ROJO — Necesito ayuda */}
-          <div className="relative w-full mb-3">
+          {/* Botón ROJO — Test de Blindaje */}
+          <div className="relative w-full mb-2.5">
             <motion.button
               initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: .24 }} whileTap={{ scale: .97 }}
-              onClick={() => go.chat(null)}
+              transition={{ delay: .3 }} whileTap={{ scale: .97 }}
+              onClick={() => go.quiz()}
               className="relative w-full overflow-hidden rounded-2xl"
-              style={{ height: 58, border: 'none', cursor: 'pointer', background: '#b91c1c', boxShadow: '0 4px 20px rgba(220,38,38,.35)', overflow: 'hidden' }}>
+              style={{ height: 52, border: 'none', cursor: 'pointer', background: '#b91c1c', boxShadow: '0 4px 20px rgba(220,38,38,.35)', overflow: 'hidden' }}>
               <motion.div className="absolute pointer-events-none"
                 animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: .8 }}
@@ -267,10 +267,10 @@ Gratis · Seguro · 24hs · No estás solo.
                 style={{ background: 'linear-gradient(180deg, rgba(255,255,255,.15) 0%, transparent 55%)' }} />
               <div className="relative flex items-center justify-between px-6 h-full">
                 <div className="flex items-center gap-4">
-                  <motion.div animate={{ scale:[1,1.18,1] }} transition={{ duration:1.8, repeat:Infinity, ease:"easeInOut", delay:.6 }}><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" strokeWidth="1.8" strokeLinecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16l.19.92z"/></svg></motion.div>
+                  <motion.div animate={{ scale:[1,1.18,1] }} transition={{ duration:1.8, repeat:Infinity, ease:"easeInOut", delay:.6 }}><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" strokeWidth="1.8" strokeLinecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></motion.div>
                   <div className="text-left">
-                    <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '1.15rem', fontWeight: 900, color: '#fff', lineHeight: 1.2 }}>Necesito ayuda ahora</div>
-                    <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.78rem', fontWeight: 600, color: 'rgba(255,255,255,.8)', marginTop: 2 }}>Hablá con nuestro asistente</div>
+                    <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '1.15rem', fontWeight: 900, color: '#fff', lineHeight: 1.2 }}>Test de Blindaje</div>
+                    <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.78rem', fontWeight: 600, color: 'rgba(255,255,255,.8)', marginTop: 2 }}>¿Qué tan protegido estás?</div>
                   </div>
                 </div>
                 <motion.div animate={{ x: [0, 4, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}>
@@ -281,13 +281,13 @@ Gratis · Seguro · 24hs · No estás solo.
           </div>
 
           {/* Botón AMARILLO — Aprendé a protegerte */}
-          <div className="relative w-full mb-3">
+          <div className="relative w-full mb-2.5">
             <motion.button
               initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
               transition={{ delay: .21 }} whileTap={{ scale: .97 }}
               onClick={() => go.aprender()}
               className="relative w-full overflow-hidden rounded-2xl"
-              style={{ height: 58, border: 'none', cursor: 'pointer', background: '#c79a00', boxShadow: '0 4px 20px rgba(255,200,68,.38)', overflow: 'hidden' }}>
+              style={{ height: 52, border: 'none', cursor: 'pointer', background: '#c79a00', boxShadow: '0 4px 20px rgba(255,200,68,.38)', overflow: 'hidden' }}>
               <motion.div className="absolute pointer-events-none"
                 animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
