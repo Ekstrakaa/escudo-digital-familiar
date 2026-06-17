@@ -73,8 +73,8 @@ const FLOW = [
     okT:'¡Correcto!', okD:'El banco nunca manda gente a tu casa. Verificá vos al 1722 0001.', noT:'Ojo con esto', noD:'Ningún banco manda empleados a tu puerta. Cerrá y llamá vos.' },
 
   { t:'tf', ic:'help', col:'#8b7cf8', tag:'Verdadero o Falso',
-    statement:'El BROU <b style="color:#00e5a0">nunca</b> te pide la clave ni el código que llega por SMS.', ans:'v',
-    okT:'¡Tal cual!', okD:'Ese código del SMS es la llave para entrar a tu cuenta. El banco ya tiene tus datos: nunca te lo pide. Si alguien te lo pide (por SMS, llamada o WhatsApp), es para robarte. No lo des nunca y cortá.', noT:'Era verdadero', noD:'El banco nunca pide la clave ni el código del SMS: ese código es la llave de tu cuenta. Si alguien te lo pide, es un estafador. No lo compartas con nadie y verificá llamando vos al 1722 0001.' },
+    statement:'¿Es <b>verdad</b> que un funcionario del BROU te puede pedir la <b>clave</b> y los <b style="color:#ffc844">códigos de la Llave Digital</b> por SMS o llamada?', ans:'f',
+    okT:'¡Falso, muy bien!', okD:'El BROU jamás te pide la clave ni los códigos de la Llave Digital, ni por SMS ni por llamada. Esos códigos son la llave de tu cuenta: el banco ya tiene tus datos, nunca te los pide. Si alguien te los pide, es un estafador: cortá y verificá vos al 1722 0001.', noT:'En realidad es falso', noD:'Un funcionario del BROU NUNCA te pide la clave ni los códigos de la Llave Digital. Si alguien te los pide (por SMS o llamada), es para robarte. No los des y llamá vos al 1722 0001.' },
 
   { t:'real', ic:'msg', col:'#ffc844', tag:'¿Estafa o real?', sender:'SUCIVE', sub:'remitente: SMS', img:'/imgs/sucive_real.png',
     text:'SUCIVE: Multa vencida. Si no pagás hoy aumenta. Ingresá: <span style="color:#7ab8ff;text-decoration:underline">asucive.cc/uy/multa</span>', ans:'estafa',
@@ -88,9 +88,9 @@ const FLOW = [
     okT:'¡Bien!', okD:'Es falso. La página "Beneficios Ebank" no es del BROU. El banco no regala descuentos así por redes; los reales salen en brou.com.uy.', noT:'Es falso', noD:'Es trucha: se hace pasar por el BROU + ANCAP. Los beneficios reales salen en brou.com.uy, no en una página rara.' },
 
   { t:'mcq', ic:'phone', col:'#00c8ff', tag:'La llamada', sub:'Te llaman de la nada',
-    q:'Te llaman de una "empresa de premios": para cobrar, necesitan el número y el <b>código de seguridad</b> de tu tarjeta. ¿Qué hacés?',
-    opts:['Le doy los datos, ¡gané!','Le doy el número, el código no','Cuelgo: no participé y nadie pide datos así','Le pido que me llame más tarde'], ok:2,
-    okT:'¡Perfecto!', okD:'Si no participaste, no ganaste. El código no se da por teléfono jamás.', noT:'Cuidado', noD:'Ningún premio real pide los datos de tu tarjeta. Cortá tranquila.' },
+    q:'Te llama un supuesto <b>"técnico de Microsoft"</b>: dice que tu computadora tiene un virus grave y que necesita que instales una app para <b>controlarla a distancia</b> y arreglarla. ¿Qué hacés?',
+    opts:['Instalo la app, ¡menos mal que llamó!','Le doy el control un ratito nomás','Cuelgo: Microsoft no llama ni controla tu compu','Le pido que me mande un técnico a casa'], ok:2,
+    okT:'¡Cortaste justo!', okD:'Microsoft, Google y Apple NUNCA te llaman por teléfono. "Dejame controlar tu pantalla" = querían entrar a robarte datos y plata. Muy bien hecho.', noT:'Ojo con esto', noD:'Ninguna empresa grande te llama para "arreglarte la compu". Si te piden instalar algo o ver tu pantalla, cortá: te querían robar.' },
 
   { t:'tf', ic:'lock', col:'#8b7cf8', tag:'Verdadero o Falso', img:'/imgs/A2F.png', fit:'contain',
     statement:'Estas apps de <b style="color:#00e5a0">doble factor</b> (un segundo paso al entrar) son seguras y conviene usarlas.', ans:'v',
@@ -104,9 +104,9 @@ const FLOW = [
     text:'<b>Caso real (Canal 4).</b> Un hombre de 90 años perdió <b>$46.000</b> con el cuento del tío: se hicieron pasar por su nieto.' },
 
   { t:'mcq', ic:'search', col:'#00c8ff', tag:'Detectá la pista', sub:'¿Qué lo delata?',
-    q:'Te llega un email de la "DGI" avisando que tenés una <b>devolución de impuestos</b> y te pide tus datos. ¿Qué lo delata como falso?',
-    opts:['Nada, parece oficial','El remitente no termina en .gub.uy','Que hable de impuestos','Que tenga el logo de DGI'], ok:1,
-    okT:'¡Ojo de detective!', okD:'Los organismos del Estado usan .gub.uy. Si el remitente es @gmail o un .com raro, es trucho.', noT:'La pista es el remitente', noD:'La DGI nunca escribe desde un @gmail. Mirá el dominio, no el logo.' },
+    q:'Te llega un WhatsApp: <b>"🎉¡FELICIDADES!🎉 Ganaste $500.000 de Mercado Libre. Para recibirlo, pagá $990 de gastos de envío."</b> ¿Qué lo delata?',
+    opts:['Nada, ¡por fin tuve suerte!','Que para "ganar" te pidan pagar algo primero','Que tenga muchos emojis','Que llegue por WhatsApp'], ok:1,
+    okT:'¡Ojo de detective!', okD:'Regla de oro: si para cobrar un premio te piden pagar algo ANTES, es estafa siempre. Nadie te cobra por regalarte plata. 😉', noT:'La trampa es el pago', noD:'Si tenés que PAGAR para "cobrar" un premio, es estafa. Un premio de verdad nunca te cuesta nada.' },
 
   { t:'tf', ic:'help', col:'#8b7cf8', tag:'Verdadero o Falso', img:'/imgs/correo_uy.png', fit:'contain',
     statement:'Te llega este correo del "Correo Uruguayo" para pagar un envío. <b>¿Es de verdad?</b>', ans:'f',
