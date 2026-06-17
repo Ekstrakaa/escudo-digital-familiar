@@ -13,8 +13,8 @@ function Particles() {
     resize(); window.addEventListener('resize', resize)
     const dots = Array.from({ length: 60 }, () => ({
       x: Math.random() * canvas.width, y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
-      r: Math.random() * 2.6 + 1.0, a: Math.random() * 0.5 + 0.18,
+      vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
+      r: Math.random() * 2.6 + 1.1, a: Math.random() * 0.5 + 0.28,
       hue: Math.random() * 360, dh: (Math.random() * 0.6 + 0.2) * (Math.random() > 0.5 ? 1 : -1),
     }))
     const draw = () => {
@@ -30,7 +30,7 @@ function Particles() {
         const dist = Math.hypot(a.x - b.x, a.y - b.y)
         if (dist < 92) {
           ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y)
-          ctx.strokeStyle = `hsla(${(a.hue + b.hue) / 2}, 100%, 65%, ${0.10 * (1 - dist / 92)})`; ctx.stroke()
+          ctx.strokeStyle = `hsla(${(a.hue + b.hue) / 2}, 100%, 65%, ${0.14 * (1 - dist / 92)})`; ctx.stroke()
         }
       }))
       animId = requestAnimationFrame(draw)
@@ -131,7 +131,7 @@ export default function AprenderScreen({ go }) {
           {TOPICS.map((t, i) => {
             const isOpen = open === i
             return (
-              <motion.div key={i} className="apr-card" style={{ borderColor: isOpen ? `${t.color}66` : `${t.color}33`, background: `linear-gradient(160deg, ${t.color}22, ${t.color}0d), #0f1e38` }}
+              <motion.div key={i} className="apr-card" style={{ borderColor: isOpen ? `${t.color}66` : `${t.color}33`, background: `linear-gradient(160deg, ${t.color}1a, ${t.color}08), rgba(16,28,52,.62)` }}
                 initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * .05, duration: .35 }}>
                 <button className="apr-hd" onClick={() => setOpen(isOpen ? null : i)} aria-expanded={isOpen}>
                   <span className="apr-chip" style={{ background: `${t.color}22`, border: `1px solid ${t.color}40` }}><Ic path={t.ic} color={t.color} /></span>
@@ -196,7 +196,7 @@ function Style() {
     .apr-p{font-size:.95rem;color:rgba(255,255,255,.7);line-height:1.45;margin:0}
 
     .apr-list{display:flex;flex-direction:column;gap:11px}
-    .apr-card{border:1.5px solid;border-radius:20px;overflow:hidden;box-shadow:0 6px 22px rgba(0,0,0,.25)}
+    .apr-card{border:1.5px solid;border-radius:20px;overflow:hidden;box-shadow:0 8px 26px rgba(0,0,0,.30);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
     .apr-hd{display:flex;align-items:center;gap:13px;width:100%;padding:15px 14px;background:transparent;border:none;cursor:pointer;text-align:left;font-family:inherit;color:inherit}
     .apr-chip{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;flex:none}
     .apr-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
