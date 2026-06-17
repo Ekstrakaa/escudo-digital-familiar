@@ -131,7 +131,7 @@ export default function AprenderScreen({ go }) {
           {TOPICS.map((t, i) => {
             const isOpen = open === i
             return (
-              <motion.div key={i} className="apr-card" style={{ borderColor: isOpen ? `${t.color}66` : `${t.color}33`, background: `linear-gradient(160deg, ${t.color}14, ${t.color}06)` }}
+              <motion.div key={i} className="apr-card" style={{ borderColor: isOpen ? `${t.color}66` : `${t.color}33`, background: `linear-gradient(160deg, ${t.color}22, ${t.color}0d), #0f1e38` }}
                 initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * .05, duration: .35 }}>
                 <button className="apr-hd" onClick={() => setOpen(isOpen ? null : i)} aria-expanded={isOpen}>
                   <span className="apr-chip" style={{ background: `${t.color}22`, border: `1px solid ${t.color}40` }}><Ic path={t.ic} color={t.color} /></span>
