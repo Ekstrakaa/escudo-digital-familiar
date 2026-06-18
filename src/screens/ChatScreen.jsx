@@ -676,7 +676,7 @@ export default function ChatScreen({ go, seed }) {
               className="w-[6px] h-[6px] rounded-full flex-shrink-0"
               style={{ background: '#10b981' }}
             />
-            <span className="truncate">En línea · Intendencia de Montevideo</span>
+            <span className="truncate">En línea</span>
           </div>
         </div>
         <button onClick={() => setVoiceMenu(o => !o)} aria-label="Elegir voz"
