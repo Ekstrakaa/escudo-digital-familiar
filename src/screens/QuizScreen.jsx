@@ -87,10 +87,10 @@ const FLOW = [
     statement:'Te llega esta promo del <b>BROU + ANCAP</b> con 35% de descuento en combustibles. <b>¿Es de verdad?</b>', ans:'f',
     okT:'¡Bien!', okD:'Es falso. La página "Beneficios Ebank" no es del BROU. El banco no regala descuentos así por redes; los reales salen en brou.com.uy.', noT:'Es falso', noD:'Es trucha: se hace pasar por el BROU + ANCAP. Los beneficios reales salen en brou.com.uy, no en una página rara.' },
 
-  { t:'mcq', ic:'phone', col:'#00c8ff', tag:'La llamada', sub:'Te llaman de la nada',
-    q:'Te llama un supuesto <b>"técnico de Microsoft"</b>: dice que tu computadora tiene un virus grave y que necesita que instales una app para <b>controlarla a distancia</b> y arreglarla. ¿Qué hacés?',
-    opts:['Instalo la app, ¡menos mal que llamó!','Le doy el control un ratito nomás','Cuelgo: Microsoft no llama ni controla tu compu','Le pido que me mande un técnico a casa'], ok:2,
-    okT:'¡Cortaste justo!', okD:'Microsoft, Google y Apple NUNCA te llaman por teléfono. "Dejame controlar tu pantalla" = querían entrar a robarte datos y plata. Muy bien hecho.', noT:'Ojo con esto', noD:'Ninguna empresa grande te llama para "arreglarte la compu". Si te piden instalar algo o ver tu pantalla, cortá: te querían robar.' },
+  { t:'mcq', ic:'user', col:'#00c8ff', tag:'¿Quién cae más?', sub:'El mito de la edad',
+    q:'¿Quién creés que cae <b>más seguido</b> en las ciberestafas y el robo de identidad?',
+    opts:['Solo los adultos mayores','Solo los que no saben de tecnología','Los jóvenes caen tanto o más que los mayores','Nadie que tenga cuidado'], ok:2,
+    okT:'¡Exacto, sorprende!', okD:'Aunque parezca mentira, los jóvenes denuncian caer en estafas tan seguido o más que los mayores. Confiarse ("a mí no me pasa") y andar apurado hace caer a cualquiera. No es la edad: la defensa es frenar y verificar.', noT:'Te sorprende, ¿no?', noD:'No es solo cuestión de edad: los jóvenes, súper metidos en el celular, caen tanto o más seguido que los mayores. El que se confía y va apurado es el que cae. La defensa es la misma a toda edad: frenar y verificar.' },
 
   { t:'tf', ic:'lock', col:'#8b7cf8', tag:'Verdadero o Falso', img:'/imgs/A2F.png', fit:'contain',
     statement:'Estas apps de <b style="color:#00e5a0">doble factor</b> (un segundo paso al entrar) son seguras y conviene usarlas.', ans:'v',
