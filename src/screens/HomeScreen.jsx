@@ -58,42 +58,42 @@ function Particles() {
 
 const SITUATIONS = [
   {
-    svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16l.19.92z"/></svg>`,
+    svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16l.19.92z"/></svg>`,
     title: 'Banco sospechoso', desc: 'Me piden datos o clave',
     color: '#ef4444', bg: 'rgba(239,68,68,.04)', border: 'rgba(239,68,68,.30)',
     tag: 'VISHING',
     msg: 'Me llamaron del banco y me pidieron mi clave',
   },
   {
-    svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
+    svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
     title: 'SMS sospechoso', desc: 'Con link o pedido raro',
     color: '#f59e0b', bg: 'rgba(245,158,11,.04)', border: 'rgba(245,158,11,.30)',
     tag: 'PHISHING',
     msg: 'Recibí un SMS con un link raro para pagar una deuda',
   },
   {
-    svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="2.5"/></svg>`,
+    svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="2.5"/></svg>`,
     title: 'Código de WA', desc: 'Me lo están pidiendo',
     color: '#10b981', bg: 'rgba(16,185,129,.04)', border: 'rgba(16,185,129,.30)',
     tag: 'ROBO WA',
     msg: 'Me están pidiendo el código de 6 dígitos de WhatsApp',
   },
   {
-    svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16" stroke-width="2.5"/></svg>`,
+    svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16" stroke-width="2.5"/></svg>`,
     title: 'Caí en estafa', desc: '¿Qué hago ahora?',
     color: '#f97316', bg: 'rgba(249,115,22,.04)', border: 'rgba(249,115,22,.30)',
     tag: 'FRAUDE',
     msg: 'Creo que me estafaron, veo movimientos raros en mi cuenta',
   },
   {
-    svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
+    svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
     title: 'En la puerta', desc: 'Pide datos o dinero',
     color: '#8b7cf8', bg: 'rgba(139,124,248,.04)', border: 'rgba(139,124,248,.30)',
     tag: 'PRESENCIAL',
     msg: 'Hay una persona en la puerta pidiendo mis datos del banco',
   },
   {
-    svg: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
+    svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
     title: 'Maltrato', desc: 'Hablá, no estás solo/a',
     color: '#38bdf8', bg: 'rgba(56,189,248,.04)', border: 'rgba(56,189,248,.30)',
     tag: 'APOYO',
@@ -353,7 +353,10 @@ Gratis · Seguro · 24hs · No estás solo.
                   WebkitBackdropFilter: 'blur(7px)',
                 }}>
                 <div style={{ position:'absolute', top:0, left:0, right:0, height:1, background:`linear-gradient(90deg,transparent,${s.color}25,transparent)` }} />
-                <div style={{ width:38, height:38, borderRadius:11, background:`${s.color}22`, border:`1px solid ${s.color}35`, display:'flex', alignItems:'center', justifyContent:'center', color:s.color, flexShrink:0, marginBottom:8 }}
+                <motion.div
+                  animate={{ scale: [1, 1.12, 1] }}
+                  transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut', delay: i * 0.2 }}
+                  style={{ width:44, height:44, borderRadius:13, background:`${s.color}22`, border:`1px solid ${s.color}35`, display:'flex', alignItems:'center', justifyContent:'center', color:s.color, flexShrink:0, marginBottom:8 }}
                   dangerouslySetInnerHTML={{ __html: s.svg }} />
                 <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'.71rem', fontWeight:900, color:s.color, letterSpacing:'.06em', marginBottom:4, whiteSpace:'nowrap' }}>{s.tag}</div>
                 <div style={{ fontFamily:"'Nunito',sans-serif", fontSize:'.92rem', fontWeight:800, color:'#f4f8ff', lineHeight:1.15 }}>{s.title}</div>
@@ -409,7 +412,7 @@ Gratis · Seguro · 24hs · No estás solo.
           <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             transition={{ duration: .2 }}
-            className="fixed inset-0 z-50 flex items-center justify-center px-5"
+            className="fixed inset-0 z-50 flex items-center justify-center px-5 edf-deskframe"
             style={{ background: 'rgba(5,13,26,.75)', backdropFilter: 'blur(4px)' }}
             onClick={() => setAuxOpen(false)}>
             <motion.div
