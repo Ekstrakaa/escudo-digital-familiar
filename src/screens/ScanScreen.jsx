@@ -322,6 +322,7 @@ export default function ScanScreen({ go }) {
           {showTutorial && (
             <motion.div
               initial={{ opacity:0 }} animate={{ opacity:1 }} exit={{ opacity:0 }}
+              className="edf-deskframe"
               style={{ position:'fixed', inset:0, background:'rgba(0,0,0,.75)', zIndex:100, display:'flex', alignItems:'center', justifyContent:'center', padding:'0 20px' }}
               onClick={() => setShowTutorial(false)}>
               <motion.div
