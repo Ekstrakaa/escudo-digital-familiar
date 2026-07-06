@@ -148,6 +148,38 @@ export default function HomeScreen({ go }) {
             background: 'linear-gradient(180deg, transparent, #060c1a)',
             pointerEvents: 'none',
           }} />
+
+          {/* ── Notificación de estafa flotante ── */}
+          <motion.div
+            initial={{ opacity: 0, scale: .78, y: 12, rotate: -9 }}
+            animate={{ opacity: 1, scale: 1, y: 0, rotate: -4 }}
+            transition={{ delay: 1.1, duration: .55, ease: [.2,.9,.2,1] }}
+            style={{ position: 'absolute', top: '11%', right: 10, zIndex: 6, pointerEvents: 'none' }}
+          >
+            <motion.div
+              animate={{ y: [0, -6, 0] }}
+              transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
+              style={{
+                display: 'flex', alignItems: 'flex-start', gap: 8, width: 174,
+                padding: '9px 10px', background: 'rgba(255,255,255,.97)',
+                borderRadius: 14, boxShadow: '0 12px 28px rgba(0,0,0,.4)',
+                border: '1px solid rgba(0,0,0,.06)',
+              }}
+            >
+              <div style={{ position: 'relative', width: 30, height: 30, borderRadius: 8, background: 'linear-gradient(135deg,#ff5470,#e11d48)', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <motion.div animate={{ scale: [1, 1.5, 1], opacity: [1, .4, 1] }} transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
+                  style={{ position: 'absolute', top: -3, right: -3, width: 9, height: 9, borderRadius: '50%', background: '#ff3d5a', border: '1.5px solid #fff' }} />
+              </div>
+              <div style={{ minWidth: 0, flex: 1 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 6 }}>
+                  <span style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.7rem', fontWeight: 900, color: '#0f172a' }}>Tu Banco</span>
+                  <span style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.56rem', fontWeight: 600, color: '#64748b' }}>ahora</span>
+                </div>
+                <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.64rem', fontWeight: 700, color: '#1e293b', lineHeight: 1.28, marginTop: 1 }}>⚠️ Cuenta bloqueada. Verificá acá 👉</div>
+              </div>
+            </motion.div>
+          </motion.div>
         </motion.div>
 
         {/* ── LOGO flotando entre foto y título ── */}
