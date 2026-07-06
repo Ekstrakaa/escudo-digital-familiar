@@ -149,37 +149,41 @@ export default function HomeScreen({ go }) {
             pointerEvents: 'none',
           }} />
 
-          {/* ── Notificación de estafa flotante ── */}
-          <motion.div
-            initial={{ opacity: 0, scale: .78, y: 12, rotate: -9 }}
-            animate={{ opacity: 1, scale: 1, y: 0, rotate: -4 }}
-            transition={{ delay: 1.1, duration: .55, ease: [.2,.9,.2,1] }}
-            style={{ position: 'absolute', top: '11%', right: 10, zIndex: 6, pointerEvents: 'none' }}
-          >
-            <motion.div
-              animate={{ y: [0, -6, 0] }}
-              transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
-              style={{
-                display: 'flex', alignItems: 'flex-start', gap: 8, width: 174,
-                padding: '9px 10px', background: 'rgba(255,255,255,.97)',
-                borderRadius: 14, boxShadow: '0 12px 28px rgba(0,0,0,.4)',
-                border: '1px solid rgba(0,0,0,.06)',
-              }}
+          {/* ── Notificaciones de estafa flotantes ── */}
+          {[
+            { pos:{ top:'6%', right:6 }, rot:-4, delay:1.1, c1:'#ff5470', c2:'#e11d48',
+              app:'Tu Banco', body:'⚠️ Cuenta bloqueada. Verificá 👉',
+              icon:<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> },
+            { pos:{ top:'15%', left:6 }, rot:4, delay:1.5, c1:'#fbbf24', c2:'#d97706',
+              app:'Encomienda', body:'📦 Paquete retenido. Pagá acá 👉',
+              icon:<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg> },
+          ].map((n, k) => (
+            <motion.div key={k}
+              initial={{ opacity: 0, scale: .75, y: 12, rotate: n.rot * 2 }}
+              animate={{ opacity: 1, scale: 1, y: 0, rotate: n.rot }}
+              transition={{ delay: n.delay, duration: .55, ease: [.2,.9,.2,1] }}
+              style={{ position: 'absolute', ...n.pos, zIndex: 6, pointerEvents: 'none' }}
             >
-              <div style={{ position: 'relative', width: 30, height: 30, borderRadius: 8, background: 'linear-gradient(135deg,#ff5470,#e11d48)', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                <motion.div animate={{ scale: [1, 1.5, 1], opacity: [1, .4, 1] }} transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
-                  style={{ position: 'absolute', top: -3, right: -3, width: 9, height: 9, borderRadius: '50%', background: '#ff3d5a', border: '1.5px solid #fff' }} />
-              </div>
-              <div style={{ minWidth: 0, flex: 1 }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 6 }}>
-                  <span style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.7rem', fontWeight: 900, color: '#0f172a' }}>Tu Banco</span>
-                  <span style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.56rem', fontWeight: 600, color: '#64748b' }}>ahora</span>
+              <motion.div
+                animate={{ y: [0, -5, 0] }}
+                transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut', delay: k * .5 }}
+                style={{ display: 'flex', alignItems: 'flex-start', gap: 6, width: 132, padding: '6px 8px', background: 'rgba(255,255,255,.97)', borderRadius: 11, boxShadow: '0 9px 22px rgba(0,0,0,.4)', border: '1px solid rgba(0,0,0,.06)' }}
+              >
+                <div style={{ position: 'relative', width: 25, height: 25, borderRadius: 7, background: `linear-gradient(135deg,${n.c1},${n.c2})`, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  {n.icon}
+                  <motion.div animate={{ scale: [1, 1.5, 1], opacity: [1, .4, 1] }} transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
+                    style={{ position: 'absolute', top: -3, right: -3, width: 8, height: 8, borderRadius: '50%', background: '#ff3d5a', border: '1.5px solid #fff' }} />
                 </div>
-                <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.64rem', fontWeight: 700, color: '#1e293b', lineHeight: 1.28, marginTop: 1 }}>⚠️ Cuenta bloqueada. Verificá acá 👉</div>
-              </div>
+                <div style={{ minWidth: 0, flex: 1 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 5 }}>
+                    <span style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.6rem', fontWeight: 900, color: '#0f172a' }}>{n.app}</span>
+                    <span style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.5rem', fontWeight: 600, color: '#64748b' }}>ahora</span>
+                  </div>
+                  <div style={{ fontFamily: "'Nunito',sans-serif", fontSize: '.57rem', fontWeight: 700, color: '#1e293b', lineHeight: 1.25, marginTop: 1 }}>{n.body}</div>
+                </div>
+              </motion.div>
             </motion.div>
-          </motion.div>
+          ))}
         </motion.div>
 
         {/* ── LOGO flotando entre foto y título ── */}
